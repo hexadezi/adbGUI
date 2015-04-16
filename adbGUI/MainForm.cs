@@ -15,7 +15,7 @@ namespace adbGUI
                   InitializeComponent();
             }
 
-            //Beenden mit ESC
+            //Exit with escape
             protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
             {
                   if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
@@ -97,8 +97,6 @@ namespace adbGUI
                   {
                         FileName = "cmd.exe",
                         WindowStyle = ProcessWindowStyle.Normal,
-                        //Das K wird gebraucht, damit sich die Konsole nicht beendet
-                        //Das $g gibt ein > aus, das & führt den nächsten Befehl aus
                         Arguments = "/C prompt $g & tools\\adb " + x + "&echo. & pause"
                   };
                   Process process = new Process { StartInfo = startInfo };
@@ -113,17 +111,12 @@ namespace adbGUI
                         Arguments = "/C " + x + "tools\\adb " + y,
                         WindowStyle = ProcessWindowStyle.Hidden
                   };
-                  //Das C wird gebraucht, damit sich die Konsole nach der Durchführung beendet.
-                  //Ansonsten bleibt diese im Arbeitsspeicher.
 
                   Process process = new Process { StartInfo = startInfo };
 
                   process.Start();
             }
 
-
-
-            //All Commands
             private void btn_startserver_Click(object sender, EventArgs e)
             {
                   callADB_wo("", "start-server");
