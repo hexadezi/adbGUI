@@ -65,7 +65,7 @@ namespace adbGUI
                         {
                               if (++count == maxTries)
                               {
-                                    DialogResult result = MessageBox.Show("Is your device connected? \n \n" + ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                                    DialogResult result = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                                     if (result == DialogResult.Cancel)
                                     {
                                           Cursor = Cursors.Default;
@@ -93,28 +93,46 @@ namespace adbGUI
 
             public void callADB_w(string x)
             {
+                  string filename = "cmd.exe";
+                  string arguments = " /C prompt $g & tools\\adb " + x + " & echo. & pause";
                   ProcessStartInfo startInfo = new ProcessStartInfo
                   {
-                        FileName = "cmd.exe",
+                        FileName = filename,
                         WindowStyle = ProcessWindowStyle.Normal,
-                        Arguments = "/C prompt $g & tools\\adb " + x + "&echo. & pause"
+                        Arguments = arguments
                   };
                   Process process = new Process { StartInfo = startInfo };
                   process.Start();
+
+                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("h:mm:ss tt"));
+                  lvi.SubItems.Add(filename + " " + arguments);
+                  listView1.Items.Add(lvi);
             }
 
             public void callADB_wo(string x, string y)
             {
+                  string filename = "cmd.exe";
+                  string arguments = "/C " + x + " tools\\adb " + y;
                   ProcessStartInfo startInfo = new ProcessStartInfo
                   {
-                        FileName = "cmd.exe",
-                        Arguments = "/C " + x + "tools\\adb " + y,
+                        FileName = filename,
+                        Arguments = arguments,
                         WindowStyle = ProcessWindowStyle.Hidden
                   };
 
                   Process process = new Process { StartInfo = startInfo };
 
                   process.Start();
+
+                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("h:mm:ss tt"));
+                  lvi.SubItems.Add(filename + " " + arguments);
+                  listView1.Items.Add(lvi);
+            }
+
+            public void AddToLog(string x)
+            {
+
+
             }
 
             private void btn_startserver_Click(object sender, EventArgs e)
@@ -788,6 +806,11 @@ namespace adbGUI
                         btn_phoneinformation_setsize.PerformClick();
                         e.SuppressKeyPress = true;
                   }
+            }
+
+            private void btn_remountsystem_Click(object sender, EventArgs e)
+            {
+                  callADB_wo("", "remount");
             }
       }
 }

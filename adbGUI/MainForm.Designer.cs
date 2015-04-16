@@ -141,6 +141,10 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+                  this.tabPage6 = new System.Windows.Forms.TabPage();
+                  this.listView1 = new System.Windows.Forms.ListView();
+                  this.col_log_time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+                  this.col_log_command = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox11.SuspendLayout();
@@ -159,6 +163,7 @@
                   this.groupBox8.SuspendLayout();
                   this.groupBox3.SuspendLayout();
                   this.tabPage5.SuspendLayout();
+                  this.tabPage6.SuspendLayout();
                   this.SuspendLayout();
                   // 
                   // tabControl1
@@ -170,6 +175,7 @@
                   this.tabControl1.Controls.Add(this.tabPage4);
                   this.tabControl1.Controls.Add(this.tabPage2);
                   this.tabControl1.Controls.Add(this.tabPage3);
+                  this.tabControl1.Controls.Add(this.tabPage6);
                   this.tabControl1.Controls.Add(this.tabPage5);
                   this.tabControl1.Location = new System.Drawing.Point(12, 12);
                   this.tabControl1.Name = "tabControl1";
@@ -269,7 +275,7 @@
                   this.groupBox1.Controls.Add(this.btn_startserver);
                   this.groupBox1.Location = new System.Drawing.Point(6, 6);
                   this.groupBox1.Name = "groupBox1";
-                  this.groupBox1.Size = new System.Drawing.Size(498, 146);
+                  this.groupBox1.Size = new System.Drawing.Size(498, 107);
                   this.groupBox1.TabIndex = 2;
                   this.groupBox1.TabStop = false;
                   this.groupBox1.Text = "Standard";
@@ -279,7 +285,7 @@
                   this.btn_openshell.AccessibleDescription = "";
                   this.btn_openshell.Location = new System.Drawing.Point(6, 77);
                   this.btn_openshell.Name = "btn_openshell";
-                  this.btn_openshell.Size = new System.Drawing.Size(159, 52);
+                  this.btn_openshell.Size = new System.Drawing.Size(159, 23);
                   this.btn_openshell.TabIndex = 4;
                   this.btn_openshell.Text = "Open Shell";
                   this.toolTip.SetToolTip(this.btn_openshell, "Open the shell");
@@ -301,7 +307,7 @@
                   // btn_showdevices
                   // 
                   this.btn_showdevices.AccessibleDescription = "";
-                  this.btn_showdevices.Location = new System.Drawing.Point(170, 77);
+                  this.btn_showdevices.Location = new System.Drawing.Point(335, 48);
                   this.btn_showdevices.Name = "btn_showdevices";
                   this.btn_showdevices.Size = new System.Drawing.Size(159, 23);
                   this.btn_showdevices.TabIndex = 7;
@@ -323,13 +329,14 @@
                   // 
                   // btn_remountsystem
                   // 
-                  this.btn_remountsystem.Location = new System.Drawing.Point(170, 106);
+                  this.btn_remountsystem.Location = new System.Drawing.Point(169, 77);
                   this.btn_remountsystem.Name = "btn_remountsystem";
                   this.btn_remountsystem.Size = new System.Drawing.Size(159, 23);
                   this.btn_remountsystem.TabIndex = 8;
                   this.btn_remountsystem.Text = "Remount System";
                   this.toolTip.SetToolTip(this.btn_remountsystem, "Remounts the /system partition on the device read-write");
                   this.btn_remountsystem.UseVisualStyleBackColor = true;
+                  this.btn_remountsystem.Click += new System.EventHandler(this.btn_remountsystem_Click);
                   // 
                   // btn_statuswindow
                   // 
@@ -1332,6 +1339,40 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
+                  // tabPage6
+                  // 
+                  this.tabPage6.Controls.Add(this.listView1);
+                  this.tabPage6.Location = new System.Drawing.Point(4, 22);
+                  this.tabPage6.Name = "tabPage6";
+                  this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+                  this.tabPage6.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage6.TabIndex = 5;
+                  this.tabPage6.Text = "Log";
+                  this.tabPage6.UseVisualStyleBackColor = true;
+                  // 
+                  // listView1
+                  // 
+                  this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.col_log_time,
+            this.col_log_command});
+                  this.listView1.GridLines = true;
+                  this.listView1.Location = new System.Drawing.Point(6, 6);
+                  this.listView1.Name = "listView1";
+                  this.listView1.Size = new System.Drawing.Size(498, 268);
+                  this.listView1.TabIndex = 0;
+                  this.listView1.UseCompatibleStateImageBehavior = false;
+                  this.listView1.View = System.Windows.Forms.View.Details;
+                  // 
+                  // col_log_time
+                  // 
+                  this.col_log_time.Text = "Time";
+                  this.col_log_time.Width = 79;
+                  // 
+                  // col_log_command
+                  // 
+                  this.col_log_command.Text = "Command";
+                  this.col_log_command.Width = 415;
+                  // 
                   // MainForm
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1375,6 +1416,7 @@
                   this.groupBox3.PerformLayout();
                   this.tabPage5.ResumeLayout(false);
                   this.tabPage5.PerformLayout();
+                  this.tabPage6.ResumeLayout(false);
                   this.ResumeLayout(false);
 
             }
@@ -1492,6 +1534,10 @@
             private System.Windows.Forms.Button btn_phoneinformation_activities;
             private System.Windows.Forms.Button btn_phoneinformation_screenshot;
             private System.Windows.Forms.Label label10;
+            private System.Windows.Forms.TabPage tabPage6;
+            private System.Windows.Forms.ListView listView1;
+            private System.Windows.Forms.ColumnHeader col_log_time;
+            private System.Windows.Forms.ColumnHeader col_log_command;
       }
 }
 
