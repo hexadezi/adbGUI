@@ -145,10 +145,15 @@ namespace adbGUI
                   callADB_wo("", "kill-server");
             }
 
+            private Form rebootmenu;
             private void btn_reboot_Click(object sender, EventArgs e)
             {
-                  RebootMenu rebootmenu = new RebootMenu();
+                  if ((rebootmenu == null) || (rebootmenu.IsDisposed))
+                  {
+                        rebootmenu = new RebootMenu();
+                  }
                   rebootmenu.Show();
+                  rebootmenu.Focus();
             }
 
             private void btn_rebootrecovery_Click(object sender, EventArgs e)
