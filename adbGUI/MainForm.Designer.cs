@@ -129,6 +129,10 @@
                   this.btn_packages_uninstall = new System.Windows.Forms.Button();
                   this.txt_packages_path = new System.Windows.Forms.TextBox();
                   this.btn_packages_open = new System.Windows.Forms.Button();
+                  this.tabPage6 = new System.Windows.Forms.TabPage();
+                  this.listView1 = new System.Windows.Forms.ListView();
+                  this.col_log_time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+                  this.col_log_command = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
                   this.tabPage5 = new System.Windows.Forms.TabPage();
                   this.label10 = new System.Windows.Forms.Label();
                   this.label9 = new System.Windows.Forms.Label();
@@ -141,10 +145,8 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-                  this.tabPage6 = new System.Windows.Forms.TabPage();
-                  this.listView1 = new System.Windows.Forms.ListView();
-                  this.col_log_time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-                  this.col_log_command = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+                  this.txt_serialno = new System.Windows.Forms.TextBox();
+                  this.groupBox13 = new System.Windows.Forms.GroupBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox11.SuspendLayout();
@@ -162,8 +164,9 @@
                   this.tabPage3.SuspendLayout();
                   this.groupBox8.SuspendLayout();
                   this.groupBox3.SuspendLayout();
-                  this.tabPage5.SuspendLayout();
                   this.tabPage6.SuspendLayout();
+                  this.tabPage5.SuspendLayout();
+                  this.groupBox13.SuspendLayout();
                   this.SuspendLayout();
                   // 
                   // tabControl1
@@ -185,6 +188,7 @@
                   // 
                   // tabPage1
                   // 
+                  this.tabPage1.Controls.Add(this.groupBox13);
                   this.tabPage1.Controls.Add(this.groupBox11);
                   this.tabPage1.Controls.Add(this.groupBox4);
                   this.tabPage1.Controls.Add(this.groupBox1);
@@ -200,28 +204,28 @@
                   // 
                   this.groupBox11.Controls.Add(this.txt_ip);
                   this.groupBox11.Controls.Add(this.btn_connect);
-                  this.groupBox11.Location = new System.Drawing.Point(6, 159);
+                  this.groupBox11.Location = new System.Drawing.Point(3, 116);
                   this.groupBox11.Name = "groupBox11";
-                  this.groupBox11.Size = new System.Drawing.Size(498, 52);
+                  this.groupBox11.Size = new System.Drawing.Size(255, 76);
                   this.groupBox11.TabIndex = 3;
                   this.groupBox11.TabStop = false;
                   this.groupBox11.Text = "Wireless ADB";
                   // 
                   // txt_ip
                   // 
-                  this.txt_ip.Location = new System.Drawing.Point(6, 25);
+                  this.txt_ip.Location = new System.Drawing.Point(7, 33);
                   this.txt_ip.Name = "txt_ip";
-                  this.txt_ip.Size = new System.Drawing.Size(405, 20);
-                  this.txt_ip.TabIndex = 1;
+                  this.txt_ip.Size = new System.Drawing.Size(159, 20);
+                  this.txt_ip.TabIndex = 10;
                   this.txt_ip.Text = "192.168.0.100:5555";
                   this.txt_ip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ip_KeyDown);
                   // 
                   // btn_connect
                   // 
-                  this.btn_connect.Location = new System.Drawing.Point(417, 23);
+                  this.btn_connect.Location = new System.Drawing.Point(172, 31);
                   this.btn_connect.Name = "btn_connect";
                   this.btn_connect.Size = new System.Drawing.Size(75, 23);
-                  this.btn_connect.TabIndex = 0;
+                  this.btn_connect.TabIndex = 11;
                   this.btn_connect.Text = "Connect";
                   this.btn_connect.UseVisualStyleBackColor = true;
                   this.btn_connect.Click += new System.EventHandler(this.btn_connect_Click);
@@ -233,16 +237,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox4.Controls.Add(this.btn_run);
                   this.groupBox4.Controls.Add(this.txt_customcommand);
-                  this.groupBox4.Location = new System.Drawing.Point(6, 217);
+                  this.groupBox4.Location = new System.Drawing.Point(6, 198);
                   this.groupBox4.Name = "groupBox4";
-                  this.groupBox4.Size = new System.Drawing.Size(498, 57);
+                  this.groupBox4.Size = new System.Drawing.Size(498, 76);
                   this.groupBox4.TabIndex = 1;
                   this.groupBox4.TabStop = false;
                   this.groupBox4.Text = "Custom Command";
                   // 
                   // btn_run
                   // 
-                  this.btn_run.Location = new System.Drawing.Point(417, 25);
+                  this.btn_run.Location = new System.Drawing.Point(417, 31);
                   this.btn_run.Name = "btn_run";
                   this.btn_run.Size = new System.Drawing.Size(75, 23);
                   this.btn_run.TabIndex = 1;
@@ -252,7 +256,7 @@
                   // 
                   // txt_customcommand
                   // 
-                  this.txt_customcommand.Location = new System.Drawing.Point(6, 28);
+                  this.txt_customcommand.Location = new System.Drawing.Point(4, 33);
                   this.txt_customcommand.Name = "txt_customcommand";
                   this.txt_customcommand.Size = new System.Drawing.Size(405, 20);
                   this.txt_customcommand.TabIndex = 0;
@@ -268,14 +272,14 @@
                   this.groupBox1.Controls.Add(this.btn_openshell);
                   this.groupBox1.Controls.Add(this.btn_restartserver);
                   this.groupBox1.Controls.Add(this.btn_showdevices);
+                  this.groupBox1.Controls.Add(this.btn_statuswindow);
                   this.groupBox1.Controls.Add(this.btn_reboot);
                   this.groupBox1.Controls.Add(this.btn_remountsystem);
-                  this.groupBox1.Controls.Add(this.btn_statuswindow);
                   this.groupBox1.Controls.Add(this.btn_killserver);
                   this.groupBox1.Controls.Add(this.btn_startserver);
                   this.groupBox1.Location = new System.Drawing.Point(6, 6);
                   this.groupBox1.Name = "groupBox1";
-                  this.groupBox1.Size = new System.Drawing.Size(498, 107);
+                  this.groupBox1.Size = new System.Drawing.Size(498, 104);
                   this.groupBox1.TabIndex = 2;
                   this.groupBox1.TabStop = false;
                   this.groupBox1.Text = "Standard";
@@ -283,10 +287,10 @@
                   // btn_openshell
                   // 
                   this.btn_openshell.AccessibleDescription = "";
-                  this.btn_openshell.Location = new System.Drawing.Point(6, 77);
+                  this.btn_openshell.Location = new System.Drawing.Point(4, 48);
                   this.btn_openshell.Name = "btn_openshell";
-                  this.btn_openshell.Size = new System.Drawing.Size(159, 23);
-                  this.btn_openshell.TabIndex = 4;
+                  this.btn_openshell.Size = new System.Drawing.Size(159, 52);
+                  this.btn_openshell.TabIndex = 5;
                   this.btn_openshell.Text = "Open Shell";
                   this.toolTip.SetToolTip(this.btn_openshell, "Open the shell");
                   this.btn_openshell.UseVisualStyleBackColor = true;
@@ -295,10 +299,10 @@
                   // btn_restartserver
                   // 
                   this.btn_restartserver.AccessibleDescription = "";
-                  this.btn_restartserver.Location = new System.Drawing.Point(169, 19);
+                  this.btn_restartserver.Location = new System.Drawing.Point(6, 19);
                   this.btn_restartserver.Name = "btn_restartserver";
                   this.btn_restartserver.Size = new System.Drawing.Size(159, 23);
-                  this.btn_restartserver.TabIndex = 5;
+                  this.btn_restartserver.TabIndex = 2;
                   this.btn_restartserver.Text = "Restart Server";
                   this.toolTip.SetToolTip(this.btn_restartserver, "Kill the server if it is running");
                   this.btn_restartserver.UseVisualStyleBackColor = true;
@@ -307,7 +311,7 @@
                   // btn_showdevices
                   // 
                   this.btn_showdevices.AccessibleDescription = "";
-                  this.btn_showdevices.Location = new System.Drawing.Point(335, 48);
+                  this.btn_showdevices.Location = new System.Drawing.Point(334, 48);
                   this.btn_showdevices.Name = "btn_showdevices";
                   this.btn_showdevices.Size = new System.Drawing.Size(159, 23);
                   this.btn_showdevices.TabIndex = 7;
@@ -318,10 +322,10 @@
                   // 
                   // btn_reboot
                   // 
-                  this.btn_reboot.Location = new System.Drawing.Point(333, 19);
+                  this.btn_reboot.Location = new System.Drawing.Point(334, 19);
                   this.btn_reboot.Name = "btn_reboot";
                   this.btn_reboot.Size = new System.Drawing.Size(159, 23);
-                  this.btn_reboot.TabIndex = 9;
+                  this.btn_reboot.TabIndex = 4;
                   this.btn_reboot.Text = "Power Menu";
                   this.toolTip.SetToolTip(this.btn_reboot, "Reboot the device");
                   this.btn_reboot.UseVisualStyleBackColor = true;
@@ -329,10 +333,10 @@
                   // 
                   // btn_remountsystem
                   // 
-                  this.btn_remountsystem.Location = new System.Drawing.Point(169, 77);
+                  this.btn_remountsystem.Location = new System.Drawing.Point(334, 77);
                   this.btn_remountsystem.Name = "btn_remountsystem";
                   this.btn_remountsystem.Size = new System.Drawing.Size(159, 23);
-                  this.btn_remountsystem.TabIndex = 8;
+                  this.btn_remountsystem.TabIndex = 9;
                   this.btn_remountsystem.Text = "Remount System";
                   this.toolTip.SetToolTip(this.btn_remountsystem, "Remounts the /system partition on the device read-write");
                   this.btn_remountsystem.UseVisualStyleBackColor = true;
@@ -340,10 +344,10 @@
                   // 
                   // btn_statuswindow
                   // 
-                  this.btn_statuswindow.Location = new System.Drawing.Point(170, 48);
+                  this.btn_statuswindow.Location = new System.Drawing.Point(169, 77);
                   this.btn_statuswindow.Name = "btn_statuswindow";
                   this.btn_statuswindow.Size = new System.Drawing.Size(159, 23);
-                  this.btn_statuswindow.TabIndex = 6;
+                  this.btn_statuswindow.TabIndex = 8;
                   this.btn_statuswindow.Text = "Check Server Status";
                   this.toolTip.SetToolTip(this.btn_statuswindow, "Continuously print device status for a specified device");
                   this.btn_statuswindow.UseVisualStyleBackColor = true;
@@ -352,10 +356,10 @@
                   // btn_killserver
                   // 
                   this.btn_killserver.AccessibleDescription = "";
-                  this.btn_killserver.Location = new System.Drawing.Point(6, 48);
+                  this.btn_killserver.Location = new System.Drawing.Point(169, 48);
                   this.btn_killserver.Name = "btn_killserver";
                   this.btn_killserver.Size = new System.Drawing.Size(159, 23);
-                  this.btn_killserver.TabIndex = 3;
+                  this.btn_killserver.TabIndex = 6;
                   this.btn_killserver.Text = "Kill Server";
                   this.toolTip.SetToolTip(this.btn_killserver, "Kill the server if it is running");
                   this.btn_killserver.UseVisualStyleBackColor = true;
@@ -364,10 +368,10 @@
                   // btn_startserver
                   // 
                   this.btn_startserver.AccessibleDescription = "";
-                  this.btn_startserver.Location = new System.Drawing.Point(6, 19);
+                  this.btn_startserver.Location = new System.Drawing.Point(169, 19);
                   this.btn_startserver.Name = "btn_startserver";
                   this.btn_startserver.Size = new System.Drawing.Size(159, 23);
-                  this.btn_startserver.TabIndex = 2;
+                  this.btn_startserver.TabIndex = 3;
                   this.btn_startserver.Text = "Start Server";
                   this.toolTip.SetToolTip(this.btn_startserver, "Ensure that there is a server running");
                   this.btn_startserver.UseVisualStyleBackColor = true;
@@ -1244,6 +1248,40 @@
                   this.btn_packages_open.UseVisualStyleBackColor = true;
                   this.btn_packages_open.Click += new System.EventHandler(this.btn_packages_open_Click);
                   // 
+                  // tabPage6
+                  // 
+                  this.tabPage6.Controls.Add(this.listView1);
+                  this.tabPage6.Location = new System.Drawing.Point(4, 22);
+                  this.tabPage6.Name = "tabPage6";
+                  this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+                  this.tabPage6.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage6.TabIndex = 5;
+                  this.tabPage6.Text = "Log";
+                  this.tabPage6.UseVisualStyleBackColor = true;
+                  // 
+                  // listView1
+                  // 
+                  this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.col_log_time,
+            this.col_log_command});
+                  this.listView1.GridLines = true;
+                  this.listView1.Location = new System.Drawing.Point(6, 6);
+                  this.listView1.Name = "listView1";
+                  this.listView1.Size = new System.Drawing.Size(498, 268);
+                  this.listView1.TabIndex = 0;
+                  this.listView1.UseCompatibleStateImageBehavior = false;
+                  this.listView1.View = System.Windows.Forms.View.Details;
+                  // 
+                  // col_log_time
+                  // 
+                  this.col_log_time.Text = "Time";
+                  this.col_log_time.Width = 79;
+                  // 
+                  // col_log_command
+                  // 
+                  this.col_log_command.Text = "Command";
+                  this.col_log_command.Width = 415;
+                  // 
                   // tabPage5
                   // 
                   this.tabPage5.Controls.Add(this.label10);
@@ -1339,39 +1377,22 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
-                  // tabPage6
+                  // txt_serialno
                   // 
-                  this.tabPage6.Controls.Add(this.listView1);
-                  this.tabPage6.Location = new System.Drawing.Point(4, 22);
-                  this.tabPage6.Name = "tabPage6";
-                  this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage6.Size = new System.Drawing.Size(510, 280);
-                  this.tabPage6.TabIndex = 5;
-                  this.tabPage6.Text = "Log";
-                  this.tabPage6.UseVisualStyleBackColor = true;
+                  this.txt_serialno.Location = new System.Drawing.Point(6, 33);
+                  this.txt_serialno.Name = "txt_serialno";
+                  this.txt_serialno.Size = new System.Drawing.Size(228, 20);
+                  this.txt_serialno.TabIndex = 12;
                   // 
-                  // listView1
+                  // groupBox13
                   // 
-                  this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.col_log_time,
-            this.col_log_command});
-                  this.listView1.GridLines = true;
-                  this.listView1.Location = new System.Drawing.Point(6, 6);
-                  this.listView1.Name = "listView1";
-                  this.listView1.Size = new System.Drawing.Size(498, 268);
-                  this.listView1.TabIndex = 0;
-                  this.listView1.UseCompatibleStateImageBehavior = false;
-                  this.listView1.View = System.Windows.Forms.View.Details;
-                  // 
-                  // col_log_time
-                  // 
-                  this.col_log_time.Text = "Time";
-                  this.col_log_time.Width = 79;
-                  // 
-                  // col_log_command
-                  // 
-                  this.col_log_command.Text = "Command";
-                  this.col_log_command.Width = 415;
+                  this.groupBox13.Controls.Add(this.txt_serialno);
+                  this.groupBox13.Location = new System.Drawing.Point(264, 116);
+                  this.groupBox13.Name = "groupBox13";
+                  this.groupBox13.Size = new System.Drawing.Size(240, 76);
+                  this.groupBox13.TabIndex = 4;
+                  this.groupBox13.TabStop = false;
+                  this.groupBox13.Text = "Serial Number";
                   // 
                   // MainForm
                   // 
@@ -1414,9 +1435,11 @@
                   this.groupBox8.PerformLayout();
                   this.groupBox3.ResumeLayout(false);
                   this.groupBox3.PerformLayout();
+                  this.tabPage6.ResumeLayout(false);
                   this.tabPage5.ResumeLayout(false);
                   this.tabPage5.PerformLayout();
-                  this.tabPage6.ResumeLayout(false);
+                  this.groupBox13.ResumeLayout(false);
+                  this.groupBox13.PerformLayout();
                   this.ResumeLayout(false);
 
             }
@@ -1538,6 +1561,8 @@
             private System.Windows.Forms.ListView listView1;
             private System.Windows.Forms.ColumnHeader col_log_time;
             private System.Windows.Forms.ColumnHeader col_log_command;
+            private System.Windows.Forms.TextBox txt_serialno;
+            private System.Windows.Forms.GroupBox groupBox13;
       }
 }
 

@@ -33,7 +33,6 @@ namespace adbGUI
 
                   MainForm mainformm = new MainForm();
 
-
                   if (combo_rebootmenu.SelectedIndex == 0)
                   {
                         mainformm.callADB_wo("", "shell reboot -p");

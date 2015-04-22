@@ -94,7 +94,7 @@ namespace adbGUI
             public void callADB_w(string x)
             {
                   string filename = "cmd.exe";
-                  string arguments = " /C prompt $g & tools\\adb " + x + " & echo. & pause";
+                  string arguments = " /C prompt $g & tools\\adb " + serialno() + " " + x + " & echo. & pause";
                   ProcessStartInfo startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -112,7 +112,7 @@ namespace adbGUI
             public void callADB_wo(string x, string y)
             {
                   string filename = "cmd.exe";
-                  string arguments = "/C " + x + " tools\\adb " + y;
+                  string arguments = "/C " + x + " tools\\adb " + serialno() + " " + y;
                   ProcessStartInfo startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -128,11 +128,15 @@ namespace adbGUI
                   lvi.SubItems.Add(filename + " " + arguments);
                   listView1.Items.Add(lvi);
             }
-
-            public void AddToLog(string x)
+            private string serialno()
             {
+                  string s = "";
 
-
+                  if (txt_serialno.Text != "")
+                  {
+                        s = "-s " + txt_serialno.Text;
+                  }
+                  return s;
             }
 
             private void btn_startserver_Click(object sender, EventArgs e)
@@ -148,6 +152,7 @@ namespace adbGUI
             private Form rebootmenu;
             private void btn_reboot_Click(object sender, EventArgs e)
             {
+
                   if ((rebootmenu == null) || (rebootmenu.IsDisposed))
                   {
                         rebootmenu = new RebootMenu();
@@ -195,7 +200,12 @@ namespace adbGUI
 
             private void btn_showdevices_Click(object sender, EventArgs e)
             {
-                  callADB_w("devices -l");
+                  //callADB_w("devices -l");
+
+                  string file = "tmp\\devices.txt";
+                  callADB_wo("mkdir tmp & del " + file + " & ", "devices -l> " + file);
+                  CallViewer(file, "Devices");
+
             }
 
             private async void btn_restartserver_Click(object sender, EventArgs e)
@@ -817,5 +827,6 @@ namespace adbGUI
             {
                   callADB_wo("", "remount");
             }
+
       }
 }
