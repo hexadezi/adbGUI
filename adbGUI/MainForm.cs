@@ -490,15 +490,6 @@ namespace adbGUI
                   callADB_w("help");
             }
 
-            //private void button_Click(object sender, EventArgs e)
-            //{
-            //      switch((Button)sender)
-            //      {
-            //            case sender.Equals(button1):
-
-            //      }
-            //}
-
             private void btn_phoneinformation_features_Click(object sender, EventArgs e)
             {
                   string file = "tmp\\phone_features.txt";
