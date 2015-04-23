@@ -105,7 +105,7 @@ namespace adbGUI
                   process.Start();
 
                   ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("h:mm:ss tt"));
-                  lvi.SubItems.Add(filename + " " + arguments);
+                  lvi.SubItems.Add(arguments.Remove(0, 3));
                   listView1.Items.Add(lvi);
             }
 
@@ -124,8 +124,18 @@ namespace adbGUI
 
                   process.Start();
 
+                  if (x == "")
+                  {
+                        arguments = arguments.Remove(0, 4);
+                  }
+                  else
+                  {
+                        arguments = arguments.Remove(0, 3);
+
+                  }
+
                   ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("h:mm:ss tt"));
-                  lvi.SubItems.Add(filename + " " + arguments);
+                  lvi.SubItems.Add(arguments);
                   listView1.Items.Add(lvi);
             }
             private string serialno()
@@ -204,7 +214,7 @@ namespace adbGUI
 
                   string file = "tmp\\devices.txt";
                   callADB_wo("mkdir tmp & del " + file + " & ", "devices -l> " + file);
-                  CallViewer(file, "Devices");
+                  CallViewer(file, "Devices", 700, 200);
 
             }
 
