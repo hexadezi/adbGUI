@@ -32,6 +32,8 @@
                   System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
                   this.tabControl1 = new System.Windows.Forms.TabControl();
                   this.tabPage1 = new System.Windows.Forms.TabPage();
+                  this.groupBox13 = new System.Windows.Forms.GroupBox();
+                  this.txt_serialno = new System.Windows.Forms.TextBox();
                   this.groupBox11 = new System.Windows.Forms.GroupBox();
                   this.txt_ip = new System.Windows.Forms.TextBox();
                   this.btn_connect = new System.Windows.Forms.Button();
@@ -42,9 +44,9 @@
                   this.btn_openshell = new System.Windows.Forms.Button();
                   this.btn_restartserver = new System.Windows.Forms.Button();
                   this.btn_showdevices = new System.Windows.Forms.Button();
+                  this.btn_statuswindow = new System.Windows.Forms.Button();
                   this.btn_reboot = new System.Windows.Forms.Button();
                   this.btn_remountsystem = new System.Windows.Forms.Button();
-                  this.btn_statuswindow = new System.Windows.Forms.Button();
                   this.btn_killserver = new System.Windows.Forms.Button();
                   this.btn_startserver = new System.Windows.Forms.Button();
                   this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -145,10 +147,9 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-                  this.txt_serialno = new System.Windows.Forms.TextBox();
-                  this.groupBox13 = new System.Windows.Forms.GroupBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
+                  this.groupBox13.SuspendLayout();
                   this.groupBox11.SuspendLayout();
                   this.groupBox4.SuspendLayout();
                   this.groupBox1.SuspendLayout();
@@ -166,7 +167,6 @@
                   this.groupBox3.SuspendLayout();
                   this.tabPage6.SuspendLayout();
                   this.tabPage5.SuspendLayout();
-                  this.groupBox13.SuspendLayout();
                   this.SuspendLayout();
                   // 
                   // tabControl1
@@ -199,6 +199,23 @@
                   this.tabPage1.TabIndex = 0;
                   this.tabPage1.Text = "All Commands";
                   this.tabPage1.UseVisualStyleBackColor = true;
+                  // 
+                  // groupBox13
+                  // 
+                  this.groupBox13.Controls.Add(this.txt_serialno);
+                  this.groupBox13.Location = new System.Drawing.Point(264, 116);
+                  this.groupBox13.Name = "groupBox13";
+                  this.groupBox13.Size = new System.Drawing.Size(240, 76);
+                  this.groupBox13.TabIndex = 4;
+                  this.groupBox13.TabStop = false;
+                  this.groupBox13.Text = "Serial Number";
+                  // 
+                  // txt_serialno
+                  // 
+                  this.txt_serialno.Location = new System.Drawing.Point(6, 33);
+                  this.txt_serialno.Name = "txt_serialno";
+                  this.txt_serialno.Size = new System.Drawing.Size(228, 20);
+                  this.txt_serialno.TabIndex = 12;
                   // 
                   // groupBox11
                   // 
@@ -299,7 +316,7 @@
                   // btn_restartserver
                   // 
                   this.btn_restartserver.AccessibleDescription = "";
-                  this.btn_restartserver.Location = new System.Drawing.Point(6, 19);
+                  this.btn_restartserver.Location = new System.Drawing.Point(4, 19);
                   this.btn_restartserver.Name = "btn_restartserver";
                   this.btn_restartserver.Size = new System.Drawing.Size(159, 23);
                   this.btn_restartserver.TabIndex = 2;
@@ -319,6 +336,17 @@
                   this.toolTip.SetToolTip(this.btn_showdevices, "Block until device is online");
                   this.btn_showdevices.UseVisualStyleBackColor = true;
                   this.btn_showdevices.Click += new System.EventHandler(this.btn_showdevices_Click);
+                  // 
+                  // btn_statuswindow
+                  // 
+                  this.btn_statuswindow.Location = new System.Drawing.Point(169, 77);
+                  this.btn_statuswindow.Name = "btn_statuswindow";
+                  this.btn_statuswindow.Size = new System.Drawing.Size(159, 23);
+                  this.btn_statuswindow.TabIndex = 8;
+                  this.btn_statuswindow.Text = "Check Server Status";
+                  this.toolTip.SetToolTip(this.btn_statuswindow, "Continuously print device status for a specified device");
+                  this.btn_statuswindow.UseVisualStyleBackColor = true;
+                  this.btn_statuswindow.Click += new System.EventHandler(this.btn_statuswindow_Click_1);
                   // 
                   // btn_reboot
                   // 
@@ -341,17 +369,6 @@
                   this.toolTip.SetToolTip(this.btn_remountsystem, "Remounts the /system partition on the device read-write");
                   this.btn_remountsystem.UseVisualStyleBackColor = true;
                   this.btn_remountsystem.Click += new System.EventHandler(this.btn_remountsystem_Click);
-                  // 
-                  // btn_statuswindow
-                  // 
-                  this.btn_statuswindow.Location = new System.Drawing.Point(169, 77);
-                  this.btn_statuswindow.Name = "btn_statuswindow";
-                  this.btn_statuswindow.Size = new System.Drawing.Size(159, 23);
-                  this.btn_statuswindow.TabIndex = 8;
-                  this.btn_statuswindow.Text = "Check Server Status";
-                  this.toolTip.SetToolTip(this.btn_statuswindow, "Continuously print device status for a specified device");
-                  this.btn_statuswindow.UseVisualStyleBackColor = true;
-                  this.btn_statuswindow.Click += new System.EventHandler(this.btn_statuswindow_Click_1);
                   // 
                   // btn_killserver
                   // 
@@ -1377,23 +1394,6 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
-                  // txt_serialno
-                  // 
-                  this.txt_serialno.Location = new System.Drawing.Point(6, 33);
-                  this.txt_serialno.Name = "txt_serialno";
-                  this.txt_serialno.Size = new System.Drawing.Size(228, 20);
-                  this.txt_serialno.TabIndex = 12;
-                  // 
-                  // groupBox13
-                  // 
-                  this.groupBox13.Controls.Add(this.txt_serialno);
-                  this.groupBox13.Location = new System.Drawing.Point(264, 116);
-                  this.groupBox13.Name = "groupBox13";
-                  this.groupBox13.Size = new System.Drawing.Size(240, 76);
-                  this.groupBox13.TabIndex = 4;
-                  this.groupBox13.TabStop = false;
-                  this.groupBox13.Text = "Serial Number";
-                  // 
                   // MainForm
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1410,6 +1410,8 @@
                   this.Load += new System.EventHandler(this.Form1_Load);
                   this.tabControl1.ResumeLayout(false);
                   this.tabPage1.ResumeLayout(false);
+                  this.groupBox13.ResumeLayout(false);
+                  this.groupBox13.PerformLayout();
                   this.groupBox11.ResumeLayout(false);
                   this.groupBox11.PerformLayout();
                   this.groupBox4.ResumeLayout(false);
@@ -1438,8 +1440,6 @@
                   this.tabPage6.ResumeLayout(false);
                   this.tabPage5.ResumeLayout(false);
                   this.tabPage5.PerformLayout();
-                  this.groupBox13.ResumeLayout(false);
-                  this.groupBox13.PerformLayout();
                   this.ResumeLayout(false);
 
             }

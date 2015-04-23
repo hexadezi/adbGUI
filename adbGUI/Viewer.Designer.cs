@@ -43,12 +43,12 @@
                   this.txt_output.BorderStyle = System.Windows.Forms.BorderStyle.None;
                   this.txt_output.Cursor = System.Windows.Forms.Cursors.IBeam;
                   this.txt_output.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                  this.txt_output.Location = new System.Drawing.Point(0, 0);
+                  this.txt_output.Location = new System.Drawing.Point(0, -1);
                   this.txt_output.Multiline = true;
                   this.txt_output.Name = "txt_output";
                   this.txt_output.ReadOnly = true;
                   this.txt_output.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-                  this.txt_output.Size = new System.Drawing.Size(841, 552);
+                  this.txt_output.Size = new System.Drawing.Size(841, 550);
                   this.txt_output.TabIndex = 0;
                   // 
                   // button1
