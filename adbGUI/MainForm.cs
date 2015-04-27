@@ -134,7 +134,7 @@ namespace adbGUI
 
                   }
 
-                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("h:mm:ss tt"));
+                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("HH:mm:ss"));
                   lvi.SubItems.Add(arguments);
                   listView1.Items.Add(lvi);
             }
