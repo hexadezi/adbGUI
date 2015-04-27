@@ -802,15 +802,17 @@ namespace adbGUI
 
             private void btn_connect_Click(object sender, EventArgs e)
             {
-                  string s = txt_ip.Text;
+                  string s = "";
+                  s = @txt_ip.Text.ToString();
                   if (s == "")
                   {
                         MessageBox.Show("Please type in IP and port!", "Error");
                   }
                   else
                   {
-                        callADB_w("connect " + txt_ip.Text.ToString());
+                        callADB_w("connect " + s);
                   }
+
             }
 
             private void txt_ip_KeyDown(object sender, KeyEventArgs e)

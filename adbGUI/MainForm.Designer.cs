@@ -234,7 +234,7 @@
                   this.txt_ip.Name = "txt_ip";
                   this.txt_ip.Size = new System.Drawing.Size(159, 20);
                   this.txt_ip.TabIndex = 10;
-                  this.txt_ip.Text = "192.168.0.100:5555";
+                  this.txt_ip.Text = "192.168.0.100";
                   this.txt_ip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ip_KeyDown);
                   // 
                   // btn_connect
