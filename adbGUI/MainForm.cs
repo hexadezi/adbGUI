@@ -24,6 +24,7 @@ namespace adbGUI
             }
             public async void CallViewer(string path, string name, int x = 850, int y = 600, FormWindowState state = FormWindowState.Normal)
             {
+
                   Viewer edit = new Viewer
                   {
                         Text = name,
@@ -34,7 +35,10 @@ namespace adbGUI
 
 
                   int count = 0;
-                  int maxTries = 200;
+                  int maxTries = 150;
+
+                  await Task.Delay(200);
+                  KillCMD();
 
                   while (true)
                   {
@@ -48,7 +52,7 @@ namespace adbGUI
                               sr.Close();
                               if (s == "")
                               {
-                                    MessageBox.Show("Is your device connected?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                    MessageBox.Show("No or more devices connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     Cursor = Cursors.Default;
                                     break;
 
@@ -137,6 +141,8 @@ namespace adbGUI
                   ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("HH:mm:ss"));
                   lvi.SubItems.Add(arguments);
                   listView1.Items.Add(lvi);
+
+
             }
             private string serialno()
             {
@@ -149,6 +155,52 @@ namespace adbGUI
                   return s;
             }
 
+            private async void IsRunning()
+            {
+                  await Task.Delay(700);
+
+                  if (Process.GetProcessesByName("adb").Length > 0)
+                  {
+                        this.Text = "adbGUI - Server is running";
+                  }
+                  else
+                  {
+                        this.Text = "adbGUI - Server is not running";
+                  }
+
+            }
+
+            private void KillServer()
+            {
+                  Process[] prs = Process.GetProcesses();
+
+
+                  foreach (Process pr in prs)
+                  {
+                        if (pr.ProcessName == "adb")
+                        {
+
+                              pr.Kill();
+
+                        }
+
+                  }
+            }
+            private void KillCMD()
+            {
+                  Process[] prs = Process.GetProcesses();
+
+
+                  foreach (Process pr in prs)
+                  {
+                        if (pr.ProcessName == "cmd")
+                        {
+
+                              pr.Kill();
+
+                        }
+                  }
+            }
             private void btn_startserver_Click(object sender, EventArgs e)
             {
                   callADB_wo("", "start-server");
@@ -156,7 +208,7 @@ namespace adbGUI
 
             private void btn_killserver_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "kill-server");
+                  KillServer();
             }
 
             private Form rebootmenu;
@@ -220,7 +272,7 @@ namespace adbGUI
 
             private async void btn_restartserver_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "kill-server");
+                  KillServer();
                   await Task.Delay(300);
                   callADB_wo("", "start-server");
             }
@@ -260,10 +312,11 @@ namespace adbGUI
                   }
             }
 
-            private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+            private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
             {
+                  KillServer();
+                  await Task.Delay(200);
                   Directory.Delete("tmp", true);
-                  callADB_wo("", "kill-server");
             }
 
             private void btn_run_Click(object sender, EventArgs e)
@@ -296,11 +349,19 @@ namespace adbGUI
                   di.Create();
                   di.Attributes |= FileAttributes.Hidden;
             }
-            private void Form1_Load(object sender, EventArgs e)
+            private async void Form1_Load(object sender, EventArgs e)
             {
                   CreateHiddenFolder("tmp");
                   txt_customcommand.Select();
                   callADB_wo("", "start-server");
+
+                  //Check Status
+                  while (true)
+                  {
+                        IsRunning();
+                        await Task.Delay(500);
+                  }
+
             }
 
             private void btn_phoneinformation_getprop_Click(object sender, EventArgs e)

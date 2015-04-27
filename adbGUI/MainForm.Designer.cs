@@ -205,16 +205,16 @@
                   this.groupBox13.Controls.Add(this.txt_serialno);
                   this.groupBox13.Location = new System.Drawing.Point(264, 116);
                   this.groupBox13.Name = "groupBox13";
-                  this.groupBox13.Size = new System.Drawing.Size(240, 76);
+                  this.groupBox13.Size = new System.Drawing.Size(240, 47);
                   this.groupBox13.TabIndex = 4;
                   this.groupBox13.TabStop = false;
                   this.groupBox13.Text = "Serial Number";
                   // 
                   // txt_serialno
                   // 
-                  this.txt_serialno.Location = new System.Drawing.Point(6, 33);
+                  this.txt_serialno.Location = new System.Drawing.Point(6, 19);
                   this.txt_serialno.Name = "txt_serialno";
-                  this.txt_serialno.Size = new System.Drawing.Size(228, 20);
+                  this.txt_serialno.Size = new System.Drawing.Size(229, 20);
                   this.txt_serialno.TabIndex = 12;
                   // 
                   // groupBox11
@@ -223,14 +223,14 @@
                   this.groupBox11.Controls.Add(this.btn_connect);
                   this.groupBox11.Location = new System.Drawing.Point(3, 116);
                   this.groupBox11.Name = "groupBox11";
-                  this.groupBox11.Size = new System.Drawing.Size(255, 76);
+                  this.groupBox11.Size = new System.Drawing.Size(255, 47);
                   this.groupBox11.TabIndex = 3;
                   this.groupBox11.TabStop = false;
                   this.groupBox11.Text = "Wireless ADB";
                   // 
                   // txt_ip
                   // 
-                  this.txt_ip.Location = new System.Drawing.Point(7, 33);
+                  this.txt_ip.Location = new System.Drawing.Point(7, 19);
                   this.txt_ip.Name = "txt_ip";
                   this.txt_ip.Size = new System.Drawing.Size(159, 20);
                   this.txt_ip.TabIndex = 10;
@@ -239,7 +239,7 @@
                   // 
                   // btn_connect
                   // 
-                  this.btn_connect.Location = new System.Drawing.Point(172, 31);
+                  this.btn_connect.Location = new System.Drawing.Point(172, 17);
                   this.btn_connect.Name = "btn_connect";
                   this.btn_connect.Size = new System.Drawing.Size(75, 23);
                   this.btn_connect.TabIndex = 11;
@@ -254,18 +254,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox4.Controls.Add(this.btn_run);
                   this.groupBox4.Controls.Add(this.txt_customcommand);
-                  this.groupBox4.Location = new System.Drawing.Point(6, 198);
+                  this.groupBox4.Location = new System.Drawing.Point(6, 169);
                   this.groupBox4.Name = "groupBox4";
-                  this.groupBox4.Size = new System.Drawing.Size(498, 76);
+                  this.groupBox4.Size = new System.Drawing.Size(498, 46);
                   this.groupBox4.TabIndex = 1;
                   this.groupBox4.TabStop = false;
                   this.groupBox4.Text = "Custom Command";
                   // 
                   // btn_run
                   // 
-                  this.btn_run.Location = new System.Drawing.Point(417, 31);
+                  this.btn_run.Location = new System.Drawing.Point(415, 17);
                   this.btn_run.Name = "btn_run";
-                  this.btn_run.Size = new System.Drawing.Size(75, 23);
+                  this.btn_run.Size = new System.Drawing.Size(78, 23);
                   this.btn_run.TabIndex = 1;
                   this.btn_run.Text = "Run";
                   this.btn_run.UseVisualStyleBackColor = true;
@@ -273,7 +273,7 @@
                   // 
                   // txt_customcommand
                   // 
-                  this.txt_customcommand.Location = new System.Drawing.Point(4, 33);
+                  this.txt_customcommand.Location = new System.Drawing.Point(4, 19);
                   this.txt_customcommand.Name = "txt_customcommand";
                   this.txt_customcommand.Size = new System.Drawing.Size(405, 20);
                   this.txt_customcommand.TabIndex = 0;
@@ -1405,7 +1405,7 @@
                   this.MaximizeBox = false;
                   this.Name = "MainForm";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-                  this.Text = "adbGUI";
+                  this.Text = "adbGUI - Server is running";
                   this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
                   this.Load += new System.EventHandler(this.Form1_Load);
                   this.tabControl1.ResumeLayout(false);
