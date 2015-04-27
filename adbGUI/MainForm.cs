@@ -77,7 +77,6 @@ namespace adbGUI
                         }
 
                   }
-                  callADB_wo("", "start-server");
             }
 
             public void CallProgram(string x, string y)
@@ -107,7 +106,7 @@ namespace adbGUI
                   Process process = new Process { StartInfo = startInfo };
                   process.Start();
 
-                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("h:mm:ss tt"));
+                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("HH:mm:ss tt"));
                   lvi.SubItems.Add(arguments.Remove(0, 3));
                   listView1.Items.Add(lvi);
             }
@@ -566,12 +565,16 @@ namespace adbGUI
 
             private void btn_phoneinformation_users_Click(object sender, EventArgs e)
             {
-                  callADB_w("shell pm list users");
+                  string file = "tmp\\alluser.txt";
+                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list users > " + file);
+                  CallViewer(file, "All User", 600, 250);
             }
 
             private void btn_phoneinformation_maxusers_Click(object sender, EventArgs e)
             {
-                  callADB_w("shell pm get-max-users");
+                  string file = "tmp\\maxuser.txt";
+                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm get-max-users > " + file);
+                  CallViewer(file, "Max User", 600, 250);
             }
 
             private void btn_phoneinformation_permissions_Click(object sender, EventArgs e)
@@ -751,7 +754,9 @@ namespace adbGUI
 
             private void btn_phoneinformation_uptime_Click(object sender, EventArgs e)
             {
-                  callADB_w("shell uptime");
+                  string file = "tmp\\uptime.txt";
+                  callADB_wo("mkdir tmp & del " + file + " & ", "shell uptime > " + file);
+                  CallViewer(file, "Netstat", 700, 250);
             }
 
             private void btn_donate_Click(object sender, EventArgs e)
@@ -804,7 +809,7 @@ namespace adbGUI
                   }
                   else
                   {
-                        callADB_w("connect " + txt_ip.Text);
+                        callADB_w("connect " + txt_ip.Text.ToString());
                   }
             }
 
