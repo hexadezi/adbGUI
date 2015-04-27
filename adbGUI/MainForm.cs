@@ -96,7 +96,7 @@ namespace adbGUI
             public void callADB_w(string x)
             {
                   string filename = "cmd.exe";
-                  string arguments = " /C prompt $g & tools\\adb " + serialno() + " " + x + " & echo. & pause";
+                  string arguments = "/C prompt $g & tools\\adb " + serialno() + " " + x + " & echo. & pause";
                   ProcessStartInfo startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
