@@ -37,9 +37,6 @@ namespace adbGUI
                   int count = 0;
                   int maxTries = 150;
 
-                  await Task.Delay(200);
-                  KillCMD();
-
                   while (true)
                   {
                         Cursor = Cursors.WaitCursor;
@@ -78,7 +75,9 @@ namespace adbGUI
                                     count = 0;
                               }
                         }
+
                   }
+                  callADB_wo("", "start-server");
             }
 
             public void CallProgram(string x, string y)
