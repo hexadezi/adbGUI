@@ -110,7 +110,7 @@ namespace adbGUI
                   lvi.SubItems.Add(arguments.Remove(0, 3));
                   listView1.Items.Add(lvi);
             }
-
+            
             public void callADB_wo(string x, string y)
             {
                   string filename = "cmd.exe";
