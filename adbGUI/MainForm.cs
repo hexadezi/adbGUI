@@ -184,21 +184,7 @@ namespace adbGUI
 
                   }
             }
-            private void KillCMD()
-            {
-                  Process[] prs = Process.GetProcesses();
 
-
-                  foreach (Process pr in prs)
-                  {
-                        if (pr.ProcessName == "cmd")
-                        {
-
-                              pr.Kill();
-
-                        }
-                  }
-            }
             private void btn_startserver_Click(object sender, EventArgs e)
             {
                   callADB_wo("", "start-server");
@@ -219,16 +205,6 @@ namespace adbGUI
                   }
                   rebootmenu.Show();
                   rebootmenu.Focus();
-            }
-
-            private void btn_rebootrecovery_Click(object sender, EventArgs e)
-            {
-                  callADB_wo("", "reboot recovery");
-            }
-
-            private void btn_rebootbootloader_Click(object sender, EventArgs e)
-            {
-                  callADB_wo("", "reboot bootloader");
             }
 
             private void button1_Click(object sender, EventArgs e)
