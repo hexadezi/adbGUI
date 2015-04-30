@@ -48,10 +48,9 @@ namespace adbGUI
                   else if (combo_rebootmenu.SelectedIndex == 3)
                   {
                         mainformm.callADB_wo("", "reboot recovery");
-
                   }
 
-                  var rebootMenu = new RebootMenu();
+                  //var rebootMenu = new RebootMenu();
 
             }
       }

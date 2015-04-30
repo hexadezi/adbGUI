@@ -460,7 +460,7 @@ namespace adbGUI
             private void btn_packages_installed_Click(object sender, EventArgs e)
             {
                   string file = "tmp\\installed_packages.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list packages -3 > " + file);
+                  callADB_wo("mkdir tmp & del " + file + " & ", "shell \"pm list packages -3 | cut -c9- | sort\" > " + file);
                   CallViewer(file, "Installed Packages", 500, 750);
             }
 
