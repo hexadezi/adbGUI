@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +23,115 @@ namespace adbGUI
                   Close();
                   return true;
             }
+
+
+
+
+
+
+
+
+
+
+
+
+            private void StartServer()
+            {
+                  ProcessStartInfo psi = new ProcessStartInfo("tools\\adb", "start-server");
+                  psi.WindowStyle = ProcessWindowStyle.Hidden;
+                  Process start = Process.Start(psi);
+            }
+            private void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
+            {
+                  Thread thread = new Thread(delegate() { callADB(a, b, titel, width, height, windowstate); });
+                  thread.Start();
+                  while (thread.IsAlive)
+                  {
+                        tabControl1.Enabled = false;
+                        //Cursor = Cursors.WaitCursor;
+                        Application.DoEvents();
+                  }
+                  tabControl1.Enabled = true;
+                  //Cursor = Cursors.Default;
+            }
+            public void ToViewer(string value, string title, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
+            {
+
+                  if (InvokeRequired)
+                  {
+                        this.Invoke(new Action<string, string, int, int, FormWindowState>(ToViewer), value, title, x, y, windowstate);
+                        return;
+                  }
+                  if (value == "")
+                  {
+                        MessageBox.Show(
+                              "No or more devices connected. \r\nIf more than one device is connected, then type in the serial in the main tab.");
+                  }
+                  else
+                  {
+                        Viewer v = new Viewer();
+
+                        v.txt_output.TabIndex = 2;
+                        v.txt_output.Text += value;
+                        v.Text = title;
+                        v.WindowState = windowstate;
+                        v.Width = x;
+                        v.Height = y;
+
+                        v.Show();
+                  }
+            }
+            public async void callADB(string a, string b, string c, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
+            {
+                  string filename = "cmd.exe";
+                  string arguments = "/C " + a + " tools\\adb " + serialno() + " " + b;
+                  ProcessStartInfo startInfo = new ProcessStartInfo
+                  {
+                        FileName = filename,
+                        Arguments = arguments,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true
+                  };
+                  Process process = new Process { StartInfo = startInfo };
+
+
+                  if (Process.GetProcessesByName("adb").Length > 0)
+                  {
+                        process.Start();
+                  }
+
+                  else
+                  {
+                        StartServer();
+                        await Task.Delay(500);
+                        process.Start();
+                  }
+
+                  string s = process.StandardOutput.ReadToEnd();
+
+                  ToViewer(s, c, x, y, windowstate);
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             public async void CallViewer(string path, string name, int x = 850, int y = 600, FormWindowState state = FormWindowState.Normal)
             {
 
@@ -110,7 +220,7 @@ namespace adbGUI
                   lvi.SubItems.Add(arguments.Remove(0, 3));
                   listView1.Items.Add(lvi);
             }
-            
+
             public void callADB_wo(string x, string y)
             {
                   string filename = "cmd.exe";
@@ -177,11 +287,8 @@ namespace adbGUI
                   {
                         if (pr.ProcessName == "adb")
                         {
-
                               pr.Kill();
-
                         }
-
                   }
             }
 
@@ -240,10 +347,16 @@ namespace adbGUI
 
                   string file = "tmp\\devices.txt";
                   callADB_wo("mkdir tmp & del " + file + " & ", "devices -l> " + file);
-                  CallViewer(file, "Devices", 700, 200);
-
+                  //CallViewer(file, "Devices", 700, 200);
+                  DevicesToTxtBox();
             }
-
+            private async void DevicesToTxtBox()
+            {
+                  await Task.Delay(1000);
+                  StreamReader sr = new StreamReader("tmp\\devices.txt", Encoding.Default, true);
+                  txt_devices.Text = sr.ReadToEnd();
+                  sr.Close();
+            }
             private async void btn_restartserver_Click(object sender, EventArgs e)
             {
                   KillServer();

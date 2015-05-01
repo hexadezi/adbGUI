@@ -147,6 +147,7 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+                  this.txt_devices = new System.Windows.Forms.TextBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -188,6 +189,7 @@
                   // 
                   // tabPage1
                   // 
+                  this.tabPage1.Controls.Add(this.txt_devices);
                   this.tabPage1.Controls.Add(this.groupBox13);
                   this.tabPage1.Controls.Add(this.groupBox11);
                   this.tabPage1.Controls.Add(this.groupBox4);
@@ -203,7 +205,7 @@
                   // groupBox13
                   // 
                   this.groupBox13.Controls.Add(this.txt_serialno);
-                  this.groupBox13.Location = new System.Drawing.Point(264, 116);
+                  this.groupBox13.Location = new System.Drawing.Point(264, 89);
                   this.groupBox13.Name = "groupBox13";
                   this.groupBox13.Size = new System.Drawing.Size(240, 47);
                   this.groupBox13.TabIndex = 4;
@@ -221,9 +223,9 @@
                   // 
                   this.groupBox11.Controls.Add(this.txt_ip);
                   this.groupBox11.Controls.Add(this.btn_connect);
-                  this.groupBox11.Location = new System.Drawing.Point(3, 116);
+                  this.groupBox11.Location = new System.Drawing.Point(6, 89);
                   this.groupBox11.Name = "groupBox11";
-                  this.groupBox11.Size = new System.Drawing.Size(255, 47);
+                  this.groupBox11.Size = new System.Drawing.Size(252, 47);
                   this.groupBox11.TabIndex = 3;
                   this.groupBox11.TabStop = false;
                   this.groupBox11.Text = "Wireless ADB";
@@ -254,7 +256,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox4.Controls.Add(this.btn_run);
                   this.groupBox4.Controls.Add(this.txt_customcommand);
-                  this.groupBox4.Location = new System.Drawing.Point(6, 169);
+                  this.groupBox4.Location = new System.Drawing.Point(6, 142);
                   this.groupBox4.Name = "groupBox4";
                   this.groupBox4.Size = new System.Drawing.Size(498, 46);
                   this.groupBox4.TabIndex = 1;
@@ -286,7 +288,6 @@
                   this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-                  this.groupBox1.Controls.Add(this.btn_openshell);
                   this.groupBox1.Controls.Add(this.btn_restartserver);
                   this.groupBox1.Controls.Add(this.btn_showdevices);
                   this.groupBox1.Controls.Add(this.btn_statuswindow);
@@ -294,9 +295,10 @@
                   this.groupBox1.Controls.Add(this.btn_remountsystem);
                   this.groupBox1.Controls.Add(this.btn_killserver);
                   this.groupBox1.Controls.Add(this.btn_startserver);
+                  this.groupBox1.Controls.Add(this.btn_openshell);
                   this.groupBox1.Location = new System.Drawing.Point(6, 6);
                   this.groupBox1.Name = "groupBox1";
-                  this.groupBox1.Size = new System.Drawing.Size(498, 104);
+                  this.groupBox1.Size = new System.Drawing.Size(498, 77);
                   this.groupBox1.TabIndex = 2;
                   this.groupBox1.TabStop = false;
                   this.groupBox1.Text = "Standard";
@@ -306,7 +308,7 @@
                   this.btn_openshell.AccessibleDescription = "";
                   this.btn_openshell.Location = new System.Drawing.Point(4, 48);
                   this.btn_openshell.Name = "btn_openshell";
-                  this.btn_openshell.Size = new System.Drawing.Size(159, 52);
+                  this.btn_openshell.Size = new System.Drawing.Size(159, 23);
                   this.btn_openshell.TabIndex = 5;
                   this.btn_openshell.Text = "Open Shell";
                   this.toolTip.SetToolTip(this.btn_openshell, "Open the shell");
@@ -318,9 +320,9 @@
                   this.btn_restartserver.AccessibleDescription = "";
                   this.btn_restartserver.Location = new System.Drawing.Point(4, 19);
                   this.btn_restartserver.Name = "btn_restartserver";
-                  this.btn_restartserver.Size = new System.Drawing.Size(159, 23);
+                  this.btn_restartserver.Size = new System.Drawing.Size(51, 23);
                   this.btn_restartserver.TabIndex = 2;
-                  this.btn_restartserver.Text = "Restart Server";
+                  this.btn_restartserver.Text = "Restart";
                   this.toolTip.SetToolTip(this.btn_restartserver, "Kill the server if it is running");
                   this.btn_restartserver.UseVisualStyleBackColor = true;
                   this.btn_restartserver.Click += new System.EventHandler(this.btn_restartserver_Click);
@@ -339,7 +341,7 @@
                   // 
                   // btn_statuswindow
                   // 
-                  this.btn_statuswindow.Location = new System.Drawing.Point(169, 77);
+                  this.btn_statuswindow.Location = new System.Drawing.Point(169, 19);
                   this.btn_statuswindow.Name = "btn_statuswindow";
                   this.btn_statuswindow.Size = new System.Drawing.Size(159, 23);
                   this.btn_statuswindow.TabIndex = 8;
@@ -361,7 +363,7 @@
                   // 
                   // btn_remountsystem
                   // 
-                  this.btn_remountsystem.Location = new System.Drawing.Point(334, 77);
+                  this.btn_remountsystem.Location = new System.Drawing.Point(169, 48);
                   this.btn_remountsystem.Name = "btn_remountsystem";
                   this.btn_remountsystem.Size = new System.Drawing.Size(159, 23);
                   this.btn_remountsystem.TabIndex = 9;
@@ -373,11 +375,11 @@
                   // btn_killserver
                   // 
                   this.btn_killserver.AccessibleDescription = "";
-                  this.btn_killserver.Location = new System.Drawing.Point(169, 48);
+                  this.btn_killserver.Location = new System.Drawing.Point(118, 19);
                   this.btn_killserver.Name = "btn_killserver";
-                  this.btn_killserver.Size = new System.Drawing.Size(159, 23);
+                  this.btn_killserver.Size = new System.Drawing.Size(45, 23);
                   this.btn_killserver.TabIndex = 6;
-                  this.btn_killserver.Text = "Kill Server";
+                  this.btn_killserver.Text = "Kill";
                   this.toolTip.SetToolTip(this.btn_killserver, "Kill the server if it is running");
                   this.btn_killserver.UseVisualStyleBackColor = true;
                   this.btn_killserver.Click += new System.EventHandler(this.btn_killserver_Click);
@@ -385,11 +387,11 @@
                   // btn_startserver
                   // 
                   this.btn_startserver.AccessibleDescription = "";
-                  this.btn_startserver.Location = new System.Drawing.Point(169, 19);
+                  this.btn_startserver.Location = new System.Drawing.Point(61, 19);
                   this.btn_startserver.Name = "btn_startserver";
-                  this.btn_startserver.Size = new System.Drawing.Size(159, 23);
+                  this.btn_startserver.Size = new System.Drawing.Size(51, 23);
                   this.btn_startserver.TabIndex = 3;
-                  this.btn_startserver.Text = "Start Server";
+                  this.btn_startserver.Text = "Start";
                   this.toolTip.SetToolTip(this.btn_startserver, "Ensure that there is a server running");
                   this.btn_startserver.UseVisualStyleBackColor = true;
                   this.btn_startserver.Click += new System.EventHandler(this.btn_startserver_Click);
@@ -1394,6 +1396,14 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
+                  // txt_devices
+                  // 
+                  this.txt_devices.Location = new System.Drawing.Point(6, 194);
+                  this.txt_devices.Multiline = true;
+                  this.txt_devices.Name = "txt_devices";
+                  this.txt_devices.Size = new System.Drawing.Size(498, 80);
+                  this.txt_devices.TabIndex = 5;
+                  // 
                   // MainForm
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1410,6 +1420,7 @@
                   this.Load += new System.EventHandler(this.Form1_Load);
                   this.tabControl1.ResumeLayout(false);
                   this.tabPage1.ResumeLayout(false);
+                  this.tabPage1.PerformLayout();
                   this.groupBox13.ResumeLayout(false);
                   this.groupBox13.PerformLayout();
                   this.groupBox11.ResumeLayout(false);
@@ -1563,6 +1574,7 @@
             private System.Windows.Forms.ColumnHeader col_log_command;
             private System.Windows.Forms.TextBox txt_serialno;
             private System.Windows.Forms.GroupBox groupBox13;
+            private System.Windows.Forms.TextBox txt_devices;
       }
 }
 
