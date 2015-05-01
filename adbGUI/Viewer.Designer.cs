@@ -42,7 +42,7 @@
                   this.txt_output.BackColor = System.Drawing.Color.White;
                   this.txt_output.BorderStyle = System.Windows.Forms.BorderStyle.None;
                   this.txt_output.Cursor = System.Windows.Forms.Cursors.IBeam;
-                  this.txt_output.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                  this.txt_output.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.txt_output.Location = new System.Drawing.Point(0, -1);
                   this.txt_output.Multiline = true;
                   this.txt_output.Name = "txt_output";
@@ -72,7 +72,7 @@
                   this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
                   this.Name = "Viewer";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-                  this.Text = "Editor";
+                  this.Text = "Output Viewer";
                   this.ResumeLayout(false);
                   this.PerformLayout();
 

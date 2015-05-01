@@ -41,14 +41,11 @@
                   this.btn_run = new System.Windows.Forms.Button();
                   this.txt_customcommand = new System.Windows.Forms.TextBox();
                   this.groupBox1 = new System.Windows.Forms.GroupBox();
-                  this.btn_openshell = new System.Windows.Forms.Button();
-                  this.btn_restartserver = new System.Windows.Forms.Button();
-                  this.btn_showdevices = new System.Windows.Forms.Button();
-                  this.btn_statuswindow = new System.Windows.Forms.Button();
                   this.btn_reboot = new System.Windows.Forms.Button();
                   this.btn_remountsystem = new System.Windows.Forms.Button();
-                  this.btn_killserver = new System.Windows.Forms.Button();
-                  this.btn_startserver = new System.Windows.Forms.Button();
+                  this.btnKillserver = new System.Windows.Forms.Button();
+                  this.btn_openshell = new System.Windows.Forms.Button();
+                  this.txt_devices = new System.Windows.Forms.TextBox();
                   this.tabPage4 = new System.Windows.Forms.TabPage();
                   this.groupBox12 = new System.Windows.Forms.GroupBox();
                   this.btn_phoneinformation_resetsize = new System.Windows.Forms.Button();
@@ -66,6 +63,7 @@
                   this.btn_phoneinformation_showmac = new System.Windows.Forms.Button();
                   this.txt_phoneinformation_mac = new System.Windows.Forms.TextBox();
                   this.groupBox5 = new System.Windows.Forms.GroupBox();
+                  this.btnAlarm = new System.Windows.Forms.Button();
                   this.btn_phoneinformation_screenshot = new System.Windows.Forms.Button();
                   this.btn_phoneinformation_activities = new System.Windows.Forms.Button();
                   this.btn_phoninformation_hosts = new System.Windows.Forms.Button();
@@ -89,7 +87,6 @@
                   this.btn_phoneinformation_logcat = new System.Windows.Forms.Button();
                   this.btn_phoneinformation_installedpackages = new System.Windows.Forms.Button();
                   this.btn_phoneinformation_getprop = new System.Windows.Forms.Button();
-                  this.btn_phoneinformation_getserial = new System.Windows.Forms.Button();
                   this.tabPage2 = new System.Windows.Forms.TabPage();
                   this.groupBox10 = new System.Windows.Forms.GroupBox();
                   this.label2 = new System.Windows.Forms.Label();
@@ -131,10 +128,6 @@
                   this.btn_packages_uninstall = new System.Windows.Forms.Button();
                   this.txt_packages_path = new System.Windows.Forms.TextBox();
                   this.btn_packages_open = new System.Windows.Forms.Button();
-                  this.tabPage6 = new System.Windows.Forms.TabPage();
-                  this.listView1 = new System.Windows.Forms.ListView();
-                  this.col_log_time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-                  this.col_log_command = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
                   this.tabPage5 = new System.Windows.Forms.TabPage();
                   this.label10 = new System.Windows.Forms.Label();
                   this.label9 = new System.Windows.Forms.Label();
@@ -147,7 +140,6 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-                  this.txt_devices = new System.Windows.Forms.TextBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -166,7 +158,6 @@
                   this.tabPage3.SuspendLayout();
                   this.groupBox8.SuspendLayout();
                   this.groupBox3.SuspendLayout();
-                  this.tabPage6.SuspendLayout();
                   this.tabPage5.SuspendLayout();
                   this.SuspendLayout();
                   // 
@@ -179,7 +170,6 @@
                   this.tabControl1.Controls.Add(this.tabPage4);
                   this.tabControl1.Controls.Add(this.tabPage2);
                   this.tabControl1.Controls.Add(this.tabPage3);
-                  this.tabControl1.Controls.Add(this.tabPage6);
                   this.tabControl1.Controls.Add(this.tabPage5);
                   this.tabControl1.Location = new System.Drawing.Point(12, 12);
                   this.tabControl1.Name = "tabControl1";
@@ -189,11 +179,11 @@
                   // 
                   // tabPage1
                   // 
-                  this.tabPage1.Controls.Add(this.txt_devices);
                   this.tabPage1.Controls.Add(this.groupBox13);
                   this.tabPage1.Controls.Add(this.groupBox11);
                   this.tabPage1.Controls.Add(this.groupBox4);
                   this.tabPage1.Controls.Add(this.groupBox1);
+                  this.tabPage1.Controls.Add(this.txt_devices);
                   this.tabPage1.Location = new System.Drawing.Point(4, 22);
                   this.tabPage1.Name = "tabPage1";
                   this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -205,7 +195,7 @@
                   // groupBox13
                   // 
                   this.groupBox13.Controls.Add(this.txt_serialno);
-                  this.groupBox13.Location = new System.Drawing.Point(264, 89);
+                  this.groupBox13.Location = new System.Drawing.Point(264, 60);
                   this.groupBox13.Name = "groupBox13";
                   this.groupBox13.Size = new System.Drawing.Size(240, 47);
                   this.groupBox13.TabIndex = 4;
@@ -223,7 +213,7 @@
                   // 
                   this.groupBox11.Controls.Add(this.txt_ip);
                   this.groupBox11.Controls.Add(this.btn_connect);
-                  this.groupBox11.Location = new System.Drawing.Point(6, 89);
+                  this.groupBox11.Location = new System.Drawing.Point(6, 60);
                   this.groupBox11.Name = "groupBox11";
                   this.groupBox11.Size = new System.Drawing.Size(252, 47);
                   this.groupBox11.TabIndex = 3;
@@ -256,7 +246,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox4.Controls.Add(this.btn_run);
                   this.groupBox4.Controls.Add(this.txt_customcommand);
-                  this.groupBox4.Location = new System.Drawing.Point(6, 142);
+                  this.groupBox4.Location = new System.Drawing.Point(6, 113);
                   this.groupBox4.Name = "groupBox4";
                   this.groupBox4.Size = new System.Drawing.Size(498, 46);
                   this.groupBox4.TabIndex = 1;
@@ -288,73 +278,22 @@
                   this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-                  this.groupBox1.Controls.Add(this.btn_restartserver);
-                  this.groupBox1.Controls.Add(this.btn_showdevices);
-                  this.groupBox1.Controls.Add(this.btn_statuswindow);
                   this.groupBox1.Controls.Add(this.btn_reboot);
                   this.groupBox1.Controls.Add(this.btn_remountsystem);
-                  this.groupBox1.Controls.Add(this.btn_killserver);
-                  this.groupBox1.Controls.Add(this.btn_startserver);
+                  this.groupBox1.Controls.Add(this.btnKillserver);
                   this.groupBox1.Controls.Add(this.btn_openshell);
                   this.groupBox1.Location = new System.Drawing.Point(6, 6);
                   this.groupBox1.Name = "groupBox1";
-                  this.groupBox1.Size = new System.Drawing.Size(498, 77);
+                  this.groupBox1.Size = new System.Drawing.Size(498, 48);
                   this.groupBox1.TabIndex = 2;
                   this.groupBox1.TabStop = false;
                   this.groupBox1.Text = "Standard";
                   // 
-                  // btn_openshell
-                  // 
-                  this.btn_openshell.AccessibleDescription = "";
-                  this.btn_openshell.Location = new System.Drawing.Point(4, 48);
-                  this.btn_openshell.Name = "btn_openshell";
-                  this.btn_openshell.Size = new System.Drawing.Size(159, 23);
-                  this.btn_openshell.TabIndex = 5;
-                  this.btn_openshell.Text = "Open Shell";
-                  this.toolTip.SetToolTip(this.btn_openshell, "Open the shell");
-                  this.btn_openshell.UseVisualStyleBackColor = true;
-                  this.btn_openshell.Click += new System.EventHandler(this.btn_openshell_Click);
-                  // 
-                  // btn_restartserver
-                  // 
-                  this.btn_restartserver.AccessibleDescription = "";
-                  this.btn_restartserver.Location = new System.Drawing.Point(4, 19);
-                  this.btn_restartserver.Name = "btn_restartserver";
-                  this.btn_restartserver.Size = new System.Drawing.Size(51, 23);
-                  this.btn_restartserver.TabIndex = 2;
-                  this.btn_restartserver.Text = "Restart";
-                  this.toolTip.SetToolTip(this.btn_restartserver, "Kill the server if it is running");
-                  this.btn_restartserver.UseVisualStyleBackColor = true;
-                  this.btn_restartserver.Click += new System.EventHandler(this.btn_restartserver_Click);
-                  // 
-                  // btn_showdevices
-                  // 
-                  this.btn_showdevices.AccessibleDescription = "";
-                  this.btn_showdevices.Location = new System.Drawing.Point(334, 48);
-                  this.btn_showdevices.Name = "btn_showdevices";
-                  this.btn_showdevices.Size = new System.Drawing.Size(159, 23);
-                  this.btn_showdevices.TabIndex = 7;
-                  this.btn_showdevices.Text = "Show Devices";
-                  this.toolTip.SetToolTip(this.btn_showdevices, "Block until device is online");
-                  this.btn_showdevices.UseVisualStyleBackColor = true;
-                  this.btn_showdevices.Click += new System.EventHandler(this.btn_showdevices_Click);
-                  // 
-                  // btn_statuswindow
-                  // 
-                  this.btn_statuswindow.Location = new System.Drawing.Point(169, 19);
-                  this.btn_statuswindow.Name = "btn_statuswindow";
-                  this.btn_statuswindow.Size = new System.Drawing.Size(159, 23);
-                  this.btn_statuswindow.TabIndex = 8;
-                  this.btn_statuswindow.Text = "Check Server Status";
-                  this.toolTip.SetToolTip(this.btn_statuswindow, "Continuously print device status for a specified device");
-                  this.btn_statuswindow.UseVisualStyleBackColor = true;
-                  this.btn_statuswindow.Click += new System.EventHandler(this.btn_statuswindow_Click_1);
-                  // 
                   // btn_reboot
                   // 
-                  this.btn_reboot.Location = new System.Drawing.Point(334, 19);
+                  this.btn_reboot.Location = new System.Drawing.Point(172, 19);
                   this.btn_reboot.Name = "btn_reboot";
-                  this.btn_reboot.Size = new System.Drawing.Size(159, 23);
+                  this.btn_reboot.Size = new System.Drawing.Size(156, 23);
                   this.btn_reboot.TabIndex = 4;
                   this.btn_reboot.Text = "Power Menu";
                   this.toolTip.SetToolTip(this.btn_reboot, "Reboot the device");
@@ -363,38 +302,48 @@
                   // 
                   // btn_remountsystem
                   // 
-                  this.btn_remountsystem.Location = new System.Drawing.Point(169, 48);
+                  this.btn_remountsystem.Location = new System.Drawing.Point(71, 19);
                   this.btn_remountsystem.Name = "btn_remountsystem";
-                  this.btn_remountsystem.Size = new System.Drawing.Size(159, 23);
+                  this.btn_remountsystem.Size = new System.Drawing.Size(95, 23);
                   this.btn_remountsystem.TabIndex = 9;
                   this.btn_remountsystem.Text = "Remount System";
                   this.toolTip.SetToolTip(this.btn_remountsystem, "Remounts the /system partition on the device read-write");
                   this.btn_remountsystem.UseVisualStyleBackColor = true;
                   this.btn_remountsystem.Click += new System.EventHandler(this.btn_remountsystem_Click);
                   // 
-                  // btn_killserver
+                  // btnKillserver
                   // 
-                  this.btn_killserver.AccessibleDescription = "";
-                  this.btn_killserver.Location = new System.Drawing.Point(118, 19);
-                  this.btn_killserver.Name = "btn_killserver";
-                  this.btn_killserver.Size = new System.Drawing.Size(45, 23);
-                  this.btn_killserver.TabIndex = 6;
-                  this.btn_killserver.Text = "Kill";
-                  this.toolTip.SetToolTip(this.btn_killserver, "Kill the server if it is running");
-                  this.btn_killserver.UseVisualStyleBackColor = true;
-                  this.btn_killserver.Click += new System.EventHandler(this.btn_killserver_Click);
+                  this.btnKillserver.AccessibleDescription = "";
+                  this.btnKillserver.Location = new System.Drawing.Point(7, 19);
+                  this.btnKillserver.Name = "btnKillserver";
+                  this.btnKillserver.Size = new System.Drawing.Size(58, 23);
+                  this.btnKillserver.TabIndex = 6;
+                  this.btnKillserver.Text = "Restart";
+                  this.toolTip.SetToolTip(this.btnKillserver, "Kill the server if it is running");
+                  this.btnKillserver.UseVisualStyleBackColor = true;
+                  this.btnKillserver.Click += new System.EventHandler(this.btnKillserver_Click);
                   // 
-                  // btn_startserver
+                  // btn_openshell
                   // 
-                  this.btn_startserver.AccessibleDescription = "";
-                  this.btn_startserver.Location = new System.Drawing.Point(61, 19);
-                  this.btn_startserver.Name = "btn_startserver";
-                  this.btn_startserver.Size = new System.Drawing.Size(51, 23);
-                  this.btn_startserver.TabIndex = 3;
-                  this.btn_startserver.Text = "Start";
-                  this.toolTip.SetToolTip(this.btn_startserver, "Ensure that there is a server running");
-                  this.btn_startserver.UseVisualStyleBackColor = true;
-                  this.btn_startserver.Click += new System.EventHandler(this.btn_startserver_Click);
+                  this.btn_openshell.AccessibleDescription = "";
+                  this.btn_openshell.Location = new System.Drawing.Point(333, 19);
+                  this.btn_openshell.Name = "btn_openshell";
+                  this.btn_openshell.Size = new System.Drawing.Size(159, 23);
+                  this.btn_openshell.TabIndex = 5;
+                  this.btn_openshell.Text = "Open Shell";
+                  this.toolTip.SetToolTip(this.btn_openshell, "Open the shell");
+                  this.btn_openshell.UseVisualStyleBackColor = true;
+                  this.btn_openshell.Click += new System.EventHandler(this.btn_openshell_Click);
+                  // 
+                  // txt_devices
+                  // 
+                  this.txt_devices.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                  this.txt_devices.Location = new System.Drawing.Point(6, 165);
+                  this.txt_devices.Multiline = true;
+                  this.txt_devices.Name = "txt_devices";
+                  this.txt_devices.ReadOnly = true;
+                  this.txt_devices.Size = new System.Drawing.Size(498, 109);
+                  this.txt_devices.TabIndex = 5;
                   // 
                   // tabPage4
                   // 
@@ -572,6 +521,7 @@
                   this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+                  this.groupBox5.Controls.Add(this.btnAlarm);
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_screenshot);
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_activities);
                   this.groupBox5.Controls.Add(this.btn_phoninformation_hosts);
@@ -595,13 +545,22 @@
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_logcat);
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_installedpackages);
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_getprop);
-                  this.groupBox5.Controls.Add(this.btn_phoneinformation_getserial);
                   this.groupBox5.Location = new System.Drawing.Point(6, 6);
                   this.groupBox5.Name = "groupBox5";
                   this.groupBox5.Size = new System.Drawing.Size(342, 268);
                   this.groupBox5.TabIndex = 1;
                   this.groupBox5.TabStop = false;
                   this.groupBox5.Text = "Phone Information";
+                  // 
+                  // btnAlarm
+                  // 
+                  this.btnAlarm.Location = new System.Drawing.Point(118, 77);
+                  this.btnAlarm.Name = "btnAlarm";
+                  this.btnAlarm.Size = new System.Drawing.Size(106, 23);
+                  this.btnAlarm.TabIndex = 26;
+                  this.btnAlarm.Text = "Alarm State";
+                  this.btnAlarm.UseVisualStyleBackColor = true;
+                  this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
                   // 
                   // btn_phoneinformation_screenshot
                   // 
@@ -832,16 +791,6 @@
                   this.btn_phoneinformation_getprop.Text = "Get Prop";
                   this.btn_phoneinformation_getprop.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_getprop.Click += new System.EventHandler(this.btn_phoneinformation_getprop_Click);
-                  // 
-                  // btn_phoneinformation_getserial
-                  // 
-                  this.btn_phoneinformation_getserial.Location = new System.Drawing.Point(118, 77);
-                  this.btn_phoneinformation_getserial.Name = "btn_phoneinformation_getserial";
-                  this.btn_phoneinformation_getserial.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_getserial.TabIndex = 10;
-                  this.btn_phoneinformation_getserial.Text = "Get Serialnumber";
-                  this.btn_phoneinformation_getserial.UseVisualStyleBackColor = true;
-                  this.btn_phoneinformation_getserial.Click += new System.EventHandler(this.btn_phoneinformation_getserial_Click);
                   // 
                   // tabPage2
                   // 
@@ -1267,40 +1216,6 @@
                   this.btn_packages_open.UseVisualStyleBackColor = true;
                   this.btn_packages_open.Click += new System.EventHandler(this.btn_packages_open_Click);
                   // 
-                  // tabPage6
-                  // 
-                  this.tabPage6.Controls.Add(this.listView1);
-                  this.tabPage6.Location = new System.Drawing.Point(4, 22);
-                  this.tabPage6.Name = "tabPage6";
-                  this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage6.Size = new System.Drawing.Size(510, 280);
-                  this.tabPage6.TabIndex = 5;
-                  this.tabPage6.Text = "Log";
-                  this.tabPage6.UseVisualStyleBackColor = true;
-                  // 
-                  // listView1
-                  // 
-                  this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.col_log_time,
-            this.col_log_command});
-                  this.listView1.GridLines = true;
-                  this.listView1.Location = new System.Drawing.Point(6, 6);
-                  this.listView1.Name = "listView1";
-                  this.listView1.Size = new System.Drawing.Size(498, 268);
-                  this.listView1.TabIndex = 0;
-                  this.listView1.UseCompatibleStateImageBehavior = false;
-                  this.listView1.View = System.Windows.Forms.View.Details;
-                  // 
-                  // col_log_time
-                  // 
-                  this.col_log_time.Text = "Time";
-                  this.col_log_time.Width = 79;
-                  // 
-                  // col_log_command
-                  // 
-                  this.col_log_command.Text = "Command";
-                  this.col_log_command.Width = 415;
-                  // 
                   // tabPage5
                   // 
                   this.tabPage5.Controls.Add(this.label10);
@@ -1325,7 +1240,7 @@
                   this.label10.Name = "label10";
                   this.label10.Size = new System.Drawing.Size(62, 13);
                   this.label10.TabIndex = 5;
-                  this.label10.Text = "abdGUI 1.0";
+                  this.label10.Text = "abdGUI 1.1";
                   // 
                   // label9
                   // 
@@ -1396,14 +1311,6 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
-                  // txt_devices
-                  // 
-                  this.txt_devices.Location = new System.Drawing.Point(6, 194);
-                  this.txt_devices.Multiline = true;
-                  this.txt_devices.Name = "txt_devices";
-                  this.txt_devices.Size = new System.Drawing.Size(498, 80);
-                  this.txt_devices.TabIndex = 5;
-                  // 
                   // MainForm
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1448,7 +1355,6 @@
                   this.groupBox8.PerformLayout();
                   this.groupBox3.ResumeLayout(false);
                   this.groupBox3.PerformLayout();
-                  this.tabPage6.ResumeLayout(false);
                   this.tabPage5.ResumeLayout(false);
                   this.tabPage5.PerformLayout();
                   this.ResumeLayout(false);
@@ -1460,12 +1366,10 @@
             private System.Windows.Forms.TabControl tabControl1;
             private System.Windows.Forms.TabPage tabPage1;
             private System.Windows.Forms.GroupBox groupBox1;
-            private System.Windows.Forms.Button btn_startserver;
             private System.Windows.Forms.ToolTip toolTip;
-            private System.Windows.Forms.Button btn_killserver;
+            private System.Windows.Forms.Button btnKillserver;
             private System.Windows.Forms.Button btn_reboot;
             private System.Windows.Forms.Button btn_remountsystem;
-            private System.Windows.Forms.Button btn_statuswindow;
             private System.Windows.Forms.TabPage tabPage2;
             private System.Windows.Forms.Button btn_sideload_sideload;
             private System.Windows.Forms.GroupBox groupBox2;
@@ -1473,15 +1377,12 @@
             private System.Windows.Forms.Label label1;
             private System.Windows.Forms.Button button1;
             private System.Windows.Forms.OpenFileDialog openFileDialog1;
-            private System.Windows.Forms.Button btn_showdevices;
-            private System.Windows.Forms.Button btn_restartserver;
             private System.Windows.Forms.TabPage tabPage3;
             private System.Windows.Forms.GroupBox groupBox3;
             private System.Windows.Forms.TabPage tabPage4;
             private System.Windows.Forms.GroupBox groupBox4;
             private System.Windows.Forms.Button btn_run;
             private System.Windows.Forms.TextBox txt_customcommand;
-            private System.Windows.Forms.Button btn_phoneinformation_getserial;
             private System.Windows.Forms.Button btn_openshell;
             private System.Windows.Forms.GroupBox groupBox5;
             private System.Windows.Forms.Button btn_phoneinformation_getprop;
@@ -1568,13 +1469,10 @@
             private System.Windows.Forms.Button btn_phoneinformation_activities;
             private System.Windows.Forms.Button btn_phoneinformation_screenshot;
             private System.Windows.Forms.Label label10;
-            private System.Windows.Forms.TabPage tabPage6;
-            private System.Windows.Forms.ListView listView1;
-            private System.Windows.Forms.ColumnHeader col_log_time;
-            private System.Windows.Forms.ColumnHeader col_log_command;
             private System.Windows.Forms.TextBox txt_serialno;
             private System.Windows.Forms.GroupBox groupBox13;
             private System.Windows.Forms.TextBox txt_devices;
+            private System.Windows.Forms.Button btnAlarm;
       }
 }
 

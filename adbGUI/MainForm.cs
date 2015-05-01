@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +9,12 @@ namespace adbGUI
 {
       public partial class MainForm : Form
       {
+            //--------------------------------------------------------------------------------------------------
+            //-------------------Windows Forms------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------
+
+            private Form _rebootmenu;
+
             public MainForm()
             {
                   InitializeComponent();
@@ -24,26 +28,34 @@ namespace adbGUI
                   return true;
             }
 
+            //--------------------------------------------------------------------------------------------------
+            //-------------------Methods------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-            private void StartServer()
+            private static void StartServer()
             {
-                  ProcessStartInfo psi = new ProcessStartInfo("tools\\adb", "start-server");
+                  var psi = new ProcessStartInfo("tools\\adb", "start-server");
                   psi.WindowStyle = ProcessWindowStyle.Hidden;
-                  Process start = Process.Start(psi);
+                  Process.Start(psi);
             }
-            private void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
+
+            private static void KillServer()
             {
-                  Thread thread = new Thread(delegate() { callADB(a, b, titel, width, height, windowstate); });
+                  var prs = Process.GetProcesses();
+
+                  foreach (var pr in prs)
+                  {
+                        if (pr.ProcessName == "adb")
+                        {
+                              pr.Kill();
+                        }
+                  }
+            }
+
+            private void GetInformation(string a, string b, string titel, int width = 850, int height = 600,
+                  FormWindowState windowstate = FormWindowState.Normal)
+            {
+                  var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate); });
                   thread.Start();
                   while (thread.IsAlive)
                   {
@@ -54,12 +66,14 @@ namespace adbGUI
                   tabControl1.Enabled = true;
                   //Cursor = Cursors.Default;
             }
-            public void ToViewer(string value, string title, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
-            {
 
+            private void ToViewer(string value, string title, int x, int y,
+                  FormWindowState windowstate = FormWindowState.Normal)
+            {
                   if (InvokeRequired)
                   {
-                        this.Invoke(new Action<string, string, int, int, FormWindowState>(ToViewer), value, title, x, y, windowstate);
+                        Invoke(new Action<string, string, int, int, FormWindowState>(ToViewer), value, title, x, y,
+                              windowstate);
                         return;
                   }
                   if (value == "")
@@ -69,7 +83,7 @@ namespace adbGUI
                   }
                   else
                   {
-                        Viewer v = new Viewer();
+                        var v = new Viewer();
 
                         v.txt_output.TabIndex = 2;
                         v.txt_output.Text += value;
@@ -81,11 +95,13 @@ namespace adbGUI
                         v.Show();
                   }
             }
-            public async void callADB(string a, string b, string c, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
+
+            private async void CallAdb(string a, string b, string c, int x, int y,
+                  FormWindowState windowstate = FormWindowState.Normal)
             {
-                  string filename = "cmd.exe";
-                  string arguments = "/C " + a + " tools\\adb " + serialno() + " " + b;
-                  ProcessStartInfo startInfo = new ProcessStartInfo
+                  var filename = "cmd.exe";
+                  var arguments = "/C " + a + " tools\\adb " + Serialno() + " " + b;
+                  var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
                         Arguments = arguments,
@@ -93,7 +109,7 @@ namespace adbGUI
                         CreateNoWindow = true,
                         RedirectStandardOutput = true
                   };
-                  Process process = new Process { StartInfo = startInfo };
+                  var process = new Process {StartInfo = startInfo};
 
 
                   if (Process.GetProcessesByName("adb").Length > 0)
@@ -108,153 +124,44 @@ namespace adbGUI
                         process.Start();
                   }
 
-                  string s = process.StandardOutput.ReadToEnd();
+                  var s = process.StandardOutput.ReadToEnd();
 
                   ToViewer(s, c, x, y, windowstate);
-
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            public async void CallViewer(string path, string name, int x = 850, int y = 600, FormWindowState state = FormWindowState.Normal)
+            private void callADB_w(string x)
             {
-
-                  Viewer edit = new Viewer
-                  {
-                        Text = name,
-                        Width = x,
-                        Height = y,
-                        WindowState = state
-                  };
-
-
-                  int count = 0;
-                  int maxTries = 150;
-
-                  while (true)
-                  {
-                        Cursor = Cursors.WaitCursor;
-
-                        try
-                        {
-                              await Task.Delay(100);
-                              StreamReader sr = new StreamReader("" + path, Encoding.Default, true);
-                              string s = sr.ReadToEnd();
-                              sr.Close();
-                              if (s == "")
-                              {
-                                    MessageBox.Show("No or more devices connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    Cursor = Cursors.Default;
-                                    break;
-
-                              }
-                              else
-                              {
-                                    edit.Show();
-                                    edit.txt_output.Text = s;
-                                    Cursor = Cursors.Default;
-                                    break;
-                              }
-                        }
-                        catch (Exception ex)
-                        {
-                              if (++count == maxTries)
-                              {
-                                    DialogResult result = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                                    if (result == DialogResult.Cancel)
-                                    {
-                                          Cursor = Cursors.Default;
-                                          break;
-                                    }
-                                    count = 0;
-                              }
-                        }
-
-                  }
-            }
-
-            public void CallProgram(string x, string y)
-            {
-                  ProcessStartInfo startInfo = new ProcessStartInfo
-                  {
-                        FileName = x,
-                        Arguments = y,
-                        WindowStyle = ProcessWindowStyle.Normal
-                  };
-
-                  Process process = new Process { StartInfo = startInfo };
-
-                  process.Start();
-            }
-
-            public void callADB_w(string x)
-            {
-                  string filename = "cmd.exe";
-                  string arguments = "/C prompt $g & tools\\adb " + serialno() + " " + x + " & echo. & pause";
-                  ProcessStartInfo startInfo = new ProcessStartInfo
+                  const string filename = "cmd.exe";
+                  var arguments = "/C prompt $g & tools\\adb " + Serialno() + " " + x + " & echo. & pause";
+                  var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
                         WindowStyle = ProcessWindowStyle.Normal,
                         Arguments = arguments
                   };
-                  Process process = new Process { StartInfo = startInfo };
+                  var process = new Process {StartInfo = startInfo};
                   process.Start();
-
-                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("HH:mm:ss tt"));
-                  lvi.SubItems.Add(arguments.Remove(0, 3));
-                  listView1.Items.Add(lvi);
             }
 
             public void callADB_wo(string x, string y)
             {
-                  string filename = "cmd.exe";
-                  string arguments = "/C " + x + " tools\\adb " + serialno() + " " + y;
-                  ProcessStartInfo startInfo = new ProcessStartInfo
+                  var filename = "cmd.exe";
+                  var arguments = "/C " + x + " tools\\adb " + Serialno() + " " + y;
+                  var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
                         Arguments = arguments,
                         WindowStyle = ProcessWindowStyle.Hidden
                   };
 
-                  Process process = new Process { StartInfo = startInfo };
+                  var process = new Process {StartInfo = startInfo};
 
                   process.Start();
-
-                  if (x == "")
-                  {
-                        arguments = arguments.Remove(0, 4);
-                  }
-                  else
-                  {
-                        arguments = arguments.Remove(0, 3);
-
-                  }
-
-                  ListViewItem lvi = new ListViewItem(DateTime.Now.ToString("HH:mm:ss"));
-                  lvi.SubItems.Add(arguments);
-                  listView1.Items.Add(lvi);
-
-
             }
-            private string serialno()
+
+            private string Serialno()
             {
-                  string s = "";
+                  var s = "";
 
                   if (txt_serialno.Text != "")
                   {
@@ -263,55 +170,86 @@ namespace adbGUI
                   return s;
             }
 
-            private async void IsRunning()
+            private void IsRunning()
             {
-                  await Task.Delay(700);
-
-                  if (Process.GetProcessesByName("adb").Length > 0)
+                  var a = "adbGUI - Server is running";
+                  var b = "adbGUI - Server is not running";
+                  while (true)
                   {
-                        this.Text = "adbGUI - Server is running";
-                  }
-                  else
-                  {
-                        this.Text = "adbGUI - Server is not running";
-                  }
-
-            }
-
-            private void KillServer()
-            {
-                  Process[] prs = Process.GetProcesses();
-
-
-                  foreach (Process pr in prs)
-                  {
-                        if (pr.ProcessName == "adb")
+                        if (Process.GetProcessesByName("adb").Length > 0)
                         {
-                              pr.Kill();
+                              if (InvokeRequired)
+                              {
+                                    Invoke(new Action<string>(ServerOn), a);
+                              }
                         }
+                        else
+                        {
+                              if (InvokeRequired)
+                              {
+                                    Invoke(new Action<string>(ServerOff), b);
+                              }
+
+                              //this.Text = "adbGUI - Server is not running";
+                        }
+                        Thread.Sleep(500);
                   }
             }
 
-            private void btn_startserver_Click(object sender, EventArgs e)
+            private void ServerOn(string s)
             {
-                  callADB_wo("", "start-server");
+                  Text = s;
             }
 
-            private void btn_killserver_Click(object sender, EventArgs e)
+            private void ServerOff(string s)
             {
-                  KillServer();
+                  Text = s;
+                  txt_devices.Text = Environment.NewLine;
             }
 
-            private Form rebootmenu;
+            private async void DevicesToTxtBox()
+            {
+                  var filename = "cmd.exe";
+                  var arguments = "/C tools\\adb devices -l";
+                  var startInfo = new ProcessStartInfo
+                  {
+                        FileName = filename,
+                        Arguments = arguments,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true
+                  };
+                  var process = new Process {StartInfo = startInfo};
+
+                  while (true)
+                  {
+                        if (Process.GetProcessesByName("adb").Length > 0)
+                        {
+                              process.Start();
+                        }
+
+                        else
+                        {
+                              StartServer();
+                              await Task.Delay(500);
+                              process.Start();
+                        }
+
+                        var s = process.StandardOutput.ReadToEnd();
+
+                        txt_devices.Invoke((MethodInvoker) (() => txt_devices.Text = s));
+                        Thread.Sleep(500);
+                  }
+            }
+
             private void btn_reboot_Click(object sender, EventArgs e)
             {
-
-                  if ((rebootmenu == null) || (rebootmenu.IsDisposed))
+                  if ((_rebootmenu == null) || (_rebootmenu.IsDisposed))
                   {
-                        rebootmenu = new RebootMenu();
+                        _rebootmenu = new RebootMenu();
                   }
-                  rebootmenu.Show();
-                  rebootmenu.Focus();
+                  _rebootmenu.Show();
+                  _rebootmenu.Focus();
             }
 
             private void button1_Click(object sender, EventArgs e)
@@ -319,7 +257,7 @@ namespace adbGUI
                   openFileDialog1.FileName = "";
                   openFileDialog1.CheckFileExists = true;
                   openFileDialog1.CheckPathExists = true;
-                  openFileDialog1.Filter = " .zip|*.zip";
+                  openFileDialog1.Filter = @" .zip|*.zip";
 
 
                   if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -332,43 +270,13 @@ namespace adbGUI
             {
                   if (txt_sideload_path.Text != "")
                   {
-                        string s = "sideload \"" + txt_sideload_path.Text + "\"";
+                        var s = "sideload \"" + txt_sideload_path.Text + "\"";
                         callADB_w(s);
                   }
                   else
                   {
                         MessageBox.Show("Please select a file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
-            }
-
-            private void btn_showdevices_Click(object sender, EventArgs e)
-            {
-                  //callADB_w("devices -l");
-
-                  string file = "tmp\\devices.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "devices -l> " + file);
-                  //CallViewer(file, "Devices", 700, 200);
-                  DevicesToTxtBox();
-            }
-            private async void DevicesToTxtBox()
-            {
-                  await Task.Delay(1000);
-                  StreamReader sr = new StreamReader("tmp\\devices.txt", Encoding.Default, true);
-                  txt_devices.Text = sr.ReadToEnd();
-                  sr.Close();
-            }
-            private async void btn_restartserver_Click(object sender, EventArgs e)
-            {
-                  KillServer();
-                  await Task.Delay(300);
-                  callADB_wo("", "start-server");
-            }
-
-            private void btn_statuswindow_Click_1(object sender, EventArgs e)
-            {
-                  MessageBox.Show(Process.GetProcessesByName("adb").Length > 0
-                        ? "The adb server is running"
-                        : "The adb server is not running");
             }
 
             private void btn_push_openfile_Click(object sender, EventArgs e)
@@ -394,21 +302,20 @@ namespace adbGUI
                   }
                   else
                   {
-                        string s = "push \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
+                        var s = "push \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
                         callADB_w(s);
                   }
             }
 
-            private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
+            private void Form1_FormClosed(object sender, FormClosedEventArgs e)
             {
                   KillServer();
-                  await Task.Delay(200);
-                  Directory.Delete("tmp", true);
+                  Environment.Exit(Environment.ExitCode);
             }
 
             private void btn_run_Click(object sender, EventArgs e)
             {
-                  string s = txt_customcommand.Text;
+                  var s = txt_customcommand.Text;
                   if (s == "")
                   {
                         MessageBox.Show("Please type in a command!", "Error");
@@ -419,57 +326,37 @@ namespace adbGUI
                   }
             }
 
-            private void btn_phoneinformation_getserial_Click(object sender, EventArgs e)
-            {
-                  string file = "tmp\\serialno.txt";
-                  callADB_wo("mkdir tmp  & del " + file + " & ", "get-serialno > " + file);
-                  CallViewer(file, "Serial Number", 270, 110);
-            }
-
             private void btn_openshell_Click(object sender, EventArgs e)
             {
                   callADB_w("shell");
             }
-            void CreateHiddenFolder(string name)
+
+            private void Form1_Load(object sender, EventArgs e)
             {
-                  DirectoryInfo di = new DirectoryInfo(name);
-                  di.Create();
-                  di.Attributes |= FileAttributes.Hidden;
-            }
-            private async void Form1_Load(object sender, EventArgs e)
-            {
-                  CreateHiddenFolder("tmp");
+                  var printDevices = new Thread(DevicesToTxtBox);
+                  printDevices.IsBackground = true;
+                  printDevices.Start();
+
+                  var checkStatus = new Thread(IsRunning);
+                  checkStatus.IsBackground = true;
+                  checkStatus.Start();
+
                   txt_customcommand.Select();
-                  callADB_wo("", "start-server");
-
-                  //Check Status
-                  while (true)
-                  {
-                        IsRunning();
-                        await Task.Delay(500);
-                  }
-
             }
 
             private void btn_phoneinformation_getprop_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\prop.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell getprop >> " + file);
-                  CallViewer(file, "Properties");
+                  GetInformation("", "shell getprop", "Properties");
             }
 
             private void btn_phoneinformation_installedpackages_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\all_packages.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list packages -f >" + file);
-                  CallViewer(file, "All Packages");
+                  GetInformation("", "shell pm list packages -f", "All Packages");
             }
 
             private void btn_phoneinformation_logcat_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\logcat.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "logcat -d> " + file);
-                  CallViewer(file, "Logcat Dump");
+                  GetInformation("", "shell logcat -d", "Logcat Dump", 850, 600, FormWindowState.Maximized);
             }
 
             private void txt_customcommand_KeyDown(object sender, KeyEventArgs e)
@@ -483,7 +370,7 @@ namespace adbGUI
 
             private void btn_phoneinformation_spoofmac_Click(object sender, EventArgs e)
             {
-                  string s = txt_phoneinformation_mac.Text;
+                  var s = txt_phoneinformation_mac.Text;
                   if (s == "")
                   {
                         MessageBox.Show("Please type in a mac address", "Error");
@@ -503,30 +390,22 @@ namespace adbGUI
 
             private void btn_phoneinformation_showmac_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\macadress.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell cat /sys/class/net/wlan0/address > " + file);
-                  CallViewer(file, "MAC Adress", 280, 110);
+                  GetInformation("", "shell cat /sys/class/net/wlan0/address", "MAC Adress", 280, 110);
             }
 
             private void btn_phoneinformation_dumpsys_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\dumpsys.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys > " + file);
-                  CallViewer(file, "Dumpsys Input Diagnostics", 850, 600, FormWindowState.Maximized);
+                  GetInformation("", "shell dumpsys", "Dumpsys Input Diagnostics", 850, 600, FormWindowState.Maximized);
             }
 
             private void btn_phoneinformation_meminfo_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\meminfo.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys meminfo > " + file);
-                  CallViewer(file, "Memory");
+                  GetInformation("", "shell dumpsys meminfo", "Memory Information");
             }
 
             private void btn_phoneinformation_processes_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\processes.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell ps > " + file);
-                  CallViewer(file, "Processes");
+                  GetInformation("", "shell ps", "Processes");
             }
 
             private void btn_packages_open_Click(object sender, EventArgs e)
@@ -545,7 +424,7 @@ namespace adbGUI
 
             private void btn_packages_install_Click_1(object sender, EventArgs e)
             {
-                  string s = "\"" + txt_packages_path.Text + "\"";
+                  var s = "\"" + txt_packages_path.Text + "\"";
 
                   if (txt_packages_path.Text != "")
                   {
@@ -559,7 +438,7 @@ namespace adbGUI
 
             private void btn_packages_uninstall_Click(object sender, EventArgs e)
             {
-                  string s = "\"" + txt_packages_package.Text + "\"";
+                  var s = "\"" + txt_packages_package.Text + "\"";
                   if (txt_packages_package.Text != "")
                   {
                         callADB_w("uninstall " + s);
@@ -572,9 +451,7 @@ namespace adbGUI
 
             private void btn_packages_installed_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\installed_packages.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell \"pm list packages -3 | cut -c9- | sort\" > " + file);
-                  CallViewer(file, "Installed Packages", 500, 750);
+                  GetInformation("", "shell \"pm list packages -3 | cut -c9- | sort\"", "Installed Packages", 500, 750);
             }
 
             private void btn_pull_saveto_Click(object sender, EventArgs e)
@@ -596,7 +473,7 @@ namespace adbGUI
                   }
                   else
                   {
-                        string s = "pull \"" + txt_pull_pathfrom.Text + "\"" + " \"" + txt_pull_pathto.Text + "\"";
+                        var s = "pull \"" + txt_pull_pathfrom.Text + "\"" + " \"" + txt_pull_pathto.Text + "\"";
                         callADB_w(s);
                   }
             }
@@ -640,94 +517,67 @@ namespace adbGUI
 
             private void btn_phoneinformation_features_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\phone_features.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list features > " + file);
-                  CallViewer(file, "Phone Features");
+                  GetInformation("", "shell \"pm list features | cut -c9- | sort\"", "Phone Features");
             }
 
             private void btn_phoneinformation_libraries_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\libraries.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list libraries > " + file);
-                  CallViewer(file, "Libraries", 500, 400);
+                  GetInformation("", "shell pm list libraries", "Libraries", 500, 400);
             }
 
             private void btn_phoneinformation_users_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\alluser.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list users > " + file);
-                  CallViewer(file, "All User", 600, 250);
+                  GetInformation("", "shell pm list users", "All User", 600, 250);
             }
 
             private void btn_phoneinformation_maxusers_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\maxuser.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm get-max-users > " + file);
-                  CallViewer(file, "Max User", 600, 250);
+                  GetInformation("", "shell pm get-max-users", "Max User", 600, 250);
             }
 
             private void btn_phoneinformation_permissions_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\permissions.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell pm list permissions > " + file);
-                  CallViewer(file, "Permissions", 700);
+                  GetInformation("", "shell pm list permissions", "Permissions", 700);
             }
 
             private void btn_phoneinformation_getimei_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\imei.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell service call iphonesubinfo 1 > " + file);
-                  CallViewer(file, "IMEI", 550, 150);
+                  GetInformation("", "shell service call iphonesubinfo 1", "IMEI", 550, 130);
             }
 
             private void btn_phoneinformation_dmesg_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\dmesg.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dmesg > " + file);
-                  CallViewer(file, "Kernel Messages", 850, 600, FormWindowState.Maximized);
-            }
-
-            private void btn_shutdown_Click(object sender, EventArgs e)
-            {
-                  callADB_wo("", "shell reboot -p");
+                  GetInformation("", "shell dmesg", "Kernel Messages", 850, 600, FormWindowState.Maximized);
             }
 
             private void btn_phoneinformation_battery_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\batterystats.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys battery > " + file);
-                  CallViewer(file, "Battery Stats", 280, 350);
+                  GetInformation("", "shell dumpsys battery", "Battery Stats", 280, 300);
             }
 
             private void btn_phoneinformation_wifiinfo_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\wifiinfo.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys wifi > " + file);
-                  CallViewer(file, "WIFI Information", 850, 600, FormWindowState.Maximized);
+                  GetInformation("", "shell dumpsys wifi", "WIFI Information", 850, 600, FormWindowState.Maximized);
             }
 
             private void btn_phoneinformation_cpuinfo_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\cpuinfo.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys cpuinfo > " + file);
-                  CallViewer(file, "CPU Information", 750, 500);
+                  GetInformation("", "shell dumpsys cpuinfo", "CPU Information", 750, 500);
             }
 
             private void btn_phoneinformation_accounts_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\accounts.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys account > " + file);
-                  CallViewer(file, "Accounts", 1500);
+                  GetInformation("", "shell dumpsys account", "Accounts", 1500);
             }
 
             private void btn_backup_backup_Click(object sender, EventArgs e)
             {
-                  string name = " -f \"" + txt_backup_path.Text + "\"";
-                  string apk = " -noapk";
-                  string shared = " -noshared";
-                  string all = " -all";
-                  string system = " -system";
-                  string package = txt_backup_packagename.Text;
+                  var name = " -f \"" + txt_backup_path.Text + "\"";
+                  var apk = " -noapk";
+                  var shared = " -noshared";
+                  var all = " -all";
+                  var system = " -system";
+                  var package = txt_backup_packagename.Text;
 
 
                   if (cb_backup_package.Checked == false)
@@ -829,33 +679,27 @@ namespace adbGUI
 
             private void btn_phoneinformation_diskstats_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\diskstats.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys diskstats > " + file);
-                  CallViewer(file, "Diskstats", 600, 350);
+                  GetInformation("", "shell dumpsys diskstats", "Diskstats", 600, 350);
             }
 
             private void btn_phoneinformation_netstat_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\netstat.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell busybox netstat > " + file);
-                  CallViewer(file, "Netstat", 950, 700);
+                  GetInformation("", "shell busybox netstat", "Netstat", 950, 700);
             }
 
             private void btn_phoneinformation_uptime_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\uptime.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell uptime > " + file);
-                  CallViewer(file, "Netstat", 700, 250);
+                  GetInformation("", "shell uptime", "Uptime", 550, 100);
             }
 
             private void btn_donate_Click(object sender, EventArgs e)
             {
-                  string url = "";
+                  var url = "";
 
-                  string business = "laboo.lm@gmail.com"; // your paypal email
-                  string description = "Donation"; // '%20' represents a space. remember HTML!
-                  string country = "DE"; // AU, US, etc.
-                  string currency = "EUR"; // AUD, USD, etc.
+                  var business = "laboo.lm@gmail.com"; // your paypal email
+                  var description = "Donation"; // '%20' represents a space. remember HTML!
+                  var country = "DE"; // AU, US, etc.
+                  var currency = "EUR"; // AUD, USD, etc.
 
                   url += "https://www.paypal.com/cgi-bin/webscr" +
                          "?cmd=" + "_donations" +
@@ -870,38 +714,35 @@ namespace adbGUI
 
             private void btn_phoneinformation_show_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\dpi.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell wm density> " + file);
-                  CallViewer(file, "DPI", 280, 110);
+                  GetInformation("", "shell wm density", "Density", 280, 110);
             }
 
             private async void btn_phoneinformation_changedpi_Click(object sender, EventArgs e)
             {
                   callADB_wo("", "shell wm density " + txt_phoneinformation_dpi.Text);
-                  await Task.Delay(500);
+                  await Task.Delay(400);
                   callADB_wo("", "reboot");
             }
 
             private async void btn_phoneinformation_resetdpi_Click(object sender, EventArgs e)
             {
                   callADB_wo("", "shell wm density reset");
-                  await Task.Delay(500);
+                  await Task.Delay(400);
                   callADB_wo("", "reboot");
             }
 
             private void btn_connect_Click(object sender, EventArgs e)
             {
-                  string s = "";
-                  s = @txt_ip.Text.ToString();
+                  string s;
+                  s = @txt_ip.Text;
                   if (s == "")
                   {
                         MessageBox.Show("Please type in IP and port!", "Error");
                   }
                   else
                   {
-                        callADB_w("connect " + s);
+                        callADB_wo("", "connect " + s);
                   }
-
             }
 
             private void txt_ip_KeyDown(object sender, KeyEventArgs e)
@@ -920,9 +761,7 @@ namespace adbGUI
 
             private void button7_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\resolution.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell wm size> " + file);
-                  CallViewer(file, "Resolution", 280, 110);
+                  GetInformation("", "shell wm size", "Resolution", 280, 110);
             }
 
             private void button6_Click(object sender, EventArgs e)
@@ -932,25 +771,17 @@ namespace adbGUI
 
             private void btn_phoninformation_hosts_Click(object sender, EventArgs e)
             {
-
-                  string file = "tmp\\hosts.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell cat /etc/hosts> " + file);
-                  CallViewer(file, "Hosts", 750);
-
+                  GetInformation("", "shell cat /etc/hosts", "Hosts", 750);
             }
 
             private void btn_phoneinformation_activities_Click(object sender, EventArgs e)
             {
-                  string file = "tmp\\activities.txt";
-                  callADB_wo("mkdir tmp & del " + file + " & ", "shell dumpsys activity> " + file);
-                  CallViewer(file, "Activities");
-
-
+                  GetInformation("", "shell dumpsys activity", "Activities");
             }
 
             private void btn_phoneinformation_screenshot_Click(object sender, EventArgs e)
             {
-                  Process proc = new Process();
+                  var proc = new Process();
                   proc.StartInfo.FileName = "tools\\screenshot.bat";
                   proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                   proc.Start();
@@ -959,7 +790,6 @@ namespace adbGUI
                         Cursor = Cursors.WaitCursor;
                   }
                   Cursor = Cursors.Default;
-
             }
 
             private void txt_phoneinformation_dpi_KeyDown(object sender, KeyEventArgs e)
@@ -985,5 +815,14 @@ namespace adbGUI
                   callADB_wo("", "remount");
             }
 
+            private void btnAlarm_Click(object sender, EventArgs e)
+            {
+                  GetInformation("", "shell dumpsys alarm", "Current Alarm Manager State", 950);
+            }
+
+            private void btnKillserver_Click(object sender, EventArgs e)
+            {
+                  KillServer();
+            }
       }
 }
