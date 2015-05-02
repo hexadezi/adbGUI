@@ -59,14 +59,14 @@ namespace adbGUI
             {
                   int i = Convert.ToInt32(txt_devices.Lines.Count().ToString());
 
-                  if (i == 4)
+                  if (i == 4 || txt_serialno.Text != "")
                   {
                         var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate); });
                         thread.Start();
                         while (thread.IsAlive)
                         {
                               tabControl1.Enabled = false;
-                              Cursor = Cursors.WaitCursor;
+                              Cursor = Cursors.AppStarting;
                               Application.DoEvents();
                         }
                         tabControl1.Enabled = true;
@@ -97,7 +97,7 @@ namespace adbGUI
                   }
                   if (value == "")
                   {
-                        MessageBox.Show("Make sure, your device is online and listed in the main tab.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Make sure, your device is online and the serial number is correct.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
                   else
                   {
@@ -228,7 +228,7 @@ namespace adbGUI
             private async void DevicesToTxtBox()
             {
                   const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices";
+                  const string arguments = "/C tools\\adb devices -l";
                   var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -257,32 +257,51 @@ namespace adbGUI
 
                         txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s2));
 
+                        Thread.Sleep(1000);
+
+                  }
+            }
+
+            private void GetSerialnumber()
+            {
+
+                  const string filename = "cmd.exe";
+                  const string arguments = "/C tools\\adb devices";
+                  var startInfo = new ProcessStartInfo
+                  {
+                        FileName = filename,
+                        Arguments = arguments,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true
+                  };
+                  var process = new Process { StartInfo = startInfo };
+                  process.Start();
+                  string s2 = process.StandardOutput.ReadToEnd();
 
 
-                        if (s2.Length > 29)
+                  if (s2.Length > 29)
+                  {
+                        using (StringReader s = new StringReader(s2))
                         {
-                              using (StringReader s = new StringReader(s2))
+                              string line;
+
+                              while (s.Peek() != -1)
                               {
-                                    string line;
+                                    line = s.ReadLine();
 
-                                    while (s.Peek() != -1)
+                                    if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
+                                          continue;
+
+                                    if (line.IndexOf('\t') != -1)
                                     {
-                                          line = s.ReadLine();
-
-                                          if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
-                                                continue;
-
-                                          if (line.IndexOf('\t') != -1)
-                                          {
-                                                line = line.Substring(0, line.IndexOf('\t'));
-                                                txt_serialno.Invoke((MethodInvoker)(() => txt_serialno.Text = line));
-                                          }
+                                          line = line.Substring(0, line.IndexOf('\t'));
+                                          txt_serialno.Invoke((MethodInvoker)(() => txt_serialno.Text = line));
                                     }
                               }
                         }
-                        Thread.Sleep(3000);
-
                   }
+                  Thread.Sleep(6000);
             }
 
             public Form Rebootmenu;
@@ -377,7 +396,7 @@ namespace adbGUI
                   callADB_w("shell");
             }
 
-            private void Form1_Load(object sender, EventArgs e)
+            private async void Form1_Load(object sender, EventArgs e)
             {
                   var printDevices = new Thread(DevicesToTxtBox);
                   printDevices.IsBackground = true;
@@ -386,6 +405,12 @@ namespace adbGUI
                   var checkStatus = new Thread(IsRunning);
                   checkStatus.IsBackground = true;
                   checkStatus.Start();
+
+                  await Task.Delay(500);
+                  var getserialnumber = new Thread(GetSerialnumber);
+                  getserialnumber.IsBackground = true;
+                  getserialnumber.Start();
+
 
                   txt_customcommand.Select();
             }
@@ -777,7 +802,7 @@ namespace adbGUI
                   callADB_wo("", "reboot");
             }
 
-            private void btn_connect_Click(object sender, EventArgs e)
+            private async void btn_connect_Click(object sender, EventArgs e)
             {
                   string s;
                   s = @txt_ip.Text;
@@ -788,6 +813,10 @@ namespace adbGUI
                   else
                   {
                         callADB_wo("", "connect " + s);
+                        txt_serialno.Text = "";
+                        await Task.Delay(1000);
+                        Thread tr = new Thread(GetSerialnumber);
+                        tr.Start();
                   }
             }
 
@@ -866,14 +895,26 @@ namespace adbGUI
                   GetInformation("", "shell dumpsys alarm", "Current Alarm Manager State", 950);
             }
 
-            private void btnKillserver_Click(object sender, EventArgs e)
+            private async void btnKillserver_Click(object sender, EventArgs e)
             {
                   KillServer();
+                  txt_serialno.Text = "";
+                  await Task.Delay(1000);
+                  Thread tr = new Thread(GetSerialnumber);
+                  tr.Start();
             }
 
-            private void button5_Click_1(object sender, EventArgs e)
+            private async void button5_Click_1(object sender, EventArgs e)
             {
                   callADB_wo("", "disconnect ");
+                  if (txt_devices.Lines.Length > 4)
+                  {
+                        txt_serialno.Text = "";
+                        await Task.Delay(1000);
+                        Thread tr = new Thread(GetSerialnumber);
+                        tr.Start();
+                  }
+
             }
 
             private async void button6_Click_1(object sender, EventArgs e)
@@ -911,10 +952,7 @@ namespace adbGUI
                   var s2 = process.StandardOutput.ReadToEnd();
 
 
-                  string deviceList = "";
-
-
-                  deviceList = s2;
+                  var deviceList = s2;
                   if (deviceList.Length > 29)
                   {
                         using (StringReader s = new StringReader(deviceList))

@@ -32,8 +32,8 @@
                   System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
                   this.tabControl1 = new System.Windows.Forms.TabControl();
                   this.tabPage1 = new System.Windows.Forms.TabPage();
-                  this.groupBox13 = new System.Windows.Forms.GroupBox();
                   this.txt_serialno = new System.Windows.Forms.TextBox();
+                  this.groupBox13 = new System.Windows.Forms.GroupBox();
                   this.groupBox11 = new System.Windows.Forms.GroupBox();
                   this.button5 = new System.Windows.Forms.Button();
                   this.txt_ip = new System.Windows.Forms.TextBox();
@@ -193,6 +193,14 @@
                   this.tabPage1.Text = "Main Commands";
                   this.tabPage1.UseVisualStyleBackColor = true;
                   // 
+                  // txt_serialno
+                  // 
+                  this.txt_serialno.Location = new System.Drawing.Point(6, 18);
+                  this.txt_serialno.Multiline = true;
+                  this.txt_serialno.Name = "txt_serialno";
+                  this.txt_serialno.Size = new System.Drawing.Size(228, 20);
+                  this.txt_serialno.TabIndex = 8;
+                  // 
                   // groupBox13
                   // 
                   this.groupBox13.Controls.Add(this.txt_serialno);
@@ -202,13 +210,6 @@
                   this.groupBox13.TabIndex = 4;
                   this.groupBox13.TabStop = false;
                   this.groupBox13.Text = "Serial Number";
-                  // 
-                  // txt_serialno
-                  // 
-                  this.txt_serialno.Location = new System.Drawing.Point(6, 19);
-                  this.txt_serialno.Name = "txt_serialno";
-                  this.txt_serialno.Size = new System.Drawing.Size(229, 20);
-                  this.txt_serialno.TabIndex = 8;
                   // 
                   // groupBox11
                   // 

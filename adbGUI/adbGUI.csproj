@@ -89,14 +89,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Methods.cs" />
     <Compile Include="RebootMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RebootMenu.Designer.cs">
       <DependentUpon>RebootMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
     <Compile Include="Viewer.cs">
       <SubType>Form</SubType>
     </Compile>
