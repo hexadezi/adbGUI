@@ -73,6 +73,7 @@
                   this.Name = "Viewer";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                   this.Text = "Output Viewer";
+                  this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Viewer_FormClosing);
                   this.ResumeLayout(false);
                   this.PerformLayout();
 

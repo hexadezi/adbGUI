@@ -35,6 +35,7 @@
                   this.groupBox13 = new System.Windows.Forms.GroupBox();
                   this.txt_serialno = new System.Windows.Forms.TextBox();
                   this.groupBox11 = new System.Windows.Forms.GroupBox();
+                  this.button5 = new System.Windows.Forms.Button();
                   this.txt_ip = new System.Windows.Forms.TextBox();
                   this.btn_connect = new System.Windows.Forms.Button();
                   this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -140,7 +141,6 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-                  this.button5 = new System.Windows.Forms.Button();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -221,6 +221,16 @@
                   this.groupBox11.TabIndex = 3;
                   this.groupBox11.TabStop = false;
                   this.groupBox11.Text = "Wireless ADB";
+                  // 
+                  // button5
+                  // 
+                  this.button5.Location = new System.Drawing.Point(171, 16);
+                  this.button5.Name = "button5";
+                  this.button5.Size = new System.Drawing.Size(75, 23);
+                  this.button5.TabIndex = 8;
+                  this.button5.Text = "Disconnect";
+                  this.button5.UseVisualStyleBackColor = true;
+                  this.button5.Click += new System.EventHandler(this.button5_Click_1);
                   // 
                   // txt_ip
                   // 
@@ -1313,16 +1323,6 @@
                   // openFileDialog1
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
-                  // 
-                  // button5
-                  // 
-                  this.button5.Location = new System.Drawing.Point(171, 16);
-                  this.button5.Name = "button5";
-                  this.button5.Size = new System.Drawing.Size(75, 23);
-                  this.button5.TabIndex = 8;
-                  this.button5.Text = "Disconnect";
-                  this.button5.UseVisualStyleBackColor = true;
-                  this.button5.Click += new System.EventHandler(this.button5_Click_1);
                   // 
                   // MainForm
                   // 

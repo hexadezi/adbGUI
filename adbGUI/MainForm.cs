@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -227,7 +228,7 @@ namespace adbGUI
             private async void DevicesToTxtBox()
             {
                   const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices -l";
+                  const string arguments = "/C tools\\adb devices";
                   var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -252,10 +253,35 @@ namespace adbGUI
                               process.Start();
                         }
 
-                        var s = process.StandardOutput.ReadToEnd();
+                        string s2 = process.StandardOutput.ReadToEnd();
 
-                        txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s));
-                        Thread.Sleep(1000);
+                        txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s2));
+
+
+
+                        if (s2.Length > 29)
+                        {
+                              using (StringReader s = new StringReader(s2))
+                              {
+                                    string line;
+
+                                    while (s.Peek() != -1)
+                                    {
+                                          line = s.ReadLine();
+
+                                          if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
+                                                continue;
+
+                                          if (line.IndexOf('\t') != -1)
+                                          {
+                                                line = line.Substring(0, line.IndexOf('\t'));
+                                                txt_serialno.Invoke((MethodInvoker)(() => txt_serialno.Text = line));
+                                          }
+                                    }
+                              }
+                        }
+                        Thread.Sleep(3000);
+
                   }
             }
 
@@ -848,6 +874,68 @@ namespace adbGUI
             private void button5_Click_1(object sender, EventArgs e)
             {
                   callADB_wo("", "disconnect ");
+            }
+
+            private async void button6_Click_1(object sender, EventArgs e)
+            {
+
+
+
+
+
+
+                  const string filename = "cmd.exe";
+                  const string arguments = "/C tools\\adb devices";
+                  var startInfo = new ProcessStartInfo
+                  {
+                        FileName = filename,
+                        Arguments = arguments,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true
+                  };
+                  var process = new Process { StartInfo = startInfo };
+
+                  if (Process.GetProcessesByName("adb").Length > 0)
+                  {
+                        process.Start();
+                  }
+
+                  else
+                  {
+                        StartServer();
+                        await Task.Delay(500);
+                        process.Start();
+                  }
+
+                  var s2 = process.StandardOutput.ReadToEnd();
+
+
+                  string deviceList = "";
+
+
+                  deviceList = s2;
+                  if (deviceList.Length > 29)
+                  {
+                        using (StringReader s = new StringReader(deviceList))
+                        {
+                              string line;
+
+                              while (s.Peek() != -1)
+                              {
+                                    line = s.ReadLine();
+
+                                    if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
+                                          continue;
+
+                                    if (line.IndexOf('\t') != -1)
+                                    {
+                                          line = line.Substring(0, line.IndexOf('\t'));
+                                          txt_serialno.Text = line;
+                                    }
+                              }
+                        }
+                  }
             }
       }
 }

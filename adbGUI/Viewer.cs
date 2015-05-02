@@ -32,5 +32,10 @@ namespace adbGUI
                         File.WriteAllText(saveFileDialog1.FileName, txt_output.Text);
                   }
             }
+
+            private void Viewer_FormClosing(object sender, FormClosingEventArgs e)
+            {
+                  Dispose();
+            }
       }
 }
