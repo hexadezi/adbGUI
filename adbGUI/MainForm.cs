@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ namespace adbGUI
             //-------------------Windows Forms------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
 
-            private Form _rebootmenu;
+
 
             public MainForm()
             {
@@ -55,16 +56,33 @@ namespace adbGUI
             private void GetInformation(string a, string b, string titel, int width = 850, int height = 600,
                   FormWindowState windowstate = FormWindowState.Normal)
             {
-                  var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate); });
-                  thread.Start();
-                  while (thread.IsAlive)
+                  int i = Convert.ToInt32(txt_devices.Lines.Count().ToString());
+
+                  if (i == 4)
                   {
-                        tabControl1.Enabled = false;
-                        //Cursor = Cursors.WaitCursor;
-                        Application.DoEvents();
+                        var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate); });
+                        thread.Start();
+                        while (thread.IsAlive)
+                        {
+                              tabControl1.Enabled = false;
+                              Cursor = Cursors.WaitCursor;
+                              Application.DoEvents();
+                        }
+                        tabControl1.Enabled = true;
+                        Cursor = Cursors.Default;
                   }
-                  tabControl1.Enabled = true;
-                  //Cursor = Cursors.Default;
+                  else if (i == 3)
+                  {
+                        //No device connected
+                        MessageBox.Show("No device connected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                  }
+                  else if (i >= 4 && Serialno() == "")
+                  {
+                        //More than 4 devices connected and no serial number
+                        MessageBox.Show("There are more than 1 devices connected. \r\nType in the serial number in the main tab.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  }
             }
 
             private void ToViewer(string value, string title, int x, int y,
@@ -78,8 +96,7 @@ namespace adbGUI
                   }
                   if (value == "")
                   {
-                        MessageBox.Show(
-                              "No or more devices connected. \r\nIf more than one device is connected, then type in the serial in the main tab.");
+                        MessageBox.Show("Make sure, your device is online and listed in the main tab.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
                   else
                   {
@@ -91,7 +108,6 @@ namespace adbGUI
                         v.WindowState = windowstate;
                         v.Width = x;
                         v.Height = y;
-
                         v.Show();
                   }
             }
@@ -109,7 +125,7 @@ namespace adbGUI
                         CreateNoWindow = true,
                         RedirectStandardOutput = true
                   };
-                  var process = new Process {StartInfo = startInfo};
+                  var process = new Process { StartInfo = startInfo };
 
 
                   if (Process.GetProcessesByName("adb").Length > 0)
@@ -124,9 +140,10 @@ namespace adbGUI
                         process.Start();
                   }
 
-                  var s = process.StandardOutput.ReadToEnd();
+                  string s = process.StandardOutput.ReadToEnd();
 
                   ToViewer(s, c, x, y, windowstate);
+                  process.StandardOutput.DiscardBufferedData();
             }
 
             private void callADB_w(string x)
@@ -139,7 +156,7 @@ namespace adbGUI
                         WindowStyle = ProcessWindowStyle.Normal,
                         Arguments = arguments
                   };
-                  var process = new Process {StartInfo = startInfo};
+                  var process = new Process { StartInfo = startInfo };
                   process.Start();
             }
 
@@ -154,7 +171,7 @@ namespace adbGUI
                         WindowStyle = ProcessWindowStyle.Hidden
                   };
 
-                  var process = new Process {StartInfo = startInfo};
+                  var process = new Process { StartInfo = startInfo };
 
                   process.Start();
             }
@@ -209,8 +226,8 @@ namespace adbGUI
 
             private async void DevicesToTxtBox()
             {
-                  var filename = "cmd.exe";
-                  var arguments = "/C tools\\adb devices -l";
+                  const string filename = "cmd.exe";
+                  const string arguments = "/C tools\\adb devices -l";
                   var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -219,7 +236,7 @@ namespace adbGUI
                         CreateNoWindow = true,
                         RedirectStandardOutput = true
                   };
-                  var process = new Process {StartInfo = startInfo};
+                  var process = new Process { StartInfo = startInfo };
 
                   while (true)
                   {
@@ -237,19 +254,21 @@ namespace adbGUI
 
                         var s = process.StandardOutput.ReadToEnd();
 
-                        txt_devices.Invoke((MethodInvoker) (() => txt_devices.Text = s));
-                        Thread.Sleep(500);
+                        txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s));
+                        Thread.Sleep(1000);
                   }
             }
 
+            public Form Rebootmenu;
             private void btn_reboot_Click(object sender, EventArgs e)
             {
-                  if ((_rebootmenu == null) || (_rebootmenu.IsDisposed))
+                  //RebootMenu _rebootmenu = new RebootMenu(txt_devices.Lines.Count().ToString());
+                  if ((Rebootmenu == null) || (Rebootmenu.IsDisposed))
                   {
-                        _rebootmenu = new RebootMenu();
+                        Rebootmenu = new RebootMenu(Convert.ToInt32(txt_devices.Lines.Count().ToString()));
                   }
-                  _rebootmenu.Show();
-                  _rebootmenu.Focus();
+                  Rebootmenu.Show();
+                  Rebootmenu.Focus();
             }
 
             private void button1_Click(object sender, EventArgs e)
@@ -315,6 +334,7 @@ namespace adbGUI
 
             private void btn_run_Click(object sender, EventArgs e)
             {
+
                   var s = txt_customcommand.Text;
                   if (s == "")
                   {
@@ -351,7 +371,7 @@ namespace adbGUI
 
             private void btn_phoneinformation_installedpackages_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell pm list packages -f", "All Packages");
+                  GetInformation("", "shell \"pm list packages -f | cut -c9- | sort\"", "All Packages");
             }
 
             private void btn_phoneinformation_logcat_Click(object sender, EventArgs e)
@@ -823,6 +843,11 @@ namespace adbGUI
             private void btnKillserver_Click(object sender, EventArgs e)
             {
                   KillServer();
+            }
+
+            private void button5_Click_1(object sender, EventArgs e)
+            {
+                  callADB_wo("", "disconnect ");
             }
       }
 }

@@ -140,6 +140,7 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+                  this.button5 = new System.Windows.Forms.Button();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -189,7 +190,7 @@
                   this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
                   this.tabPage1.Size = new System.Drawing.Size(510, 280);
                   this.tabPage1.TabIndex = 0;
-                  this.tabPage1.Text = "All Commands";
+                  this.tabPage1.Text = "Main Commands";
                   this.tabPage1.UseVisualStyleBackColor = true;
                   // 
                   // groupBox13
@@ -207,10 +208,11 @@
                   this.txt_serialno.Location = new System.Drawing.Point(6, 19);
                   this.txt_serialno.Name = "txt_serialno";
                   this.txt_serialno.Size = new System.Drawing.Size(229, 20);
-                  this.txt_serialno.TabIndex = 12;
+                  this.txt_serialno.TabIndex = 8;
                   // 
                   // groupBox11
                   // 
+                  this.groupBox11.Controls.Add(this.button5);
                   this.groupBox11.Controls.Add(this.txt_ip);
                   this.groupBox11.Controls.Add(this.btn_connect);
                   this.groupBox11.Location = new System.Drawing.Point(6, 60);
@@ -224,17 +226,17 @@
                   // 
                   this.txt_ip.Location = new System.Drawing.Point(7, 19);
                   this.txt_ip.Name = "txt_ip";
-                  this.txt_ip.Size = new System.Drawing.Size(159, 20);
-                  this.txt_ip.TabIndex = 10;
+                  this.txt_ip.Size = new System.Drawing.Size(78, 20);
+                  this.txt_ip.TabIndex = 6;
                   this.txt_ip.Text = "192.168.0.100";
                   this.txt_ip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ip_KeyDown);
                   // 
                   // btn_connect
                   // 
-                  this.btn_connect.Location = new System.Drawing.Point(172, 17);
+                  this.btn_connect.Location = new System.Drawing.Point(91, 17);
                   this.btn_connect.Name = "btn_connect";
                   this.btn_connect.Size = new System.Drawing.Size(75, 23);
-                  this.btn_connect.TabIndex = 11;
+                  this.btn_connect.TabIndex = 7;
                   this.btn_connect.Text = "Connect";
                   this.btn_connect.UseVisualStyleBackColor = true;
                   this.btn_connect.Click += new System.EventHandler(this.btn_connect_Click);
@@ -291,7 +293,7 @@
                   // 
                   // btn_reboot
                   // 
-                  this.btn_reboot.Location = new System.Drawing.Point(172, 19);
+                  this.btn_reboot.Location = new System.Drawing.Point(171, 19);
                   this.btn_reboot.Name = "btn_reboot";
                   this.btn_reboot.Size = new System.Drawing.Size(156, 23);
                   this.btn_reboot.TabIndex = 4;
@@ -305,7 +307,7 @@
                   this.btn_remountsystem.Location = new System.Drawing.Point(71, 19);
                   this.btn_remountsystem.Name = "btn_remountsystem";
                   this.btn_remountsystem.Size = new System.Drawing.Size(95, 23);
-                  this.btn_remountsystem.TabIndex = 9;
+                  this.btn_remountsystem.TabIndex = 3;
                   this.btn_remountsystem.Text = "Remount System";
                   this.toolTip.SetToolTip(this.btn_remountsystem, "Remounts the /system partition on the device read-write");
                   this.btn_remountsystem.UseVisualStyleBackColor = true;
@@ -317,7 +319,7 @@
                   this.btnKillserver.Location = new System.Drawing.Point(7, 19);
                   this.btnKillserver.Name = "btnKillserver";
                   this.btnKillserver.Size = new System.Drawing.Size(58, 23);
-                  this.btnKillserver.TabIndex = 6;
+                  this.btnKillserver.TabIndex = 2;
                   this.btnKillserver.Text = "Restart";
                   this.toolTip.SetToolTip(this.btnKillserver, "Kill the server if it is running");
                   this.btnKillserver.UseVisualStyleBackColor = true;
@@ -377,7 +379,7 @@
                   this.btn_phoneinformation_resetsize.Location = new System.Drawing.Point(78, 45);
                   this.btn_phoneinformation_resetsize.Name = "btn_phoneinformation_resetsize";
                   this.btn_phoneinformation_resetsize.Size = new System.Drawing.Size(66, 23);
-                  this.btn_phoneinformation_resetsize.TabIndex = 42;
+                  this.btn_phoneinformation_resetsize.TabIndex = 35;
                   this.btn_phoneinformation_resetsize.Text = "Reset";
                   this.btn_phoneinformation_resetsize.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_resetsize.Click += new System.EventHandler(this.button6_Click);
@@ -387,7 +389,7 @@
                   this.btn_phoneinformation_showsize.Location = new System.Drawing.Point(6, 45);
                   this.btn_phoneinformation_showsize.Name = "btn_phoneinformation_showsize";
                   this.btn_phoneinformation_showsize.Size = new System.Drawing.Size(66, 23);
-                  this.btn_phoneinformation_showsize.TabIndex = 41;
+                  this.btn_phoneinformation_showsize.TabIndex = 34;
                   this.btn_phoneinformation_showsize.Text = "Show current DPI";
                   this.btn_phoneinformation_showsize.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_showsize.Click += new System.EventHandler(this.button7_Click);
@@ -397,7 +399,7 @@
                   this.txt_phoneinformation_resolution.Location = new System.Drawing.Point(6, 19);
                   this.txt_phoneinformation_resolution.Name = "txt_phoneinformation_resolution";
                   this.txt_phoneinformation_resolution.Size = new System.Drawing.Size(83, 20);
-                  this.txt_phoneinformation_resolution.TabIndex = 6;
+                  this.txt_phoneinformation_resolution.TabIndex = 32;
                   this.txt_phoneinformation_resolution.Text = "1080x1920";
                   this.txt_phoneinformation_resolution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_phoneinformation_resolution_KeyDown);
                   // 
@@ -406,7 +408,7 @@
                   this.btn_phoneinformation_setsize.Location = new System.Drawing.Point(95, 17);
                   this.btn_phoneinformation_setsize.Name = "btn_phoneinformation_setsize";
                   this.btn_phoneinformation_setsize.Size = new System.Drawing.Size(49, 23);
-                  this.btn_phoneinformation_setsize.TabIndex = 5;
+                  this.btn_phoneinformation_setsize.TabIndex = 33;
                   this.btn_phoneinformation_setsize.Text = "Set";
                   this.btn_phoneinformation_setsize.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_setsize.Click += new System.EventHandler(this.button5_Click);
@@ -429,7 +431,7 @@
                   this.btn_phoneinformation_resetdpi.Location = new System.Drawing.Point(78, 45);
                   this.btn_phoneinformation_resetdpi.Name = "btn_phoneinformation_resetdpi";
                   this.btn_phoneinformation_resetdpi.Size = new System.Drawing.Size(66, 23);
-                  this.btn_phoneinformation_resetdpi.TabIndex = 40;
+                  this.btn_phoneinformation_resetdpi.TabIndex = 31;
                   this.btn_phoneinformation_resetdpi.Text = "Reset";
                   this.btn_phoneinformation_resetdpi.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_resetdpi.Click += new System.EventHandler(this.btn_phoneinformation_resetdpi_Click);
@@ -557,7 +559,7 @@
                   this.btnAlarm.Location = new System.Drawing.Point(118, 77);
                   this.btnAlarm.Name = "btnAlarm";
                   this.btnAlarm.Size = new System.Drawing.Size(106, 23);
-                  this.btnAlarm.TabIndex = 26;
+                  this.btnAlarm.TabIndex = 7;
                   this.btnAlarm.Text = "Alarm State";
                   this.btnAlarm.UseVisualStyleBackColor = true;
                   this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
@@ -567,7 +569,7 @@
                   this.btn_phoneinformation_screenshot.Location = new System.Drawing.Point(230, 222);
                   this.btn_phoneinformation_screenshot.Name = "btn_phoneinformation_screenshot";
                   this.btn_phoneinformation_screenshot.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_screenshot.TabIndex = 25;
+                  this.btn_phoneinformation_screenshot.TabIndex = 23;
                   this.btn_phoneinformation_screenshot.Text = "Screenshot";
                   this.btn_phoneinformation_screenshot.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_screenshot.Click += new System.EventHandler(this.btn_phoneinformation_screenshot_Click);
@@ -577,7 +579,7 @@
                   this.btn_phoneinformation_activities.Location = new System.Drawing.Point(118, 222);
                   this.btn_phoneinformation_activities.Name = "btn_phoneinformation_activities";
                   this.btn_phoneinformation_activities.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_activities.TabIndex = 24;
+                  this.btn_phoneinformation_activities.TabIndex = 22;
                   this.btn_phoneinformation_activities.Text = "Activities";
                   this.btn_phoneinformation_activities.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_activities.Click += new System.EventHandler(this.btn_phoneinformation_activities_Click);
@@ -587,7 +589,7 @@
                   this.btn_phoninformation_hosts.Location = new System.Drawing.Point(6, 222);
                   this.btn_phoninformation_hosts.Name = "btn_phoninformation_hosts";
                   this.btn_phoninformation_hosts.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoninformation_hosts.TabIndex = 23;
+                  this.btn_phoninformation_hosts.TabIndex = 21;
                   this.btn_phoninformation_hosts.Text = "Hosts";
                   this.btn_phoninformation_hosts.UseVisualStyleBackColor = true;
                   this.btn_phoninformation_hosts.Click += new System.EventHandler(this.btn_phoninformation_hosts_Click);
@@ -597,7 +599,7 @@
                   this.btn_phoneinformation_uptime.Location = new System.Drawing.Point(230, 106);
                   this.btn_phoneinformation_uptime.Name = "btn_phoneinformation_uptime";
                   this.btn_phoneinformation_uptime.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_uptime.TabIndex = 19;
+                  this.btn_phoneinformation_uptime.TabIndex = 11;
                   this.btn_phoneinformation_uptime.Text = "Uptime";
                   this.btn_phoneinformation_uptime.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_uptime.Click += new System.EventHandler(this.btn_phoneinformation_uptime_Click);
@@ -607,7 +609,7 @@
                   this.btn_phoneinformation_netstat.Location = new System.Drawing.Point(230, 164);
                   this.btn_phoneinformation_netstat.Name = "btn_phoneinformation_netstat";
                   this.btn_phoneinformation_netstat.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_netstat.TabIndex = 21;
+                  this.btn_phoneinformation_netstat.TabIndex = 17;
                   this.btn_phoneinformation_netstat.Text = "Netstat";
                   this.btn_phoneinformation_netstat.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_netstat.Click += new System.EventHandler(this.btn_phoneinformation_netstat_Click);
@@ -617,7 +619,7 @@
                   this.btn_phoneinformation_diskstats.Location = new System.Drawing.Point(6, 193);
                   this.btn_phoneinformation_diskstats.Name = "btn_phoneinformation_diskstats";
                   this.btn_phoneinformation_diskstats.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_diskstats.TabIndex = 6;
+                  this.btn_phoneinformation_diskstats.TabIndex = 18;
                   this.btn_phoneinformation_diskstats.Text = "Diskstats";
                   this.btn_phoneinformation_diskstats.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_diskstats.Click += new System.EventHandler(this.btn_phoneinformation_diskstats_Click);
@@ -627,7 +629,7 @@
                   this.btn_phoneinformation_accounts.Location = new System.Drawing.Point(118, 193);
                   this.btn_phoneinformation_accounts.Name = "btn_phoneinformation_accounts";
                   this.btn_phoneinformation_accounts.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_accounts.TabIndex = 14;
+                  this.btn_phoneinformation_accounts.TabIndex = 19;
                   this.btn_phoneinformation_accounts.Text = "Accounts";
                   this.btn_phoneinformation_accounts.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_accounts.Click += new System.EventHandler(this.btn_phoneinformation_accounts_Click);
@@ -637,7 +639,7 @@
                   this.btn_phoneinformation_cpuinfo.Location = new System.Drawing.Point(118, 164);
                   this.btn_phoneinformation_cpuinfo.Name = "btn_phoneinformation_cpuinfo";
                   this.btn_phoneinformation_cpuinfo.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_cpuinfo.TabIndex = 13;
+                  this.btn_phoneinformation_cpuinfo.TabIndex = 16;
                   this.btn_phoneinformation_cpuinfo.Text = "CPU Info";
                   this.btn_phoneinformation_cpuinfo.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_cpuinfo.Click += new System.EventHandler(this.btn_phoneinformation_cpuinfo_Click);
@@ -647,7 +649,7 @@
                   this.btn_phoneinformation_wifiinfo.Location = new System.Drawing.Point(6, 164);
                   this.btn_phoneinformation_wifiinfo.Name = "btn_phoneinformation_wifiinfo";
                   this.btn_phoneinformation_wifiinfo.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_wifiinfo.TabIndex = 5;
+                  this.btn_phoneinformation_wifiinfo.TabIndex = 15;
                   this.btn_phoneinformation_wifiinfo.Text = "WiFi Info";
                   this.btn_phoneinformation_wifiinfo.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_wifiinfo.Click += new System.EventHandler(this.btn_phoneinformation_wifiinfo_Click);
@@ -657,7 +659,7 @@
                   this.btn_phoneinformation_battery.Location = new System.Drawing.Point(230, 135);
                   this.btn_phoneinformation_battery.Name = "btn_phoneinformation_battery";
                   this.btn_phoneinformation_battery.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_battery.TabIndex = 20;
+                  this.btn_phoneinformation_battery.TabIndex = 14;
                   this.btn_phoneinformation_battery.Text = "Battery Stats";
                   this.btn_phoneinformation_battery.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_battery.Click += new System.EventHandler(this.btn_phoneinformation_battery_Click);
@@ -667,7 +669,7 @@
                   this.btn_phoneinformation_dmesg.Location = new System.Drawing.Point(118, 135);
                   this.btn_phoneinformation_dmesg.Name = "btn_phoneinformation_dmesg";
                   this.btn_phoneinformation_dmesg.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_dmesg.TabIndex = 12;
+                  this.btn_phoneinformation_dmesg.TabIndex = 13;
                   this.btn_phoneinformation_dmesg.Text = "Kernel Debugging";
                   this.btn_phoneinformation_dmesg.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_dmesg.Click += new System.EventHandler(this.btn_phoneinformation_dmesg_Click);
@@ -677,7 +679,7 @@
                   this.btn_phoneinformation_getimei.Location = new System.Drawing.Point(6, 135);
                   this.btn_phoneinformation_getimei.Name = "btn_phoneinformation_getimei";
                   this.btn_phoneinformation_getimei.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_getimei.TabIndex = 4;
+                  this.btn_phoneinformation_getimei.TabIndex = 12;
                   this.btn_phoneinformation_getimei.Text = "Get IMEI";
                   this.btn_phoneinformation_getimei.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_getimei.Click += new System.EventHandler(this.btn_phoneinformation_getimei_Click);
@@ -687,7 +689,7 @@
                   this.btn_phoneinformation_permissions.Location = new System.Drawing.Point(230, 193);
                   this.btn_phoneinformation_permissions.Name = "btn_phoneinformation_permissions";
                   this.btn_phoneinformation_permissions.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_permissions.TabIndex = 22;
+                  this.btn_phoneinformation_permissions.TabIndex = 20;
                   this.btn_phoneinformation_permissions.Text = "Permissions";
                   this.btn_phoneinformation_permissions.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_permissions.Click += new System.EventHandler(this.btn_phoneinformation_permissions_Click);
@@ -697,7 +699,7 @@
                   this.btn_phoneinformation_maxusers.Location = new System.Drawing.Point(118, 106);
                   this.btn_phoneinformation_maxusers.Name = "btn_phoneinformation_maxusers";
                   this.btn_phoneinformation_maxusers.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_maxusers.TabIndex = 11;
+                  this.btn_phoneinformation_maxusers.TabIndex = 10;
                   this.btn_phoneinformation_maxusers.Text = "Max Users";
                   this.btn_phoneinformation_maxusers.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_maxusers.Click += new System.EventHandler(this.btn_phoneinformation_maxusers_Click);
@@ -707,7 +709,7 @@
                   this.btn_phoneinformation_users.Location = new System.Drawing.Point(6, 106);
                   this.btn_phoneinformation_users.Name = "btn_phoneinformation_users";
                   this.btn_phoneinformation_users.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_users.TabIndex = 3;
+                  this.btn_phoneinformation_users.TabIndex = 9;
                   this.btn_phoneinformation_users.Text = "All Users";
                   this.btn_phoneinformation_users.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_users.Click += new System.EventHandler(this.btn_phoneinformation_users_Click);
@@ -717,7 +719,7 @@
                   this.btn_phoneinformation_libraries.Location = new System.Drawing.Point(230, 77);
                   this.btn_phoneinformation_libraries.Name = "btn_phoneinformation_libraries";
                   this.btn_phoneinformation_libraries.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_libraries.TabIndex = 18;
+                  this.btn_phoneinformation_libraries.TabIndex = 8;
                   this.btn_phoneinformation_libraries.Text = "Libraries";
                   this.btn_phoneinformation_libraries.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_libraries.Click += new System.EventHandler(this.btn_phoneinformation_libraries_Click);
@@ -727,7 +729,7 @@
                   this.btn_phoneinformation_features.Location = new System.Drawing.Point(230, 48);
                   this.btn_phoneinformation_features.Name = "btn_phoneinformation_features";
                   this.btn_phoneinformation_features.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_features.TabIndex = 17;
+                  this.btn_phoneinformation_features.TabIndex = 5;
                   this.btn_phoneinformation_features.Text = "Features";
                   this.btn_phoneinformation_features.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_features.Click += new System.EventHandler(this.btn_phoneinformation_features_Click);
@@ -737,7 +739,7 @@
                   this.btn_phoneinformation_processes.Location = new System.Drawing.Point(6, 48);
                   this.btn_phoneinformation_processes.Name = "btn_phoneinformation_processes";
                   this.btn_phoneinformation_processes.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_processes.TabIndex = 1;
+                  this.btn_phoneinformation_processes.TabIndex = 3;
                   this.btn_phoneinformation_processes.Text = "Show Processes";
                   this.btn_phoneinformation_processes.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_processes.Click += new System.EventHandler(this.btn_phoneinformation_processes_Click);
@@ -747,7 +749,7 @@
                   this.btn_phoneinformation_meminfo.Location = new System.Drawing.Point(118, 48);
                   this.btn_phoneinformation_meminfo.Name = "btn_phoneinformation_meminfo";
                   this.btn_phoneinformation_meminfo.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_meminfo.TabIndex = 9;
+                  this.btn_phoneinformation_meminfo.TabIndex = 4;
                   this.btn_phoneinformation_meminfo.Text = "Memory Info";
                   this.btn_phoneinformation_meminfo.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_meminfo.Click += new System.EventHandler(this.btn_phoneinformation_meminfo_Click);
@@ -757,7 +759,7 @@
                   this.btn_phoneinformation_dumpsys.Location = new System.Drawing.Point(118, 19);
                   this.btn_phoneinformation_dumpsys.Name = "btn_phoneinformation_dumpsys";
                   this.btn_phoneinformation_dumpsys.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_dumpsys.TabIndex = 8;
+                  this.btn_phoneinformation_dumpsys.TabIndex = 1;
                   this.btn_phoneinformation_dumpsys.Text = "Dumpsys";
                   this.btn_phoneinformation_dumpsys.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_dumpsys.Click += new System.EventHandler(this.btn_phoneinformation_dumpsys_Click);
@@ -767,7 +769,7 @@
                   this.btn_phoneinformation_logcat.Location = new System.Drawing.Point(230, 19);
                   this.btn_phoneinformation_logcat.Name = "btn_phoneinformation_logcat";
                   this.btn_phoneinformation_logcat.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_logcat.TabIndex = 16;
+                  this.btn_phoneinformation_logcat.TabIndex = 2;
                   this.btn_phoneinformation_logcat.Text = "Logcat";
                   this.btn_phoneinformation_logcat.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_logcat.Click += new System.EventHandler(this.btn_phoneinformation_logcat_Click);
@@ -777,7 +779,7 @@
                   this.btn_phoneinformation_installedpackages.Location = new System.Drawing.Point(6, 77);
                   this.btn_phoneinformation_installedpackages.Name = "btn_phoneinformation_installedpackages";
                   this.btn_phoneinformation_installedpackages.Size = new System.Drawing.Size(106, 23);
-                  this.btn_phoneinformation_installedpackages.TabIndex = 2;
+                  this.btn_phoneinformation_installedpackages.TabIndex = 6;
                   this.btn_phoneinformation_installedpackages.Text = "All Packages";
                   this.btn_phoneinformation_installedpackages.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_installedpackages.Click += new System.EventHandler(this.btn_phoneinformation_installedpackages_Click);
@@ -802,7 +804,7 @@
                   this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
                   this.tabPage2.Size = new System.Drawing.Size(510, 280);
                   this.tabPage2.TabIndex = 1;
-                  this.tabPage2.Text = "Files";
+                  this.tabPage2.Text = "Files and Sideload";
                   this.tabPage2.UseVisualStyleBackColor = true;
                   // 
                   // groupBox10
@@ -987,7 +989,7 @@
                   this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
                   this.tabPage3.Size = new System.Drawing.Size(510, 280);
                   this.tabPage3.TabIndex = 2;
-                  this.tabPage3.Text = "Apps Backup";
+                  this.tabPage3.Text = "Apps and Backup";
                   this.tabPage3.UseVisualStyleBackColor = true;
                   // 
                   // groupBox8
@@ -1236,9 +1238,10 @@
                   // label10
                   // 
                   this.label10.AutoSize = true;
-                  this.label10.Location = new System.Drawing.Point(6, 158);
+                  this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                  this.label10.Location = new System.Drawing.Point(6, 161);
                   this.label10.Name = "label10";
-                  this.label10.Size = new System.Drawing.Size(62, 13);
+                  this.label10.Size = new System.Drawing.Size(72, 13);
                   this.label10.TabIndex = 5;
                   this.label10.Text = "abdGUI 1.1";
                   // 
@@ -1291,7 +1294,7 @@
                   // 
                   this.label7.AutoSize = true;
                   this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                  this.label7.Location = new System.Drawing.Point(11, 118);
+                  this.label7.Location = new System.Drawing.Point(11, 89);
                   this.label7.Name = "label7";
                   this.label7.Size = new System.Drawing.Size(80, 12);
                   this.label7.TabIndex = 2;
@@ -1301,7 +1304,7 @@
                   // 
                   this.label6.AutoSize = true;
                   this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
-                  this.label6.Location = new System.Drawing.Point(7, 106);
+                  this.label6.Location = new System.Drawing.Point(7, 77);
                   this.label6.Name = "label6";
                   this.label6.Size = new System.Drawing.Size(265, 12);
                   this.label6.TabIndex = 0;
@@ -1310,6 +1313,16 @@
                   // openFileDialog1
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
+                  // 
+                  // button5
+                  // 
+                  this.button5.Location = new System.Drawing.Point(171, 16);
+                  this.button5.Name = "button5";
+                  this.button5.Size = new System.Drawing.Size(75, 23);
+                  this.button5.TabIndex = 8;
+                  this.button5.Text = "Disconnect";
+                  this.button5.UseVisualStyleBackColor = true;
+                  this.button5.Click += new System.EventHandler(this.button5_Click_1);
                   // 
                   // MainForm
                   // 
@@ -1471,8 +1484,9 @@
             private System.Windows.Forms.Label label10;
             private System.Windows.Forms.TextBox txt_serialno;
             private System.Windows.Forms.GroupBox groupBox13;
-            private System.Windows.Forms.TextBox txt_devices;
             private System.Windows.Forms.Button btnAlarm;
+            public System.Windows.Forms.TextBox txt_devices;
+            private System.Windows.Forms.Button button5;
       }
 }
 
