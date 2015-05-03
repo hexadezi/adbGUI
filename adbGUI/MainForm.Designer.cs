@@ -32,8 +32,8 @@
                   System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
                   this.tabControl1 = new System.Windows.Forms.TabControl();
                   this.tabPage1 = new System.Windows.Forms.TabPage();
-                  this.txt_serialno = new System.Windows.Forms.TextBox();
                   this.groupBox13 = new System.Windows.Forms.GroupBox();
+                  this.txt_serialno = new System.Windows.Forms.TextBox();
                   this.groupBox11 = new System.Windows.Forms.GroupBox();
                   this.button5 = new System.Windows.Forms.Button();
                   this.txt_ip = new System.Windows.Forms.TextBox();
@@ -193,23 +193,27 @@
                   this.tabPage1.Text = "Main Commands";
                   this.tabPage1.UseVisualStyleBackColor = true;
                   // 
-                  // txt_serialno
-                  // 
-                  this.txt_serialno.Location = new System.Drawing.Point(6, 18);
-                  this.txt_serialno.Multiline = true;
-                  this.txt_serialno.Name = "txt_serialno";
-                  this.txt_serialno.Size = new System.Drawing.Size(228, 20);
-                  this.txt_serialno.TabIndex = 8;
-                  // 
                   // groupBox13
                   // 
                   this.groupBox13.Controls.Add(this.txt_serialno);
-                  this.groupBox13.Location = new System.Drawing.Point(264, 60);
+                  this.groupBox13.Location = new System.Drawing.Point(292, 60);
                   this.groupBox13.Name = "groupBox13";
-                  this.groupBox13.Size = new System.Drawing.Size(240, 47);
+                  this.groupBox13.Size = new System.Drawing.Size(212, 47);
                   this.groupBox13.TabIndex = 4;
                   this.groupBox13.TabStop = false;
                   this.groupBox13.Text = "Serial Number";
+                  // 
+                  // txt_serialno
+                  // 
+                  this.txt_serialno.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+                  this.txt_serialno.Font = new System.Drawing.Font("Consolas", 9.25F);
+                  this.txt_serialno.Location = new System.Drawing.Point(6, 19);
+                  this.txt_serialno.Multiline = true;
+                  this.txt_serialno.Name = "txt_serialno";
+                  this.txt_serialno.Size = new System.Drawing.Size(200, 20);
+                  this.txt_serialno.TabIndex = 8;
                   // 
                   // groupBox11
                   // 
@@ -218,14 +222,14 @@
                   this.groupBox11.Controls.Add(this.btn_connect);
                   this.groupBox11.Location = new System.Drawing.Point(6, 60);
                   this.groupBox11.Name = "groupBox11";
-                  this.groupBox11.Size = new System.Drawing.Size(252, 47);
+                  this.groupBox11.Size = new System.Drawing.Size(280, 47);
                   this.groupBox11.TabIndex = 3;
                   this.groupBox11.TabStop = false;
                   this.groupBox11.Text = "Wireless ADB";
                   // 
                   // button5
                   // 
-                  this.button5.Location = new System.Drawing.Point(171, 16);
+                  this.button5.Location = new System.Drawing.Point(199, 17);
                   this.button5.Name = "button5";
                   this.button5.Size = new System.Drawing.Size(75, 23);
                   this.button5.TabIndex = 8;
@@ -235,16 +239,16 @@
                   // 
                   // txt_ip
                   // 
-                  this.txt_ip.Location = new System.Drawing.Point(7, 19);
+                  this.txt_ip.Location = new System.Drawing.Point(6, 19);
                   this.txt_ip.Name = "txt_ip";
-                  this.txt_ip.Size = new System.Drawing.Size(78, 20);
+                  this.txt_ip.Size = new System.Drawing.Size(106, 20);
                   this.txt_ip.TabIndex = 6;
                   this.txt_ip.Text = "192.168.0.100";
                   this.txt_ip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ip_KeyDown);
                   // 
                   // btn_connect
                   // 
-                  this.btn_connect.Location = new System.Drawing.Point(91, 17);
+                  this.btn_connect.Location = new System.Drawing.Point(118, 17);
                   this.btn_connect.Name = "btn_connect";
                   this.btn_connect.Size = new System.Drawing.Size(75, 23);
                   this.btn_connect.TabIndex = 7;
@@ -357,6 +361,7 @@
                   this.txt_devices.ReadOnly = true;
                   this.txt_devices.Size = new System.Drawing.Size(498, 109);
                   this.txt_devices.TabIndex = 5;
+                  this.txt_devices.TextChanged += new System.EventHandler(this.txt_devices_TextChanged);
                   // 
                   // tabPage4
                   // 

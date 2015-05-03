@@ -43,19 +43,13 @@ namespace adbGUI
 
             private static void KillServer()
             {
-                  var prs = Process.GetProcesses();
-
-                  foreach (var pr in prs)
+                  foreach (var pr in Process.GetProcessesByName("adb"))
                   {
-                        if (pr.ProcessName == "adb")
-                        {
-                              pr.Kill();
-                        }
+                        pr.Kill();
                   }
             }
 
-            private void GetInformation(string a, string b, string titel, int width = 850, int height = 600,
-                  FormWindowState windowstate = FormWindowState.Normal)
+            private void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
             {
                   int i = Convert.ToInt32(txt_devices.Lines.Count().ToString());
 
@@ -66,11 +60,11 @@ namespace adbGUI
                         while (thread.IsAlive)
                         {
                               tabControl1.Enabled = false;
-                              Cursor = Cursors.AppStarting;
+                              //Cursor = Cursors.AppStarting;
                               Application.DoEvents();
                         }
                         tabControl1.Enabled = true;
-                        Cursor = Cursors.Default;
+                        //Cursor = Cursors.Default;
                   }
                   else if (i == 3)
                   {
@@ -128,23 +122,12 @@ namespace adbGUI
                   };
                   var process = new Process { StartInfo = startInfo };
 
-
-                  if (Process.GetProcessesByName("adb").Length > 0)
-                  {
-                        process.Start();
-                  }
-
-                  else
-                  {
-                        StartServer();
-                        await Task.Delay(500);
-                        process.Start();
-                  }
+                  process.Start();
 
                   string s = process.StandardOutput.ReadToEnd();
 
                   ToViewer(s, c, x, y, windowstate);
-                  process.StandardOutput.DiscardBufferedData();
+                  process.StandardOutput.Dispose();
             }
 
             private void callADB_w(string x)
@@ -185,7 +168,7 @@ namespace adbGUI
                   {
                         s = "-s " + txt_serialno.Text;
                   }
-                  return s;
+                  return s.ToLower();
             }
 
             private void IsRunning()
@@ -207,10 +190,8 @@ namespace adbGUI
                               {
                                     Invoke(new Action<string>(ServerOff), b);
                               }
-
-                              //this.Text = "adbGUI - Server is not running";
                         }
-                        Thread.Sleep(500);
+                        Thread.Sleep(150);
                   }
             }
 
@@ -222,7 +203,8 @@ namespace adbGUI
             private void ServerOff(string s)
             {
                   Text = s;
-                  txt_devices.Text = Environment.NewLine;
+                  txt_devices.Text = string.Empty;
+                  txt_serialno.Text = string.Empty;
             }
 
             private async void DevicesToTxtBox()
@@ -255,7 +237,7 @@ namespace adbGUI
 
                         string s2 = process.StandardOutput.ReadToEnd();
 
-                        txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s2));
+                        txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s2.ToUpper()));
 
                         Thread.Sleep(1000);
 
@@ -296,12 +278,13 @@ namespace adbGUI
                                     if (line.IndexOf('\t') != -1)
                                     {
                                           line = line.Substring(0, line.IndexOf('\t'));
-                                          txt_serialno.Invoke((MethodInvoker)(() => txt_serialno.Text = line));
+                                          txt_serialno.Invoke((MethodInvoker)(() => txt_serialno.Text = line.ToUpper()));
                                     }
                               }
+                              s.Close();
+                              s.Dispose();
                         }
                   }
-                  Thread.Sleep(6000);
             }
 
             public Form Rebootmenu;
@@ -396,7 +379,7 @@ namespace adbGUI
                   callADB_w("shell");
             }
 
-            private async void Form1_Load(object sender, EventArgs e)
+            private void Form1_Load(object sender, EventArgs e)
             {
                   var printDevices = new Thread(DevicesToTxtBox);
                   printDevices.IsBackground = true;
@@ -405,13 +388,6 @@ namespace adbGUI
                   var checkStatus = new Thread(IsRunning);
                   checkStatus.IsBackground = true;
                   checkStatus.Start();
-
-                  await Task.Delay(500);
-                  var getserialnumber = new Thread(GetSerialnumber);
-                  getserialnumber.IsBackground = true;
-                  getserialnumber.Start();
-
-
                   txt_customcommand.Select();
             }
 
@@ -802,7 +778,7 @@ namespace adbGUI
                   callADB_wo("", "reboot");
             }
 
-            private async void btn_connect_Click(object sender, EventArgs e)
+            private void btn_connect_Click(object sender, EventArgs e)
             {
                   string s;
                   s = @txt_ip.Text;
@@ -813,10 +789,6 @@ namespace adbGUI
                   else
                   {
                         callADB_wo("", "connect " + s);
-                        txt_serialno.Text = "";
-                        await Task.Delay(1000);
-                        Thread tr = new Thread(GetSerialnumber);
-                        tr.Start();
                   }
             }
 
@@ -862,9 +834,9 @@ namespace adbGUI
                   proc.Start();
                   while (proc.HasExited == false)
                   {
-                        Cursor = Cursors.WaitCursor;
+                        //Cursor = Cursors.WaitCursor;
                   }
-                  Cursor = Cursors.Default;
+                  //Cursor = Cursors.Default;
             }
 
             private void txt_phoneinformation_dpi_KeyDown(object sender, KeyEventArgs e)
@@ -895,26 +867,14 @@ namespace adbGUI
                   GetInformation("", "shell dumpsys alarm", "Current Alarm Manager State", 950);
             }
 
-            private async void btnKillserver_Click(object sender, EventArgs e)
+            private void btnKillserver_Click(object sender, EventArgs e)
             {
                   KillServer();
-                  txt_serialno.Text = "";
-                  await Task.Delay(1000);
-                  Thread tr = new Thread(GetSerialnumber);
-                  tr.Start();
             }
 
-            private async void button5_Click_1(object sender, EventArgs e)
+            private void button5_Click_1(object sender, EventArgs e)
             {
                   callADB_wo("", "disconnect ");
-                  if (txt_devices.Lines.Length > 4)
-                  {
-                        txt_serialno.Text = "";
-                        await Task.Delay(1000);
-                        Thread tr = new Thread(GetSerialnumber);
-                        tr.Start();
-                  }
-
             }
 
             private async void button6_Click_1(object sender, EventArgs e)
@@ -972,8 +932,21 @@ namespace adbGUI
                                           txt_serialno.Text = line;
                                     }
                               }
+                              s.Close();
+                              s.Dispose();
                         }
                   }
+            }
+
+            private void txt_devices_TextChanged(object sender, EventArgs e)
+            {
+                  if (txt_devices.Lines.Count() == 3)
+                  {
+                        txt_serialno.Text = "";
+                  }
+                  Thread tr = new Thread(GetSerialnumber);
+                  tr.IsBackground = true;
+                  tr.Start();
             }
       }
 }

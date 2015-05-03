@@ -20,7 +20,7 @@ namespace adbGUI
             private void button1_Click(object sender, EventArgs e)
             {
                   saveFileDialog1.Filter = " .txt|*.txt";
-                  saveFileDialog1.FileName = ActiveForm.Text.Replace(" ", "_").ToLower();
+                  saveFileDialog1.FileName = ActiveForm.Text.Replace(" ", "_").ToLower() + "_" + DateTime.Now.ToString().Replace(":",".");
                   if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                   {
                         File.WriteAllText(saveFileDialog1.FileName, txt_output.Text);
@@ -29,7 +29,7 @@ namespace adbGUI
 
             private void Viewer_FormClosing(object sender, FormClosingEventArgs e)
             {
-                  Dispose();
+                  txt_output.Dispose();
             }
       }
 }
