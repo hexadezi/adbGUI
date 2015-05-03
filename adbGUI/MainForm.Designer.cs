@@ -33,7 +33,7 @@
                   this.tabControl1 = new System.Windows.Forms.TabControl();
                   this.tabPage1 = new System.Windows.Forms.TabPage();
                   this.groupBox13 = new System.Windows.Forms.GroupBox();
-                  this.txt_serialno = new System.Windows.Forms.TextBox();
+                  this.cbSerials = new System.Windows.Forms.ComboBox();
                   this.groupBox11 = new System.Windows.Forms.GroupBox();
                   this.button5 = new System.Windows.Forms.Button();
                   this.txt_ip = new System.Windows.Forms.TextBox();
@@ -195,25 +195,23 @@
                   // 
                   // groupBox13
                   // 
-                  this.groupBox13.Controls.Add(this.txt_serialno);
+                  this.groupBox13.Controls.Add(this.cbSerials);
                   this.groupBox13.Location = new System.Drawing.Point(292, 60);
                   this.groupBox13.Name = "groupBox13";
                   this.groupBox13.Size = new System.Drawing.Size(212, 47);
                   this.groupBox13.TabIndex = 4;
                   this.groupBox13.TabStop = false;
-                  this.groupBox13.Text = "Serial Number";
+                  this.groupBox13.Text = "Devices";
                   // 
-                  // txt_serialno
+                  // cbSerials
                   // 
-                  this.txt_serialno.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-                  this.txt_serialno.Font = new System.Drawing.Font("Consolas", 9.25F);
-                  this.txt_serialno.Location = new System.Drawing.Point(6, 19);
-                  this.txt_serialno.Multiline = true;
-                  this.txt_serialno.Name = "txt_serialno";
-                  this.txt_serialno.Size = new System.Drawing.Size(200, 20);
-                  this.txt_serialno.TabIndex = 8;
+                  this.cbSerials.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+                  this.cbSerials.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                  this.cbSerials.FormattingEnabled = true;
+                  this.cbSerials.Location = new System.Drawing.Point(6, 19);
+                  this.cbSerials.Name = "cbSerials";
+                  this.cbSerials.Size = new System.Drawing.Size(200, 22);
+                  this.cbSerials.TabIndex = 6;
                   // 
                   // groupBox11
                   // 
@@ -354,11 +352,11 @@
                   // 
                   // txt_devices
                   // 
+                  this.txt_devices.Enabled = false;
                   this.txt_devices.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.txt_devices.Location = new System.Drawing.Point(6, 165);
                   this.txt_devices.Multiline = true;
                   this.txt_devices.Name = "txt_devices";
-                  this.txt_devices.ReadOnly = true;
                   this.txt_devices.Size = new System.Drawing.Size(498, 109);
                   this.txt_devices.TabIndex = 5;
                   this.txt_devices.TextChanged += new System.EventHandler(this.txt_devices_TextChanged);
@@ -1348,7 +1346,6 @@
                   this.tabPage1.ResumeLayout(false);
                   this.tabPage1.PerformLayout();
                   this.groupBox13.ResumeLayout(false);
-                  this.groupBox13.PerformLayout();
                   this.groupBox11.ResumeLayout(false);
                   this.groupBox11.PerformLayout();
                   this.groupBox4.ResumeLayout(false);
@@ -1488,11 +1485,11 @@
             private System.Windows.Forms.Button btn_phoneinformation_activities;
             private System.Windows.Forms.Button btn_phoneinformation_screenshot;
             private System.Windows.Forms.Label label10;
-            private System.Windows.Forms.TextBox txt_serialno;
             private System.Windows.Forms.GroupBox groupBox13;
             private System.Windows.Forms.Button btnAlarm;
             public System.Windows.Forms.TextBox txt_devices;
             private System.Windows.Forms.Button button5;
+            public System.Windows.Forms.ComboBox cbSerials;
       }
 }
 

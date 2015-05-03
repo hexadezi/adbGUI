@@ -16,7 +16,6 @@ namespace adbGUI
             //--------------------------------------------------------------------------------------------------
 
 
-
             public MainForm()
             {
                   InitializeComponent();
@@ -49,13 +48,34 @@ namespace adbGUI
                   }
             }
 
+            private void ToViewer(string value, string title, int x, int y,
+                  FormWindowState windowstate = FormWindowState.Normal)
+            {
+                  if (InvokeRequired)
+                  {
+                        Invoke(new Action<string, string, int, int, FormWindowState>(ToViewer), value, title, x, y,
+                              windowstate);
+                        return;
+                  }
+
+
+                  var v = new Viewer();
+
+                  v.txt_output.TabIndex = 2;
+                  v.txt_output.Text += value;
+                  v.Text = title;
+                  v.WindowState = windowstate;
+                  v.Width = x;
+                  v.Height = y;
+                  v.Show();
+            }
+
             private void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
             {
-                  int i = Convert.ToInt32(txt_devices.Lines.Count().ToString());
-
-                  if (i == 4 || txt_serialno.Text != "")
+                  if (cbSerials.SelectedItem != null)
                   {
-                        var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate); });
+                        string serial = Serialno();
+                        var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate, serial); });
                         thread.Start();
                         while (thread.IsAlive)
                         {
@@ -66,52 +86,17 @@ namespace adbGUI
                         tabControl1.Enabled = true;
                         //Cursor = Cursors.Default;
                   }
-                  else if (i == 3)
-                  {
-                        //No device connected
-                        MessageBox.Show("No device connected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-                  }
-                  else if (i >= 4 && Serialno() == "")
-                  {
-                        //More than 4 devices connected and no serial number
-                        MessageBox.Show("There are more than 1 devices connected. \r\nType in the serial number in the main tab.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  }
-            }
-
-            private void ToViewer(string value, string title, int x, int y,
-                  FormWindowState windowstate = FormWindowState.Normal)
-            {
-                  if (InvokeRequired)
-                  {
-                        Invoke(new Action<string, string, int, int, FormWindowState>(ToViewer), value, title, x, y,
-                              windowstate);
-                        return;
-                  }
-                  if (value == "")
-                  {
-                        MessageBox.Show("Make sure, your device is online and the serial number is correct.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  }
                   else
                   {
-                        var v = new Viewer();
-
-                        v.txt_output.TabIndex = 2;
-                        v.txt_output.Text += value;
-                        v.Text = title;
-                        v.WindowState = windowstate;
-                        v.Width = x;
-                        v.Height = y;
-                        v.Show();
+                        MessageBox.Show("Make sure your device is connected and listed online and selected in the device list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
+
             }
 
-            private async void CallAdb(string a, string b, string c, int x, int y,
-                  FormWindowState windowstate = FormWindowState.Normal)
+            private void CallAdb(string a, string b, string c, int x, int y, FormWindowState windowstate = FormWindowState.Normal, string serial = "")
             {
                   var filename = "cmd.exe";
-                  var arguments = "/C " + a + " tools\\adb " + Serialno() + " " + b;
+                  var arguments = "/C " + a + " tools\\adb " + serial + " " + b;
                   var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -130,45 +115,70 @@ namespace adbGUI
                   process.StandardOutput.Dispose();
             }
 
+            public string Serialno()
+            {
+                  string serial;
+
+                  try
+                  {
+                        if (cbSerials.SelectedItem.ToString() == "")
+                        {
+                              return serial = "";
+                        }
+                        else
+                        {
+                              return serial = "-s " + cbSerials.SelectedItem.ToString().ToLower();
+                        }
+                  }
+                  catch (Exception)
+                  {
+                        return "";
+                  }
+
+            }
+
             private void callADB_w(string x)
             {
-                  const string filename = "cmd.exe";
-                  var arguments = "/C prompt $g & tools\\adb " + Serialno() + " " + x + " & echo. & pause";
-                  var startInfo = new ProcessStartInfo
+                  if (cbSerials.SelectedItem == null)
                   {
-                        FileName = filename,
-                        WindowStyle = ProcessWindowStyle.Normal,
-                        Arguments = arguments
-                  };
-                  var process = new Process { StartInfo = startInfo };
-                  process.Start();
+                        MessageBox.Show("Make sure your device is connected and listed online and selected in the device list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  }
+                  else
+                  {
+                        const string filename = "cmd.exe";
+                        var arguments = "/C prompt $g & tools\\adb " + Serialno() + " " + x + " & echo. & pause";
+                        var startInfo = new ProcessStartInfo
+                        {
+                              FileName = filename,
+                              WindowStyle = ProcessWindowStyle.Normal,
+                              Arguments = arguments
+                        };
+                        var process = new Process { StartInfo = startInfo };
+                        process.Start();
+                  }
             }
 
             public void callADB_wo(string x, string y)
             {
-                  var filename = "cmd.exe";
-                  var arguments = "/C " + x + " tools\\adb " + Serialno() + " " + y;
-                  var startInfo = new ProcessStartInfo
+                  if (cbSerials.SelectedItem != null)
                   {
-                        FileName = filename,
-                        Arguments = arguments,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                  };
+                        var filename = "cmd.exe";
+                        var arguments = "/C " + x + " tools\\adb " + Serialno() + " " + y;
+                        var startInfo = new ProcessStartInfo
+                        {
+                              FileName = filename,
+                              Arguments = arguments,
+                              WindowStyle = ProcessWindowStyle.Hidden
+                        };
 
-                  var process = new Process { StartInfo = startInfo };
+                        var process = new Process { StartInfo = startInfo };
 
-                  process.Start();
-            }
-
-            private string Serialno()
-            {
-                  var s = "";
-
-                  if (txt_serialno.Text != "")
-                  {
-                        s = "-s " + txt_serialno.Text;
+                        process.Start();
                   }
-                  return s.ToLower();
+                  else
+                  {
+                        MessageBox.Show("Make sure your device is connected and listed online and selected in the device list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  }
             }
 
             private void IsRunning()
@@ -204,7 +214,6 @@ namespace adbGUI
             {
                   Text = s;
                   txt_devices.Text = string.Empty;
-                  txt_serialno.Text = string.Empty;
             }
 
             private async void DevicesToTxtBox()
@@ -244,8 +253,9 @@ namespace adbGUI
                   }
             }
 
-            private void GetSerialnumber()
+            private void SerialnumberToComboBox()
             {
+                  cbSerials.Invoke((MethodInvoker)(() => cbSerials.Items.Clear()));
 
                   const string filename = "cmd.exe";
                   const string arguments = "/C tools\\adb devices";
@@ -278,25 +288,51 @@ namespace adbGUI
                                     if (line.IndexOf('\t') != -1)
                                     {
                                           line = line.Substring(0, line.IndexOf('\t'));
-                                          txt_serialno.Invoke((MethodInvoker)(() => txt_serialno.Text = line.ToUpper()));
+                                          cbSerials.Invoke((MethodInvoker)(() => cbSerials.Items.Add(line.ToUpper())));
                                     }
                               }
                               s.Close();
                               s.Dispose();
                         }
                   }
+
+            }
+            
+            private void ConnectWifi()
+            {
+                  string s;
+                  s = @txt_ip.Text;
+                  if (s == "")
+                  {
+                        MessageBox.Show("Please type in IP and port!", "Error");
+                  }
+                  else
+                  {
+                        var filename = "cmd.exe";
+                        var arguments = "/C tools\\adb connect " + s;
+                        var startInfo = new ProcessStartInfo
+                        {
+                              FileName = filename,
+                              Arguments = arguments,
+                              WindowStyle = ProcessWindowStyle.Hidden
+                        };
+
+                        var process = new Process { StartInfo = startInfo };
+
+                        process.Start();
+                  }
             }
 
-            public Form Rebootmenu;
+
+            private Form _rebootmenu;
             private void btn_reboot_Click(object sender, EventArgs e)
             {
-                  //RebootMenu _rebootmenu = new RebootMenu(txt_devices.Lines.Count().ToString());
-                  if ((Rebootmenu == null) || (Rebootmenu.IsDisposed))
+                  if ((_rebootmenu == null) || (_rebootmenu.IsDisposed))
                   {
-                        Rebootmenu = new RebootMenu(Convert.ToInt32(txt_devices.Lines.Count().ToString()));
+                        _rebootmenu = new RebootMenu();
                   }
-                  Rebootmenu.Show();
-                  Rebootmenu.Focus();
+                  _rebootmenu.Show();
+                  _rebootmenu.Focus();
             }
 
             private void button1_Click(object sender, EventArgs e)
@@ -780,16 +816,7 @@ namespace adbGUI
 
             private void btn_connect_Click(object sender, EventArgs e)
             {
-                  string s;
-                  s = @txt_ip.Text;
-                  if (s == "")
-                  {
-                        MessageBox.Show("Please type in IP and port!", "Error");
-                  }
-                  else
-                  {
-                        callADB_wo("", "connect " + s);
-                  }
+                  ConnectWifi();
             }
 
             private void txt_ip_KeyDown(object sender, KeyEventArgs e)
@@ -877,74 +904,9 @@ namespace adbGUI
                   callADB_wo("", "disconnect ");
             }
 
-            private async void button6_Click_1(object sender, EventArgs e)
-            {
-
-
-
-
-
-
-                  const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices";
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
-                  };
-                  var process = new Process { StartInfo = startInfo };
-
-                  if (Process.GetProcessesByName("adb").Length > 0)
-                  {
-                        process.Start();
-                  }
-
-                  else
-                  {
-                        StartServer();
-                        await Task.Delay(500);
-                        process.Start();
-                  }
-
-                  var s2 = process.StandardOutput.ReadToEnd();
-
-
-                  var deviceList = s2;
-                  if (deviceList.Length > 29)
-                  {
-                        using (StringReader s = new StringReader(deviceList))
-                        {
-                              string line;
-
-                              while (s.Peek() != -1)
-                              {
-                                    line = s.ReadLine();
-
-                                    if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
-                                          continue;
-
-                                    if (line.IndexOf('\t') != -1)
-                                    {
-                                          line = line.Substring(0, line.IndexOf('\t'));
-                                          txt_serialno.Text = line;
-                                    }
-                              }
-                              s.Close();
-                              s.Dispose();
-                        }
-                  }
-            }
-
             private void txt_devices_TextChanged(object sender, EventArgs e)
             {
-                  if (txt_devices.Lines.Count() == 3)
-                  {
-                        txt_serialno.Text = "";
-                  }
-                  Thread tr = new Thread(GetSerialnumber);
+                  Thread tr = new Thread(SerialnumberToComboBox);
                   tr.IsBackground = true;
                   tr.Start();
             }

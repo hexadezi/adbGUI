@@ -35,6 +35,7 @@
                   // 
                   // combo_rebootmenu
                   // 
+                  this.combo_rebootmenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
                   this.combo_rebootmenu.FormattingEnabled = true;
                   this.combo_rebootmenu.Items.AddRange(new object[] {
             "Shutdown Device",
@@ -53,7 +54,7 @@
                   this.btn_rebootmenu_reboot.Name = "btn_rebootmenu_reboot";
                   this.btn_rebootmenu_reboot.Size = new System.Drawing.Size(220, 23);
                   this.btn_rebootmenu_reboot.TabIndex = 1;
-                  this.btn_rebootmenu_reboot.Text = "Reboot";
+                  this.btn_rebootmenu_reboot.Text = "Go";
                   this.btn_rebootmenu_reboot.UseVisualStyleBackColor = true;
                   this.btn_rebootmenu_reboot.Click += new System.EventHandler(this.btn_rebootmenu_reboot_Click);
                   // 
