@@ -131,16 +131,14 @@
                   this.btn_packages_open = new System.Windows.Forms.Button();
                   this.tabPage5 = new System.Windows.Forms.TabPage();
                   this.label10 = new System.Windows.Forms.Label();
-                  this.label9 = new System.Windows.Forms.Label();
                   this.btn_donate = new System.Windows.Forms.Button();
                   this.button4 = new System.Windows.Forms.Button();
                   this.button3 = new System.Windows.Forms.Button();
-                  this.label7 = new System.Windows.Forms.Label();
-                  this.label6 = new System.Windows.Forms.Label();
                   this.toolTip = new System.Windows.Forms.ToolTip(this.components);
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+                  this.textBox1 = new System.Windows.Forms.TextBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -1234,13 +1232,11 @@
                   // 
                   // tabPage5
                   // 
+                  this.tabPage5.Controls.Add(this.textBox1);
                   this.tabPage5.Controls.Add(this.label10);
-                  this.tabPage5.Controls.Add(this.label9);
                   this.tabPage5.Controls.Add(this.btn_donate);
                   this.tabPage5.Controls.Add(this.button4);
                   this.tabPage5.Controls.Add(this.button3);
-                  this.tabPage5.Controls.Add(this.label7);
-                  this.tabPage5.Controls.Add(this.label6);
                   this.tabPage5.Location = new System.Drawing.Point(4, 22);
                   this.tabPage5.Name = "tabPage5";
                   this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -1252,22 +1248,12 @@
                   // label10
                   // 
                   this.label10.AutoSize = true;
-                  this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                  this.label10.Location = new System.Drawing.Point(6, 161);
+                  this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                  this.label10.Location = new System.Drawing.Point(3, 156);
                   this.label10.Name = "label10";
-                  this.label10.Size = new System.Drawing.Size(72, 13);
+                  this.label10.Size = new System.Drawing.Size(102, 20);
                   this.label10.TabIndex = 5;
                   this.label10.Text = "abdGUI 1.1";
-                  // 
-                  // label9
-                  // 
-                  this.label9.AutoSize = true;
-                  this.label9.Location = new System.Drawing.Point(6, 184);
-                  this.label9.Name = "label9";
-                  this.label9.Size = new System.Drawing.Size(156, 78);
-                  this.label9.TabIndex = 4;
-                  this.label9.Text = "Thanks to:\r\nstackoverflow.com\r\nxda-developers.com\r\nPixel Buddah for programm icon" +
-    "\r\nSaloni Sinha for the beer icon\r\nAndrea Soragna for viewer icon";
                   // 
                   // btn_donate
                   // 
@@ -1304,29 +1290,20 @@
                   this.button3.UseVisualStyleBackColor = true;
                   this.button3.Click += new System.EventHandler(this.button3_Click);
                   // 
-                  // label7
-                  // 
-                  this.label7.AutoSize = true;
-                  this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                  this.label7.Location = new System.Drawing.Point(11, 89);
-                  this.label7.Name = "label7";
-                  this.label7.Size = new System.Drawing.Size(80, 12);
-                  this.label7.TabIndex = 2;
-                  this.label7.Text = "Thomas A. Edison";
-                  // 
-                  // label6
-                  // 
-                  this.label6.AutoSize = true;
-                  this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
-                  this.label6.Location = new System.Drawing.Point(7, 77);
-                  this.label6.Name = "label6";
-                  this.label6.Size = new System.Drawing.Size(265, 12);
-                  this.label6.TabIndex = 0;
-                  this.label6.Text = "“I have not failed. I\'ve just found 10,000 ways that won\'t work.”";
-                  // 
                   // openFileDialog1
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
+                  // 
+                  // textBox1
+                  // 
+                  this.textBox1.Location = new System.Drawing.Point(6, 179);
+                  this.textBox1.Multiline = true;
+                  this.textBox1.Name = "textBox1";
+                  this.textBox1.ReadOnly = true;
+                  this.textBox1.Size = new System.Drawing.Size(336, 95);
+                  this.textBox1.TabIndex = 6;
+                  this.textBox1.Text = "Thanks to:\r\nstackoverflow.com\r\nxda-developers.com\r\nPixel Buddah for programm icon" +
+    "\r\nSaloni Sinha for the beer icon\r\nAndrea Soragna for viewer icon";
                   // 
                   // MainForm
                   // 
@@ -1340,6 +1317,7 @@
                   this.Name = "MainForm";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                   this.Text = "adbGUI - Server is running";
+                  this.TopMost = true;
                   this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
                   this.Load += new System.EventHandler(this.Form1_Load);
                   this.tabControl1.ResumeLayout(false);
@@ -1420,8 +1398,6 @@
             private System.Windows.Forms.TabPage tabPage5;
             private System.Windows.Forms.Button btn_phoneinformation_processes;
             private System.Windows.Forms.Button button3;
-            private System.Windows.Forms.Label label6;
-            private System.Windows.Forms.Label label7;
             private System.Windows.Forms.TextBox txt_packages_path;
             private System.Windows.Forms.Button btn_packages_open;
             private System.Windows.Forms.Button btn_packages_install;
@@ -1466,7 +1442,6 @@
             private System.Windows.Forms.Button btn_phoneinformation_netstat;
             private System.Windows.Forms.Button btn_phoneinformation_uptime;
             private System.Windows.Forms.Button btn_donate;
-            private System.Windows.Forms.Label label9;
             private System.Windows.Forms.GroupBox groupBox9;
             private System.Windows.Forms.Button btn_phoneinformation_show;
             private System.Windows.Forms.Button btn_phoneinformation_changedpi;
@@ -1490,6 +1465,7 @@
             public System.Windows.Forms.TextBox txt_devices;
             private System.Windows.Forms.Button button5;
             public System.Windows.Forms.ComboBox cbSerials;
+            private System.Windows.Forms.TextBox textBox1;
       }
 }
 

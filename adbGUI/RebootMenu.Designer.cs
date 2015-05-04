@@ -70,6 +70,7 @@
                   this.Name = "RebootMenu";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                   this.Text = "Power Menu";
+                  this.TopMost = true;
                   this.Load += new System.EventHandler(this.RebootMenu_Load);
                   this.ResumeLayout(false);
 

@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -76,27 +75,41 @@ namespace adbGUI
                   {
                         string serial = Serialno();
                         var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate, serial); });
+                        thread.IsBackground = true;
                         thread.Start();
                         while (thread.IsAlive)
                         {
                               tabControl1.Enabled = false;
-                              //Cursor = Cursors.AppStarting;
                               Application.DoEvents();
+                              //Cursor = Cursors.AppStarting;
                         }
                         tabControl1.Enabled = true;
                         //Cursor = Cursors.Default;
                   }
                   else
                   {
-                        MessageBox.Show("Make sure your device is connected and listed online and selected in the device list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        NoDeviceSelected();
                   }
+
+            }
+
+            private void NoDeviceSelected()
+            {
+
+                  tabControl1.SelectTab(0);
+
+                  MessageBox.Show("Error: No device selected. \r\n" +
+                                  "Go to the first tab and and select a device.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                  cbSerials.DroppedDown = true;
 
             }
 
             private void CallAdb(string a, string b, string c, int x, int y, FormWindowState windowstate = FormWindowState.Normal, string serial = "")
             {
-                  var filename = "cmd.exe";
+                  const string filename = "cmd.exe";
                   var arguments = "/C " + a + " tools\\adb " + serial + " " + b;
+
                   var startInfo = new ProcessStartInfo
                   {
                         FileName = filename,
@@ -105,29 +118,29 @@ namespace adbGUI
                         CreateNoWindow = true,
                         RedirectStandardOutput = true
                   };
+
                   var process = new Process { StartInfo = startInfo };
 
                   process.Start();
 
-                  string s = process.StandardOutput.ReadToEnd();
+                  var s = process.StandardOutput.ReadToEnd();
 
                   ToViewer(s, c, x, y, windowstate);
-                  process.StandardOutput.Dispose();
+
+                  process.Dispose();
             }
 
-            public string Serialno()
+            private string Serialno()
             {
-                  string serial;
-
                   try
                   {
                         if (cbSerials.SelectedItem.ToString() == "")
                         {
-                              return serial = "";
+                              return "";
                         }
                         else
                         {
-                              return serial = "-s " + cbSerials.SelectedItem.ToString().ToLower();
+                              return "-s " + cbSerials.SelectedItem.ToString().ToLower();
                         }
                   }
                   catch (Exception)
@@ -141,7 +154,7 @@ namespace adbGUI
             {
                   if (cbSerials.SelectedItem == null)
                   {
-                        MessageBox.Show("Make sure your device is connected and listed online and selected in the device list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        NoDeviceSelected();
                   }
                   else
                   {
@@ -177,7 +190,7 @@ namespace adbGUI
                   }
                   else
                   {
-                        MessageBox.Show("Make sure your device is connected and listed online and selected in the device list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        NoDeviceSelected();
                   }
             }
 
@@ -201,7 +214,7 @@ namespace adbGUI
                                     Invoke(new Action<string>(ServerOff), b);
                               }
                         }
-                        Thread.Sleep(150);
+                        Thread.Sleep(200);
                   }
             }
 
@@ -248,7 +261,7 @@ namespace adbGUI
 
                         txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s2.ToUpper()));
 
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
 
                   }
             }
@@ -297,7 +310,7 @@ namespace adbGUI
                   }
 
             }
-            
+
             private void ConnectWifi()
             {
                   string s;
@@ -321,6 +334,22 @@ namespace adbGUI
 
                         process.Start();
                   }
+            }
+
+            private void DisconnectWifi()
+            {
+                  var filename = "cmd.exe";
+                  var arguments = "/C tools\\adb disconnect";
+                  var startInfo = new ProcessStartInfo
+                  {
+                        FileName = filename,
+                        Arguments = arguments,
+                        WindowStyle = ProcessWindowStyle.Hidden
+                  };
+
+                  var process = new Process { StartInfo = startInfo };
+
+                  process.Start();
             }
 
 
@@ -393,6 +422,7 @@ namespace adbGUI
             private void Form1_FormClosed(object sender, FormClosedEventArgs e)
             {
                   KillServer();
+                  Application.Exit();
                   Environment.Exit(Environment.ExitCode);
             }
 
@@ -901,7 +931,7 @@ namespace adbGUI
 
             private void button5_Click_1(object sender, EventArgs e)
             {
-                  callADB_wo("", "disconnect ");
+                  DisconnectWifi();
             }
 
             private void txt_devices_TextChanged(object sender, EventArgs e)
