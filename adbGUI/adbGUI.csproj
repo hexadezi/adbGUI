@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\adbMethods.cs" />
     <Compile Include="Forms\RebootMenu.cs">
       <SubType>Form</SubType>
     </Compile>

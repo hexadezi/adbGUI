@@ -130,6 +130,7 @@
                   this.txt_packages_path = new System.Windows.Forms.TextBox();
                   this.btn_packages_open = new System.Windows.Forms.Button();
                   this.tabPage5 = new System.Windows.Forms.TabPage();
+                  this.textBox1 = new System.Windows.Forms.TextBox();
                   this.label10 = new System.Windows.Forms.Label();
                   this.btn_donate = new System.Windows.Forms.Button();
                   this.button4 = new System.Windows.Forms.Button();
@@ -138,7 +139,6 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-                  this.textBox1 = new System.Windows.Forms.TextBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -1245,6 +1245,17 @@
                   this.tabPage5.Text = "About";
                   this.tabPage5.UseVisualStyleBackColor = true;
                   // 
+                  // textBox1
+                  // 
+                  this.textBox1.Location = new System.Drawing.Point(6, 179);
+                  this.textBox1.Multiline = true;
+                  this.textBox1.Name = "textBox1";
+                  this.textBox1.ReadOnly = true;
+                  this.textBox1.Size = new System.Drawing.Size(336, 95);
+                  this.textBox1.TabIndex = 6;
+                  this.textBox1.Text = "Thanks to:\r\nstackoverflow.com\r\nxda-developers.com\r\nPixel Buddah for programm icon" +
+    "\r\nSaloni Sinha for the beer icon\r\nAndrea Soragna for viewer icon";
+                  // 
                   // label10
                   // 
                   this.label10.AutoSize = true;
@@ -1293,17 +1304,6 @@
                   // openFileDialog1
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
-                  // 
-                  // textBox1
-                  // 
-                  this.textBox1.Location = new System.Drawing.Point(6, 179);
-                  this.textBox1.Multiline = true;
-                  this.textBox1.Name = "textBox1";
-                  this.textBox1.ReadOnly = true;
-                  this.textBox1.Size = new System.Drawing.Size(336, 95);
-                  this.textBox1.TabIndex = 6;
-                  this.textBox1.Text = "Thanks to:\r\nstackoverflow.com\r\nxda-developers.com\r\nPixel Buddah for programm icon" +
-    "\r\nSaloni Sinha for the beer icon\r\nAndrea Soragna for viewer icon";
                   // 
                   // MainForm
                   // 
@@ -1357,7 +1357,6 @@
 
             #endregion
 
-            private System.Windows.Forms.TabControl tabControl1;
             private System.Windows.Forms.TabPage tabPage1;
             private System.Windows.Forms.GroupBox groupBox1;
             private System.Windows.Forms.ToolTip toolTip;
@@ -1376,7 +1375,6 @@
             private System.Windows.Forms.TabPage tabPage4;
             private System.Windows.Forms.GroupBox groupBox4;
             private System.Windows.Forms.Button btn_run;
-            private System.Windows.Forms.TextBox txt_customcommand;
             private System.Windows.Forms.Button btn_openshell;
             private System.Windows.Forms.GroupBox groupBox5;
             private System.Windows.Forms.Button btn_phoneinformation_getprop;
@@ -1448,7 +1446,7 @@
             private System.Windows.Forms.TextBox txt_phoneinformation_dpi;
             private System.Windows.Forms.Button btn_phoneinformation_resetdpi;
             private System.Windows.Forms.GroupBox groupBox11;
-            private System.Windows.Forms.TextBox txt_ip;
+            public System.Windows.Forms.TextBox txt_ip;
             private System.Windows.Forms.Button btn_connect;
             private System.Windows.Forms.GroupBox groupBox12;
             private System.Windows.Forms.Button btn_phoneinformation_setsize;
@@ -1466,6 +1464,8 @@
             private System.Windows.Forms.Button button5;
             public System.Windows.Forms.ComboBox cbSerials;
             private System.Windows.Forms.TextBox textBox1;
+            public System.Windows.Forms.TabControl tabControl1;
+            public System.Windows.Forms.TextBox txt_customcommand;
       }
 }
 

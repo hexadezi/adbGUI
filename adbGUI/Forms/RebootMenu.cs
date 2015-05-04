@@ -32,19 +32,19 @@ namespace adbGUI
 
                   if (combo_rebootmenu.SelectedIndex == 0)
                   {
-                        mainform.callADB_wo("", "shell reboot -p");
+                        mainform.AdbMethods.callADB_wo("", "shell reboot -p");
                   }
                   else if (combo_rebootmenu.SelectedIndex == 1)
                   {
-                        mainform.callADB_wo("", "reboot");
+                        mainform.AdbMethods.callADB_wo("", "reboot");
                   }
                   else if (combo_rebootmenu.SelectedIndex == 2)
                   {
-                        mainform.callADB_wo("", "reboot bootloader");
+                        mainform.AdbMethods.callADB_wo("", "reboot bootloader");
                   }
                   else if (combo_rebootmenu.SelectedIndex == 3)
                   {
-                        mainform.callADB_wo("", "reboot recovery");
+                        mainform.AdbMethods.callADB_wo("", "reboot recovery");
 
                   }
 

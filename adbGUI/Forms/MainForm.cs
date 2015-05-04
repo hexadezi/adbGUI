@@ -18,6 +18,12 @@ namespace adbGUI
             public MainForm()
             {
                   InitializeComponent();
+                  _adbMethods = new adbMethods(this);
+            }
+
+            public adbMethods AdbMethods
+            {
+                  get { return _adbMethods; }
             }
 
             //Exit with escape
@@ -32,327 +38,10 @@ namespace adbGUI
             //-------------------Methods------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
 
-            private static void StartServer()
-            {
-                  var psi = new ProcessStartInfo("tools\\adb", "start-server");
-                  psi.WindowStyle = ProcessWindowStyle.Hidden;
-                  Process.Start(psi);
-            }
-
-            private static void KillServer()
-            {
-                  foreach (var pr in Process.GetProcessesByName("adb"))
-                  {
-                        pr.Kill();
-                  }
-            }
-
-            private void ToViewer(string value, string title, int x, int y,
-                  FormWindowState windowstate = FormWindowState.Normal)
-            {
-                  if (InvokeRequired)
-                  {
-                        Invoke(new Action<string, string, int, int, FormWindowState>(ToViewer), value, title, x, y,
-                              windowstate);
-                        return;
-                  }
-
-
-                  var v = new Viewer();
-
-                  v.txt_output.TabIndex = 2;
-                  v.txt_output.Text += value;
-                  v.Text = title;
-                  v.WindowState = windowstate;
-                  v.Width = x;
-                  v.Height = y;
-                  v.Show();
-            }
-
-            private void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
-            {
-                  if (cbSerials.SelectedItem != null)
-                  {
-                        string serial = Serialno();
-                        var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate, serial); });
-                        thread.IsBackground = true;
-                        thread.Start();
-                        while (thread.IsAlive)
-                        {
-                              tabControl1.Enabled = false;
-                              Application.DoEvents();
-                              //Cursor = Cursors.AppStarting;
-                        }
-                        tabControl1.Enabled = true;
-                        //Cursor = Cursors.Default;
-                  }
-                  else
-                  {
-                        NoDeviceSelected();
-                  }
-
-            }
-
-            private void NoDeviceSelected()
-            {
-
-                  tabControl1.SelectTab(0);
-
-                  MessageBox.Show("Error: No device selected. Select a device in the list.\t","Error", MessageBoxButtons.OK,MessageBoxIcon.Information);
-
-                  cbSerials.DroppedDown = true;
-
-            }
-
-            private void CallAdb(string a, string b, string c, int x, int y, FormWindowState windowstate = FormWindowState.Normal, string serial = "")
-            {
-                  const string filename = "cmd.exe";
-                  var arguments = "/C " + a + " tools\\adb " + serial + " " + b;
-
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
-                  };
-
-                  var process = new Process { StartInfo = startInfo };
-
-                  process.Start();
-
-                  var s = process.StandardOutput.ReadToEnd();
-
-                  ToViewer(s, c, x, y, windowstate);
-
-                  process.Dispose();
-            }
-
-            private string Serialno()
-            {
-                  try
-                  {
-                        if (cbSerials.SelectedItem.ToString() == "")
-                        {
-                              return "";
-                        }
-                        else
-                        {
-                              return "-s " + cbSerials.SelectedItem.ToString().ToLower();
-                        }
-                  }
-                  catch (Exception)
-                  {
-                        return "";
-                  }
-
-            }
-
-            private void callADB_w(string x)
-            {
-                  if (cbSerials.SelectedItem == null)
-                  {
-                        NoDeviceSelected();
-                  }
-                  else
-                  {
-                        const string filename = "cmd.exe";
-                        var arguments = "/C prompt $g & tools\\adb " + Serialno() + " " + x + " & echo. & pause";
-                        var startInfo = new ProcessStartInfo
-                        {
-                              FileName = filename,
-                              WindowStyle = ProcessWindowStyle.Normal,
-                              Arguments = arguments
-                        };
-                        var process = new Process { StartInfo = startInfo };
-                        process.Start();
-                  }
-            }
-
-            public void callADB_wo(string x, string y)
-            {
-                  if (cbSerials.SelectedItem != null)
-                  {
-                        var filename = "cmd.exe";
-                        var arguments = "/C " + x + " tools\\adb " + Serialno() + " " + y;
-                        var startInfo = new ProcessStartInfo
-                        {
-                              FileName = filename,
-                              Arguments = arguments,
-                              WindowStyle = ProcessWindowStyle.Hidden
-                        };
-
-                        var process = new Process { StartInfo = startInfo };
-
-                        process.Start();
-                  }
-                  else
-                  {
-                        NoDeviceSelected();
-                  }
-            }
-
-            private void IsRunning()
-            {
-                  var a = "adbGUI - Server is running";
-                  var b = "adbGUI - Server is not running";
-                  while (true)
-                  {
-                        if (Process.GetProcessesByName("adb").Length > 0)
-                        {
-                              if (InvokeRequired)
-                              {
-                                    Invoke(new Action<string>(ServerOn), a);
-                              }
-                        }
-                        else
-                        {
-                              if (InvokeRequired)
-                              {
-                                    Invoke(new Action<string>(ServerOff), b);
-                              }
-                        }
-                        Thread.Sleep(200);
-                  }
-            }
-
-            private void ServerOn(string s)
-            {
-                  Text = s;
-            }
-
-            private void ServerOff(string s)
-            {
-                  Text = s;
-                  txt_devices.Text = string.Empty;
-            }
-
-            private async void DevicesToTxtBox()
-            {
-                  const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices -l";
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
-                  };
-                  var process = new Process { StartInfo = startInfo };
-
-                  while (true)
-                  {
-                        if (Process.GetProcessesByName("adb").Length > 0)
-                        {
-                              process.Start();
-                        }
-
-                        else
-                        {
-                              StartServer();
-                              await Task.Delay(500);
-                              process.Start();
-                        }
-
-                        string s2 = process.StandardOutput.ReadToEnd();
-
-                        txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s2.ToUpper()));
-
-                        Thread.Sleep(100);
-
-                  }
-            }
-
-            private void SerialnumberToComboBox()
-            {
-                  cbSerials.Invoke((MethodInvoker)(() => cbSerials.Items.Clear()));
-
-                  const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices";
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
-                  };
-                  var process = new Process { StartInfo = startInfo };
-                  process.Start();
-                  string s2 = process.StandardOutput.ReadToEnd();
-
-
-                  if (s2.Length > 29)
-                  {
-                        using (StringReader s = new StringReader(s2))
-                        {
-                              string line;
-
-                              while (s.Peek() != -1)
-                              {
-                                    line = s.ReadLine();
-
-                                    if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
-                                          continue;
-
-                                    if (line.IndexOf('\t') != -1)
-                                    {
-                                          line = line.Substring(0, line.IndexOf('\t'));
-                                          cbSerials.Invoke((MethodInvoker)(() => cbSerials.Items.Add(line.ToUpper())));
-                                    }
-                              }
-                              s.Close();
-                              s.Dispose();
-                        }
-                  }
-
-            }
-
-            private void ConnectWifi()
-            {
-                  string s;
-                  s = @txt_ip.Text;
-                  if (s == "")
-                  {
-                        MessageBox.Show("Please type in IP and port!", "Error");
-                  }
-                  else
-                  {
-                        var filename = "cmd.exe";
-                        var arguments = "/C tools\\adb connect " + s;
-                        var startInfo = new ProcessStartInfo
-                        {
-                              FileName = filename,
-                              Arguments = arguments,
-                              WindowStyle = ProcessWindowStyle.Hidden
-                        };
-
-                        var process = new Process { StartInfo = startInfo };
-
-                        process.Start();
-                  }
-            }
-
-            private void DisconnectWifi()
-            {
-                  var filename = "cmd.exe";
-                  var arguments = "/C tools\\adb disconnect";
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                  };
-
-                  var process = new Process { StartInfo = startInfo };
-
-                  process.Start();
-            }
-
 
             private Form _rebootmenu;
+            private readonly adbMethods _adbMethods;
+
             private void btn_reboot_Click(object sender, EventArgs e)
             {
                   if ((_rebootmenu == null) || (_rebootmenu.IsDisposed))
@@ -382,7 +71,7 @@ namespace adbGUI
                   if (txt_sideload_path.Text != "")
                   {
                         var s = "sideload \"" + txt_sideload_path.Text + "\"";
-                        callADB_w(s);
+                        AdbMethods.callADB_w(s);
                   }
                   else
                   {
@@ -414,13 +103,13 @@ namespace adbGUI
                   else
                   {
                         var s = "push \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
-                        callADB_w(s);
+                        AdbMethods.callADB_w(s);
                   }
             }
 
             private void Form1_FormClosed(object sender, FormClosedEventArgs e)
             {
-                  KillServer();
+                  adbMethods.KillServer();
                   Application.Exit();
                   Environment.Exit(Environment.ExitCode);
             }
@@ -435,22 +124,22 @@ namespace adbGUI
                   }
                   else
                   {
-                        callADB_w(s);
+                        AdbMethods.callADB_w(s);
                   }
             }
 
             private void btn_openshell_Click(object sender, EventArgs e)
             {
-                  callADB_w("shell");
+                  AdbMethods.callADB_w("shell");
             }
 
             private void Form1_Load(object sender, EventArgs e)
             {
-                  var printDevices = new Thread(DevicesToTxtBox);
+                  var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
                   printDevices.IsBackground = true;
                   printDevices.Start();
 
-                  var checkStatus = new Thread(IsRunning);
+                  var checkStatus = new Thread(AdbMethods.IsRunning);
                   checkStatus.IsBackground = true;
                   checkStatus.Start();
 
@@ -459,17 +148,17 @@ namespace adbGUI
 
             private void btn_phoneinformation_getprop_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell getprop", "Properties");
+                  AdbMethods.GetInformation("", "shell getprop", "Properties");
             }
 
             private void btn_phoneinformation_installedpackages_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell \"pm list packages -f | cut -c9- | sort\"", "All Packages");
+                  AdbMethods.GetInformation("", "shell \"pm list packages -f | cut -c9- | sort\"", "All Packages");
             }
 
             private void btn_phoneinformation_logcat_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell logcat -d", "Logcat Dump", 850, 600, FormWindowState.Maximized);
+                  AdbMethods.GetInformation("", "shell logcat -d", "Logcat Dump", 850, 600, FormWindowState.Maximized);
             }
 
             private void txt_customcommand_KeyDown(object sender, KeyEventArgs e)
@@ -490,35 +179,35 @@ namespace adbGUI
                   }
                   else
                   {
-                        callADB_wo("", "shell su root busybox ifconfig wlan0 hw ether " + txt_phoneinformation_mac.Text);
+                        AdbMethods.callADB_wo("", "shell su root busybox ifconfig wlan0 hw ether " + txt_phoneinformation_mac.Text);
                   }
             }
 
             private async void button2_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "shell su root busybox ifconfig wlan0 down");
+                  AdbMethods.callADB_wo("", "shell su root busybox ifconfig wlan0 down");
                   await Task.Delay(200);
-                  callADB_wo("", "shell su root busybox ifconfig wlan0 up");
+                  AdbMethods.callADB_wo("", "shell su root busybox ifconfig wlan0 up");
             }
 
             private void btn_phoneinformation_showmac_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell cat /sys/class/net/wlan0/address", "MAC Adress", 280, 110);
+                  AdbMethods.GetInformation("", "shell cat /sys/class/net/wlan0/address", "MAC Adress", 280, 110);
             }
 
             private void btn_phoneinformation_dumpsys_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys", "Dumpsys Input Diagnostics", 850, 600, FormWindowState.Maximized);
+                  AdbMethods.GetInformation("", "shell dumpsys", "Dumpsys Input Diagnostics", 850, 600, FormWindowState.Maximized);
             }
 
             private void btn_phoneinformation_meminfo_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys meminfo", "Memory Information");
+                  AdbMethods.GetInformation("", "shell dumpsys meminfo", "Memory Information");
             }
 
             private void btn_phoneinformation_processes_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell ps", "Processes");
+                  AdbMethods.GetInformation("", "shell ps", "Processes");
             }
 
             private void btn_packages_open_Click(object sender, EventArgs e)
@@ -541,7 +230,7 @@ namespace adbGUI
 
                   if (txt_packages_path.Text != "")
                   {
-                        callADB_w("install " + s);
+                        AdbMethods.callADB_w("install " + s);
                   }
                   else
                   {
@@ -554,7 +243,7 @@ namespace adbGUI
                   var s = "\"" + txt_packages_package.Text + "\"";
                   if (txt_packages_package.Text != "")
                   {
-                        callADB_w("uninstall " + s);
+                        AdbMethods.callADB_w("uninstall " + s);
                   }
                   else
                   {
@@ -564,7 +253,7 @@ namespace adbGUI
 
             private void btn_packages_installed_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell \"pm list packages -3 | cut -c9- | sort\"", "Installed Packages", 500, 750);
+                  AdbMethods.GetInformation("", "shell \"pm list packages -3 | cut -c9- | sort\"", "Installed Packages", 500, 750);
             }
 
             private void btn_pull_saveto_Click(object sender, EventArgs e)
@@ -587,7 +276,7 @@ namespace adbGUI
                   else
                   {
                         var s = "pull \"" + txt_pull_pathfrom.Text + "\"" + " \"" + txt_pull_pathto.Text + "\"";
-                        callADB_w(s);
+                        AdbMethods.callADB_w(s);
                   }
             }
 
@@ -620,67 +309,67 @@ namespace adbGUI
 
             private void button3_Click(object sender, EventArgs e)
             {
-                  callADB_w("version");
+                  AdbMethods.callADB_w("version");
             }
 
             private void button4_Click(object sender, EventArgs e)
             {
-                  callADB_w("help");
+                  AdbMethods.callADB_w("help");
             }
 
             private void btn_phoneinformation_features_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell \"pm list features | cut -c9- | sort\"", "Phone Features");
+                  AdbMethods.GetInformation("", "shell \"pm list features | cut -c9- | sort\"", "Phone Features");
             }
 
             private void btn_phoneinformation_libraries_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell pm list libraries", "Libraries", 500, 400);
+                  AdbMethods.GetInformation("", "shell pm list libraries", "Libraries", 500, 400);
             }
 
             private void btn_phoneinformation_users_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell pm list users", "All User", 600, 250);
+                  AdbMethods.GetInformation("", "shell pm list users", "All User", 600, 250);
             }
 
             private void btn_phoneinformation_maxusers_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell pm get-max-users", "Max User", 600, 250);
+                  AdbMethods.GetInformation("", "shell pm get-max-users", "Max User", 600, 250);
             }
 
             private void btn_phoneinformation_permissions_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell pm list permissions", "Permissions", 700);
+                  AdbMethods.GetInformation("", "shell pm list permissions", "Permissions", 700);
             }
 
             private void btn_phoneinformation_getimei_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell service call iphonesubinfo 1", "IMEI", 550, 130);
+                  AdbMethods.GetInformation("", "shell service call iphonesubinfo 1", "IMEI", 550, 130);
             }
 
             private void btn_phoneinformation_dmesg_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dmesg", "Kernel Messages", 850, 600, FormWindowState.Maximized);
+                  AdbMethods.GetInformation("", "shell dmesg", "Kernel Messages", 850, 600, FormWindowState.Maximized);
             }
 
             private void btn_phoneinformation_battery_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys battery", "Battery Stats", 280, 300);
+                  AdbMethods.GetInformation("", "shell dumpsys battery", "Battery Stats", 280, 300);
             }
 
             private void btn_phoneinformation_wifiinfo_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys wifi", "WIFI Information", 850, 600, FormWindowState.Maximized);
+                  AdbMethods.GetInformation("", "shell dumpsys wifi", "WIFI Information", 850, 600, FormWindowState.Maximized);
             }
 
             private void btn_phoneinformation_cpuinfo_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys cpuinfo", "CPU Information", 750, 500);
+                  AdbMethods.GetInformation("", "shell dumpsys cpuinfo", "CPU Information", 750, 500);
             }
 
             private void btn_phoneinformation_accounts_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys account", "Accounts", 1500);
+                  AdbMethods.GetInformation("", "shell dumpsys account", "Accounts", 1500);
             }
 
             private void btn_backup_backup_Click(object sender, EventArgs e)
@@ -713,7 +402,7 @@ namespace adbGUI
                               system = " -nosystem";
                         }
 
-                        callADB_w("backup" + apk + shared + all + system + name);
+                        AdbMethods.callADB_w("backup" + apk + shared + all + system + name);
                   }
                   else
                   {
@@ -724,7 +413,7 @@ namespace adbGUI
                         }
                         else
                         {
-                              callADB_w("backup -apk " + package + name);
+                              AdbMethods.callADB_w("backup -apk " + package + name);
                         }
                   }
             }
@@ -760,7 +449,7 @@ namespace adbGUI
                   }
                   else
                   {
-                        callADB_w("restore \"" + txt_restore_path.Text + "\"");
+                        AdbMethods.callADB_w("restore \"" + txt_restore_path.Text + "\"");
                   }
             }
 
@@ -792,17 +481,17 @@ namespace adbGUI
 
             private void btn_phoneinformation_diskstats_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys diskstats", "Diskstats", 600, 350);
+                  AdbMethods.GetInformation("", "shell dumpsys diskstats", "Diskstats", 600, 350);
             }
 
             private void btn_phoneinformation_netstat_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell busybox netstat", "Netstat", 950, 700);
+                  AdbMethods.GetInformation("", "shell busybox netstat", "Netstat", 950, 700);
             }
 
             private void btn_phoneinformation_uptime_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell uptime", "Uptime", 550, 100);
+                  AdbMethods.GetInformation("", "shell uptime", "Uptime", 550, 100);
             }
 
             private void btn_donate_Click(object sender, EventArgs e)
@@ -827,26 +516,26 @@ namespace adbGUI
 
             private void btn_phoneinformation_show_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell wm density", "Density", 280, 110);
+                  AdbMethods.GetInformation("", "shell wm density", "Density", 280, 110);
             }
 
             private async void btn_phoneinformation_changedpi_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "shell wm density " + txt_phoneinformation_dpi.Text);
+                  AdbMethods.callADB_wo("", "shell wm density " + txt_phoneinformation_dpi.Text);
                   await Task.Delay(400);
-                  callADB_wo("", "reboot");
+                  AdbMethods.callADB_wo("", "reboot");
             }
 
             private async void btn_phoneinformation_resetdpi_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "shell wm density reset");
+                  AdbMethods.callADB_wo("", "shell wm density reset");
                   await Task.Delay(400);
-                  callADB_wo("", "reboot");
+                  AdbMethods.callADB_wo("", "reboot");
             }
 
             private void btn_connect_Click(object sender, EventArgs e)
             {
-                  ConnectWifi();
+                  AdbMethods.ConnectWifi();
             }
 
             private void txt_ip_KeyDown(object sender, KeyEventArgs e)
@@ -860,27 +549,27 @@ namespace adbGUI
 
             private void button5_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "shell wm size " + txt_phoneinformation_resolution.Text);
+                  AdbMethods.callADB_wo("", "shell wm size " + txt_phoneinformation_resolution.Text);
             }
 
             private void button7_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell wm size", "Resolution", 280, 110);
+                  AdbMethods.GetInformation("", "shell wm size", "Resolution", 280, 110);
             }
 
             private void button6_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "shell wm size reset");
+                  AdbMethods.callADB_wo("", "shell wm size reset");
             }
 
             private void btn_phoninformation_hosts_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell cat /etc/hosts", "Hosts", 750);
+                  AdbMethods.GetInformation("", "shell cat /etc/hosts", "Hosts", 750);
             }
 
             private void btn_phoneinformation_activities_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys activity", "Activities");
+                  AdbMethods.GetInformation("", "shell dumpsys activity", "Activities");
             }
 
             private void btn_phoneinformation_screenshot_Click(object sender, EventArgs e)
@@ -916,29 +605,29 @@ namespace adbGUI
 
             private void btn_remountsystem_Click(object sender, EventArgs e)
             {
-                  callADB_wo("", "remount");
+                  AdbMethods.callADB_wo("", "remount");
             }
 
             private void btnAlarm_Click(object sender, EventArgs e)
             {
-                  GetInformation("", "shell dumpsys alarm", "Current Alarm Manager State", 950);
+                  AdbMethods.GetInformation("", "shell dumpsys alarm", "Current Alarm Manager State", 950);
             }
 
             private void btnKillserver_Click(object sender, EventArgs e)
             {
-                  KillServer();
+                  adbMethods.KillServer();
                   cbSerials.Items.Clear();
                   txt_devices.Text = "";
             }
 
             private void button5_Click_1(object sender, EventArgs e)
             {
-                  DisconnectWifi();
+                  AdbMethods.DisconnectWifi();
             }
 
             private void txt_devices_TextChanged(object sender, EventArgs e)
             {
-                  Thread tr = new Thread(SerialnumberToComboBox);
+                  Thread tr = new Thread(AdbMethods.SerialnumberToComboBox);
                   tr.IsBackground = true;
                   tr.Start();
             }
