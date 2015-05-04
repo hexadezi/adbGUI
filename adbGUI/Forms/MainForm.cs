@@ -98,8 +98,7 @@ namespace adbGUI
 
                   tabControl1.SelectTab(0);
 
-                  MessageBox.Show("Error: No device selected. \r\n" +
-                                  "Go to the first tab and and select a device.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  MessageBox.Show("Error: No device selected. Select a device in the list.\t","Error", MessageBoxButtons.OK,MessageBoxIcon.Information);
 
                   cbSerials.DroppedDown = true;
 
@@ -454,6 +453,7 @@ namespace adbGUI
                   var checkStatus = new Thread(IsRunning);
                   checkStatus.IsBackground = true;
                   checkStatus.Start();
+
                   txt_customcommand.Select();
             }
 
@@ -927,6 +927,8 @@ namespace adbGUI
             private void btnKillserver_Click(object sender, EventArgs e)
             {
                   KillServer();
+                  cbSerials.Items.Clear();
+                  txt_devices.Text = "";
             }
 
             private void button5_Click_1(object sender, EventArgs e)
