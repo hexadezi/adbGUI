@@ -34,11 +34,6 @@ namespace adbGUI
                   return true;
             }
 
-            //--------------------------------------------------------------------------------------------------
-            //-------------------Methods------------------------------------------------------------------------
-            //--------------------------------------------------------------------------------------------------
-
-
             private Form _rebootmenu;
             private readonly adbMethods _adbMethods;
 
@@ -498,10 +493,10 @@ namespace adbGUI
             {
                   var url = "";
 
-                  var business = "laboo.lm@gmail.com"; // your paypal email
-                  var description = "Donation"; // '%20' represents a space. remember HTML!
-                  var country = "DE"; // AU, US, etc.
-                  var currency = "EUR"; // AUD, USD, etc.
+                  const string business = "laboo.lm@gmail.com"; // your paypal email
+                  const string description = "Donation"; // '%20' represents a space. remember HTML!
+                  const string country = "DE"; // AU, US, etc.
+                  const string currency = "EUR"; // AUD, USD, etc.
 
                   url += "https://www.paypal.com/cgi-bin/webscr" +
                          "?cmd=" + "_donations" +

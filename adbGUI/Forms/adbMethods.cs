@@ -31,8 +31,7 @@ namespace adbGUI
                   }
             }
 
-            private void ToViewer(string value, string title, int x, int y,
-                  FormWindowState windowstate = FormWindowState.Normal)
+            private void ToViewer(string value, string title, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
             {
                   if (_mainForm.InvokeRequired)
                   {
@@ -81,7 +80,7 @@ namespace adbGUI
             {
                   _mainForm.tabControl1.SelectTab(0);
 
-                  MessageBox.Show("Error: No device selected. Select a device in the list.\t","Error", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                  MessageBox.Show("Error: No device selected. Select a device in the list.\t", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                   _mainForm.cbSerials.DroppedDown = true;
 
@@ -211,7 +210,7 @@ namespace adbGUI
                   _mainForm.txt_devices.Text = string.Empty;
             }
 
-            public async void DevicesToTxtBox()
+            public void DevicesToTxtBox()
             {
                   const string filename = "cmd.exe";
                   const string arguments = "/C tools\\adb devices -l";
@@ -235,7 +234,7 @@ namespace adbGUI
                         else
                         {
                               StartServer();
-                              await Task.Delay(500);
+                              Thread.Sleep(500);
                               process.Start();
                         }
 
@@ -243,7 +242,7 @@ namespace adbGUI
 
                         _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2.ToUpper()));
 
-                        Thread.Sleep(100);
+                        Thread.Sleep(300);
 
                   }
             }
@@ -289,6 +288,14 @@ namespace adbGUI
                               s.Close();
                               s.Dispose();
                         }
+                  }
+                  try
+                  {
+                        _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.SelectedIndex = _mainForm.cbSerials.Items.Count - 1));
+                  }
+                  catch (Exception ex)
+                  {
+                        MessageBox.Show(ex.Message);
                   }
 
             }
