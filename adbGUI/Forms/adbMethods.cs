@@ -16,6 +16,7 @@ namespace adbGUI
                   _mainForm = mainForm;
             }
 
+            //Start the adb server
             private static void StartServer()
             {
                   var psi = new ProcessStartInfo("tools\\adb", "start-server");
@@ -23,7 +24,8 @@ namespace adbGUI
                   Process.Start(psi);
             }
 
-            public static void KillServer()
+            //Kill the adb server
+            public void KillServer()
             {
                   foreach (var pr in Process.GetProcessesByName("adb"))
                   {
@@ -31,6 +33,7 @@ namespace adbGUI
                   }
             }
 
+            //Text to viewer
             private void ToViewer(string value, string title, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
             {
                   if (_mainForm.InvokeRequired)
@@ -52,6 +55,7 @@ namespace adbGUI
                   v.Show();
             }
 
+            //Get all the information and start a new thread in wich CallAdb() runs
             public void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
             {
                   if (_mainForm.cbSerials.SelectedItem != null)
@@ -71,21 +75,20 @@ namespace adbGUI
                   }
                   else
                   {
-                        NoDeviceSelected();
+                        NoDeviceConnected();
                   }
 
             }
 
-            private void NoDeviceSelected()
+            //Call this, when you check for connected devices and there is no device connected
+            private void NoDeviceConnected()
             {
                   _mainForm.tabControl1.SelectTab(0);
 
-                  MessageBox.Show("Error: No device selected. Select a device in the list.\t", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                  _mainForm.cbSerials.DroppedDown = true;
-
+                  MessageBox.Show("No device Connected. Please connect a device and select it.\t", "Error - No device found", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+            //Call hidden adb instance, gets the output and puts it in a string, redirects string to ToViewer
             private void CallAdb(string a, string b, string c, int x, int y, FormWindowState windowstate = FormWindowState.Normal, string serial = "")
             {
                   const string filename = "cmd.exe";
@@ -111,6 +114,7 @@ namespace adbGUI
                   process.Dispose();
             }
 
+            //Returns the selected serial number in the combobox with the -s argument
             private string Serialno()
             {
                   try
@@ -131,11 +135,12 @@ namespace adbGUI
 
             }
 
+            //Open adb with commandprompt
             public void callADB_w(string x)
             {
                   if (_mainForm.cbSerials.SelectedItem == null)
                   {
-                        NoDeviceSelected();
+                        NoDeviceConnected();
                   }
                   else
                   {
@@ -152,6 +157,7 @@ namespace adbGUI
                   }
             }
 
+            //Open adb without commandprompt
             public void callADB_wo(string x, string y)
             {
                   if (_mainForm.cbSerials.SelectedItem != null)
@@ -171,14 +177,15 @@ namespace adbGUI
                   }
                   else
                   {
-                        NoDeviceSelected();
+                        NoDeviceConnected();
                   }
             }
 
+            //Checks if server is running and updates application title
             public void IsRunning()
             {
-                  var a = "adbGUI - Server is running";
-                  var b = "adbGUI - Server is not running";
+                  var a = "adbGUI - Server running";
+                  var b = "adbGUI - Server not running";
                   while (true)
                   {
                         if (Process.GetProcessesByName("adb").Length > 0)
@@ -195,7 +202,7 @@ namespace adbGUI
                                     _mainForm.Invoke(new Action<string>(ServerOff), b);
                               }
                         }
-                        Thread.Sleep(200);
+                        Thread.Sleep(20);
                   }
             }
 
@@ -210,6 +217,7 @@ namespace adbGUI
                   _mainForm.txt_devices.Text = string.Empty;
             }
 
+            //Prints devices - l to the textbox
             public void DevicesToTxtBox()
             {
                   const string filename = "cmd.exe";
@@ -242,11 +250,12 @@ namespace adbGUI
 
                         _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2.ToUpper()));
 
-                        Thread.Sleep(300);
+                        Thread.Sleep(1000);
 
                   }
             }
 
+            //Run devices command, extract the serialnumber and add to combobox
             public void SerialnumberToComboBox()
             {
                   _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Clear()));
@@ -300,6 +309,7 @@ namespace adbGUI
 
             }
 
+            //Connect device to the ip in textbox
             public void ConnectWifi()
             {
                   string s;
@@ -325,6 +335,7 @@ namespace adbGUI
                   }
             }
 
+            //Disconnect connected devices
             public void DisconnectWifi()
             {
                   var filename = "cmd.exe";

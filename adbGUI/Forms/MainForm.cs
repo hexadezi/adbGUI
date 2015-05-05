@@ -104,9 +104,11 @@ namespace adbGUI
 
             private void Form1_FormClosed(object sender, FormClosedEventArgs e)
             {
-                  adbMethods.KillServer();
+                  Thread tr = new Thread(AdbMethods.KillServer);
+                  tr.IsBackground = true;
+                  tr.Start(); 
                   Application.Exit();
-                  Environment.Exit(Environment.ExitCode);
+                  Environment.Exit(0);
             }
 
             private void btn_run_Click(object sender, EventArgs e)
@@ -516,21 +518,19 @@ namespace adbGUI
 
             private async void btn_phoneinformation_changedpi_Click(object sender, EventArgs e)
             {
-                  AdbMethods.callADB_wo("", "shell wm density " + txt_phoneinformation_dpi.Text);
-                  await Task.Delay(400);
-                  AdbMethods.callADB_wo("", "reboot");
+                  AdbMethods.callADB_wo("", "shell wm density " + txt_phoneinformation_dpi.Text + "&& tools\\adb reboot");
             }
 
             private async void btn_phoneinformation_resetdpi_Click(object sender, EventArgs e)
             {
-                  AdbMethods.callADB_wo("", "shell wm density reset");
-                  await Task.Delay(400);
-                  AdbMethods.callADB_wo("", "reboot");
+                  AdbMethods.callADB_wo("", "shell wm density reset && tools\\adb reboot");
             }
 
             private void btn_connect_Click(object sender, EventArgs e)
             {
-                  AdbMethods.ConnectWifi();
+                  var tr = new Thread(AdbMethods.ConnectWifi);
+                  tr.IsBackground = true;
+                  tr.Start();
             }
 
             private void txt_ip_KeyDown(object sender, KeyEventArgs e)
@@ -610,14 +610,17 @@ namespace adbGUI
 
             private void btnKillserver_Click(object sender, EventArgs e)
             {
-                  adbMethods.KillServer();
+                  Thread tr = new Thread(AdbMethods.KillServer);
+                  tr.IsBackground = true;
+                  tr.Start();
                   cbSerials.Items.Clear();
-                  txt_devices.Text = "";
             }
 
             private void button5_Click_1(object sender, EventArgs e)
             {
-                  AdbMethods.DisconnectWifi();
+                  Thread tr = new Thread(AdbMethods.DisconnectWifi);
+                  tr.IsBackground = true;
+                  tr.Start();
             }
 
             private void txt_devices_TextChanged(object sender, EventArgs e)
