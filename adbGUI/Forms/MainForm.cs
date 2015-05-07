@@ -516,12 +516,12 @@ namespace adbGUI
                   AdbMethods.GetInformation("", "shell wm density", "Density", 280, 110);
             }
 
-            private async void btn_phoneinformation_changedpi_Click(object sender, EventArgs e)
+            private void btn_phoneinformation_changedpi_Click(object sender, EventArgs e)
             {
                   AdbMethods.callADB_wo("", "shell wm density " + txt_phoneinformation_dpi.Text + "&& tools\\adb reboot");
             }
 
-            private async void btn_phoneinformation_resetdpi_Click(object sender, EventArgs e)
+            private void btn_phoneinformation_resetdpi_Click(object sender, EventArgs e)
             {
                   AdbMethods.callADB_wo("", "shell wm density reset && tools\\adb reboot");
             }
