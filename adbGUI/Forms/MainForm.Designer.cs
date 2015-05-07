@@ -225,7 +225,7 @@
                   // 
                   // button5
                   // 
-                  this.button5.Location = new System.Drawing.Point(199, 17);
+                  this.button5.Location = new System.Drawing.Point(199, 18);
                   this.button5.Name = "button5";
                   this.button5.Size = new System.Drawing.Size(75, 23);
                   this.button5.TabIndex = 8;
@@ -235,18 +235,20 @@
                   // 
                   // txt_ip
                   // 
+                  this.txt_ip.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.txt_ip.Location = new System.Drawing.Point(6, 19);
+                  this.txt_ip.MaxLength = 15;
                   this.txt_ip.Name = "txt_ip";
-                  this.txt_ip.Size = new System.Drawing.Size(106, 20);
+                  this.txt_ip.Size = new System.Drawing.Size(113, 22);
                   this.txt_ip.TabIndex = 6;
                   this.txt_ip.Text = "192.168.0.100";
                   this.txt_ip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ip_KeyDown);
                   // 
                   // btn_connect
                   // 
-                  this.btn_connect.Location = new System.Drawing.Point(118, 17);
+                  this.btn_connect.Location = new System.Drawing.Point(125, 18);
                   this.btn_connect.Name = "btn_connect";
-                  this.btn_connect.Size = new System.Drawing.Size(75, 23);
+                  this.btn_connect.Size = new System.Drawing.Size(68, 23);
                   this.btn_connect.TabIndex = 7;
                   this.btn_connect.Text = "Connect";
                   this.btn_connect.UseVisualStyleBackColor = true;
