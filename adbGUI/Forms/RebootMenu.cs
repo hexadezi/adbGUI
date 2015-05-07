@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -25,29 +26,43 @@ namespace adbGUI
 
             private void btn_rebootmenu_reboot_Click(object sender, EventArgs e)
             {
-                  //MainForm mainform = new MainForm();
+                  Close();
 
-                  this.Close();
                   var mainform = Application.OpenForms.OfType<MainForm>().Single();
 
-                  if (combo_rebootmenu.SelectedIndex == 0)
+                  switch (combo_rebootmenu.SelectedIndex)
                   {
-                        mainform.AdbMethods.callADB_wo("", "shell reboot -p");
-                  }
-                  else if (combo_rebootmenu.SelectedIndex == 1)
-                  {
-                        mainform.AdbMethods.callADB_wo("", "reboot");
-                  }
-                  else if (combo_rebootmenu.SelectedIndex == 2)
-                  {
-                        mainform.AdbMethods.callADB_wo("", "reboot bootloader");
-                  }
-                  else if (combo_rebootmenu.SelectedIndex == 3)
-                  {
-                        mainform.AdbMethods.callADB_wo("", "reboot recovery");
-
+                        case 0:
+                              mainform.AdbMethods.callADB_wo("", "shell reboot -p");
+                              break;
+                        case 1:
+                              mainform.AdbMethods.callADB_wo("", "reboot");
+                              break;
+                        case 2:
+                              mainform.AdbMethods.callADB_wo("", "reboot bootloader");
+                              break;
+                        case 3:
+                              mainform.AdbMethods.callADB_wo("", "reboot recovery");
+                              break;
                   }
 
+
+                  //if (combo_rebootmenu.SelectedIndex == 0)
+                  //{
+                  //      mainform.AdbMethods.callADB_wo("", "shell reboot -p");
+                  //}
+                  //else if (combo_rebootmenu.SelectedIndex == 1)
+                  //{
+                  //      mainform.AdbMethods.callADB_wo("", "reboot");
+                  //}
+                  //else if (combo_rebootmenu.SelectedIndex == 2)
+                  //{
+                  //      mainform.AdbMethods.callADB_wo("", "reboot bootloader");
+                  //}
+                  //else if (combo_rebootmenu.SelectedIndex == 3)
+                  //{
+                  //      mainform.AdbMethods.callADB_wo("", "reboot recovery");
+                  //}
             }
       }
 }
