@@ -19,6 +19,16 @@ namespace adbGUI
             {
                   InitializeComponent();
                   _adbMethods = new adbMethods(this);
+
+                  var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
+                  printDevices.IsBackground = true;
+                  printDevices.Start();
+
+                  var checkStatus = new Thread(AdbMethods.IsRunning);
+                  checkStatus.IsBackground = true;
+                  checkStatus.Start();
+
+                  txt_customcommand.Select();
             }
 
             public adbMethods AdbMethods
@@ -128,19 +138,6 @@ namespace adbGUI
             private void btn_openshell_Click(object sender, EventArgs e)
             {
                   AdbMethods.callADB_w("shell");
-            }
-
-            private void Form1_Load(object sender, EventArgs e)
-            {
-                  var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
-                  printDevices.IsBackground = true;
-                  printDevices.Start();
-
-                  var checkStatus = new Thread(AdbMethods.IsRunning);
-                  checkStatus.IsBackground = true;
-                  checkStatus.Start();
-
-                  txt_customcommand.Select();
             }
 
             private void btn_phoneinformation_getprop_Click(object sender, EventArgs e)

@@ -1321,7 +1321,6 @@
                   this.Text = "adbGUI - Server is running";
                   this.TopMost = true;
                   this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-                  this.Load += new System.EventHandler(this.Form1_Load);
                   this.tabControl1.ResumeLayout(false);
                   this.tabPage1.ResumeLayout(false);
                   this.tabPage1.PerformLayout();
