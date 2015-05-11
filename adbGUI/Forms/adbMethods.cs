@@ -56,7 +56,7 @@ namespace adbGUI
             }
 
             //Get all the information and start a new thread in wich CallAdb() runs
-            public void GetInformation(string a, string b, string titel, int width = 850, int height = 600, FormWindowState windowstate = FormWindowState.Normal)
+            public void GetInformation(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal)
             {
                   if (_mainForm.cbSerials.SelectedItem != null)
                   {

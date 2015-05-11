@@ -46,13 +46,13 @@
                   this.txt_output.Name = "txt_output";
                   this.txt_output.ReadOnly = true;
                   this.txt_output.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-                  this.txt_output.Size = new System.Drawing.Size(842, 569);
+                  this.txt_output.Size = new System.Drawing.Size(842, 567);
                   this.txt_output.TabIndex = 0;
                   // 
                   // button1
                   // 
                   this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-                  this.button1.Location = new System.Drawing.Point(0, 548);
+                  this.button1.Location = new System.Drawing.Point(0, 546);
                   this.button1.Name = "button1";
                   this.button1.Size = new System.Drawing.Size(842, 21);
                   this.button1.TabIndex = 1;
@@ -64,7 +64,7 @@
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                   this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                  this.ClientSize = new System.Drawing.Size(842, 569);
+                  this.ClientSize = new System.Drawing.Size(842, 567);
                   this.Controls.Add(this.button1);
                   this.Controls.Add(this.txt_output);
                   this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
