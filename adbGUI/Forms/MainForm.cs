@@ -82,15 +82,24 @@ namespace adbGUI
 
             private void btn_push_openfile_Click(object sender, EventArgs e)
             {
-                  openFileDialog1.FileName = "";
-                  openFileDialog1.CheckFileExists = true;
+                  openFileDialog1.FileName = " "; //This is not a normal whitespace. ALT + 255
+                  openFileDialog1.CheckFileExists = false;
                   openFileDialog1.CheckPathExists = true;
-                  openFileDialog1.Filter = "";
+                  openFileDialog1.ValidateNames = false;
+                  //openFileDialog1.Filter = "All Files (*.*)|*.*"; ;
 
 
                   if (openFileDialog1.ShowDialog() == DialogResult.OK)
                   {
-                        txt_push_fromfilepath.Text = openFileDialog1.FileName;
+                        if (openFileDialog1.SafeFileName == " ") //This is not a normal whitespace. ALT + 255
+                        {
+                              txt_push_fromfilepath.Text =
+                                    openFileDialog1.FileName.Remove(openFileDialog1.FileName.Length - 2, 2);
+                        }
+                        else
+                        {
+                              txt_push_fromfilepath.Text = openFileDialog1.FileName;
+                        }
                   }
             }
 

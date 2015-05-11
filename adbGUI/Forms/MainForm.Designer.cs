@@ -860,7 +860,7 @@
                   this.btn_pull_saveto.Name = "btn_pull_saveto";
                   this.btn_pull_saveto.Size = new System.Drawing.Size(75, 23);
                   this.btn_pull_saveto.TabIndex = 8;
-                  this.btn_pull_saveto.Text = "Savte to";
+                  this.btn_pull_saveto.Text = "Save...";
                   this.btn_pull_saveto.UseVisualStyleBackColor = true;
                   this.btn_pull_saveto.Click += new System.EventHandler(this.btn_pull_saveto_Click);
                   // 
@@ -922,7 +922,7 @@
                   this.btn_push_openfile.Name = "btn_push_openfile";
                   this.btn_push_openfile.Size = new System.Drawing.Size(75, 23);
                   this.btn_push_openfile.TabIndex = 4;
-                  this.btn_push_openfile.Text = "Open file";
+                  this.btn_push_openfile.Text = "Open...";
                   this.btn_push_openfile.UseVisualStyleBackColor = true;
                   this.btn_push_openfile.Click += new System.EventHandler(this.btn_push_openfile_Click);
                   // 
