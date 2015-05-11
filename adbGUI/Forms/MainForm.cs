@@ -620,7 +620,6 @@ namespace adbGUI
                   Thread tr = new Thread(AdbMethods.KillServer);
                   tr.IsBackground = true;
                   tr.Start();
-                  cbSerials.Items.Clear();
             }
 
             private void button5_Click_1(object sender, EventArgs e)
