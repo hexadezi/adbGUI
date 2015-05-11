@@ -56,8 +56,6 @@ namespace adbGUI
             private void button1_Click(object sender, EventArgs e)
             {
                   openFileDialog1.FileName = "";
-                  openFileDialog1.CheckFileExists = true;
-                  openFileDialog1.CheckPathExists = true;
                   openFileDialog1.Filter = @" .zip|*.zip";
 
 
@@ -424,6 +422,7 @@ namespace adbGUI
 
             private void btn_backup_saveto_Click(object sender, EventArgs e)
             {
+                  saveFileDialog1.FileName = "backup_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
                   saveFileDialog1.Filter = " .ab|*.ab";
                   if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                   {
@@ -434,8 +433,6 @@ namespace adbGUI
             private void btn_restore_openfile_Click(object sender, EventArgs e)
             {
                   openFileDialog1.FileName = "";
-                  openFileDialog1.CheckFileExists = true;
-                  openFileDialog1.CheckPathExists = true;
                   openFileDialog1.Filter = " .ab|*.ab";
 
 
