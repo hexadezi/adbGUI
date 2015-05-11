@@ -49,12 +49,8 @@ namespace adbGUI
 
             private void btn_reboot_Click(object sender, EventArgs e)
             {
-                  if ((_rebootmenu == null) || (_rebootmenu.IsDisposed))
-                  {
-                        _rebootmenu = new RebootMenu();
-                  }
-                  _rebootmenu.Show();
-                  _rebootmenu.Focus();
+                  _rebootmenu = new RebootMenu();
+                  _rebootmenu.ShowDialog();
             }
 
             private void button1_Click(object sender, EventArgs e)
