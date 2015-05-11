@@ -1249,20 +1249,21 @@
                   // 
                   // textBox1
                   // 
+                  this.textBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.textBox1.Location = new System.Drawing.Point(6, 179);
                   this.textBox1.Multiline = true;
                   this.textBox1.Name = "textBox1";
                   this.textBox1.ReadOnly = true;
                   this.textBox1.Size = new System.Drawing.Size(336, 95);
                   this.textBox1.TabIndex = 6;
-                  this.textBox1.Text = "Thanks to:\r\nstackoverflow.com\r\nxda-developers.com\r\nPixel Buddah for programm icon" +
-    "\r\nSaloni Sinha for the beer icon\r\nAndrea Soragna for viewer icon";
+                  this.textBox1.Text = "Thanks to:\r\n  stackoverflow.com\r\n  xda-developers.com\r\n  Pixel Buddah for program" +
+    "m icon\r\n  Saloni Sinha for the beer icon\r\n  Andrea Soragna for viewer icon";
                   // 
                   // label10
                   // 
                   this.label10.AutoSize = true;
                   this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                  this.label10.Location = new System.Drawing.Point(3, 156);
+                  this.label10.Location = new System.Drawing.Point(6, 156);
                   this.label10.Name = "label10";
                   this.label10.Size = new System.Drawing.Size(102, 20);
                   this.label10.TabIndex = 5;
