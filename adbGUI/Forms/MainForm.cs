@@ -582,8 +582,11 @@ namespace adbGUI
                   proc.Start();
                   while (proc.HasExited == false)
                   {
+                        tabControl1.Enabled = false;
+
                         //Cursor = Cursors.WaitCursor;
                   }
+                  tabControl1.Enabled = true;
                   //Cursor = Cursors.Default;
             }
 
