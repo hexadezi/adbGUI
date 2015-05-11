@@ -86,11 +86,12 @@ namespace adbGUI
                   openFileDialog1.CheckFileExists = false;
                   openFileDialog1.CheckPathExists = true;
                   openFileDialog1.ValidateNames = false;
-                  //openFileDialog1.Filter = "All Files (*.*)|*.*"; ;
+                  openFileDialog1.Filter = "All Files (*.*)|*.*"; ;
 
 
                   if (openFileDialog1.ShowDialog() == DialogResult.OK)
                   {
+
                         if (openFileDialog1.SafeFileName == " ") //This is not a normal whitespace. ALT + 255
                         {
                               txt_push_fromfilepath.Text =
@@ -121,7 +122,7 @@ namespace adbGUI
             {
                   Thread tr = new Thread(AdbMethods.KillServer);
                   tr.IsBackground = true;
-                  tr.Start(); 
+                  tr.Start();
                   Application.Exit();
                   Environment.Exit(0);
             }
@@ -388,20 +389,24 @@ namespace adbGUI
                               MessageBox.Show("Please select a destination!", "Error", MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                         }
-                        if (cb_backup_withapk.Checked)
+                        else
                         {
-                              apk = " -apk";
-                        }
-                        if (cb_backup_shared.Checked)
-                        {
-                              shared = " -shared";
-                        }
-                        if (cb_backup_nosystem.Checked)
-                        {
-                              system = " -nosystem";
+                              if (cb_backup_withapk.Checked)
+                              {
+                                    apk = " -apk";
+                              }
+                              if (cb_backup_shared.Checked)
+                              {
+                                    shared = " -shared";
+                              }
+                              if (cb_backup_nosystem.Checked)
+                              {
+                                    system = " -nosystem";
+                              }
+
+                              AdbMethods.callADB_w("backup" + apk + shared + all + system + name);
                         }
 
-                        AdbMethods.callADB_w("backup" + apk + shared + all + system + name);
                   }
                   else
                   {
