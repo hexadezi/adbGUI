@@ -629,16 +629,27 @@ namespace adbGUI
                   tr.Start();
             }
 
+
+
             private void timer1_Tick(object sender, EventArgs e)
             {
+                  var checkStatus = new Thread(AdbMethods.IsRunning);
+                  checkStatus.IsBackground = true;
+                  if (!checkStatus.IsAlive)
+                  {
+                        checkStatus.Start();
+
+                  }
 
                   var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
                   printDevices.IsBackground = true;
-                  printDevices.Start();
+                  if (!printDevices.IsAlive)
+                  {
+                        printDevices.Start();
+                  }
 
-                  var checkStatus = new Thread(AdbMethods.IsRunning);
-                  checkStatus.IsBackground = true;
-                  checkStatus.Start();
+
+
 
             }
       }

@@ -1311,7 +1311,7 @@
                   // 
                   // timer1
                   // 
-                  this.timer1.Interval = 300;
+                  this.timer1.Interval = 1000;
                   this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
                   // 
                   // MainForm
@@ -1325,7 +1325,7 @@
                   this.MaximizeBox = false;
                   this.Name = "MainForm";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-                  this.Text = "adbGUI - Server is running";
+                  this.Text = "adbGUI - Server is not running";
                   this.TopMost = true;
                   this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
                   this.tabControl1.ResumeLayout(false);
