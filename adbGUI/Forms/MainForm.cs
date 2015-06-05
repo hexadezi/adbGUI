@@ -19,7 +19,9 @@ namespace adbGUI
             {
                   InitializeComponent();
                   _adbMethods = new adbMethods(this);
-                  timer1.Enabled = true;
+
+                  Thread timerThread = new Thread(timer);
+                  timerThread.Start();
 
                   txt_customcommand.Select();
             }
@@ -629,28 +631,29 @@ namespace adbGUI
                   tr.Start();
             }
 
-
-
-            private void timer1_Tick(object sender, EventArgs e)
+            private void timer()
             {
-                  var checkStatus = new Thread(AdbMethods.IsRunning);
-                  checkStatus.IsBackground = true;
-                  if (!checkStatus.IsAlive)
+                  while (true)
                   {
-                        checkStatus.Start();
+                        var checkStatus = new Thread(AdbMethods.IsRunning);
+                        checkStatus.IsBackground = true;
+                        if (!checkStatus.IsAlive)
+                        {
+                              checkStatus.Start();
 
+                        }
+
+                        var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
+                        printDevices.IsBackground = true;
+                        if (!printDevices.IsAlive)
+                        {
+                              printDevices.Start();
+                        }
+
+                        Thread.Sleep(500);
                   }
-
-                  var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
-                  printDevices.IsBackground = true;
-                  if (!printDevices.IsAlive)
-                  {
-                        printDevices.Start();
-                  }
-
-
-
 
             }
+
       }
 }
