@@ -139,6 +139,7 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+                  this.timer1 = new System.Windows.Forms.Timer(this.components);
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -1308,6 +1309,11 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
+                  // timer1
+                  // 
+                  this.timer1.Interval = 300;
+                  this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+                  // 
                   // MainForm
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1468,6 +1474,7 @@
             private System.Windows.Forms.TextBox textBox1;
             public System.Windows.Forms.TabControl tabControl1;
             public System.Windows.Forms.TextBox txt_customcommand;
+            private System.Windows.Forms.Timer timer1;
       }
 }
 

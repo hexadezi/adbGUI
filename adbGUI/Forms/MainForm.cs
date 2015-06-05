@@ -19,14 +19,7 @@ namespace adbGUI
             {
                   InitializeComponent();
                   _adbMethods = new adbMethods(this);
-
-                  var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
-                  printDevices.IsBackground = true;
-                  printDevices.Start();
-
-                  var checkStatus = new Thread(AdbMethods.IsRunning);
-                  checkStatus.IsBackground = true;
-                  checkStatus.Start();
+                  timer1.Enabled = true;
 
                   txt_customcommand.Select();
             }
@@ -634,6 +627,19 @@ namespace adbGUI
                   Thread tr = new Thread(AdbMethods.SerialnumberToComboBox);
                   tr.IsBackground = true;
                   tr.Start();
+            }
+
+            private void timer1_Tick(object sender, EventArgs e)
+            {
+
+                  var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
+                  printDevices.IsBackground = true;
+                  printDevices.Start();
+
+                  var checkStatus = new Thread(AdbMethods.IsRunning);
+                  checkStatus.IsBackground = true;
+                  checkStatus.Start();
+
             }
       }
 }

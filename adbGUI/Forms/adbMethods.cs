@@ -186,8 +186,7 @@ namespace adbGUI
             {
                   var a = "adbGUI - Server running";
                   var b = "adbGUI - Server not running";
-                  while (true)
-                  {
+
                         if (Process.GetProcessesByName("adb").Length > 0)
                         {
                               if (_mainForm.InvokeRequired)
@@ -202,8 +201,6 @@ namespace adbGUI
                                     _mainForm.Invoke(new Action<string>(ServerOff), b);
                               }
                         }
-                        Thread.Sleep(20);
-                  }
             }
 
             private void ServerOn(string s)
@@ -232,8 +229,6 @@ namespace adbGUI
                   };
                   var process = new Process { StartInfo = startInfo };
 
-                  while (true)
-                  {
                         if (Process.GetProcessesByName("adb").Length > 0)
                         {
                               process.Start();
@@ -250,9 +245,6 @@ namespace adbGUI
 
                         _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2.ToUpper()));
 
-                        Thread.Sleep(1000);
-
-                  }
             }
 
             //Run devices command, extract the serialnumber and add to combobox
