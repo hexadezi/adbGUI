@@ -125,7 +125,7 @@ namespace adbGUI
                         }
                         else
                         {
-                              return "-s " + _mainForm.cbSerials.SelectedItem.ToString().ToLower();
+                              return "-s " + _mainForm.cbSerials.SelectedItem.ToString();
                         }
                   }
                   catch (Exception)
@@ -243,7 +243,7 @@ namespace adbGUI
 
                         string s2 = process.StandardOutput.ReadToEnd();
 
-                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2.ToUpper()));
+                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2));
 
             }
 
@@ -283,7 +283,7 @@ namespace adbGUI
                                     if (line.IndexOf('\t') != -1)
                                     {
                                           line = line.Substring(0, line.IndexOf('\t'));
-                                          _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Add(line.ToUpper())));
+                                          _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Add(line)));
                                     }
                               }
                               s.Close();
