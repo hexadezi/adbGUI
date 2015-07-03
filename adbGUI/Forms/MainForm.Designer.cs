@@ -353,7 +353,7 @@
                   // txt_devices
                   // 
                   this.txt_devices.Enabled = false;
-                  this.txt_devices.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                  this.txt_devices.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.txt_devices.Location = new System.Drawing.Point(6, 165);
                   this.txt_devices.Multiline = true;
                   this.txt_devices.Name = "txt_devices";
