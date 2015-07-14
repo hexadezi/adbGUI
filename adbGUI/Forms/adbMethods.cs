@@ -372,7 +372,7 @@ namespace adbGUI
                   else
                   {
                         _mainForm.btnKillserver.Invoke((MethodInvoker)(() => _mainForm.btnKillserver.ForeColor = Color.Red));
-                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = "Starting server..."));
+                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = "STARTING SERVER..."));
 
 
                         MethodInvoker action = delegate { _mainForm.cbSerials.Items.Clear(); };

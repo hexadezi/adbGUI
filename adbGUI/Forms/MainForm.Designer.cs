@@ -113,13 +113,11 @@
                   this.cb_backup_package = new System.Windows.Forms.CheckBox();
                   this.btn_restore_restore = new System.Windows.Forms.Button();
                   this.btn_restore_openfile = new System.Windows.Forms.Button();
-                  this.label4 = new System.Windows.Forms.Label();
                   this.txt_restore_path = new System.Windows.Forms.TextBox();
                   this.btn_backup_saveto = new System.Windows.Forms.Button();
                   this.cb_backup_nosystem = new System.Windows.Forms.CheckBox();
                   this.cb_backup_shared = new System.Windows.Forms.CheckBox();
                   this.cb_backup_withapk = new System.Windows.Forms.CheckBox();
-                  this.label3 = new System.Windows.Forms.Label();
                   this.btn_backup_backup = new System.Windows.Forms.Button();
                   this.txt_backup_path = new System.Windows.Forms.TextBox();
                   this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -139,6 +137,7 @@
                   this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
                   this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
                   this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+                  this.groupBox14 = new System.Windows.Forms.GroupBox();
                   this.tabControl1.SuspendLayout();
                   this.tabPage1.SuspendLayout();
                   this.groupBox13.SuspendLayout();
@@ -158,6 +157,7 @@
                   this.groupBox8.SuspendLayout();
                   this.groupBox3.SuspendLayout();
                   this.tabPage5.SuspendLayout();
+                  this.groupBox14.SuspendLayout();
                   this.SuspendLayout();
                   // 
                   // tabControl1
@@ -173,7 +173,7 @@
                   this.tabControl1.Location = new System.Drawing.Point(12, 12);
                   this.tabControl1.Name = "tabControl1";
                   this.tabControl1.SelectedIndex = 0;
-                  this.tabControl1.Size = new System.Drawing.Size(518, 306);
+                  this.tabControl1.Size = new System.Drawing.Size(560, 338);
                   this.tabControl1.TabIndex = 6;
                   // 
                   // tabPage1
@@ -186,46 +186,51 @@
                   this.tabPage1.Location = new System.Drawing.Point(4, 22);
                   this.tabPage1.Name = "tabPage1";
                   this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage1.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage1.Size = new System.Drawing.Size(552, 312);
                   this.tabPage1.TabIndex = 0;
                   this.tabPage1.Text = "Main Commands";
                   this.tabPage1.UseVisualStyleBackColor = true;
                   // 
                   // groupBox13
                   // 
+                  this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox13.Controls.Add(this.cbSerials);
-                  this.groupBox13.Location = new System.Drawing.Point(292, 60);
+                  this.groupBox13.Location = new System.Drawing.Point(301, 60);
                   this.groupBox13.Name = "groupBox13";
-                  this.groupBox13.Size = new System.Drawing.Size(212, 47);
+                  this.groupBox13.Size = new System.Drawing.Size(245, 47);
                   this.groupBox13.TabIndex = 4;
                   this.groupBox13.TabStop = false;
                   this.groupBox13.Text = "Devices";
                   // 
                   // cbSerials
                   // 
+                  this.cbSerials.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.cbSerials.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
                   this.cbSerials.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.cbSerials.FormattingEnabled = true;
                   this.cbSerials.Location = new System.Drawing.Point(6, 19);
                   this.cbSerials.Name = "cbSerials";
-                  this.cbSerials.Size = new System.Drawing.Size(200, 22);
+                  this.cbSerials.Size = new System.Drawing.Size(233, 22);
                   this.cbSerials.TabIndex = 6;
                   // 
                   // groupBox11
                   // 
+                  this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox11.Controls.Add(this.button5);
                   this.groupBox11.Controls.Add(this.txt_ip);
                   this.groupBox11.Controls.Add(this.btn_connect);
                   this.groupBox11.Location = new System.Drawing.Point(6, 60);
                   this.groupBox11.Name = "groupBox11";
-                  this.groupBox11.Size = new System.Drawing.Size(280, 47);
+                  this.groupBox11.Size = new System.Drawing.Size(289, 47);
                   this.groupBox11.TabIndex = 3;
                   this.groupBox11.TabStop = false;
                   this.groupBox11.Text = "Wireless ADB";
                   // 
                   // button5
                   // 
-                  this.button5.Location = new System.Drawing.Point(199, 18);
+                  this.button5.Location = new System.Drawing.Point(206, 17);
                   this.button5.Name = "button5";
                   this.button5.Size = new System.Drawing.Size(75, 23);
                   this.button5.TabIndex = 8;
@@ -248,7 +253,7 @@
                   // 
                   this.btn_connect.Location = new System.Drawing.Point(125, 18);
                   this.btn_connect.Name = "btn_connect";
-                  this.btn_connect.Size = new System.Drawing.Size(68, 23);
+                  this.btn_connect.Size = new System.Drawing.Size(75, 23);
                   this.btn_connect.TabIndex = 7;
                   this.btn_connect.Text = "Connect";
                   this.btn_connect.UseVisualStyleBackColor = true;
@@ -256,21 +261,20 @@
                   // 
                   // groupBox4
                   // 
-                  this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+                  this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox4.Controls.Add(this.btn_run);
                   this.groupBox4.Controls.Add(this.txt_customcommand);
                   this.groupBox4.Location = new System.Drawing.Point(6, 113);
                   this.groupBox4.Name = "groupBox4";
-                  this.groupBox4.Size = new System.Drawing.Size(498, 46);
+                  this.groupBox4.Size = new System.Drawing.Size(540, 52);
                   this.groupBox4.TabIndex = 1;
                   this.groupBox4.TabStop = false;
                   this.groupBox4.Text = "Custom Command";
                   // 
                   // btn_run
                   // 
-                  this.btn_run.Location = new System.Drawing.Point(415, 17);
+                  this.btn_run.Location = new System.Drawing.Point(458, 17);
                   this.btn_run.Name = "btn_run";
                   this.btn_run.Size = new System.Drawing.Size(78, 23);
                   this.btn_run.TabIndex = 1;
@@ -280,9 +284,9 @@
                   // 
                   // txt_customcommand
                   // 
-                  this.txt_customcommand.Location = new System.Drawing.Point(4, 19);
+                  this.txt_customcommand.Location = new System.Drawing.Point(7, 19);
                   this.txt_customcommand.Name = "txt_customcommand";
-                  this.txt_customcommand.Size = new System.Drawing.Size(405, 20);
+                  this.txt_customcommand.Size = new System.Drawing.Size(446, 20);
                   this.txt_customcommand.TabIndex = 0;
                   this.toolTip.SetToolTip(this.txt_customcommand, "You dont need to write \"adb\", If you have a path or file with spaces, then you ne" +
         "ed to put the path or filename in quotation marks.\r\n");
@@ -290,8 +294,7 @@
                   // 
                   // groupBox1
                   // 
-                  this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+                  this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox1.Controls.Add(this.btn_reboot);
                   this.groupBox1.Controls.Add(this.btn_remountsystem);
@@ -299,14 +302,14 @@
                   this.groupBox1.Controls.Add(this.btn_openshell);
                   this.groupBox1.Location = new System.Drawing.Point(6, 6);
                   this.groupBox1.Name = "groupBox1";
-                  this.groupBox1.Size = new System.Drawing.Size(498, 48);
+                  this.groupBox1.Size = new System.Drawing.Size(540, 48);
                   this.groupBox1.TabIndex = 2;
                   this.groupBox1.TabStop = false;
                   this.groupBox1.Text = "Standard";
                   // 
                   // btn_reboot
                   // 
-                  this.btn_reboot.Location = new System.Drawing.Point(199, 19);
+                  this.btn_reboot.Location = new System.Drawing.Point(241, 19);
                   this.btn_reboot.Name = "btn_reboot";
                   this.btn_reboot.Size = new System.Drawing.Size(145, 23);
                   this.btn_reboot.TabIndex = 4;
@@ -317,7 +320,7 @@
                   // 
                   // btn_remountsystem
                   // 
-                  this.btn_remountsystem.Location = new System.Drawing.Point(98, 19);
+                  this.btn_remountsystem.Location = new System.Drawing.Point(140, 19);
                   this.btn_remountsystem.Name = "btn_remountsystem";
                   this.btn_remountsystem.Size = new System.Drawing.Size(95, 23);
                   this.btn_remountsystem.TabIndex = 3;
@@ -329,19 +332,20 @@
                   // btnKillserver
                   // 
                   this.btnKillserver.AccessibleDescription = "";
+                  this.btnKillserver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                   this.btnKillserver.Location = new System.Drawing.Point(7, 19);
                   this.btnKillserver.Name = "btnKillserver";
-                  this.btnKillserver.Size = new System.Drawing.Size(85, 23);
+                  this.btnKillserver.Size = new System.Drawing.Size(127, 23);
                   this.btnKillserver.TabIndex = 2;
-                  this.btnKillserver.Text = "Restart";
-                  this.toolTip.SetToolTip(this.btnKillserver, "Kill the server if it is running");
+                  this.btnKillserver.Text = "RESTART";
+                  this.toolTip.SetToolTip(this.btnKillserver, "Restart the adb process");
                   this.btnKillserver.UseVisualStyleBackColor = true;
                   this.btnKillserver.Click += new System.EventHandler(this.btnKillserver_Click);
                   // 
                   // btn_openshell
                   // 
                   this.btn_openshell.AccessibleDescription = "";
-                  this.btn_openshell.Location = new System.Drawing.Point(350, 19);
+                  this.btn_openshell.Location = new System.Drawing.Point(392, 19);
                   this.btn_openshell.Name = "btn_openshell";
                   this.btn_openshell.Size = new System.Drawing.Size(142, 23);
                   this.btn_openshell.TabIndex = 5;
@@ -352,12 +356,15 @@
                   // 
                   // txt_devices
                   // 
+                  this.txt_devices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.txt_devices.Enabled = false;
                   this.txt_devices.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                  this.txt_devices.Location = new System.Drawing.Point(6, 165);
+                  this.txt_devices.Location = new System.Drawing.Point(6, 171);
                   this.txt_devices.Multiline = true;
                   this.txt_devices.Name = "txt_devices";
-                  this.txt_devices.Size = new System.Drawing.Size(498, 109);
+                  this.txt_devices.Size = new System.Drawing.Size(540, 135);
                   this.txt_devices.TabIndex = 5;
                   // 
                   // tabPage4
@@ -369,20 +376,23 @@
                   this.tabPage4.Location = new System.Drawing.Point(4, 22);
                   this.tabPage4.Name = "tabPage4";
                   this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage4.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage4.Size = new System.Drawing.Size(552, 312);
                   this.tabPage4.TabIndex = 3;
                   this.tabPage4.Text = "Phone Information";
                   this.tabPage4.UseVisualStyleBackColor = true;
                   // 
                   // groupBox12
                   // 
+                  this.groupBox12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox12.Controls.Add(this.btn_phoneinformation_resetsize);
                   this.groupBox12.Controls.Add(this.btn_phoneinformation_showsize);
                   this.groupBox12.Controls.Add(this.txt_phoneinformation_resolution);
                   this.groupBox12.Controls.Add(this.btn_phoneinformation_setsize);
-                  this.groupBox12.Location = new System.Drawing.Point(354, 183);
+                  this.groupBox12.Location = new System.Drawing.Point(396, 170);
                   this.groupBox12.Name = "groupBox12";
-                  this.groupBox12.Size = new System.Drawing.Size(150, 91);
+                  this.groupBox12.Size = new System.Drawing.Size(150, 136);
                   this.groupBox12.TabIndex = 14;
                   this.groupBox12.TabStop = false;
                   this.groupBox12.Text = "Resolution";
@@ -428,13 +438,15 @@
                   // 
                   // groupBox9
                   // 
+                  this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox9.Controls.Add(this.btn_phoneinformation_resetdpi);
                   this.groupBox9.Controls.Add(this.btn_phoneinformation_show);
                   this.groupBox9.Controls.Add(this.btn_phoneinformation_changedpi);
                   this.groupBox9.Controls.Add(this.txt_phoneinformation_dpi);
-                  this.groupBox9.Location = new System.Drawing.Point(354, 93);
+                  this.groupBox9.Location = new System.Drawing.Point(396, 88);
                   this.groupBox9.Name = "groupBox9";
-                  this.groupBox9.Size = new System.Drawing.Size(150, 84);
+                  this.groupBox9.Size = new System.Drawing.Size(150, 76);
                   this.groupBox9.TabIndex = 13;
                   this.groupBox9.TabStop = false;
                   this.groupBox9.Text = "Change DPI";
@@ -480,11 +492,13 @@
                   // 
                   // groupBox6
                   // 
+                  this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox6.Controls.Add(this.button2);
                   this.groupBox6.Controls.Add(this.btn_phoneinformation_spoofmac);
                   this.groupBox6.Controls.Add(this.btn_phoneinformation_showmac);
                   this.groupBox6.Controls.Add(this.txt_phoneinformation_mac);
-                  this.groupBox6.Location = new System.Drawing.Point(354, 6);
+                  this.groupBox6.Location = new System.Drawing.Point(396, 6);
                   this.groupBox6.Name = "groupBox6";
                   this.groupBox6.Size = new System.Drawing.Size(150, 76);
                   this.groupBox6.TabIndex = 12;
@@ -533,9 +547,8 @@
                   // 
                   // groupBox5
                   // 
-                  this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+                  this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
                   this.groupBox5.Controls.Add(this.btnAlarm);
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_screenshot);
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_activities);
@@ -562,16 +575,16 @@
                   this.groupBox5.Controls.Add(this.btn_phoneinformation_getprop);
                   this.groupBox5.Location = new System.Drawing.Point(6, 6);
                   this.groupBox5.Name = "groupBox5";
-                  this.groupBox5.Size = new System.Drawing.Size(342, 268);
+                  this.groupBox5.Size = new System.Drawing.Size(384, 300);
                   this.groupBox5.TabIndex = 1;
                   this.groupBox5.TabStop = false;
                   this.groupBox5.Text = "Phone Information";
                   // 
                   // btnAlarm
                   // 
-                  this.btnAlarm.Location = new System.Drawing.Point(118, 77);
+                  this.btnAlarm.Location = new System.Drawing.Point(133, 77);
                   this.btnAlarm.Name = "btnAlarm";
-                  this.btnAlarm.Size = new System.Drawing.Size(106, 23);
+                  this.btnAlarm.Size = new System.Drawing.Size(118, 23);
                   this.btnAlarm.TabIndex = 7;
                   this.btnAlarm.Text = "Alarm State";
                   this.btnAlarm.UseVisualStyleBackColor = true;
@@ -579,9 +592,9 @@
                   // 
                   // btn_phoneinformation_screenshot
                   // 
-                  this.btn_phoneinformation_screenshot.Location = new System.Drawing.Point(230, 222);
+                  this.btn_phoneinformation_screenshot.Location = new System.Drawing.Point(257, 222);
                   this.btn_phoneinformation_screenshot.Name = "btn_phoneinformation_screenshot";
-                  this.btn_phoneinformation_screenshot.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_screenshot.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_screenshot.TabIndex = 23;
                   this.btn_phoneinformation_screenshot.Text = "Screenshot";
                   this.btn_phoneinformation_screenshot.UseVisualStyleBackColor = true;
@@ -589,9 +602,9 @@
                   // 
                   // btn_phoneinformation_activities
                   // 
-                  this.btn_phoneinformation_activities.Location = new System.Drawing.Point(118, 222);
+                  this.btn_phoneinformation_activities.Location = new System.Drawing.Point(133, 222);
                   this.btn_phoneinformation_activities.Name = "btn_phoneinformation_activities";
-                  this.btn_phoneinformation_activities.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_activities.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_activities.TabIndex = 22;
                   this.btn_phoneinformation_activities.Text = "Activities";
                   this.btn_phoneinformation_activities.UseVisualStyleBackColor = true;
@@ -599,9 +612,9 @@
                   // 
                   // btn_phoninformation_hosts
                   // 
-                  this.btn_phoninformation_hosts.Location = new System.Drawing.Point(6, 222);
+                  this.btn_phoninformation_hosts.Location = new System.Drawing.Point(9, 222);
                   this.btn_phoninformation_hosts.Name = "btn_phoninformation_hosts";
-                  this.btn_phoninformation_hosts.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoninformation_hosts.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoninformation_hosts.TabIndex = 21;
                   this.btn_phoninformation_hosts.Text = "Hosts";
                   this.btn_phoninformation_hosts.UseVisualStyleBackColor = true;
@@ -609,9 +622,9 @@
                   // 
                   // btn_phoneinformation_uptime
                   // 
-                  this.btn_phoneinformation_uptime.Location = new System.Drawing.Point(230, 106);
+                  this.btn_phoneinformation_uptime.Location = new System.Drawing.Point(257, 106);
                   this.btn_phoneinformation_uptime.Name = "btn_phoneinformation_uptime";
-                  this.btn_phoneinformation_uptime.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_uptime.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_uptime.TabIndex = 11;
                   this.btn_phoneinformation_uptime.Text = "Uptime";
                   this.btn_phoneinformation_uptime.UseVisualStyleBackColor = true;
@@ -619,9 +632,9 @@
                   // 
                   // btn_phoneinformation_netstat
                   // 
-                  this.btn_phoneinformation_netstat.Location = new System.Drawing.Point(230, 164);
+                  this.btn_phoneinformation_netstat.Location = new System.Drawing.Point(257, 164);
                   this.btn_phoneinformation_netstat.Name = "btn_phoneinformation_netstat";
-                  this.btn_phoneinformation_netstat.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_netstat.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_netstat.TabIndex = 17;
                   this.btn_phoneinformation_netstat.Text = "Netstat";
                   this.btn_phoneinformation_netstat.UseVisualStyleBackColor = true;
@@ -629,9 +642,9 @@
                   // 
                   // btn_phoneinformation_diskstats
                   // 
-                  this.btn_phoneinformation_diskstats.Location = new System.Drawing.Point(6, 193);
+                  this.btn_phoneinformation_diskstats.Location = new System.Drawing.Point(9, 193);
                   this.btn_phoneinformation_diskstats.Name = "btn_phoneinformation_diskstats";
-                  this.btn_phoneinformation_diskstats.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_diskstats.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_diskstats.TabIndex = 18;
                   this.btn_phoneinformation_diskstats.Text = "Diskstats";
                   this.btn_phoneinformation_diskstats.UseVisualStyleBackColor = true;
@@ -639,9 +652,9 @@
                   // 
                   // btn_phoneinformation_accounts
                   // 
-                  this.btn_phoneinformation_accounts.Location = new System.Drawing.Point(118, 193);
+                  this.btn_phoneinformation_accounts.Location = new System.Drawing.Point(133, 193);
                   this.btn_phoneinformation_accounts.Name = "btn_phoneinformation_accounts";
-                  this.btn_phoneinformation_accounts.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_accounts.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_accounts.TabIndex = 19;
                   this.btn_phoneinformation_accounts.Text = "Accounts";
                   this.btn_phoneinformation_accounts.UseVisualStyleBackColor = true;
@@ -649,9 +662,9 @@
                   // 
                   // btn_phoneinformation_cpuinfo
                   // 
-                  this.btn_phoneinformation_cpuinfo.Location = new System.Drawing.Point(118, 164);
+                  this.btn_phoneinformation_cpuinfo.Location = new System.Drawing.Point(133, 164);
                   this.btn_phoneinformation_cpuinfo.Name = "btn_phoneinformation_cpuinfo";
-                  this.btn_phoneinformation_cpuinfo.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_cpuinfo.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_cpuinfo.TabIndex = 16;
                   this.btn_phoneinformation_cpuinfo.Text = "CPU Info";
                   this.btn_phoneinformation_cpuinfo.UseVisualStyleBackColor = true;
@@ -659,9 +672,9 @@
                   // 
                   // btn_phoneinformation_wifiinfo
                   // 
-                  this.btn_phoneinformation_wifiinfo.Location = new System.Drawing.Point(6, 164);
+                  this.btn_phoneinformation_wifiinfo.Location = new System.Drawing.Point(9, 164);
                   this.btn_phoneinformation_wifiinfo.Name = "btn_phoneinformation_wifiinfo";
-                  this.btn_phoneinformation_wifiinfo.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_wifiinfo.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_wifiinfo.TabIndex = 15;
                   this.btn_phoneinformation_wifiinfo.Text = "WiFi Info";
                   this.btn_phoneinformation_wifiinfo.UseVisualStyleBackColor = true;
@@ -669,9 +682,9 @@
                   // 
                   // btn_phoneinformation_battery
                   // 
-                  this.btn_phoneinformation_battery.Location = new System.Drawing.Point(230, 135);
+                  this.btn_phoneinformation_battery.Location = new System.Drawing.Point(257, 135);
                   this.btn_phoneinformation_battery.Name = "btn_phoneinformation_battery";
-                  this.btn_phoneinformation_battery.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_battery.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_battery.TabIndex = 14;
                   this.btn_phoneinformation_battery.Text = "Battery Stats";
                   this.btn_phoneinformation_battery.UseVisualStyleBackColor = true;
@@ -679,19 +692,19 @@
                   // 
                   // btn_phoneinformation_dmesg
                   // 
-                  this.btn_phoneinformation_dmesg.Location = new System.Drawing.Point(118, 135);
+                  this.btn_phoneinformation_dmesg.Location = new System.Drawing.Point(133, 135);
                   this.btn_phoneinformation_dmesg.Name = "btn_phoneinformation_dmesg";
-                  this.btn_phoneinformation_dmesg.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_dmesg.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_dmesg.TabIndex = 13;
-                  this.btn_phoneinformation_dmesg.Text = "Kernel Debugging";
+                  this.btn_phoneinformation_dmesg.Text = "Kernel Debug";
                   this.btn_phoneinformation_dmesg.UseVisualStyleBackColor = true;
                   this.btn_phoneinformation_dmesg.Click += new System.EventHandler(this.btn_phoneinformation_dmesg_Click);
                   // 
                   // btn_phoneinformation_getimei
                   // 
-                  this.btn_phoneinformation_getimei.Location = new System.Drawing.Point(6, 135);
+                  this.btn_phoneinformation_getimei.Location = new System.Drawing.Point(9, 135);
                   this.btn_phoneinformation_getimei.Name = "btn_phoneinformation_getimei";
-                  this.btn_phoneinformation_getimei.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_getimei.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_getimei.TabIndex = 12;
                   this.btn_phoneinformation_getimei.Text = "Get IMEI";
                   this.btn_phoneinformation_getimei.UseVisualStyleBackColor = true;
@@ -699,9 +712,9 @@
                   // 
                   // btn_phoneinformation_permissions
                   // 
-                  this.btn_phoneinformation_permissions.Location = new System.Drawing.Point(230, 193);
+                  this.btn_phoneinformation_permissions.Location = new System.Drawing.Point(257, 193);
                   this.btn_phoneinformation_permissions.Name = "btn_phoneinformation_permissions";
-                  this.btn_phoneinformation_permissions.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_permissions.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_permissions.TabIndex = 20;
                   this.btn_phoneinformation_permissions.Text = "Permissions";
                   this.btn_phoneinformation_permissions.UseVisualStyleBackColor = true;
@@ -709,9 +722,9 @@
                   // 
                   // btn_phoneinformation_maxusers
                   // 
-                  this.btn_phoneinformation_maxusers.Location = new System.Drawing.Point(118, 106);
+                  this.btn_phoneinformation_maxusers.Location = new System.Drawing.Point(133, 106);
                   this.btn_phoneinformation_maxusers.Name = "btn_phoneinformation_maxusers";
-                  this.btn_phoneinformation_maxusers.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_maxusers.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_maxusers.TabIndex = 10;
                   this.btn_phoneinformation_maxusers.Text = "Max Users";
                   this.btn_phoneinformation_maxusers.UseVisualStyleBackColor = true;
@@ -719,9 +732,9 @@
                   // 
                   // btn_phoneinformation_users
                   // 
-                  this.btn_phoneinformation_users.Location = new System.Drawing.Point(6, 106);
+                  this.btn_phoneinformation_users.Location = new System.Drawing.Point(9, 106);
                   this.btn_phoneinformation_users.Name = "btn_phoneinformation_users";
-                  this.btn_phoneinformation_users.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_users.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_users.TabIndex = 9;
                   this.btn_phoneinformation_users.Text = "All Users";
                   this.btn_phoneinformation_users.UseVisualStyleBackColor = true;
@@ -729,9 +742,9 @@
                   // 
                   // btn_phoneinformation_libraries
                   // 
-                  this.btn_phoneinformation_libraries.Location = new System.Drawing.Point(230, 77);
+                  this.btn_phoneinformation_libraries.Location = new System.Drawing.Point(257, 77);
                   this.btn_phoneinformation_libraries.Name = "btn_phoneinformation_libraries";
-                  this.btn_phoneinformation_libraries.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_libraries.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_libraries.TabIndex = 8;
                   this.btn_phoneinformation_libraries.Text = "Libraries";
                   this.btn_phoneinformation_libraries.UseVisualStyleBackColor = true;
@@ -739,9 +752,9 @@
                   // 
                   // btn_phoneinformation_features
                   // 
-                  this.btn_phoneinformation_features.Location = new System.Drawing.Point(230, 48);
+                  this.btn_phoneinformation_features.Location = new System.Drawing.Point(257, 48);
                   this.btn_phoneinformation_features.Name = "btn_phoneinformation_features";
-                  this.btn_phoneinformation_features.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_features.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_features.TabIndex = 5;
                   this.btn_phoneinformation_features.Text = "Features";
                   this.btn_phoneinformation_features.UseVisualStyleBackColor = true;
@@ -749,9 +762,9 @@
                   // 
                   // btn_phoneinformation_processes
                   // 
-                  this.btn_phoneinformation_processes.Location = new System.Drawing.Point(6, 48);
+                  this.btn_phoneinformation_processes.Location = new System.Drawing.Point(9, 48);
                   this.btn_phoneinformation_processes.Name = "btn_phoneinformation_processes";
-                  this.btn_phoneinformation_processes.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_processes.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_processes.TabIndex = 3;
                   this.btn_phoneinformation_processes.Text = "Show Processes";
                   this.btn_phoneinformation_processes.UseVisualStyleBackColor = true;
@@ -759,9 +772,9 @@
                   // 
                   // btn_phoneinformation_meminfo
                   // 
-                  this.btn_phoneinformation_meminfo.Location = new System.Drawing.Point(118, 48);
+                  this.btn_phoneinformation_meminfo.Location = new System.Drawing.Point(133, 48);
                   this.btn_phoneinformation_meminfo.Name = "btn_phoneinformation_meminfo";
-                  this.btn_phoneinformation_meminfo.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_meminfo.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_meminfo.TabIndex = 4;
                   this.btn_phoneinformation_meminfo.Text = "Memory Info";
                   this.btn_phoneinformation_meminfo.UseVisualStyleBackColor = true;
@@ -769,9 +782,9 @@
                   // 
                   // btn_phoneinformation_dumpsys
                   // 
-                  this.btn_phoneinformation_dumpsys.Location = new System.Drawing.Point(118, 19);
+                  this.btn_phoneinformation_dumpsys.Location = new System.Drawing.Point(133, 19);
                   this.btn_phoneinformation_dumpsys.Name = "btn_phoneinformation_dumpsys";
-                  this.btn_phoneinformation_dumpsys.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_dumpsys.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_dumpsys.TabIndex = 1;
                   this.btn_phoneinformation_dumpsys.Text = "Dumpsys";
                   this.btn_phoneinformation_dumpsys.UseVisualStyleBackColor = true;
@@ -779,9 +792,9 @@
                   // 
                   // btn_phoneinformation_logcat
                   // 
-                  this.btn_phoneinformation_logcat.Location = new System.Drawing.Point(230, 19);
+                  this.btn_phoneinformation_logcat.Location = new System.Drawing.Point(257, 19);
                   this.btn_phoneinformation_logcat.Name = "btn_phoneinformation_logcat";
-                  this.btn_phoneinformation_logcat.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_logcat.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_logcat.TabIndex = 2;
                   this.btn_phoneinformation_logcat.Text = "Logcat";
                   this.btn_phoneinformation_logcat.UseVisualStyleBackColor = true;
@@ -789,9 +802,9 @@
                   // 
                   // btn_phoneinformation_installedpackages
                   // 
-                  this.btn_phoneinformation_installedpackages.Location = new System.Drawing.Point(6, 77);
+                  this.btn_phoneinformation_installedpackages.Location = new System.Drawing.Point(9, 77);
                   this.btn_phoneinformation_installedpackages.Name = "btn_phoneinformation_installedpackages";
-                  this.btn_phoneinformation_installedpackages.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_installedpackages.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_installedpackages.TabIndex = 6;
                   this.btn_phoneinformation_installedpackages.Text = "All Packages";
                   this.btn_phoneinformation_installedpackages.UseVisualStyleBackColor = true;
@@ -799,9 +812,9 @@
                   // 
                   // btn_phoneinformation_getprop
                   // 
-                  this.btn_phoneinformation_getprop.Location = new System.Drawing.Point(6, 19);
+                  this.btn_phoneinformation_getprop.Location = new System.Drawing.Point(9, 19);
                   this.btn_phoneinformation_getprop.Name = "btn_phoneinformation_getprop";
-                  this.btn_phoneinformation_getprop.Size = new System.Drawing.Size(106, 23);
+                  this.btn_phoneinformation_getprop.Size = new System.Drawing.Size(118, 23);
                   this.btn_phoneinformation_getprop.TabIndex = 0;
                   this.btn_phoneinformation_getprop.Text = "Get Prop";
                   this.btn_phoneinformation_getprop.UseVisualStyleBackColor = true;
@@ -815,21 +828,24 @@
                   this.tabPage2.Location = new System.Drawing.Point(4, 22);
                   this.tabPage2.Name = "tabPage2";
                   this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage2.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage2.Size = new System.Drawing.Size(552, 312);
                   this.tabPage2.TabIndex = 1;
                   this.tabPage2.Text = "Files and Sideload";
                   this.tabPage2.UseVisualStyleBackColor = true;
                   // 
                   // groupBox10
                   // 
+                  this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox10.Controls.Add(this.label2);
                   this.groupBox10.Controls.Add(this.btn_pull_pull);
                   this.groupBox10.Controls.Add(this.btn_pull_saveto);
                   this.groupBox10.Controls.Add(this.txt_pull_pathfrom);
                   this.groupBox10.Controls.Add(this.txt_pull_pathto);
-                  this.groupBox10.Location = new System.Drawing.Point(6, 189);
+                  this.groupBox10.Location = new System.Drawing.Point(6, 208);
                   this.groupBox10.Name = "groupBox10";
-                  this.groupBox10.Size = new System.Drawing.Size(498, 85);
+                  this.groupBox10.Size = new System.Drawing.Size(540, 98);
                   this.groupBox10.TabIndex = 3;
                   this.groupBox10.TabStop = false;
                   this.groupBox10.Text = "Pull Files";
@@ -845,7 +861,7 @@
                   // 
                   // btn_pull_pull
                   // 
-                  this.btn_pull_pull.Location = new System.Drawing.Point(417, 55);
+                  this.btn_pull_pull.Location = new System.Drawing.Point(459, 58);
                   this.btn_pull_pull.Name = "btn_pull_pull";
                   this.btn_pull_pull.Size = new System.Drawing.Size(75, 23);
                   this.btn_pull_pull.TabIndex = 10;
@@ -855,7 +871,7 @@
                   // 
                   // btn_pull_saveto
                   // 
-                  this.btn_pull_saveto.Location = new System.Drawing.Point(417, 29);
+                  this.btn_pull_saveto.Location = new System.Drawing.Point(459, 29);
                   this.btn_pull_saveto.Name = "btn_pull_saveto";
                   this.btn_pull_saveto.Size = new System.Drawing.Size(75, 23);
                   this.btn_pull_saveto.TabIndex = 8;
@@ -865,9 +881,9 @@
                   // 
                   // txt_pull_pathfrom
                   // 
-                  this.txt_pull_pathfrom.Location = new System.Drawing.Point(6, 57);
+                  this.txt_pull_pathfrom.Location = new System.Drawing.Point(6, 60);
                   this.txt_pull_pathfrom.Name = "txt_pull_pathfrom";
-                  this.txt_pull_pathfrom.Size = new System.Drawing.Size(405, 20);
+                  this.txt_pull_pathfrom.Size = new System.Drawing.Size(447, 20);
                   this.txt_pull_pathfrom.TabIndex = 9;
                   this.txt_pull_pathfrom.Text = "/sdcard/";
                   this.txt_pull_pathfrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_pull_pathfrom_KeyDown);
@@ -876,22 +892,21 @@
                   // 
                   this.txt_pull_pathto.Location = new System.Drawing.Point(6, 31);
                   this.txt_pull_pathto.Name = "txt_pull_pathto";
-                  this.txt_pull_pathto.Size = new System.Drawing.Size(405, 20);
+                  this.txt_pull_pathto.Size = new System.Drawing.Size(447, 20);
                   this.txt_pull_pathto.TabIndex = 7;
                   // 
                   // groupBox7
                   // 
-                  this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+                  this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox7.Controls.Add(this.label5);
                   this.groupBox7.Controls.Add(this.btn_push_push);
                   this.groupBox7.Controls.Add(this.btn_push_openfile);
                   this.groupBox7.Controls.Add(this.txt_push_tofilepath);
                   this.groupBox7.Controls.Add(this.txt_push_fromfilepath);
-                  this.groupBox7.Location = new System.Drawing.Point(6, 98);
+                  this.groupBox7.Location = new System.Drawing.Point(6, 107);
                   this.groupBox7.Name = "groupBox7";
-                  this.groupBox7.Size = new System.Drawing.Size(498, 85);
+                  this.groupBox7.Size = new System.Drawing.Size(540, 95);
                   this.groupBox7.TabIndex = 2;
                   this.groupBox7.TabStop = false;
                   this.groupBox7.Text = "Push Files";
@@ -907,7 +922,7 @@
                   // 
                   // btn_push_push
                   // 
-                  this.btn_push_push.Location = new System.Drawing.Point(417, 56);
+                  this.btn_push_push.Location = new System.Drawing.Point(459, 56);
                   this.btn_push_push.Name = "btn_push_push";
                   this.btn_push_push.Size = new System.Drawing.Size(75, 23);
                   this.btn_push_push.TabIndex = 6;
@@ -917,7 +932,7 @@
                   // 
                   // btn_push_openfile
                   // 
-                  this.btn_push_openfile.Location = new System.Drawing.Point(417, 17);
+                  this.btn_push_openfile.Location = new System.Drawing.Point(459, 19);
                   this.btn_push_openfile.Name = "btn_push_openfile";
                   this.btn_push_openfile.Size = new System.Drawing.Size(75, 23);
                   this.btn_push_openfile.TabIndex = 4;
@@ -929,7 +944,7 @@
                   // 
                   this.txt_push_tofilepath.Location = new System.Drawing.Point(6, 58);
                   this.txt_push_tofilepath.Name = "txt_push_tofilepath";
-                  this.txt_push_tofilepath.Size = new System.Drawing.Size(405, 20);
+                  this.txt_push_tofilepath.Size = new System.Drawing.Size(447, 20);
                   this.txt_push_tofilepath.TabIndex = 5;
                   this.txt_push_tofilepath.Text = "/sdcard/";
                   this.txt_push_tofilepath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_push_tofilepath_KeyDown);
@@ -938,13 +953,12 @@
                   // 
                   this.txt_push_fromfilepath.Location = new System.Drawing.Point(6, 19);
                   this.txt_push_fromfilepath.Name = "txt_push_fromfilepath";
-                  this.txt_push_fromfilepath.Size = new System.Drawing.Size(405, 20);
+                  this.txt_push_fromfilepath.Size = new System.Drawing.Size(447, 20);
                   this.txt_push_fromfilepath.TabIndex = 3;
                   // 
                   // groupBox2
                   // 
-                  this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+                  this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox2.Controls.Add(this.button1);
                   this.groupBox2.Controls.Add(this.txt_sideload_path);
@@ -952,14 +966,14 @@
                   this.groupBox2.Controls.Add(this.btn_sideload_sideload);
                   this.groupBox2.Location = new System.Drawing.Point(6, 6);
                   this.groupBox2.Name = "groupBox2";
-                  this.groupBox2.Size = new System.Drawing.Size(498, 86);
+                  this.groupBox2.Size = new System.Drawing.Size(540, 95);
                   this.groupBox2.TabIndex = 1;
                   this.groupBox2.TabStop = false;
                   this.groupBox2.Text = "Sideload";
                   // 
                   // button1
                   // 
-                  this.button1.Location = new System.Drawing.Point(333, 53);
+                  this.button1.Location = new System.Drawing.Point(378, 53);
                   this.button1.Name = "button1";
                   this.button1.Size = new System.Drawing.Size(75, 23);
                   this.button1.TabIndex = 1;
@@ -971,7 +985,7 @@
                   // 
                   this.txt_sideload_path.Location = new System.Drawing.Point(6, 55);
                   this.txt_sideload_path.Name = "txt_sideload_path";
-                  this.txt_sideload_path.Size = new System.Drawing.Size(321, 20);
+                  this.txt_sideload_path.Size = new System.Drawing.Size(366, 20);
                   this.txt_sideload_path.TabIndex = 0;
                   // 
                   // label1
@@ -985,7 +999,7 @@
                   // 
                   // btn_sideload_sideload
                   // 
-                  this.btn_sideload_sideload.Location = new System.Drawing.Point(414, 53);
+                  this.btn_sideload_sideload.Location = new System.Drawing.Point(459, 53);
                   this.btn_sideload_sideload.Name = "btn_sideload_sideload";
                   this.btn_sideload_sideload.Size = new System.Drawing.Size(75, 23);
                   this.btn_sideload_sideload.TabIndex = 2;
@@ -995,43 +1009,40 @@
                   // 
                   // tabPage3
                   // 
+                  this.tabPage3.Controls.Add(this.groupBox14);
                   this.tabPage3.Controls.Add(this.groupBox8);
                   this.tabPage3.Controls.Add(this.groupBox3);
                   this.tabPage3.Location = new System.Drawing.Point(4, 22);
                   this.tabPage3.Name = "tabPage3";
                   this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage3.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage3.Size = new System.Drawing.Size(552, 312);
                   this.tabPage3.TabIndex = 2;
                   this.tabPage3.Text = "Apps and Backup";
                   this.tabPage3.UseVisualStyleBackColor = true;
                   // 
                   // groupBox8
                   // 
+                  this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
                   this.groupBox8.Controls.Add(this.label8);
                   this.groupBox8.Controls.Add(this.txt_backup_packagename);
                   this.groupBox8.Controls.Add(this.cb_backup_package);
-                  this.groupBox8.Controls.Add(this.btn_restore_restore);
-                  this.groupBox8.Controls.Add(this.btn_restore_openfile);
-                  this.groupBox8.Controls.Add(this.label4);
-                  this.groupBox8.Controls.Add(this.txt_restore_path);
                   this.groupBox8.Controls.Add(this.btn_backup_saveto);
                   this.groupBox8.Controls.Add(this.cb_backup_nosystem);
                   this.groupBox8.Controls.Add(this.cb_backup_shared);
                   this.groupBox8.Controls.Add(this.cb_backup_withapk);
-                  this.groupBox8.Controls.Add(this.label3);
                   this.groupBox8.Controls.Add(this.btn_backup_backup);
                   this.groupBox8.Controls.Add(this.txt_backup_path);
                   this.groupBox8.Location = new System.Drawing.Point(6, 111);
                   this.groupBox8.Name = "groupBox8";
-                  this.groupBox8.Size = new System.Drawing.Size(498, 163);
+                  this.groupBox8.Size = new System.Drawing.Size(540, 102);
                   this.groupBox8.TabIndex = 7;
                   this.groupBox8.TabStop = false;
-                  this.groupBox8.Text = "Backup and Restore";
+                  this.groupBox8.Text = "Backup";
                   // 
                   // label8
                   // 
                   this.label8.AutoSize = true;
-                  this.label8.Location = new System.Drawing.Point(218, 27);
+                  this.label8.Location = new System.Drawing.Point(260, 16);
                   this.label8.Name = "label8";
                   this.label8.Size = new System.Drawing.Size(83, 13);
                   this.label8.TabIndex = 14;
@@ -1040,7 +1051,7 @@
                   // 
                   // txt_backup_packagename
                   // 
-                  this.txt_backup_packagename.Location = new System.Drawing.Point(221, 43);
+                  this.txt_backup_packagename.Location = new System.Drawing.Point(263, 32);
                   this.txt_backup_packagename.Name = "txt_backup_packagename";
                   this.txt_backup_packagename.Size = new System.Drawing.Size(109, 20);
                   this.txt_backup_packagename.TabIndex = 7;
@@ -1049,7 +1060,7 @@
                   // cb_backup_package
                   // 
                   this.cb_backup_package.AutoSize = true;
-                  this.cb_backup_package.Location = new System.Drawing.Point(7, 69);
+                  this.cb_backup_package.Location = new System.Drawing.Point(7, 58);
                   this.cb_backup_package.Name = "cb_backup_package";
                   this.cb_backup_package.Size = new System.Drawing.Size(109, 17);
                   this.cb_backup_package.TabIndex = 10;
@@ -1059,7 +1070,7 @@
                   // 
                   // btn_restore_restore
                   // 
-                  this.btn_restore_restore.Location = new System.Drawing.Point(418, 116);
+                  this.btn_restore_restore.Location = new System.Drawing.Point(460, 16);
                   this.btn_restore_restore.Name = "btn_restore_restore";
                   this.btn_restore_restore.Size = new System.Drawing.Size(75, 23);
                   this.btn_restore_restore.TabIndex = 16;
@@ -1069,7 +1080,7 @@
                   // 
                   // btn_restore_openfile
                   // 
-                  this.btn_restore_openfile.Location = new System.Drawing.Point(337, 117);
+                  this.btn_restore_openfile.Location = new System.Drawing.Point(379, 17);
                   this.btn_restore_openfile.Name = "btn_restore_openfile";
                   this.btn_restore_openfile.Size = new System.Drawing.Size(75, 23);
                   this.btn_restore_openfile.TabIndex = 15;
@@ -1077,25 +1088,16 @@
                   this.btn_restore_openfile.UseVisualStyleBackColor = true;
                   this.btn_restore_openfile.Click += new System.EventHandler(this.btn_restore_openfile_Click);
                   // 
-                  // label4
-                  // 
-                  this.label4.AutoSize = true;
-                  this.label4.Location = new System.Drawing.Point(7, 103);
-                  this.label4.Name = "label4";
-                  this.label4.Size = new System.Drawing.Size(44, 13);
-                  this.label4.TabIndex = 9;
-                  this.label4.Text = "Restore";
-                  // 
                   // txt_restore_path
                   // 
-                  this.txt_restore_path.Location = new System.Drawing.Point(7, 119);
+                  this.txt_restore_path.Location = new System.Drawing.Point(6, 19);
                   this.txt_restore_path.Name = "txt_restore_path";
-                  this.txt_restore_path.Size = new System.Drawing.Size(324, 20);
+                  this.txt_restore_path.Size = new System.Drawing.Size(366, 20);
                   this.txt_restore_path.TabIndex = 14;
                   // 
                   // btn_backup_saveto
                   // 
-                  this.btn_backup_saveto.Location = new System.Drawing.Point(336, 41);
+                  this.btn_backup_saveto.Location = new System.Drawing.Point(378, 30);
                   this.btn_backup_saveto.Name = "btn_backup_saveto";
                   this.btn_backup_saveto.Size = new System.Drawing.Size(75, 23);
                   this.btn_backup_saveto.TabIndex = 8;
@@ -1106,7 +1108,7 @@
                   // cb_backup_nosystem
                   // 
                   this.cb_backup_nosystem.AutoSize = true;
-                  this.cb_backup_nosystem.Location = new System.Drawing.Point(258, 69);
+                  this.cb_backup_nosystem.Location = new System.Drawing.Point(295, 58);
                   this.cb_backup_nosystem.Name = "cb_backup_nosystem";
                   this.cb_backup_nosystem.Size = new System.Drawing.Size(77, 17);
                   this.cb_backup_nosystem.TabIndex = 13;
@@ -1116,7 +1118,7 @@
                   // cb_backup_shared
                   // 
                   this.cb_backup_shared.AutoSize = true;
-                  this.cb_backup_shared.Location = new System.Drawing.Point(193, 69);
+                  this.cb_backup_shared.Location = new System.Drawing.Point(229, 58);
                   this.cb_backup_shared.Name = "cb_backup_shared";
                   this.cb_backup_shared.Size = new System.Drawing.Size(60, 17);
                   this.cb_backup_shared.TabIndex = 12;
@@ -1126,25 +1128,16 @@
                   // cb_backup_withapk
                   // 
                   this.cb_backup_withapk.AutoSize = true;
-                  this.cb_backup_withapk.Location = new System.Drawing.Point(117, 69);
+                  this.cb_backup_withapk.Location = new System.Drawing.Point(151, 58);
                   this.cb_backup_withapk.Name = "cb_backup_withapk";
                   this.cb_backup_withapk.Size = new System.Drawing.Size(72, 17);
                   this.cb_backup_withapk.TabIndex = 11;
                   this.cb_backup_withapk.Text = "With APK";
                   this.cb_backup_withapk.UseVisualStyleBackColor = true;
                   // 
-                  // label3
-                  // 
-                  this.label3.AutoSize = true;
-                  this.label3.Location = new System.Drawing.Point(3, 27);
-                  this.label3.Name = "label3";
-                  this.label3.Size = new System.Drawing.Size(44, 13);
-                  this.label3.TabIndex = 3;
-                  this.label3.Text = "Backup";
-                  // 
                   // btn_backup_backup
                   // 
-                  this.btn_backup_backup.Location = new System.Drawing.Point(417, 41);
+                  this.btn_backup_backup.Location = new System.Drawing.Point(459, 30);
                   this.btn_backup_backup.Name = "btn_backup_backup";
                   this.btn_backup_backup.Size = new System.Drawing.Size(75, 23);
                   this.btn_backup_backup.TabIndex = 9;
@@ -1154,16 +1147,14 @@
                   // 
                   // txt_backup_path
                   // 
-                  this.txt_backup_path.Location = new System.Drawing.Point(6, 43);
+                  this.txt_backup_path.Location = new System.Drawing.Point(6, 32);
                   this.txt_backup_path.Name = "txt_backup_path";
-                  this.txt_backup_path.Size = new System.Drawing.Size(324, 20);
+                  this.txt_backup_path.Size = new System.Drawing.Size(366, 20);
                   this.txt_backup_path.TabIndex = 6;
                   // 
                   // groupBox3
                   // 
-                  this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+                  this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Right;
                   this.groupBox3.Controls.Add(this.btn_packages_installed);
                   this.groupBox3.Controls.Add(this.btn_packages_install);
                   this.groupBox3.Controls.Add(this.txt_packages_package);
@@ -1172,14 +1163,14 @@
                   this.groupBox3.Controls.Add(this.btn_packages_open);
                   this.groupBox3.Location = new System.Drawing.Point(6, 6);
                   this.groupBox3.Name = "groupBox3";
-                  this.groupBox3.Size = new System.Drawing.Size(498, 99);
+                  this.groupBox3.Size = new System.Drawing.Size(540, 99);
                   this.groupBox3.TabIndex = 6;
                   this.groupBox3.TabStop = false;
                   this.groupBox3.Text = "Install and Uninstall";
                   // 
                   // btn_packages_installed
                   // 
-                  this.btn_packages_installed.Location = new System.Drawing.Point(336, 57);
+                  this.btn_packages_installed.Location = new System.Drawing.Point(378, 57);
                   this.btn_packages_installed.Name = "btn_packages_installed";
                   this.btn_packages_installed.Size = new System.Drawing.Size(75, 23);
                   this.btn_packages_installed.TabIndex = 4;
@@ -1189,7 +1180,7 @@
                   // 
                   // btn_packages_install
                   // 
-                  this.btn_packages_install.Location = new System.Drawing.Point(417, 20);
+                  this.btn_packages_install.Location = new System.Drawing.Point(459, 20);
                   this.btn_packages_install.Name = "btn_packages_install";
                   this.btn_packages_install.Size = new System.Drawing.Size(75, 23);
                   this.btn_packages_install.TabIndex = 2;
@@ -1201,12 +1192,12 @@
                   // 
                   this.txt_packages_package.Location = new System.Drawing.Point(6, 59);
                   this.txt_packages_package.Name = "txt_packages_package";
-                  this.txt_packages_package.Size = new System.Drawing.Size(324, 20);
+                  this.txt_packages_package.Size = new System.Drawing.Size(366, 20);
                   this.txt_packages_package.TabIndex = 3;
                   // 
                   // btn_packages_uninstall
                   // 
-                  this.btn_packages_uninstall.Location = new System.Drawing.Point(417, 57);
+                  this.btn_packages_uninstall.Location = new System.Drawing.Point(459, 57);
                   this.btn_packages_uninstall.Name = "btn_packages_uninstall";
                   this.btn_packages_uninstall.Size = new System.Drawing.Size(75, 23);
                   this.btn_packages_uninstall.TabIndex = 5;
@@ -1218,12 +1209,12 @@
                   // 
                   this.txt_packages_path.Location = new System.Drawing.Point(6, 22);
                   this.txt_packages_path.Name = "txt_packages_path";
-                  this.txt_packages_path.Size = new System.Drawing.Size(324, 20);
+                  this.txt_packages_path.Size = new System.Drawing.Size(366, 20);
                   this.txt_packages_path.TabIndex = 0;
                   // 
                   // btn_packages_open
                   // 
-                  this.btn_packages_open.Location = new System.Drawing.Point(336, 20);
+                  this.btn_packages_open.Location = new System.Drawing.Point(378, 20);
                   this.btn_packages_open.Name = "btn_packages_open";
                   this.btn_packages_open.Size = new System.Drawing.Size(75, 23);
                   this.btn_packages_open.TabIndex = 1;
@@ -1241,7 +1232,7 @@
                   this.tabPage5.Location = new System.Drawing.Point(4, 22);
                   this.tabPage5.Name = "tabPage5";
                   this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-                  this.tabPage5.Size = new System.Drawing.Size(510, 280);
+                  this.tabPage5.Size = new System.Drawing.Size(552, 312);
                   this.tabPage5.TabIndex = 4;
                   this.tabPage5.Text = "About";
                   this.tabPage5.UseVisualStyleBackColor = true;
@@ -1307,11 +1298,23 @@
                   // 
                   this.openFileDialog1.FileName = "openFileDialog1";
                   // 
+                  // groupBox14
+                  // 
+                  this.groupBox14.Controls.Add(this.txt_restore_path);
+                  this.groupBox14.Controls.Add(this.btn_restore_openfile);
+                  this.groupBox14.Controls.Add(this.btn_restore_restore);
+                  this.groupBox14.Location = new System.Drawing.Point(6, 219);
+                  this.groupBox14.Name = "groupBox14";
+                  this.groupBox14.Size = new System.Drawing.Size(540, 87);
+                  this.groupBox14.TabIndex = 8;
+                  this.groupBox14.TabStop = false;
+                  this.groupBox14.Text = "Restore";
+                  // 
                   // MainForm
                   // 
                   this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                   this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                  this.ClientSize = new System.Drawing.Size(542, 329);
+                  this.ClientSize = new System.Drawing.Size(584, 361);
                   this.Controls.Add(this.tabControl1);
                   this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
                   this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1353,6 +1356,8 @@
                   this.groupBox3.PerformLayout();
                   this.tabPage5.ResumeLayout(false);
                   this.tabPage5.PerformLayout();
+                  this.groupBox14.ResumeLayout(false);
+                  this.groupBox14.PerformLayout();
                   this.ResumeLayout(false);
 
             }
@@ -1423,7 +1428,6 @@
             private System.Windows.Forms.Button btn_phoneinformation_accounts;
             private System.Windows.Forms.Button btn_phoneinformation_cpuinfo;
             private System.Windows.Forms.GroupBox groupBox8;
-            private System.Windows.Forms.Label label3;
             private System.Windows.Forms.Button btn_backup_backup;
             private System.Windows.Forms.TextBox txt_backup_path;
             private System.Windows.Forms.CheckBox cb_backup_withapk;
@@ -1432,7 +1436,6 @@
             private System.Windows.Forms.Button btn_backup_saveto;
             private System.Windows.Forms.Button btn_restore_restore;
             private System.Windows.Forms.Button btn_restore_openfile;
-            private System.Windows.Forms.Label label4;
             private System.Windows.Forms.TextBox txt_restore_path;
             private System.Windows.Forms.Label label8;
             private System.Windows.Forms.TextBox txt_backup_packagename;
@@ -1468,6 +1471,7 @@
             public System.Windows.Forms.TabControl tabControl1;
             public System.Windows.Forms.TextBox txt_customcommand;
             public System.Windows.Forms.Button btnKillserver;
+            private System.Windows.Forms.GroupBox groupBox14;
       }
 }
 
