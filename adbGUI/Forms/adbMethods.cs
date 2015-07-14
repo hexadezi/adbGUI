@@ -123,10 +123,7 @@ namespace adbGUI
                         {
                               return "";
                         }
-                        else
-                        {
-                              return "-s " + _mainForm.cbSerials.SelectedItem.ToString();
-                        }
+                        return "-s " + _mainForm.cbSerials.SelectedItem;
                   }
                   catch (Exception)
                   {
@@ -377,8 +374,12 @@ namespace adbGUI
                         _mainForm.btnKillserver.Invoke((MethodInvoker)(() => _mainForm.btnKillserver.ForeColor = Color.Red));
                         _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = "Starting server..."));
 
+
+                        MethodInvoker action = delegate { _mainForm.cbSerials.Items.Clear(); };
+                        _mainForm.cbSerials.BeginInvoke(action);
+
                         StartServer();
-                        Thread.Sleep(300);
+                        Thread.Sleep(100);
                         process.Start();
                   }
 
