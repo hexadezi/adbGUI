@@ -18,10 +18,8 @@ namespace adbGUI
             public MainForm()
             {
                   InitializeComponent();
-                  _adbMethods = new adbMethods(this);
 
-                  //Thread timerThread = new Thread(timer);
-                  //timerThread.Start();
+                  _adbMethods = new adbMethods(this);
 
                   txt_customcommand.Select();
             }
@@ -668,7 +666,7 @@ namespace adbGUI
                         {
                               RefreshDevices.Start();
                         }
-                        Thread.Sleep(1000);
+                        Thread.Sleep(700);
 
                   }
 
@@ -676,7 +674,6 @@ namespace adbGUI
 
             private void MainForm_Load(object sender, EventArgs e)
             {
-
                   Thread timerThread = new Thread(timer);
                   timerThread.Start();
             }
