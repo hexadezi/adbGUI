@@ -622,14 +622,8 @@ namespace adbGUI
                   tr.Start();
             }
 
-            private void txt_devices_TextChanged(object sender, EventArgs e)
-            {
-                  //Thread tr = new Thread(AdbMethods.SerialnumberToComboBox);
-                  //tr.IsBackground = true;
-                  //tr.Start();
-            }
 
-            private void timer()
+            private void Timer()
             {
                   while (true)
                   {
@@ -674,7 +668,7 @@ namespace adbGUI
 
             private void MainForm_Load(object sender, EventArgs e)
             {
-                  Thread timerThread = new Thread(timer);
+                  Thread timerThread = new Thread(Timer);
                   timerThread.Start();
             }
 

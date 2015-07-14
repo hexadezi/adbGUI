@@ -359,7 +359,6 @@
                   this.txt_devices.Name = "txt_devices";
                   this.txt_devices.Size = new System.Drawing.Size(498, 109);
                   this.txt_devices.TabIndex = 5;
-                  this.txt_devices.TextChanged += new System.EventHandler(this.txt_devices_TextChanged);
                   // 
                   // tabPage4
                   // 
