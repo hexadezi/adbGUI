@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI
@@ -47,7 +47,7 @@ namespace adbGUI
                   var v = new Viewer();
 
                   v.txt_output.TabIndex = 2;
-                  v.txt_output.Text += value;
+                  v.txt_output.Text = value;
                   v.Text = title;
                   v.WindowState = windowstate;
                   v.Width = x;
@@ -60,7 +60,7 @@ namespace adbGUI
             {
                   if (_mainForm.cbSerials.SelectedItem != null)
                   {
-                        string serial = Serialno();
+                        string serial = SelectedSerialno();
                         var thread = new Thread(delegate() { CallAdb(a, b, titel, width, height, windowstate, serial); });
                         thread.IsBackground = true;
                         thread.Start();
@@ -68,10 +68,10 @@ namespace adbGUI
                         {
                               _mainForm.tabControl1.Enabled = false;
                               Application.DoEvents();
-                              //Cursor = Cursors.AppStarting;
+                              _mainForm.Cursor = Cursors.AppStarting;
                         }
                         _mainForm.tabControl1.Enabled = true;
-                        //Cursor = Cursors.Default;
+                        _mainForm.Cursor = Cursors.Default;
                   }
                   else
                   {
@@ -115,7 +115,7 @@ namespace adbGUI
             }
 
             //Returns the selected serial number in the combobox with the -s argument
-            private string Serialno()
+            private string SelectedSerialno()
             {
                   try
                   {
@@ -145,7 +145,7 @@ namespace adbGUI
                   else
                   {
                         const string filename = "cmd.exe";
-                        var arguments = "/C prompt $g & tools\\adb " + Serialno() + " " + x + " & echo. & pause";
+                        var arguments = "/C prompt $g & tools\\adb " + SelectedSerialno() + " " + x + " & echo. & pause";
                         var startInfo = new ProcessStartInfo
                         {
                               FileName = filename,
@@ -163,7 +163,7 @@ namespace adbGUI
                   if (_mainForm.cbSerials.SelectedItem != null)
                   {
                         var filename = "cmd.exe";
-                        var arguments = "/C " + x + " tools\\adb " + Serialno() + " " + y;
+                        var arguments = "/C " + x + " tools\\adb " + SelectedSerialno() + " " + y;
                         var startInfo = new ProcessStartInfo
                         {
                               FileName = filename,
@@ -182,124 +182,130 @@ namespace adbGUI
             }
 
             //Checks if server is running and updates application title
-            public void IsRunning()
-            {
-                  var a = "adbGUI - Server running";
-                  var b = "adbGUI - Server not running";
+            //public void IsRunning()
+            //{
+            //      var a = "adbGUI - Server running";
+            //      var b = "adbGUI - Server not running";
 
-                        if (Process.GetProcessesByName("adb").Length > 0)
-                        {
-                              if (_mainForm.InvokeRequired)
-                              {
-                                    _mainForm.Invoke(new Action<string>(ServerOn), a);
-                              }
-                        }
-                        else
-                        {
-                              if (_mainForm.InvokeRequired)
-                              {
-                                    _mainForm.Invoke(new Action<string>(ServerOff), b);
-                              }
-                        }
-            }
+            //            if (Process.GetProcessesByName("adb").Length > 0)
+            //            {
+            //                  if (_mainForm.InvokeRequired)
+            //                  {
+            //                        _mainForm.Invoke(new Action<string>(ServerOn), a);
+            //                  }
+            //            }
+            //            else
+            //            {
+            //                  if (_mainForm.InvokeRequired)
+            //                  {
+            //                        _mainForm.Invoke(new Action<string>(ServerOff), b);
+            //                  }
+            //            }
+            //}
 
-            private void ServerOn(string s)
-            {
-                  _mainForm.Text = s;
-            }
+            //private void ServerOn(string s)
+            //{
+            //      _mainForm.Text = s;
+            //}
 
-            private void ServerOff(string s)
-            {
-                  _mainForm.Text = s;
-                  _mainForm.txt_devices.Text = string.Empty;
-            }
+            //private void ServerOff(string s)
+            //{
+            //      _mainForm.Text = s;
+            //      _mainForm.txt_devices.Text = string.Empty;
+            //}
+
 
             //Prints devices - l to the textbox
-            public void DevicesToTxtBox()
-            {
-                  const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices -l";
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
-                  };
-                  var process = new Process { StartInfo = startInfo };
+            //public void DevicesToTxtBox()
+            //{
+            //      const string filename = "cmd.exe";
+            //      const string arguments = "/C tools\\adb devices -l";
+            //      var startInfo = new ProcessStartInfo
+            //      {
+            //            FileName = filename,
+            //            Arguments = arguments,
+            //            UseShellExecute = false,
+            //            CreateNoWindow = true,
+            //            RedirectStandardOutput = true
+            //      };
+            //      var process = new Process { StartInfo = startInfo };
 
-                        if (Process.GetProcessesByName("adb").Length > 0)
-                        {
-                              process.Start();
-                        }
+            //      if (Process.GetProcessesByName("adb").Length > 0)
+            //      {
+            //            process.Start();
+            //      }
 
-                        else
-                        {
-                              StartServer();
-                              Thread.Sleep(500);
-                              process.Start();
-                        }
+            //      else
+            //      {
+            //            StartServer();
+            //            Thread.Sleep(500);
+            //            process.Start();
+            //      }
 
-                        string s2 = process.StandardOutput.ReadToEnd();
+            //      string s2 = process.StandardOutput.ReadToEnd();
 
-                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2));
+            //      _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2));
 
-            }
+            //}
 
-            //Run devices command, extract the serialnumber and add to combobox
-            public void SerialnumberToComboBox()
-            {
-                  _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Clear()));
+            ////Run devices command, extract the serialnumber and add to combobox
+            //public void SerialnumberToComboBox()
+            //{
+            //      MethodInvoker action = delegate { _mainForm.cbSerials.Items.Clear(); };
 
-                  const string filename = "cmd.exe";
-                  const string arguments = "/C tools\\adb devices";
-                  var startInfo = new ProcessStartInfo
-                  {
-                        FileName = filename,
-                        Arguments = arguments,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
-                  };
-                  var process = new Process { StartInfo = startInfo };
-                  process.Start();
-                  string s2 = process.StandardOutput.ReadToEnd();
+            //      _mainForm.cbSerials.BeginInvoke(action);
 
 
-                  if (s2.Length > 29)
-                  {
-                        using (StringReader s = new StringReader(s2))
-                        {
-                              string line;
+            //      const string filename = "cmd.exe";
+            //      const string arguments = "/C tools\\adb devices";
+            //      var startInfo = new ProcessStartInfo
+            //      {
+            //            FileName = filename,
+            //            Arguments = arguments,
+            //            UseShellExecute = false,
+            //            CreateNoWindow = true,
+            //            RedirectStandardOutput = true
+            //      };
+            //      var process = new Process { StartInfo = startInfo };
 
-                              while (s.Peek() != -1)
-                              {
-                                    line = s.ReadLine();
+            //      process.Start();
 
-                                    if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "")
-                                          continue;
+            //      string s2 = process.StandardOutput.ReadToEnd();
 
-                                    if (line.IndexOf('\t') != -1)
-                                    {
-                                          line = line.Substring(0, line.IndexOf('\t'));
-                                          _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Add(line)));
-                                    }
-                              }
-                              s.Close();
-                              s.Dispose();
-                        }
-                  }
-                  try
-                  {
-                        _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.SelectedIndex = _mainForm.cbSerials.Items.Count - 1));
-                  }
-                  catch (Exception ex)
-                  {
-                        MessageBox.Show(ex.Message);
-                  }
 
-            }
+            //      if (s2.Length > 29)
+            //      {
+            //            using (StringReader s = new StringReader(s2))
+            //            {
+            //                  string line;
+
+            //                  while (s.Peek() != -1)
+            //                  {
+            //                        line = s.ReadLine();
+
+            //                        if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "" || line.StartsWith("*"))
+            //                              continue;
+
+            //                        if (line.IndexOf('\t') != -1)
+            //                        {
+            //                              line = line.Substring(0, line.IndexOf('\t'));
+            //                              _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Add(line)));
+            //                        }
+            //                  }
+            //                  s.Close();
+            //                  s.Dispose();
+            //            }
+            //      }
+            //      try
+            //      {
+            //            _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.SelectedIndex = _mainForm.cbSerials.Items.Count - 1));
+            //      }
+            //      catch (Exception ex)
+            //      {
+            //            MessageBox.Show(ex.Message);
+            //      }
+
+            //}
 
             //Connect device to the ip in textbox
             public void ConnectWifi()
@@ -342,6 +348,96 @@ namespace adbGUI
                   var process = new Process { StartInfo = startInfo };
 
                   process.Start();
+            }
+
+
+            public void RefreshDevicesAndServer()
+            {
+                  const string filename = "cmd.exe";
+                  const string arguments = "/C tools\\adb devices -l";
+                  var startInfo = new ProcessStartInfo
+                  {
+                        FileName = filename,
+                        Arguments = arguments,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true
+                  };
+                  var process = new Process { StartInfo = startInfo };
+
+                  if (Process.GetProcessesByName("adb").Length > 0)
+                  {
+                        process.Start();
+                        _mainForm.btnKillserver.Invoke((MethodInvoker)(() => _mainForm.btnKillserver.ForeColor=Color.ForestGreen));
+
+                  }
+
+                  else
+                  {
+                        _mainForm.btnKillserver.Invoke((MethodInvoker)(() => _mainForm.btnKillserver.ForeColor = Color.Red));
+                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = "Starting server..."));
+
+                        StartServer();
+                        Thread.Sleep(300);
+                        process.Start();
+                  }
+
+
+                  string s2 = process.StandardOutput.ReadToEnd();
+
+
+
+                  if (_mainForm.txt_devices.Text != s2)
+                  {
+                        _mainForm.txt_devices.Invoke((MethodInvoker)(() => _mainForm.txt_devices.Text = s2.ToUpper()));
+
+                        MethodInvoker action = delegate { _mainForm.cbSerials.Items.Clear(); };
+
+                        _mainForm.cbSerials.BeginInvoke(action);
+
+
+                        if (s2.Length > 29)
+                        {
+                              using (StringReader s = new StringReader(s2))
+                              {
+                                    string line;
+
+                                    while (s.Peek() != -1)
+                                    {
+                                          line = s.ReadLine();
+
+                                          if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "" || line.StartsWith("*"))
+                                                continue;
+
+                                          if (line.IndexOf(' ') != -1)
+                                          {
+                                                line = line.Substring(0, line.IndexOf(' '));
+                                                _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.Items.Add(line)));
+                                          }
+                                    }
+                                    s.Close();
+                                    s.Dispose();
+                              }
+                        }
+                        try
+                        {
+                              _mainForm.cbSerials.Invoke((MethodInvoker)(() => _mainForm.cbSerials.SelectedIndex = _mainForm.cbSerials.Items.Count - 1));
+                        }
+                        catch (Exception ex)
+                        {
+                              MessageBox.Show(ex.Message);
+                        }
+                  }
+
+                  
+
+
+
+
+
+
+
+
             }
       }
 }

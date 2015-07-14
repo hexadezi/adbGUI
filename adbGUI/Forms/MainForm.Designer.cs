@@ -306,9 +306,9 @@
                   // 
                   // btn_reboot
                   // 
-                  this.btn_reboot.Location = new System.Drawing.Point(171, 19);
+                  this.btn_reboot.Location = new System.Drawing.Point(199, 19);
                   this.btn_reboot.Name = "btn_reboot";
-                  this.btn_reboot.Size = new System.Drawing.Size(156, 23);
+                  this.btn_reboot.Size = new System.Drawing.Size(145, 23);
                   this.btn_reboot.TabIndex = 4;
                   this.btn_reboot.Text = "Power Menu";
                   this.toolTip.SetToolTip(this.btn_reboot, "Reboot the device");
@@ -317,7 +317,7 @@
                   // 
                   // btn_remountsystem
                   // 
-                  this.btn_remountsystem.Location = new System.Drawing.Point(71, 19);
+                  this.btn_remountsystem.Location = new System.Drawing.Point(98, 19);
                   this.btn_remountsystem.Name = "btn_remountsystem";
                   this.btn_remountsystem.Size = new System.Drawing.Size(95, 23);
                   this.btn_remountsystem.TabIndex = 3;
@@ -331,7 +331,7 @@
                   this.btnKillserver.AccessibleDescription = "";
                   this.btnKillserver.Location = new System.Drawing.Point(7, 19);
                   this.btnKillserver.Name = "btnKillserver";
-                  this.btnKillserver.Size = new System.Drawing.Size(58, 23);
+                  this.btnKillserver.Size = new System.Drawing.Size(85, 23);
                   this.btnKillserver.TabIndex = 2;
                   this.btnKillserver.Text = "Restart";
                   this.toolTip.SetToolTip(this.btnKillserver, "Kill the server if it is running");
@@ -341,9 +341,9 @@
                   // btn_openshell
                   // 
                   this.btn_openshell.AccessibleDescription = "";
-                  this.btn_openshell.Location = new System.Drawing.Point(333, 19);
+                  this.btn_openshell.Location = new System.Drawing.Point(350, 19);
                   this.btn_openshell.Name = "btn_openshell";
-                  this.btn_openshell.Size = new System.Drawing.Size(159, 23);
+                  this.btn_openshell.Size = new System.Drawing.Size(142, 23);
                   this.btn_openshell.TabIndex = 5;
                   this.btn_openshell.Text = "Open Shell";
                   this.toolTip.SetToolTip(this.btn_openshell, "Open the shell");
@@ -1319,9 +1319,10 @@
                   this.MaximizeBox = false;
                   this.Name = "MainForm";
                   this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-                  this.Text = "adbGUI - Server is not running";
+                  this.Text = "adbGUI";
                   this.TopMost = true;
                   this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+                  this.Load += new System.EventHandler(this.MainForm_Load);
                   this.tabControl1.ResumeLayout(false);
                   this.tabPage1.ResumeLayout(false);
                   this.tabPage1.PerformLayout();
@@ -1362,7 +1363,6 @@
             private System.Windows.Forms.TabPage tabPage1;
             private System.Windows.Forms.GroupBox groupBox1;
             private System.Windows.Forms.ToolTip toolTip;
-            private System.Windows.Forms.Button btnKillserver;
             private System.Windows.Forms.Button btn_reboot;
             private System.Windows.Forms.Button btn_remountsystem;
             private System.Windows.Forms.TabPage tabPage2;
@@ -1468,6 +1468,7 @@
             private System.Windows.Forms.TextBox textBox1;
             public System.Windows.Forms.TabControl tabControl1;
             public System.Windows.Forms.TextBox txt_customcommand;
+            public System.Windows.Forms.Button btnKillserver;
       }
 }
 

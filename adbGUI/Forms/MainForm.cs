@@ -20,8 +20,8 @@ namespace adbGUI
                   InitializeComponent();
                   _adbMethods = new adbMethods(this);
 
-                  Thread timerThread = new Thread(timer);
-                  timerThread.Start();
+                  //Thread timerThread = new Thread(timer);
+                  //timerThread.Start();
 
                   txt_customcommand.Select();
             }
@@ -626,33 +626,59 @@ namespace adbGUI
 
             private void txt_devices_TextChanged(object sender, EventArgs e)
             {
-                  Thread tr = new Thread(AdbMethods.SerialnumberToComboBox);
-                  tr.IsBackground = true;
-                  tr.Start();
+                  //Thread tr = new Thread(AdbMethods.SerialnumberToComboBox);
+                  //tr.IsBackground = true;
+                  //tr.Start();
             }
 
             private void timer()
             {
                   while (true)
                   {
-                        var checkStatus = new Thread(AdbMethods.IsRunning);
-                        checkStatus.IsBackground = true;
-                        if (!checkStatus.IsAlive)
+                        //var checkStatus = new Thread(AdbMethods.IsRunning);
+                        //checkStatus.IsBackground = true;
+                        //if (!checkStatus.IsAlive)
+                        //{
+                        //      checkStatus.Start();
+                        //}
+                        //if (Process.GetProcessesByName("adb").Length > 0)
+                        //{
+
+                        //}
+                        //else
+                        //{
+                        //      MethodInvoker action = delegate { txt_devices.Text = "Restarting server..."; };
+                        //      txt_devices.BeginInvoke(action);
+                        //}
+
+                        //var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
+                        //printDevices.IsBackground = true;
+                        //if (!printDevices.IsAlive)
+                        //{
+                        //      printDevices.Start();
+                        //}
+                        //Thread.Sleep(800);
+
+
+
+                        var RefreshDevices = new Thread(AdbMethods.RefreshDevicesAndServer);
+                        RefreshDevices.IsBackground = true;
+
+                        if (!RefreshDevices.IsAlive)
                         {
-                              checkStatus.Start();
-
+                              RefreshDevices.Start();
                         }
+                        Thread.Sleep(1000);
 
-                        var printDevices = new Thread(AdbMethods.DevicesToTxtBox);
-                        printDevices.IsBackground = true;
-                        if (!printDevices.IsAlive)
-                        {
-                              printDevices.Start();
-                        }
-
-                        Thread.Sleep(500);
                   }
 
+            }
+
+            private void MainForm_Load(object sender, EventArgs e)
+            {
+
+                  Thread timerThread = new Thread(timer);
+                  timerThread.Start();
             }
 
       }
