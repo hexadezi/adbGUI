@@ -247,7 +247,7 @@
             this.txt_ip.Name = "txt_ip";
             this.txt_ip.Size = new System.Drawing.Size(113, 22);
             this.txt_ip.TabIndex = 6;
-            this.txt_ip.Text = "192.168.0.100";
+            this.txt_ip.Text = "192.168.0.31";
             this.txt_ip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ip_KeyDown);
             // 
             // btn_connect
@@ -394,7 +394,7 @@
             this.groupBox12.Controls.Add(this.btn_phoneinformation_setsize);
             this.groupBox12.Location = new System.Drawing.Point(396, 170);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(150, 136);
+            this.groupBox12.Size = new System.Drawing.Size(150, 90);
             this.groupBox12.TabIndex = 14;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Resolution";
@@ -577,7 +577,7 @@
             this.groupBox5.Controls.Add(this.btn_phoneinformation_getprop);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(384, 300);
+            this.groupBox5.Size = new System.Drawing.Size(384, 254);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Phone Information";
@@ -997,7 +997,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(195, 26);
             this.label1.TabIndex = 1;
-            this.label1.Text = "1.  Enter Recovery in Sideload mode\r\n2.  Choose the file, click sideload button";
+            this.label1.Text = "1.  Enter Recovery in sideload mode\r\n2.  Choose the file, click sideload button";
             // 
             // btn_sideload_sideload
             // 
@@ -1254,11 +1254,11 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(6, 179);
+            this.textBox1.Location = new System.Drawing.Point(6, 211);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(336, 95);
+            this.textBox1.Size = new System.Drawing.Size(378, 95);
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = "Thanks to:\r\n  stackoverflow.com\r\n  xda-developers.com\r\n  Pixel Buddah for program" +
     "m icon\r\n  Saloni Sinha for the beer icon\r\n  Andrea Soragna for viewer icon";
@@ -1267,7 +1267,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 156);
+            this.label10.Location = new System.Drawing.Point(6, 188);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 20);
             this.label10.TabIndex = 5;
@@ -1278,7 +1278,7 @@
             this.btn_donate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_donate.ForeColor = System.Drawing.Color.Black;
             this.btn_donate.Image = ((System.Drawing.Image)(resources.GetObject("btn_donate.Image")));
-            this.btn_donate.Location = new System.Drawing.Point(348, 208);
+            this.btn_donate.Location = new System.Drawing.Point(390, 240);
             this.btn_donate.Name = "btn_donate";
             this.btn_donate.Size = new System.Drawing.Size(156, 66);
             this.btn_donate.TabIndex = 0;
@@ -1290,7 +1290,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(348, 179);
+            this.button4.Location = new System.Drawing.Point(390, 211);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -1300,7 +1300,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(429, 179);
+            this.button3.Location = new System.Drawing.Point(471, 211);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 2;
@@ -1324,7 +1324,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "adbGUI";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

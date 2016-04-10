@@ -76,7 +76,6 @@ namespace adbGUI
                 }
 
                 Thread.Sleep(1100);
-
             }
 
 
@@ -87,11 +86,8 @@ namespace adbGUI
             return cbSerials.SelectedItem.ToString();
         }
 
-
-
-
         //Get all the information
-        public void GetInformationAndOpenViewer(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal)
+        private void GetInformationAndOpenViewer(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal)
         {
             if (cbSerials.SelectedItem != null)
             {
@@ -107,10 +103,10 @@ namespace adbGUI
                 {
                     tabControl1.Enabled = false;
                     Application.DoEvents();
-                    Cursor = Cursors.AppStarting;
+                    //Cursor = Cursors.AppStarting;
                 }
                 tabControl1.Enabled = true;
-                Cursor = Cursors.Default;
+                //Cursor = Cursors.Default;
 
             }
             else
@@ -119,6 +115,7 @@ namespace adbGUI
             }
 
         }
+
         //Opens the textviewer
         private void ToViewer(string value, string title, int x, int y, FormWindowState windowstate = FormWindowState.Normal)
         {
@@ -132,13 +129,13 @@ namespace adbGUI
 
             var v = new Viewer();
 
-            v.txt_output.TabIndex = 2;
-            v.txt_output.Text = value;
+            //v.txt_output.TabIndex = 3;
             v.Text = title;
             v.WindowState = windowstate;
             v.Width = x;
             v.Height = y;
             v.Show();
+            v.txt_output.Text = value;
 
         }
 
@@ -245,22 +242,16 @@ namespace adbGUI
             }
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-        }
-
         private void btn_run_Click(object sender, EventArgs e)
         {
-
             var s = txt_customcommand.Text;
             if (s == "")
             {
-                MessageBox.Show("Please type in a command!", "Error");
+                MessageBox.Show("Please enter a command!", "Error");
             }
             else
             {
-                StandardIO.AdbCMD(s, GetSelectedSerialnumber());
+                StandardIO.AdbCMD(@s, GetSelectedSerialnumber());
             }
         }
 
@@ -302,7 +293,9 @@ namespace adbGUI
             if (r.Match(s).Success)
             {
                 string serial = GetSelectedSerialnumber();
-                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root busybox ifconfig wlan0 down", " -s " + serial); });
+
+                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root busybox ifconfig wlan0 hw ether " + s,"-s " + serial); });
+
                 thr.Start();
             }
             else
@@ -666,29 +659,45 @@ namespace adbGUI
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
+
             var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$");
 
             string ipadress = @txt_ip.Text;
 
             if (r.Match(ipadress).Success)
             {
-                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "connect " + ipadress, ""); });
-                thr.Start();
-            }
-            else
-            {
-                MessageBox.Show(ipadress + " is not a valid IP adress. \r\nPlease enter a valid IP address!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string output = null;
+
+                tabControl1.Enabled = false;
+
+                ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "connect " + ipadress, ""); };
+                starter += () =>
+                {
+                    tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
+
+                    MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
+
+                Thread thread = new Thread(starter) { IsBackground = true };
+
+                thread.Start();
+
             }
         }
 
+
         private void txt_ip_KeyDown(object sender, KeyEventArgs e)
         {
+
+
             if (e.KeyCode == Keys.Enter)
             {
                 btn_connect.PerformClick();
                 e.SuppressKeyPress = true;
+
             }
         }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -778,8 +787,21 @@ namespace adbGUI
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            Thread thr = new Thread(() => { StandardIO.AdbCMDBackground("", "disconnect ", ""); });
-            thr.Start();
+            string output = null;
+
+            tabControl1.Enabled = false;
+
+            ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "disconnect", ""); };
+            starter += () =>
+            {
+                tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
+
+                MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+
+            Thread thread = new Thread(starter) { IsBackground = true };
+
+            thread.Start();
         }
 
         private void txt_devices_TextChanged(object sender, EventArgs e)
@@ -793,7 +815,14 @@ namespace adbGUI
 
         private void cbSerials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Text = "adbGUI - Connected to: " + GetSelectedSerialnumber();
+            Text = "adbGUI - Connected to: " + GetSelectedSerialnumber().ToUpper();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.ExitThread();
+            Environment.Exit(0);
+
         }
     }
 }
