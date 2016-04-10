@@ -55,7 +55,7 @@ namespace adbGUI
                 tr.Join();
 
                 txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s.ToUpper()));
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
             }
 
         }
@@ -83,7 +83,15 @@ namespace adbGUI
 
         private string GetSelectedSerialnumber()
         {
-            return cbSerials.SelectedItem.ToString();
+            if (cbSerials.Items.Count == 0)
+            {
+                return "";
+            }
+            else
+            {
+                return cbSerials.SelectedItem.ToString();
+
+            }
         }
 
         //Get all the information
@@ -197,7 +205,7 @@ namespace adbGUI
             if (txt_sideload_path.Text != "")
             {
                 var s = "sideload \"" + txt_sideload_path.Text + "\"";
-                StandardIO.AdbCMD(s, GetSelectedSerialnumber());
+                StandardIO.AdbCMD(s, " -s " + GetSelectedSerialnumber());
             }
             else
             {
@@ -238,7 +246,7 @@ namespace adbGUI
             else
             {
                 var s = "push \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
-                StandardIO.AdbCMD(s, GetSelectedSerialnumber());
+                StandardIO.AdbCMD(s, " -s " + GetSelectedSerialnumber());
             }
         }
 
@@ -251,13 +259,13 @@ namespace adbGUI
             }
             else
             {
-                StandardIO.AdbCMD(@s, GetSelectedSerialnumber());
+                StandardIO.AdbCMD(@s, " -s " + GetSelectedSerialnumber());
             }
         }
 
         private void btn_openshell_Click(object sender, EventArgs e)
         {
-            StandardIO.AdbCMD("shell", GetSelectedSerialnumber());
+            StandardIO.AdbCMD("shell", " -s " + GetSelectedSerialnumber());
         }
 
         private void btn_phoneinformation_getprop_Click(object sender, EventArgs e)
@@ -294,7 +302,7 @@ namespace adbGUI
             {
                 string serial = GetSelectedSerialnumber();
 
-                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root busybox ifconfig wlan0 hw ether " + s,"-s " + serial); });
+                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root busybox ifconfig wlan0 hw ether " + s, "-s " + serial); });
 
                 thr.Start();
             }
@@ -353,10 +361,29 @@ namespace adbGUI
         private void btn_packages_install_Click_1(object sender, EventArgs e)
         {
             var s = "\"" + txt_packages_path.Text + "\"";
+            string serial = " -s " + GetSelectedSerialnumber();
 
             if (txt_packages_path.Text != "")
             {
-                StandardIO.AdbCMD("install " + s, GetSelectedSerialnumber());
+                //StandardIO.AdbCMD("install " + s, " -s " + GetSelectedSerialnumber());
+
+
+                string output = null;
+
+                tabControl1.Enabled = false;
+
+                ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "install " + s, serial); };
+                starter += () =>
+                {
+                    tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
+
+                    MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
+
+                Thread thread = new Thread(starter) { IsBackground = true };
+
+                thread.Start();
+
             }
             else
             {
@@ -367,14 +394,36 @@ namespace adbGUI
         private void btn_packages_uninstall_Click(object sender, EventArgs e)
         {
             var s = "\"" + txt_packages_package.Text + "\"";
+            string serial = " -s " + GetSelectedSerialnumber();
+
             if (txt_packages_package.Text != "")
             {
-                StandardIO.AdbCMD("uninstall " + s, GetSelectedSerialnumber());
+                //StandardIO.AdbCMD("uninstall " + s, " -s " + GetSelectedSerialnumber());
+
+                string output = null;
+
+                tabControl1.Enabled = false;
+
+                ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "uninstall " + s, serial); };
+                starter += () =>
+                {
+                    tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
+
+                    MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
+
+                Thread thread = new Thread(starter) { IsBackground = true };
+
+                thread.Start();
             }
             else
             {
                 MessageBox.Show("Please select a package!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
+
         }
 
         private void btn_packages_installed_Click(object sender, EventArgs e)
@@ -402,7 +451,7 @@ namespace adbGUI
             else
             {
                 var s = "pull \"" + txt_pull_pathfrom.Text + "\"" + " \"" + txt_pull_pathto.Text + "\"";
-                StandardIO.AdbCMD(s, GetSelectedSerialnumber());
+                StandardIO.AdbCMD(s, " -s " + GetSelectedSerialnumber());
             }
         }
 
@@ -435,12 +484,12 @@ namespace adbGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            StandardIO.AdbCMD("version", GetSelectedSerialnumber());
+            StandardIO.AdbCMD("version", " - s" + GetSelectedSerialnumber());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            StandardIO.AdbCMD("help", GetSelectedSerialnumber());
+            StandardIO.AdbCMD("help", " -s " + GetSelectedSerialnumber());
         }
 
         private void btn_phoneinformation_features_Click(object sender, EventArgs e)
@@ -529,7 +578,7 @@ namespace adbGUI
                     {
                         system = " -nosystem";
                     }
-                    StandardIO.AdbCMD("backup" + apk + shared + all + system + name, GetSelectedSerialnumber());
+                    StandardIO.AdbCMD("backup" + apk + shared + all + system + name, " -s " + GetSelectedSerialnumber());
                 }
 
             }
@@ -542,7 +591,7 @@ namespace adbGUI
                 }
                 else
                 {
-                    StandardIO.AdbCMD("backup -apk " + package + name, GetSelectedSerialnumber());
+                    StandardIO.AdbCMD("backup -apk " + package + name, " -s " + GetSelectedSerialnumber());
                 }
             }
         }
@@ -577,7 +626,7 @@ namespace adbGUI
             }
             else
             {
-                StandardIO.AdbCMD("restore \"" + txt_restore_path.Text + "\"", GetSelectedSerialnumber());
+                StandardIO.AdbCMD("restore \"" + txt_restore_path.Text + "\"", " -s " + GetSelectedSerialnumber());
             }
         }
 
@@ -683,6 +732,10 @@ namespace adbGUI
                 thread.Start();
 
             }
+            else
+            {
+                MessageBox.Show("Please enter a valid IP adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
 
@@ -787,16 +840,15 @@ namespace adbGUI
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            string output = null;
 
             tabControl1.Enabled = false;
 
-            ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "disconnect", ""); };
+            ThreadStart starter = () => {StandardIO.AdbCMDBackground("", "disconnect", ""); };
             starter += () =>
             {
                 tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
 
-                MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Successfully disconnected", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
 
             Thread thread = new Thread(starter) { IsBackground = true };

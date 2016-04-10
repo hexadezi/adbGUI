@@ -59,7 +59,7 @@ namespace adbGUI
         {
             const string filename = "cmd.exe";
 
-            string arguments = "/C prompt $G & tools\\adb -s " + serialnumber + " " + arg1 + " & echo. & echo. & pause";
+            string arguments = "/C prompt $G & tools\\adb" + serialnumber + " " + arg1 + " & echo. & echo. & pause";
 
             var startInfo = new ProcessStartInfo
             {
