@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -94,6 +95,44 @@ namespace adbGUI
             }
         }
 
+        private void GetInstalledApps(string serial)
+        {
+            cbInstalledApps.Invoke((MethodInvoker)(() => { cbInstalledApps.Items.Clear(); }));
+
+            string output = null;
+
+            output = StandardIO.AdbCMDBackground("", "shell \"pm list packages -3 | cut -c9- | sort\"", " -s " + serial);
+
+            foreach (var item in output.Split(new string[] { "\r\r\n", }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                cbInstalledApps.Invoke((MethodInvoker)(() => { cbInstalledApps.Items.Add(item); }));
+            }
+
+
+
+        }
+
+        private void RefreshInstalledAps()
+        {
+            if (cbSerials.SelectedItem != null)
+            {
+                cbInstalledApps.Enabled = false;
+                string serial = GetSelectedSerialnumber();
+                Thread thr = new Thread(() => { GetInstalledApps(serial); });
+
+                thr.IsBackground = true;
+
+                thr.Start();
+
+                while (thr.IsAlive)
+                {
+                    Application.DoEvents();
+                }
+                cbInstalledApps.Enabled = true;
+                cbInstalledApps.SelectedIndex = 0;
+            }
+        }
+
         //Get all the information
         private void GetInformationAndOpenViewer(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal)
         {
@@ -109,10 +148,12 @@ namespace adbGUI
 
                 while (thr.IsAlive)
                 {
+                    groupBox11.Enabled = false;
                     tabControl1.Enabled = false;
                     Application.DoEvents();
                     //Cursor = Cursors.AppStarting;
                 }
+                groupBox11.Enabled = true;
                 tabControl1.Enabled = true;
                 //Cursor = Cursors.Default;
 
@@ -180,6 +221,7 @@ namespace adbGUI
                 MessageBox.Show("adb.exe not found. Make soure adbGUI.exe is in the tools folder.", "Error - adb.exe", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
+
         }
 
         private void btn_reboot_Click(object sender, EventArgs e)
@@ -369,20 +411,26 @@ namespace adbGUI
 
 
                 string output = null;
-
+                groupBox11.Enabled = false;
                 tabControl1.Enabled = false;
 
                 ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "install " + s, serial); };
                 starter += () =>
                 {
+                    groupBox11.Invoke((MethodInvoker)(() => groupBox11.Enabled = true));
                     tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
-
                     MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 };
 
                 Thread thread = new Thread(starter) { IsBackground = true };
 
                 thread.Start();
+
+                while (thread.IsAlive)
+                {
+                    Application.DoEvents();
+                }
+                RefreshInstalledAps();
 
             }
             else
@@ -393,42 +441,35 @@ namespace adbGUI
 
         private void btn_packages_uninstall_Click(object sender, EventArgs e)
         {
-            var s = "\"" + txt_packages_package.Text + "\"";
+            var s = "\"" + cbInstalledApps.SelectedItem + "\"";
+
             string serial = " -s " + GetSelectedSerialnumber();
 
-            if (txt_packages_package.Text != "")
+            string output = null;
+
+            groupBox11.Enabled = false;
+            tabControl1.Enabled = false;
+            ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "uninstall " + s, serial); };
+
+            starter += () =>
             {
-                //StandardIO.AdbCMD("uninstall " + s, " -s " + GetSelectedSerialnumber());
+                groupBox11.Invoke((MethodInvoker)(() => groupBox11.Enabled = true));
+                tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
 
-                string output = null;
+                MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                tabControl1.Enabled = false;
+            };
 
-                ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "uninstall " + s, serial); };
-                starter += () =>
-                {
-                    tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
+            Thread thread = new Thread(starter) { IsBackground = true };
 
-                    MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                };
+            thread.Start();
 
-                Thread thread = new Thread(starter) { IsBackground = true };
-
-                thread.Start();
-            }
-            else
+            while (thread.IsAlive)
             {
-                MessageBox.Show("Please select a package!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.DoEvents();
             }
+            RefreshInstalledAps();
 
-
-
-
-        }
-
-        private void btn_packages_installed_Click(object sender, EventArgs e)
-        {
-            GetInformationAndOpenViewer("", "shell \"pm list packages -3 | cut -c9- | sort\"", "Installed Packages", 500, 750);
         }
 
         private void btn_pull_saveto_Click(object sender, EventArgs e)
@@ -716,12 +757,13 @@ namespace adbGUI
             if (r.Match(ipadress).Success)
             {
                 string output = null;
-
+                groupBox11.Enabled = false;
                 tabControl1.Enabled = false;
 
                 ThreadStart starter = () => { output = StandardIO.AdbCMDBackground("", "connect " + ipadress, ""); };
                 starter += () =>
                 {
+                    groupBox11.Invoke((MethodInvoker)(() => groupBox11.Enabled = true));
                     tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
 
                     MessageBox.Show(output, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -795,10 +837,12 @@ namespace adbGUI
 
             while (proc.HasExited == false)
             {
+                groupBox11.Enabled = false;
                 tabControl1.Enabled = false;
 
                 //Cursor = Cursors.WaitCursor;
             }
+            groupBox11.Enabled = true;
             tabControl1.Enabled = true;
             //Cursor = Cursors.Default;
         }
@@ -841,13 +885,14 @@ namespace adbGUI
         private void button5_Click_1(object sender, EventArgs e)
         {
 
+            groupBox11.Enabled = false;
             tabControl1.Enabled = false;
 
-            ThreadStart starter = () => {StandardIO.AdbCMDBackground("", "disconnect", ""); };
+            ThreadStart starter = () => { StandardIO.AdbCMDBackground("", "disconnect", ""); };
             starter += () =>
             {
+                groupBox11.Invoke((MethodInvoker)(() => groupBox11.Enabled = true));
                 tabControl1.Invoke((MethodInvoker)(() => tabControl1.Enabled = true));
-
                 MessageBox.Show("Successfully disconnected", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
 
@@ -867,7 +912,7 @@ namespace adbGUI
 
         private void cbSerials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Text = "adbGUI - Connected to: " + GetSelectedSerialnumber().ToUpper();
+            RefreshInstalledAps();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -875,6 +920,11 @@ namespace adbGUI
             Application.ExitThread();
             Environment.Exit(0);
 
+        }
+
+        private void btn_refreshInstalledApps_Click(object sender, EventArgs e)
+        {
+            RefreshInstalledAps();
         }
     }
 }
