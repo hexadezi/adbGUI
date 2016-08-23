@@ -129,7 +129,15 @@ namespace adbGUI
                     Application.DoEvents();
                 }
                 cbInstalledApps.Enabled = true;
-                cbInstalledApps.SelectedIndex = 0;
+                try
+                {
+                    cbInstalledApps.SelectedIndex = 0;
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
             }
         }
 

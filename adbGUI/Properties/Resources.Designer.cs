@@ -63,16 +63,6 @@ namespace adbGUI.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _1460414796_arrows_refresh {
-            get {
-                object obj = ResourceManager.GetObject("1460414796_arrows_refresh", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _1460414981_Update {
             get {
                 object obj = ResourceManager.GetObject("1460414981_Update", resourceCulture);
