@@ -296,7 +296,7 @@ namespace adbGUI
             }
             else
             {
-                var s = "push -p \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
+                var s = "push \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
                 StandardIO.AdbCMD(s, " -s " + GetSelectedSerialnumber());
             }
         }
