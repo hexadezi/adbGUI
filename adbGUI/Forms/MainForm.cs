@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using System.Linq;
 
 namespace adbGUI
 {
@@ -290,12 +292,11 @@ namespace adbGUI
         {
             if (txt_push_fromfilepath.Text == "" || txt_push_tofilepath.Text == "")
             {
-                MessageBox.Show("Please select a file and chose destination!", "Error", MessageBoxButtons.OK,
-                      MessageBoxIcon.Error);
+                MessageBox.Show("Please select a file and chose destination!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                var s = "push \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
+                var s = "push -p \"" + txt_push_fromfilepath.Text + "\"" + " \"" + txt_push_tofilepath.Text + "\"";
                 StandardIO.AdbCMD(s, " -s " + GetSelectedSerialnumber());
             }
         }
@@ -933,6 +934,50 @@ namespace adbGUI
         private void btn_refreshInstalledApps_Click(object sender, EventArgs e)
         {
             RefreshInstalledAps();
+        }
+
+        private void btnPushDestinationLS_Click(Object sender, EventArgs e)
+        {
+            string path = txt_push_tofilepath.Text;
+            List<string> resultList = StandardIO.AdbCMDBackground("", "shell ls \"" + path + "\" -F").Split(Environment.NewLine.ToCharArray()).ToList();
+            resultList = FixFileListing(resultList);
+            MessageBox.Show(string.Join(Environment.NewLine, resultList), "File Listing");
+        }
+
+        private void btnPullDestinationLS_Click(Object sender, EventArgs e)
+        {
+            string path = txt_pull_pathfrom.Text;
+            List<string> resultList = StandardIO.AdbCMDBackground("", "shell ls \"" + path + "\" -F").Split(Environment.NewLine.ToCharArray()).ToList();
+            resultList = FixFileListing(resultList);
+            MessageBox.Show(string.Join(Environment.NewLine, resultList), "File Listing");
+        }
+
+        private List<string> FixFileListing(List<string> inputList)
+        {
+            inputList = inputList.Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+            inputList = inputList.Where(x => !x.EndsWith("Permission denied")).ToList();
+            if (inputList.Count == 1 && inputList[0].EndsWith("No such file or directory"))
+            {
+                return inputList;
+            }
+            else
+            // Clean the results
+            {
+                for (int j = 0; j < inputList.Count; j++)
+                {
+                    string part1 = inputList[j].Split(' ')[0];
+                    string part2 = inputList[j].Remove(0, part1.Length);
+                    if (part1 == "d")
+                    {
+                        inputList[j] = "Directory: " + part2;
+                    }
+                    else
+                    {
+                        inputList[j] = "File: " + part2;
+                    }
+                }
+            }
+            return inputList;
         }
     }
 }
