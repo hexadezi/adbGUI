@@ -84,12 +84,14 @@
             this.btn_phoneinformation_getprop = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btnPullDestinationLS = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_pull_pull = new System.Windows.Forms.Button();
             this.btn_pull_saveto = new System.Windows.Forms.Button();
             this.txt_pull_pathfrom = new System.Windows.Forms.TextBox();
             this.txt_pull_pathto = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnPushDestinationLS = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_push_push = new System.Windows.Forms.Button();
             this.btn_push_openfile = new System.Windows.Forms.Button();
@@ -170,7 +172,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(560, 299);
+            this.tabControl1.Size = new System.Drawing.Size(604, 299);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -181,7 +183,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(552, 273);
+            this.tabPage1.Size = new System.Drawing.Size(596, 273);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -304,7 +306,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(552, 273);
+            this.tabPage4.Size = new System.Drawing.Size(596, 273);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Phone Information";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -756,13 +758,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(552, 273);
+            this.tabPage2.Size = new System.Drawing.Size(596, 273);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Files and Sideload";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.btnPullDestinationLS);
             this.groupBox10.Controls.Add(this.label2);
             this.groupBox10.Controls.Add(this.btn_pull_pull);
             this.groupBox10.Controls.Add(this.btn_pull_saveto);
@@ -770,10 +773,20 @@
             this.groupBox10.Controls.Add(this.txt_pull_pathto);
             this.groupBox10.Location = new System.Drawing.Point(6, 178);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(540, 89);
+            this.groupBox10.Size = new System.Drawing.Size(584, 89);
             this.groupBox10.TabIndex = 3;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Pull Files";
+            // 
+            // btnPullDestinationLS
+            // 
+            this.btnPullDestinationLS.Location = new System.Drawing.Point(540, 58);
+            this.btnPullDestinationLS.Name = "btnPullDestinationLS";
+            this.btnPullDestinationLS.Size = new System.Drawing.Size(37, 23);
+            this.btnPullDestinationLS.TabIndex = 8;
+            this.btnPullDestinationLS.Text = "List";
+            this.btnPullDestinationLS.UseVisualStyleBackColor = true;
+            this.btnPullDestinationLS.Click += new System.EventHandler(this.btnPullDestinationLS_Click);
             // 
             // label2
             // 
@@ -800,7 +813,7 @@
             this.btn_pull_saveto.Name = "btn_pull_saveto";
             this.btn_pull_saveto.Size = new System.Drawing.Size(75, 23);
             this.btn_pull_saveto.TabIndex = 8;
-            this.btn_pull_saveto.Text = "Save...";
+            this.btn_pull_saveto.Text = "Browse...";
             this.btn_pull_saveto.UseVisualStyleBackColor = true;
             this.btn_pull_saveto.Click += new System.EventHandler(this.btn_pull_saveto_Click);
             // 
@@ -824,6 +837,7 @@
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.btnPushDestinationLS);
             this.groupBox7.Controls.Add(this.label5);
             this.groupBox7.Controls.Add(this.btn_push_push);
             this.groupBox7.Controls.Add(this.btn_push_openfile);
@@ -831,10 +845,20 @@
             this.groupBox7.Controls.Add(this.txt_push_fromfilepath);
             this.groupBox7.Location = new System.Drawing.Point(6, 77);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(540, 95);
+            this.groupBox7.Size = new System.Drawing.Size(584, 95);
             this.groupBox7.TabIndex = 2;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Push Files";
+            // 
+            // btnPushDestinationLS
+            // 
+            this.btnPushDestinationLS.Location = new System.Drawing.Point(541, 56);
+            this.btnPushDestinationLS.Name = "btnPushDestinationLS";
+            this.btnPushDestinationLS.Size = new System.Drawing.Size(37, 23);
+            this.btnPushDestinationLS.TabIndex = 7;
+            this.btnPushDestinationLS.Text = "List";
+            this.btnPushDestinationLS.UseVisualStyleBackColor = true;
+            this.btnPushDestinationLS.Click += new System.EventHandler(this.btnPushDestinationLS_Click);
             // 
             // label5
             // 
@@ -861,7 +885,7 @@
             this.btn_push_openfile.Name = "btn_push_openfile";
             this.btn_push_openfile.Size = new System.Drawing.Size(75, 23);
             this.btn_push_openfile.TabIndex = 4;
-            this.btn_push_openfile.Text = "Open...";
+            this.btn_push_openfile.Text = "Browse...";
             this.btn_push_openfile.UseVisualStyleBackColor = true;
             this.btn_push_openfile.Click += new System.EventHandler(this.btn_push_openfile_Click);
             // 
@@ -891,7 +915,7 @@
             this.groupBox2.Controls.Add(this.btn_sideload_sideload);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(540, 65);
+            this.groupBox2.Size = new System.Drawing.Size(584, 65);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sideload";
@@ -940,7 +964,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(552, 273);
+            this.tabPage3.Size = new System.Drawing.Size(596, 273);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Apps and Backup";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1171,7 +1195,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(552, 273);
+            this.tabPage5.Size = new System.Drawing.Size(596, 273);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "About";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1183,10 +1207,9 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(378, 95);
+            this.textBox1.Size = new System.Drawing.Size(378, 108);
             this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "Thanks to:\r\n  stackoverflow.com\r\n  xda-developers.com\r\n  Pixel Buddah for program" +
-    "m icon\r\n  Saloni Sinha for the beer icon\r\n  Andrea Soragna for viewer icon";
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // label10
             // 
@@ -1196,7 +1219,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 20);
             this.label10.TabIndex = 5;
-            this.label10.Text = "abdGUI 1.1";
+            this.label10.Text = "abdGUI 1.2";
             // 
             // button4
             // 
@@ -1305,7 +1328,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 373);
+            this.ClientSize = new System.Drawing.Size(662, 373);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.tabControl1);
@@ -1464,6 +1487,8 @@
         private System.Windows.Forms.Button btn_refreshInstalledApps;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Button btnPushDestinationLS;
+        private System.Windows.Forms.Button btnPullDestinationLS;
     }
 }
 
