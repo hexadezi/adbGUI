@@ -129,7 +129,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btn_donate = new System.Windows.Forms.Button();
             this.cbSerials = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
             this.txt_ip = new System.Windows.Forms.TextBox();
@@ -172,7 +171,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(604, 299);
+            this.tabControl1.Size = new System.Drawing.Size(638, 299);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -183,7 +182,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(596, 273);
+            this.tabPage1.Size = new System.Drawing.Size(630, 273);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -196,14 +195,14 @@
             this.groupBox4.Controls.Add(this.txt_customcommand);
             this.groupBox4.Location = new System.Drawing.Point(6, 60);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(540, 52);
+            this.groupBox4.Size = new System.Drawing.Size(618, 52);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Custom Command";
             // 
             // btn_run
             // 
-            this.btn_run.Location = new System.Drawing.Point(458, 17);
+            this.btn_run.Location = new System.Drawing.Point(534, 17);
             this.btn_run.Name = "btn_run";
             this.btn_run.Size = new System.Drawing.Size(78, 23);
             this.btn_run.TabIndex = 1;
@@ -215,7 +214,7 @@
             // 
             this.txt_customcommand.Location = new System.Drawing.Point(7, 19);
             this.txt_customcommand.Name = "txt_customcommand";
-            this.txt_customcommand.Size = new System.Drawing.Size(446, 20);
+            this.txt_customcommand.Size = new System.Drawing.Size(521, 20);
             this.txt_customcommand.TabIndex = 0;
             this.toolTip.SetToolTip(this.txt_customcommand, "You dont need to write \"adb\", If you have a path or file with spaces, then you ne" +
         "ed to put the path or filename in quotation marks.\r\n");
@@ -231,14 +230,14 @@
             this.groupBox1.Controls.Add(this.btn_openshell);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 48);
+            this.groupBox1.Size = new System.Drawing.Size(618, 48);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Standard";
             // 
             // btn_reboot
             // 
-            this.btn_reboot.Location = new System.Drawing.Point(241, 19);
+            this.btn_reboot.Location = new System.Drawing.Point(319, 19);
             this.btn_reboot.Name = "btn_reboot";
             this.btn_reboot.Size = new System.Drawing.Size(145, 23);
             this.btn_reboot.TabIndex = 4;
@@ -251,7 +250,7 @@
             // 
             this.btn_remountsystem.Location = new System.Drawing.Point(140, 19);
             this.btn_remountsystem.Name = "btn_remountsystem";
-            this.btn_remountsystem.Size = new System.Drawing.Size(95, 23);
+            this.btn_remountsystem.Size = new System.Drawing.Size(173, 23);
             this.btn_remountsystem.TabIndex = 3;
             this.btn_remountsystem.Text = "Remount System";
             this.toolTip.SetToolTip(this.btn_remountsystem, "Remounts the /system partition on the device read-write");
@@ -274,7 +273,7 @@
             // btn_openshell
             // 
             this.btn_openshell.AccessibleDescription = "";
-            this.btn_openshell.Location = new System.Drawing.Point(392, 19);
+            this.btn_openshell.Location = new System.Drawing.Point(470, 19);
             this.btn_openshell.Name = "btn_openshell";
             this.btn_openshell.Size = new System.Drawing.Size(142, 23);
             this.btn_openshell.TabIndex = 5;
@@ -293,7 +292,7 @@
             this.txt_devices.Location = new System.Drawing.Point(6, 118);
             this.txt_devices.Multiline = true;
             this.txt_devices.Name = "txt_devices";
-            this.txt_devices.Size = new System.Drawing.Size(540, 149);
+            this.txt_devices.Size = new System.Drawing.Size(618, 149);
             this.txt_devices.TabIndex = 5;
             this.txt_devices.TextChanged += new System.EventHandler(this.txt_devices_TextChanged);
             // 
@@ -306,7 +305,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(596, 273);
+            this.tabPage4.Size = new System.Drawing.Size(630, 273);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Phone Information";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -322,7 +321,7 @@
             this.groupBox12.Controls.Add(this.btn_phoneinformation_setsize);
             this.groupBox12.Location = new System.Drawing.Point(396, 170);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(150, 97);
+            this.groupBox12.Size = new System.Drawing.Size(153, 97);
             this.groupBox12.TabIndex = 14;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Resolution";
@@ -376,7 +375,7 @@
             this.groupBox9.Controls.Add(this.txt_phoneinformation_dpi);
             this.groupBox9.Location = new System.Drawing.Point(396, 88);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(150, 76);
+            this.groupBox9.Size = new System.Drawing.Size(153, 76);
             this.groupBox9.TabIndex = 13;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Change DPI";
@@ -430,7 +429,7 @@
             this.groupBox6.Controls.Add(this.txt_phoneinformation_mac);
             this.groupBox6.Location = new System.Drawing.Point(396, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(150, 76);
+            this.groupBox6.Size = new System.Drawing.Size(153, 76);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Spoof MAC";
@@ -758,7 +757,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(596, 273);
+            this.tabPage2.Size = new System.Drawing.Size(630, 273);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Files and Sideload";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -773,7 +772,7 @@
             this.groupBox10.Controls.Add(this.txt_pull_pathto);
             this.groupBox10.Location = new System.Drawing.Point(6, 178);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(584, 89);
+            this.groupBox10.Size = new System.Drawing.Size(618, 89);
             this.groupBox10.TabIndex = 3;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Pull Files";
@@ -782,7 +781,7 @@
             // 
             this.btnPullDestinationLS.Location = new System.Drawing.Point(540, 58);
             this.btnPullDestinationLS.Name = "btnPullDestinationLS";
-            this.btnPullDestinationLS.Size = new System.Drawing.Size(37, 23);
+            this.btnPullDestinationLS.Size = new System.Drawing.Size(72, 23);
             this.btnPullDestinationLS.TabIndex = 8;
             this.btnPullDestinationLS.Text = "List";
             this.btnPullDestinationLS.UseVisualStyleBackColor = true;
@@ -811,7 +810,7 @@
             // 
             this.btn_pull_saveto.Location = new System.Drawing.Point(459, 29);
             this.btn_pull_saveto.Name = "btn_pull_saveto";
-            this.btn_pull_saveto.Size = new System.Drawing.Size(75, 23);
+            this.btn_pull_saveto.Size = new System.Drawing.Size(153, 23);
             this.btn_pull_saveto.TabIndex = 8;
             this.btn_pull_saveto.Text = "Browse...";
             this.btn_pull_saveto.UseVisualStyleBackColor = true;
@@ -845,16 +844,16 @@
             this.groupBox7.Controls.Add(this.txt_push_fromfilepath);
             this.groupBox7.Location = new System.Drawing.Point(6, 77);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(584, 95);
+            this.groupBox7.Size = new System.Drawing.Size(618, 95);
             this.groupBox7.TabIndex = 2;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Push Files";
             // 
             // btnPushDestinationLS
             // 
-            this.btnPushDestinationLS.Location = new System.Drawing.Point(541, 56);
+            this.btnPushDestinationLS.Location = new System.Drawing.Point(540, 55);
             this.btnPushDestinationLS.Name = "btnPushDestinationLS";
-            this.btnPushDestinationLS.Size = new System.Drawing.Size(37, 23);
+            this.btnPushDestinationLS.Size = new System.Drawing.Size(72, 23);
             this.btnPushDestinationLS.TabIndex = 7;
             this.btnPushDestinationLS.Text = "List";
             this.btnPushDestinationLS.UseVisualStyleBackColor = true;
@@ -883,7 +882,7 @@
             // 
             this.btn_push_openfile.Location = new System.Drawing.Point(459, 19);
             this.btn_push_openfile.Name = "btn_push_openfile";
-            this.btn_push_openfile.Size = new System.Drawing.Size(75, 23);
+            this.btn_push_openfile.Size = new System.Drawing.Size(153, 23);
             this.btn_push_openfile.TabIndex = 4;
             this.btn_push_openfile.Text = "Browse...";
             this.btn_push_openfile.UseVisualStyleBackColor = true;
@@ -915,14 +914,14 @@
             this.groupBox2.Controls.Add(this.btn_sideload_sideload);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(584, 65);
+            this.groupBox2.Size = new System.Drawing.Size(618, 65);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sideload";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(378, 36);
+            this.button1.Location = new System.Drawing.Point(456, 36);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -934,7 +933,7 @@
             // 
             this.txt_sideload_path.Location = new System.Drawing.Point(6, 38);
             this.txt_sideload_path.Name = "txt_sideload_path";
-            this.txt_sideload_path.Size = new System.Drawing.Size(366, 20);
+            this.txt_sideload_path.Size = new System.Drawing.Size(444, 20);
             this.txt_sideload_path.TabIndex = 0;
             // 
             // label1
@@ -948,7 +947,7 @@
             // 
             // btn_sideload_sideload
             // 
-            this.btn_sideload_sideload.Location = new System.Drawing.Point(459, 36);
+            this.btn_sideload_sideload.Location = new System.Drawing.Point(537, 36);
             this.btn_sideload_sideload.Name = "btn_sideload_sideload";
             this.btn_sideload_sideload.Size = new System.Drawing.Size(75, 23);
             this.btn_sideload_sideload.TabIndex = 2;
@@ -964,7 +963,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(596, 273);
+            this.tabPage3.Size = new System.Drawing.Size(630, 273);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Apps and Backup";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -976,7 +975,7 @@
             this.groupBox14.Controls.Add(this.btn_restore_restore);
             this.groupBox14.Location = new System.Drawing.Point(6, 193);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(540, 47);
+            this.groupBox14.Size = new System.Drawing.Size(618, 74);
             this.groupBox14.TabIndex = 8;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Restore";
@@ -1022,7 +1021,7 @@
             this.groupBox8.Controls.Add(this.txt_backup_path);
             this.groupBox8.Location = new System.Drawing.Point(6, 101);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(540, 86);
+            this.groupBox8.Size = new System.Drawing.Size(618, 86);
             this.groupBox8.TabIndex = 7;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Backup";
@@ -1124,7 +1123,7 @@
             this.groupBox3.Controls.Add(this.btn_packages_open);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(540, 89);
+            this.groupBox3.Size = new System.Drawing.Size(618, 89);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Install and Uninstall";
@@ -1191,11 +1190,10 @@
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.button4);
             this.tabPage5.Controls.Add(this.button3);
-            this.tabPage5.Controls.Add(this.btn_donate);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(596, 273);
+            this.tabPage5.Size = new System.Drawing.Size(630, 273);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "About";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1207,9 +1205,8 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(378, 108);
+            this.textBox1.Size = new System.Drawing.Size(418, 212);
             this.textBox1.TabIndex = 6;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // label10
             // 
@@ -1223,7 +1220,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(390, 26);
+            this.button4.Location = new System.Drawing.Point(6, 244);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -1233,28 +1230,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(471, 26);
+            this.button3.Location = new System.Drawing.Point(87, 244);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 2;
             this.button3.Text = "About ADB";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // btn_donate
-            // 
-            this.btn_donate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_donate.ForeColor = System.Drawing.Color.Black;
-            this.btn_donate.Image = ((System.Drawing.Image)(resources.GetObject("btn_donate.Image")));
-            this.btn_donate.Location = new System.Drawing.Point(390, 55);
-            this.btn_donate.Name = "btn_donate";
-            this.btn_donate.Size = new System.Drawing.Size(156, 66);
-            this.btn_donate.TabIndex = 0;
-            this.btn_donate.Text = "Buy me a beer";
-            this.btn_donate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_donate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_donate.UseVisualStyleBackColor = true;
-            this.btn_donate.Click += new System.EventHandler(this.btn_donate_Click);
             // 
             // cbSerials
             // 
@@ -1263,7 +1245,7 @@
             this.cbSerials.FormattingEnabled = true;
             this.cbSerials.Location = new System.Drawing.Point(6, 19);
             this.cbSerials.Name = "cbSerials";
-            this.cbSerials.Size = new System.Drawing.Size(244, 22);
+            this.cbSerials.Size = new System.Drawing.Size(318, 22);
             this.cbSerials.TabIndex = 6;
             this.cbSerials.SelectedIndexChanged += new System.EventHandler(this.cbSerials_SelectedIndexChanged);
             // 
@@ -1319,7 +1301,7 @@
             this.groupBox13.Controls.Add(this.cbSerials);
             this.groupBox13.Location = new System.Drawing.Point(316, 315);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(256, 48);
+            this.groupBox13.Size = new System.Drawing.Size(330, 48);
             this.groupBox13.TabIndex = 10;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Devices";
@@ -1456,7 +1438,6 @@
             private System.Windows.Forms.Button btn_phoneinformation_diskstats;
             private System.Windows.Forms.Button btn_phoneinformation_netstat;
             private System.Windows.Forms.Button btn_phoneinformation_uptime;
-            private System.Windows.Forms.Button btn_donate;
             private System.Windows.Forms.GroupBox groupBox9;
             private System.Windows.Forms.Button btn_phoneinformation_show;
             private System.Windows.Forms.Button btn_phoneinformation_changedpi;
