@@ -15,7 +15,7 @@ namespace adbGUI
         {
             string filename = "cmd.exe";
 
-            var arguments = "/C " + arg1 + " tools\\adb " + serialnumber + " " + arg2;
+            var arguments = "/C " + arg1 + " adb " + serialnumber + " " + arg2;
 
             var startInfo = new ProcessStartInfo
             {
@@ -23,7 +23,8 @@ namespace adbGUI
                 CreateNoWindow = true,
                 FileName = filename,
                 RedirectStandardOutput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
+                //RedirectStandardError  = true
             };
 
             Process process = new Process { StartInfo = startInfo };
@@ -31,7 +32,7 @@ namespace adbGUI
             process.Start();
 
             string s = process.StandardOutput.ReadToEnd();
-
+            //string s_err = process.StandardError.ReadToEnd();
             return s;
         }
 
@@ -39,7 +40,7 @@ namespace adbGUI
         {
             string filename = "cmd.exe";
 
-            var arguments = "/C " + arg1 + " tools\\adb " + serialnumber + " " + arg2;
+            var arguments = "/C " + arg1 + " adb " + serialnumber + " " + arg2;
 
             var startInfo = new ProcessStartInfo
             {
@@ -59,7 +60,7 @@ namespace adbGUI
         {
             const string filename = "cmd.exe";
 
-            string arguments = "/C prompt $G & tools\\adb" + serialnumber + " " + arg1 + " & echo. & echo. & pause";
+            string arguments = "/C prompt $G & adb" + serialnumber + " " + arg1 + " & echo. & echo. & pause";
 
             var startInfo = new ProcessStartInfo
             {
