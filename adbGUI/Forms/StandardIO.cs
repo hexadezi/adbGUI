@@ -36,7 +36,7 @@ namespace adbGUI
             return s;
         }
 
-        public static void AdbCMDBackgroundNoReturn(string arg1, string arg2, string serialnumber = "")
+        public static void AdbCMDBackgroundNoReturn(string arg1, string arg2, string serialnumber = "",bool blockIO=false)
         {
             string filename = "cmd.exe";
 
@@ -54,7 +54,12 @@ namespace adbGUI
             Process process = new Process { StartInfo = startInfo };
 
             process.Start();
+            if (blockIO)
+            {
+                process.WaitForExit();
+            }
         }
+
 
         public static void AdbCMD(string arg1, string serialnumber = "")
         {
@@ -72,6 +77,28 @@ namespace adbGUI
             var process = new Process { StartInfo = startInfo };
 
             process.Start();
+        }
+
+        public static void StandardCMDshell(string arg1,bool blockIO=false)
+        {
+            const string filename = "cmd.exe";
+
+            string arguments = "/C " + arg1;
+
+            var startInfo = new ProcessStartInfo
+            {
+                Arguments = arguments,
+                FileName = filename,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
+            var process = new Process { StartInfo = startInfo };
+
+            process.Start();
+            if (blockIO)
+            {
+                process.WaitForExit();
+            }
         }
 
         public static List<string> GetDevices()
