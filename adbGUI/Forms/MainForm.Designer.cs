@@ -319,7 +319,7 @@
             this.groupBox12.Controls.Add(this.btn_phoneinformation_showsize);
             this.groupBox12.Controls.Add(this.txt_phoneinformation_resolution);
             this.groupBox12.Controls.Add(this.btn_phoneinformation_setsize);
-            this.groupBox12.Location = new System.Drawing.Point(396, 170);
+            this.groupBox12.Location = new System.Drawing.Point(471, 170);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(153, 97);
             this.groupBox12.TabIndex = 14;
@@ -373,7 +373,7 @@
             this.groupBox9.Controls.Add(this.btn_phoneinformation_show);
             this.groupBox9.Controls.Add(this.btn_phoneinformation_changedpi);
             this.groupBox9.Controls.Add(this.txt_phoneinformation_dpi);
-            this.groupBox9.Location = new System.Drawing.Point(396, 88);
+            this.groupBox9.Location = new System.Drawing.Point(471, 88);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(153, 76);
             this.groupBox9.TabIndex = 13;
@@ -427,7 +427,7 @@
             this.groupBox6.Controls.Add(this.btn_phoneinformation_spoofmac);
             this.groupBox6.Controls.Add(this.btn_phoneinformation_showmac);
             this.groupBox6.Controls.Add(this.txt_phoneinformation_mac);
-            this.groupBox6.Location = new System.Drawing.Point(396, 6);
+            this.groupBox6.Location = new System.Drawing.Point(471, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(153, 76);
             this.groupBox6.TabIndex = 12;
@@ -504,7 +504,7 @@
             this.groupBox5.Controls.Add(this.btn_phoneinformation_getprop);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(384, 261);
+            this.groupBox5.Size = new System.Drawing.Size(459, 261);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Phone Information";
@@ -880,7 +880,7 @@
             // 
             // btn_push_openfile
             // 
-            this.btn_push_openfile.Location = new System.Drawing.Point(459, 19);
+            this.btn_push_openfile.Location = new System.Drawing.Point(459, 17);
             this.btn_push_openfile.Name = "btn_push_openfile";
             this.btn_push_openfile.Size = new System.Drawing.Size(153, 23);
             this.btn_push_openfile.TabIndex = 4;
@@ -984,12 +984,12 @@
             // 
             this.txt_restore_path.Location = new System.Drawing.Point(6, 19);
             this.txt_restore_path.Name = "txt_restore_path";
-            this.txt_restore_path.Size = new System.Drawing.Size(366, 20);
+            this.txt_restore_path.Size = new System.Drawing.Size(444, 20);
             this.txt_restore_path.TabIndex = 14;
             // 
             // btn_restore_openfile
             // 
-            this.btn_restore_openfile.Location = new System.Drawing.Point(379, 17);
+            this.btn_restore_openfile.Location = new System.Drawing.Point(456, 16);
             this.btn_restore_openfile.Name = "btn_restore_openfile";
             this.btn_restore_openfile.Size = new System.Drawing.Size(75, 23);
             this.btn_restore_openfile.TabIndex = 15;
@@ -999,7 +999,7 @@
             // 
             // btn_restore_restore
             // 
-            this.btn_restore_restore.Location = new System.Drawing.Point(460, 16);
+            this.btn_restore_restore.Location = new System.Drawing.Point(537, 15);
             this.btn_restore_restore.Name = "btn_restore_restore";
             this.btn_restore_restore.Size = new System.Drawing.Size(75, 23);
             this.btn_restore_restore.TabIndex = 16;
@@ -1057,7 +1057,7 @@
             // 
             // btn_backup_saveto
             // 
-            this.btn_backup_saveto.Location = new System.Drawing.Point(378, 30);
+            this.btn_backup_saveto.Location = new System.Drawing.Point(456, 30);
             this.btn_backup_saveto.Name = "btn_backup_saveto";
             this.btn_backup_saveto.Size = new System.Drawing.Size(75, 23);
             this.btn_backup_saveto.TabIndex = 8;
@@ -1097,7 +1097,7 @@
             // 
             // btn_backup_backup
             // 
-            this.btn_backup_backup.Location = new System.Drawing.Point(459, 30);
+            this.btn_backup_backup.Location = new System.Drawing.Point(537, 30);
             this.btn_backup_backup.Name = "btn_backup_backup";
             this.btn_backup_backup.Size = new System.Drawing.Size(75, 23);
             this.btn_backup_backup.TabIndex = 9;
@@ -1133,12 +1133,12 @@
             this.cbInstalledApps.FormattingEnabled = true;
             this.cbInstalledApps.Location = new System.Drawing.Point(6, 59);
             this.cbInstalledApps.Name = "cbInstalledApps";
-            this.cbInstalledApps.Size = new System.Drawing.Size(418, 21);
+            this.cbInstalledApps.Size = new System.Drawing.Size(496, 21);
             this.cbInstalledApps.TabIndex = 6;
             // 
             // btn_packages_install
             // 
-            this.btn_packages_install.Location = new System.Drawing.Point(459, 20);
+            this.btn_packages_install.Location = new System.Drawing.Point(537, 20);
             this.btn_packages_install.Name = "btn_packages_install";
             this.btn_packages_install.Size = new System.Drawing.Size(75, 23);
             this.btn_packages_install.TabIndex = 2;
@@ -1150,7 +1150,7 @@
             // 
             this.btn_refreshInstalledApps.BackgroundImage = global::adbGUI.Properties.Resources._1460414981_Update;
             this.btn_refreshInstalledApps.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_refreshInstalledApps.Location = new System.Drawing.Point(430, 57);
+            this.btn_refreshInstalledApps.Location = new System.Drawing.Point(508, 57);
             this.btn_refreshInstalledApps.Name = "btn_refreshInstalledApps";
             this.btn_refreshInstalledApps.Size = new System.Drawing.Size(23, 23);
             this.btn_refreshInstalledApps.TabIndex = 5;
@@ -1159,7 +1159,7 @@
             // 
             // btn_packages_uninstall
             // 
-            this.btn_packages_uninstall.Location = new System.Drawing.Point(459, 57);
+            this.btn_packages_uninstall.Location = new System.Drawing.Point(537, 57);
             this.btn_packages_uninstall.Name = "btn_packages_uninstall";
             this.btn_packages_uninstall.Size = new System.Drawing.Size(75, 23);
             this.btn_packages_uninstall.TabIndex = 5;
@@ -1171,12 +1171,12 @@
             // 
             this.txt_packages_path.Location = new System.Drawing.Point(6, 22);
             this.txt_packages_path.Name = "txt_packages_path";
-            this.txt_packages_path.Size = new System.Drawing.Size(366, 20);
+            this.txt_packages_path.Size = new System.Drawing.Size(444, 20);
             this.txt_packages_path.TabIndex = 0;
             // 
             // btn_packages_open
             // 
-            this.btn_packages_open.Location = new System.Drawing.Point(378, 20);
+            this.btn_packages_open.Location = new System.Drawing.Point(456, 20);
             this.btn_packages_open.Name = "btn_packages_open";
             this.btn_packages_open.Size = new System.Drawing.Size(75, 23);
             this.btn_packages_open.TabIndex = 1;
@@ -1205,7 +1205,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(418, 212);
+            this.textBox1.Size = new System.Drawing.Size(618, 212);
             this.textBox1.TabIndex = 6;
             // 
             // label10
