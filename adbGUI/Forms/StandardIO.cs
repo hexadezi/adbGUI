@@ -15,7 +15,7 @@ namespace adbGUI
         {
             string filename = "cmd.exe";
 
-            var arguments = "/C " + arg1 + " tools\\adb " + serialnumber + " " + arg2;
+            var arguments = "/C " + arg1 + " adb " + serialnumber + " " + arg2;
 
             var startInfo = new ProcessStartInfo
             {
@@ -23,7 +23,8 @@ namespace adbGUI
                 CreateNoWindow = true,
                 FileName = filename,
                 RedirectStandardOutput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
+                //RedirectStandardError  = true
             };
 
             Process process = new Process { StartInfo = startInfo };
@@ -31,15 +32,15 @@ namespace adbGUI
             process.Start();
 
             string s = process.StandardOutput.ReadToEnd();
-
+            //string s_err = process.StandardError.ReadToEnd();
             return s;
         }
 
-        public static void AdbCMDBackgroundNoReturn(string arg1, string arg2, string serialnumber = "")
+        public static void AdbCMDBackgroundNoReturn(string arg1, string arg2, string serialnumber = "",bool blockIO=false)
         {
             string filename = "cmd.exe";
 
-            var arguments = "/C " + arg1 + " tools\\adb " + serialnumber + " " + arg2;
+            var arguments = "/C " + arg1 + " adb " + serialnumber + " " + arg2;
 
             var startInfo = new ProcessStartInfo
             {
@@ -53,13 +54,18 @@ namespace adbGUI
             Process process = new Process { StartInfo = startInfo };
 
             process.Start();
+            if (blockIO)
+            {
+                process.WaitForExit();
+            }
         }
+
 
         public static void AdbCMD(string arg1, string serialnumber = "")
         {
             const string filename = "cmd.exe";
 
-            string arguments = "/C prompt $G & tools\\adb" + serialnumber + " " + arg1 + " & echo. & echo. & pause";
+            string arguments = "/C prompt $G & adb" + serialnumber + " " + arg1 + " & echo. & echo. & pause";
 
             var startInfo = new ProcessStartInfo
             {
@@ -71,6 +77,28 @@ namespace adbGUI
             var process = new Process { StartInfo = startInfo };
 
             process.Start();
+        }
+
+        public static void StandardCMDshell(string arg1,bool blockIO=false)
+        {
+            const string filename = "cmd.exe";
+
+            string arguments = "/C " + arg1;
+
+            var startInfo = new ProcessStartInfo
+            {
+                Arguments = arguments,
+                FileName = filename,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
+            var process = new Process { StartInfo = startInfo };
+
+            process.Start();
+            if (blockIO)
+            {
+                process.WaitForExit();
+            }
         }
 
         public static List<string> GetDevices()
