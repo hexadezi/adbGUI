@@ -58,7 +58,7 @@ namespace adbGUI
                 tr.Join();
 
                 txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s.ToUpper()));
-                Thread.Sleep(1500);
+                Thread.Sleep(1000);
             }
 
         }
@@ -144,22 +144,13 @@ namespace adbGUI
         }
 
         //Get all the information
-        private void GetInformationAndOpenViewer(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal,bool needSerial=true)
+        private void GetInformationAndOpenViewer(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal)
         {
             if (cbSerials.SelectedItem != null)
             {
                 string serial = GetSelectedSerialnumber();
-                Thread thr;
-                if (needSerial)//append serial;
-                {
-                    thr = new Thread(() => { ToViewer(StandardIO.AdbCMDBackground("", b, " -s " + serial), titel, width, height, windowstate); });
-                
-                }
-                else
-                {
-                    thr = new Thread(() => { ToViewer(StandardIO.AdbCMDBackground("", b, ""), titel, width, height, windowstate); });
 
-                }
+                Thread thr = new Thread(() => { ToViewer(StandardIO.AdbCMDBackground("", b, " -s " + serial), titel, width, height, windowstate); });
 
                 thr.IsBackground = true;
 
@@ -216,32 +207,29 @@ namespace adbGUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            /*
             if (File.Exists(@"tools\adb.exe"))
             {
-                
+                Thread refreshinformationtextbox = new Thread(RefreshInformationTextbox);
+                refreshinformationtextbox.IsBackground = true;
+
+                if (!refreshinformationtextbox.IsAlive)
+                {
+                    refreshinformationtextbox.Start();
+                }
+
+                Thread refreshrestartbuttoncolor = new Thread(RefreshRestartButtonColor);
+                refreshrestartbuttoncolor.IsBackground = true;
+
+                if (!refreshrestartbuttoncolor.IsAlive)
+                {
+                    refreshrestartbuttoncolor.Start();
+                }
             }
 
             else
             {
-                MessageBox.Show("File <adb.exe> don't find. \nMake sure adbGUI.exe is in the tool's folder.", "Error:adb.exe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("adb.exe not found. Make soure adbGUI.exe is in the tools folder.", "Error - adb.exe", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
-            }
-            */
-            Thread refreshinformationtextbox = new Thread(RefreshInformationTextbox);
-            refreshinformationtextbox.IsBackground = true;
-
-            if (!refreshinformationtextbox.IsAlive)
-            {
-                refreshinformationtextbox.Start();
-            }
-
-            Thread refreshrestartbuttoncolor = new Thread(RefreshRestartButtonColor);
-            refreshrestartbuttoncolor.IsBackground = true;
-
-            if (!refreshrestartbuttoncolor.IsAlive)
-            {
-                refreshrestartbuttoncolor.Start();
             }
 
         }
@@ -546,15 +534,12 @@ namespace adbGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //StandardIO.AdbCMD("version", " - s" + GetSelectedSerialnumber());
-            //StandardIO.AdbCMD("version");
-            GetInformationAndOpenViewer("", "version", "ADBVersionInfo", 340, 150);
+            StandardIO.AdbCMD("version", " - s" + GetSelectedSerialnumber());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            StandardIO.AdbCMD("help");
-            //GetInformationAndOpenViewer("", "help", "HelpInfo", 840, 630,FormWindowState.Normal,false);
+            StandardIO.AdbCMD("help", " -s " + GetSelectedSerialnumber());
         }
 
         private void btn_phoneinformation_features_Click(object sender, EventArgs e)
@@ -584,7 +569,7 @@ namespace adbGUI
 
         private void btn_phoneinformation_getimei_Click(object sender, EventArgs e)
         {
-            GetInformationAndOpenViewer("", "shell service call iphonesubinfo 1", "IMEI", 550, 160);
+            GetInformationAndOpenViewer("", "shell service call iphonesubinfo 1", "IMEI", 550, 130);
         }
 
         private void btn_phoneinformation_dmesg_Click(object sender, EventArgs e)
@@ -733,7 +718,7 @@ namespace adbGUI
 
         private void btn_phoneinformation_uptime_Click(object sender, EventArgs e)
         {
-            GetInformationAndOpenViewer("", "shell uptime", "Uptime", 550, 150);
+            GetInformationAndOpenViewer("", "shell uptime", "Uptime", 550, 100);
         }
 
         private void btn_donate_Click(object sender, EventArgs e)
@@ -863,7 +848,7 @@ namespace adbGUI
             {
                 groupBox11.Enabled = false;
                 tabControl1.Enabled = false;
-                Thread.Sleep(100);
+
                 //Cursor = Cursors.WaitCursor;
             }
             groupBox11.Enabled = true;
@@ -993,11 +978,6 @@ namespace adbGUI
                 }
             }
             return inputList;
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
