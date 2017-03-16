@@ -700,7 +700,7 @@ namespace adbGUI
                 cb_backup_shared.Enabled = true;
                 label8.Visible = false;
                 txt_backup_packagename.Visible = false;
-                txt_backup_path.Size = new Size(366, 20);
+                txt_backup_path.Size = new Size(444, 20);
                 cb_backup_withapk.Enabled = true;
                 txt_backup_packagename.Text = "";
             }
