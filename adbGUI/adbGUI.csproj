@@ -81,8 +81,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>StrongPasscode.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -156,13 +155,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="StrongPasscode.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\1428882391_416405.ico" />
-    <None Include="Resources\ProcessOnG1003.png" />
-    <None Include="Resources\ProcessOnG1002.png" />
     <None Include="Resources\IU7CO.gif" />
     <None Include="Resources\1460414981_Update.png" />
+    <None Include="Resources\1460414796_arrows_refresh.png" />
     <None Include="Resources\noun_56146_cc.png" />
   </ItemGroup>
   <ItemGroup>

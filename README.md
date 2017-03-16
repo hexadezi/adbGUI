@@ -1,10 +1,10 @@
 # adbGUI
+************
 
+####Welcome
+This programm is a is a nice gui for adb.
 
-##Welcome
-This programm is a nice GUI tool for AndroidDevelopment via adb.
-
-##Screenshots
+####Screenshots
 
 ![alt tag](http://i.imgur.com/xGfUxDb.png)
 ![alt tag](http://i.imgur.com/xW8Fmzo.png)
@@ -12,7 +12,5 @@ This programm is a nice GUI tool for AndroidDevelopment via adb.
 ![alt tag](http://i.imgur.com/xlVvpkH.png)
 
 
-##Download
-
-1. http://d-h.st/users/labo?fld_id=44865  
-2. https://github.com/6769/adbGUI/releases
+####Download
+http://d-h.st/users/labo?fld_id=44865

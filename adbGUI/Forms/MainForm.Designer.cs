@@ -86,12 +86,14 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.btnPullDestinationLS = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_pull_pull = new System.Windows.Forms.Button();
             this.btn_pull_saveto = new System.Windows.Forms.Button();
             this.txt_pull_pathfrom = new System.Windows.Forms.TextBox();
             this.txt_pull_pathto = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnPushDestinationLS = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.btn_push_push = new System.Windows.Forms.Button();
             this.btn_push_openfile = new System.Windows.Forms.Button();
             this.txt_push_tofilepath = new System.Windows.Forms.TextBox();
             this.txt_push_fromfilepath = new System.Windows.Forms.TextBox();
@@ -122,7 +124,7 @@
             this.txt_packages_path = new System.Windows.Forms.TextBox();
             this.btn_packages_open = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.textBox1_about_pane = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3_about_adb = new System.Windows.Forms.Button();
@@ -137,8 +139,6 @@
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btn_pull_pull = new System.Windows.Forms.Button();
-            this.btn_push_push = new System.Windows.Forms.Button();
             this.btn_refreshInstalledApps = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
@@ -799,11 +799,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Destination";
             // 
+            // btn_pull_pull
+            // 
+            this.btn_pull_pull.Location = new System.Drawing.Point(459, 54);
+            this.btn_pull_pull.Name = "btn_pull_pull";
+            this.btn_pull_pull.Size = new System.Drawing.Size(75, 21);
+            this.btn_pull_pull.TabIndex = 10;
+            this.btn_pull_pull.Text = "Pull";
+            this.btn_pull_pull.UseVisualStyleBackColor = true;
+            this.btn_pull_pull.Click += new System.EventHandler(this.btn_pull_pull_Click);
+            // 
             // btn_pull_saveto
             // 
-            this.btn_pull_saveto.Location = new System.Drawing.Point(540, 20);
+            this.btn_pull_saveto.Location = new System.Drawing.Point(459, 27);
             this.btn_pull_saveto.Name = "btn_pull_saveto";
-            this.btn_pull_saveto.Size = new System.Drawing.Size(72, 21);
+            this.btn_pull_saveto.Size = new System.Drawing.Size(153, 21);
             this.btn_pull_saveto.TabIndex = 8;
             this.btn_pull_saveto.Text = "Browse...";
             this.btn_pull_saveto.UseVisualStyleBackColor = true;
@@ -844,7 +854,7 @@
             // 
             // btnPushDestinationLS
             // 
-            this.btnPushDestinationLS.Location = new System.Drawing.Point(540, 54);
+            this.btnPushDestinationLS.Location = new System.Drawing.Point(540, 51);
             this.btnPushDestinationLS.Name = "btnPushDestinationLS";
             this.btnPushDestinationLS.Size = new System.Drawing.Size(72, 21);
             this.btnPushDestinationLS.TabIndex = 7;
@@ -861,11 +871,21 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Destination";
             // 
+            // btn_push_push
+            // 
+            this.btn_push_push.Location = new System.Drawing.Point(459, 52);
+            this.btn_push_push.Name = "btn_push_push";
+            this.btn_push_push.Size = new System.Drawing.Size(75, 21);
+            this.btn_push_push.TabIndex = 6;
+            this.btn_push_push.Text = "Push";
+            this.btn_push_push.UseVisualStyleBackColor = true;
+            this.btn_push_push.Click += new System.EventHandler(this.btn_push_push_Click);
+            // 
             // btn_push_openfile
             // 
-            this.btn_push_openfile.Location = new System.Drawing.Point(540, 18);
+            this.btn_push_openfile.Location = new System.Drawing.Point(459, 18);
             this.btn_push_openfile.Name = "btn_push_openfile";
-            this.btn_push_openfile.Size = new System.Drawing.Size(72, 21);
+            this.btn_push_openfile.Size = new System.Drawing.Size(153, 21);
             this.btn_push_openfile.TabIndex = 4;
             this.btn_push_openfile.Text = "Browse...";
             this.btn_push_openfile.UseVisualStyleBackColor = true;
@@ -930,9 +950,9 @@
             // 
             // btn_sideload_sideload
             // 
-            this.btn_sideload_sideload.Location = new System.Drawing.Point(540, 33);
+            this.btn_sideload_sideload.Location = new System.Drawing.Point(537, 33);
             this.btn_sideload_sideload.Name = "btn_sideload_sideload";
-            this.btn_sideload_sideload.Size = new System.Drawing.Size(72, 21);
+            this.btn_sideload_sideload.Size = new System.Drawing.Size(75, 21);
             this.btn_sideload_sideload.TabIndex = 2;
             this.btn_sideload_sideload.Text = "Sideload";
             this.btn_sideload_sideload.UseVisualStyleBackColor = true;
@@ -1159,7 +1179,7 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.pictureBox1);
-            this.tabPage5.Controls.Add(this.textBox1_about_pane);
+            this.tabPage5.Controls.Add(this.textBox1);
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.button4);
             this.tabPage5.Controls.Add(this.button3_about_adb);
@@ -1171,17 +1191,15 @@
             this.tabPage5.Text = "About";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // textBox1_about_pane
+            // textBox1
             // 
-            this.textBox1_about_pane.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1_about_pane.Location = new System.Drawing.Point(6, 24);
-            this.textBox1_about_pane.Multiline = true;
-            this.textBox1_about_pane.Name = "textBox1_about_pane";
-            this.textBox1_about_pane.ReadOnly = true;
-            this.textBox1_about_pane.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1_about_pane.Size = new System.Drawing.Size(489, 196);
-            this.textBox1_about_pane.TabIndex = 6;
-            this.textBox1_about_pane.TextChanged += new System.EventHandler(this.textBox1_about_pane_TextChanged);
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(6, 24);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(468, 196);
+            this.textBox1.TabIndex = 6;
             // 
             // label10
             // 
@@ -1287,34 +1305,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // btn_pull_pull
-            // 
-            this.btn_pull_pull.FlatAppearance.BorderSize = 0;
-            this.btn_pull_pull.Image = global::adbGUI.Properties.Resources.ProcessOnG1002;
-            this.btn_pull_pull.Location = new System.Drawing.Point(459, 20);
-            this.btn_pull_pull.Name = "btn_pull_pull";
-            this.btn_pull_pull.Size = new System.Drawing.Size(75, 55);
-            this.btn_pull_pull.TabIndex = 10;
-            this.btn_pull_pull.Text = "Pull";
-            this.btn_pull_pull.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_pull_pull.UseVisualStyleBackColor = true;
-            this.btn_pull_pull.Click += new System.EventHandler(this.btn_pull_pull_Click);
-            // 
-            // btn_push_push
-            // 
-            this.btn_push_push.BackColor = System.Drawing.Color.Transparent;
-            this.btn_push_push.FlatAppearance.BorderSize = 0;
-            this.btn_push_push.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_push_push.Image = global::adbGUI.Properties.Resources.ProcessOnG1003;
-            this.btn_push_push.Location = new System.Drawing.Point(459, 18);
-            this.btn_push_push.Name = "btn_push_push";
-            this.btn_push_push.Size = new System.Drawing.Size(75, 57);
-            this.btn_push_push.TabIndex = 6;
-            this.btn_push_push.Text = "Push";
-            this.btn_push_push.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_push_push.UseVisualStyleBackColor = false;
-            this.btn_push_push.Click += new System.EventHandler(this.btn_push_push_Click);
-            // 
             // btn_refreshInstalledApps
             // 
             this.btn_refreshInstalledApps.BackgroundImage = global::adbGUI.Properties.Resources._1460414981_Update;
@@ -1330,9 +1320,9 @@
             // 
             this.pictureBox1.BackgroundImage = global::adbGUI.Properties.Resources.IU7CO;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(501, 24);
+            this.pictureBox1.Location = new System.Drawing.Point(480, 24);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(123, 196);
+            this.pictureBox1.Size = new System.Drawing.Size(144, 196);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -1491,7 +1481,7 @@
             public System.Windows.Forms.TextBox txt_devices;
             private System.Windows.Forms.Button button5;
             public System.Windows.Forms.ComboBox cbSerials;
-            private System.Windows.Forms.TextBox textBox1_about_pane;
+            private System.Windows.Forms.TextBox textBox1;
             public System.Windows.Forms.TabControl tabControl1;
             public System.Windows.Forms.TextBox txt_customcommand;
             public System.Windows.Forms.Button btnKillserver;

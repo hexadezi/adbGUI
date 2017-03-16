@@ -58,7 +58,7 @@ namespace adbGUI
                 tr.Join();
 
                 txt_devices.Invoke((MethodInvoker)(() => txt_devices.Text = s.ToUpper()));
-                Thread.Sleep(3000);
+                Thread.Sleep(1500);
             }
 
         }
@@ -546,22 +546,15 @@ namespace adbGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //about buttom;
+            //StandardIO.AdbCMD("version", " - s" + GetSelectedSerialnumber());
             //StandardIO.AdbCMD("version");
-            //GetInformationAndOpenViewer("", "version", "ADBVersionInfo", 340, 150);
-            String adb_version_from_cmd = StandardIO.AdbCMDBackground("", "version");
-
-            textBox1_about_pane.Text = adb_version_from_cmd;
+            GetInformationAndOpenViewer("", "version", "ADBVersionInfo", 340, 150);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //adb help buttom;
-            //StandardIO.AdbCMD("help");
-            //help cmd output is located in STDERR;use 2>&1 redirection;
-            
-            String adb_help_info = StandardIO.AdbCMDBackground("", "help 2>&1");
-            textBox1_about_pane.Text = adb_help_info;
+            StandardIO.AdbCMD("help");
+            //GetInformationAndOpenViewer("", "help", "HelpInfo", 840, 630,FormWindowState.Normal,false);
         }
 
         private void btn_phoneinformation_features_Click(object sender, EventArgs e)
@@ -858,38 +851,24 @@ namespace adbGUI
 
         private void btn_phoneinformation_screenshot_Click(object sender, EventArgs e)
         {
-            //reWrited by [6769]
-            //var proc = new Process();
+            var proc = new Process();
 
-            //proc.StartInfo.FileName = "tools\\screenshot.bat";
+            proc.StartInfo.FileName = "tools\\screenshot.bat";
 
-            //proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
-            //proc.Start();
+            proc.Start();
 
-            //while (proc.HasExited == false)
-            //{
-            //    groupBox11.Enabled = false;
-            //    tabControl1.Enabled = false;
-            //    Thread.Sleep(100);
-            //    //Cursor = Cursors.WaitCursor;
-            //}
-            //groupBox11.Enabled = true;
-            //tabControl1.Enabled = true;
-            ////Cursor = Cursors.Default;
-
-            //there is unnecessary to invoke such a batch file to execute some adb shell;
-            groupBox11.Enabled = false;
-            tabControl1.Enabled = false;
-
-            StandardIO.AdbCMDBackgroundNoReturn("", "shell screencap -p /sdcard/screenshot.png", " -s " + GetSelectedSerialnumber(),true);
-            StandardIO.AdbCMDBackgroundNoReturn("", "pull /sdcard/screenshot.png", " -s " + GetSelectedSerialnumber(),true);
-            StandardIO.AdbCMDBackgroundNoReturn("", "shell rm /sdcard/screenshot.png", " -s " + GetSelectedSerialnumber());
-            //open sreenshot.png on PC;
-
+            while (proc.HasExited == false)
+            {
+                groupBox11.Enabled = false;
+                tabControl1.Enabled = false;
+                Thread.Sleep(100);
+                //Cursor = Cursors.WaitCursor;
+            }
             groupBox11.Enabled = true;
             tabControl1.Enabled = true;
-            StandardIO.StandardCMDshell("start screenshot.png");
+            //Cursor = Cursors.Default;
         }
 
         private void txt_phoneinformation_dpi_KeyDown(object sender, KeyEventArgs e)
@@ -975,20 +954,17 @@ namespace adbGUI
         private void btnPushDestinationLS_Click(Object sender, EventArgs e)
         {
             string path = txt_push_tofilepath.Text;
-            //List<string> resultList = StandardIO.AdbCMDBackground("", "shell ls \"" + path + "\" -F").Split(Environment.NewLine.ToCharArray()).ToList();
-            //resultList = FixFileListing(resultList);
-            GetInformationAndOpenViewer("", ("shell ls \"" + path + "\" -F"), "Path: "+path, 400, 600);
-            //MessageBox.Show(string.Join(Environment.NewLine, resultList), "File Listing");
+            List<string> resultList = StandardIO.AdbCMDBackground("", "shell ls \"" + path + "\" -F").Split(Environment.NewLine.ToCharArray()).ToList();
+            resultList = FixFileListing(resultList);
+            MessageBox.Show(string.Join(Environment.NewLine, resultList), "File Listing");
         }
 
         private void btnPullDestinationLS_Click(Object sender, EventArgs e)
         {
             string path = txt_pull_pathfrom.Text;
-            //List<string> resultList = StandardIO.AdbCMDBackground("", "shell ls \"" + path + "\" -F").Split(Environment.NewLine.ToCharArray()).ToList();
-            //resultList = FixFileListing(resultList);
-            //MessageBox.Show(string.Join(Environment.NewLine, resultList), "File Listing");
-            GetInformationAndOpenViewer("", ("shell ls \"" + path + "\" -F"), "Path: " + path, 400, 600);
-
+            List<string> resultList = StandardIO.AdbCMDBackground("", "shell ls \"" + path + "\" -F").Split(Environment.NewLine.ToCharArray()).ToList();
+            resultList = FixFileListing(resultList);
+            MessageBox.Show(string.Join(Environment.NewLine, resultList), "File Listing");
         }
 
         private List<string> FixFileListing(List<string> inputList)
@@ -1021,15 +997,7 @@ namespace adbGUI
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            //hiden function here;
-            //about this small programe;
-            String about_self = "visit https://github.com/labo89/adbGUI";
-            textBox1_about_pane.Text = about_self;
-        }
 
-        private void textBox1_about_pane_TextChanged(object sender, EventArgs e)
-        {
-            //pass
         }
     }
 }
