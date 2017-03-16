@@ -130,9 +130,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="tools\screenshot.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\1428882391_416405.ico" />
+    <Content Include="tools\adb.exe" />
+    <Content Include="tools\AdbWinApi.dll" />
+    <Content Include="tools\AdbWinUsbApi.dll" />
     <None Include="Resources\1460414981_Update.png" />
     <None Include="Resources\1460414796_arrows_refresh.png" />
     <None Include="Resources\noun_56146_cc.png" />
