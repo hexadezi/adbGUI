@@ -104,8 +104,8 @@ namespace adbGUI
             string output = null;
 
             output = StandardIO.AdbCMDBackground("", "shell \"pm list packages -3 | cut -c9- | sort\"", " -s " + serial);
-
-            foreach (var item in output.Split(new string[] { "\r\r\n", }, StringSplitOptions.RemoveEmptyEntries))
+            
+            foreach (var item in output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 cbInstalledApps.Invoke((MethodInvoker)(() => { cbInstalledApps.Items.Add(item); }));
             }
