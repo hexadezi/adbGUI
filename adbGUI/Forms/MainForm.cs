@@ -353,7 +353,7 @@ namespace adbGUI
             {
                 string serial = GetSelectedSerialnumber();
 
-                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root busybox ifconfig wlan0 hw ether " + s, "-s " + serial); });
+                Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root ifconfig wlan0 hw ether " + s, "-s " + serial); });
 
                 thr.Start();
             }
@@ -367,17 +367,17 @@ namespace adbGUI
         {
             string serial = GetSelectedSerialnumber();
 
-            Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root busybox ifconfig wlan0 down", " -s " + serial); });
+            Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", "shell su root ifconfig wlan0 down", " -s " + serial); });
             thr.Start();
 
-            Thread thr2 = new Thread(() => { StandardIO.AdbCMDBackground("", "shell su root busybox ifconfig wlan0 up", " -s " + serial); });
+            Thread thr2 = new Thread(() => { StandardIO.AdbCMDBackground("", "shell su root ifconfig wlan0 up", " -s " + serial); });
             thr2.Start();
 
         }
 
         private void btn_phoneinformation_showmac_Click(object sender, EventArgs e)
         {
-            GetInformationAndOpenViewer("", "shell cat /sys/class/net/wlan0/address", "MAC Adress", 280, 110);
+            GetInformationAndOpenViewer("", "shell su root cat /sys/class/net/wlan0/address", "MAC Adress", 280, 110);
         }
 
         private void btn_phoneinformation_dumpsys_Click(object sender, EventArgs e)
