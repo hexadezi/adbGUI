@@ -36,7 +36,7 @@ namespace adbGUI
         }
 
         public static void AdbCMDBackgroundNoReturn(string arg1, string arg2, string serialnumber = "")
-        {
+        { 
             string filename = "cmd.exe";
 
             var arguments = "/C " + arg1 + " tools\\adb " + serialnumber + " " + arg2;
@@ -117,6 +117,8 @@ namespace adbGUI
         {
             MessageBox.Show("No device connected. Please connect a device and select it.\t", "Error - No device connected", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+
     }
 
 

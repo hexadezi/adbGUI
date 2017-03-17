@@ -143,6 +143,13 @@ namespace adbGUI
             }
         }
 
+        private void AddToLog(string s)
+        {
+
+            txt_log.Text += s + "\r\n";
+
+        }
+
         //Get all the information
         private void GetInformationAndOpenViewer(string a, string b, string titel, int width = 850, int height = 606, FormWindowState windowstate = FormWindowState.Normal)
         {
@@ -155,6 +162,8 @@ namespace adbGUI
                 thr.IsBackground = true;
 
                 thr.Start();
+
+                AddToLog(b + " -s " + serial);
 
                 while (thr.IsAlive)
                 {
@@ -207,10 +216,14 @@ namespace adbGUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            AddToLog("start log");
+
             if (File.Exists(@"tools\adb.exe"))
             {
                 Thread refreshinformationtextbox = new Thread(RefreshInformationTextbox);
                 refreshinformationtextbox.IsBackground = true;
+
+                
 
                 if (!refreshinformationtextbox.IsAlive)
                 {
@@ -748,12 +761,13 @@ namespace adbGUI
 
         private void btn_phoneinformation_changedpi_Click(object sender, EventArgs e)
         {
-            StandardIO.AdbCMDBackground("", "shell wm density " + txt_phoneinformation_dpi.Text + "&& tools\\adb reboot");
+            //StandardIO.AdbCMDBackground("", "shell wm density " + txt_phoneinformation_dpi.Text + "&& tools\\adb reboot");
+            StandardIO.AdbCMDBackground("", "shell wm density " + txt_phoneinformation_dpi.Text);
         }
 
         private void btn_phoneinformation_resetdpi_Click(object sender, EventArgs e)
         {
-            StandardIO.AdbCMDBackground("", "shell wm density reset && tools\\adb reboot");
+            StandardIO.AdbCMDBackground("", "shell wm density reset");
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
