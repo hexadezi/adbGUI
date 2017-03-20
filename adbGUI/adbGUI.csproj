@@ -52,7 +52,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\1428882391_416405.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\programIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -89,13 +89,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\RebootMenu.cs">
+    <Compile Include="Methods\AdbOps.cs" />
+    <Compile Include="Forms\PowerMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RebootMenu.Designer.cs">
-      <DependentUpon>RebootMenu.cs</DependentUpon>
+    <Compile Include="Forms\PowerMenu.Designer.cs">
+      <DependentUpon>PowerMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StandardIO.cs" />
+    <Compile Include="Methods\FormMethods.cs" />
     <Compile Include="Forms\Viewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,10 +109,10 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Methods\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\RebootMenu.resx">
-      <DependentUpon>RebootMenu.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\PowerMenu.resx">
+      <DependentUpon>PowerMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Viewer.resx">
       <DependentUpon>Viewer.cs</DependentUpon>
@@ -132,9 +133,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1428882391_416405.ico" />
+    <Content Include="Resources\programIcon.ico" />
     <None Include="Resources\1460414981_Update.png" />
-    <None Include="Resources\1460414796_arrows_refresh.png" />
     <None Include="Resources\noun_56146_cc.png" />
   </ItemGroup>
   <ItemGroup>

@@ -6,11 +6,16 @@ using System.Windows.Forms;
 
 namespace adbGUI
 {
-    public partial class RebootMenu : Form
+    public partial class PowerMenu : Form
     {
-        public RebootMenu()
+        AdbOps adb = new AdbOps();
+
+        FormMethods formMethods;
+
+        public PowerMenu(MainForm frm)
         {
             InitializeComponent();
+            formMethods = frm.formMethods;
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -30,7 +35,7 @@ namespace adbGUI
 
             MainForm mainform = Application.OpenForms.OfType<MainForm>().Single();
 
-            string serial = " -s " + mainform.cbSerials.SelectedItem.ToString(); ;
+            string serial = " -s " + mainform.cbx_connectedDevices.SelectedItem.ToString(); ;
 
             string cmd = null;
 
@@ -54,8 +59,8 @@ namespace adbGUI
                     break;
             }
 
-            Thread thr = new Thread(() => { StandardIO.AdbCMDBackgroundNoReturn("", cmd, serial); });
-            thr.Start();
+            adb.StartProcessing(cmd, formMethods.selectedDevice());
+
         }
     }
 }
