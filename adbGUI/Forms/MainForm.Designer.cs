@@ -1300,6 +1300,7 @@
             this.rtb_console.Size = new System.Drawing.Size(805, 377);
             this.rtb_console.TabIndex = 11;
             this.rtb_console.Text = "";
+            this.rtb_console.Resize += new System.EventHandler(this.rtb_console_Resize);
             // 
             // panel1
             // 

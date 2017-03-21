@@ -100,6 +100,11 @@ namespace adbGUI
 
         }
 
+        private void rtb_console_Resize(object sender, EventArgs e)
+        {
+            rtb_console.ScrollToCaret();
+        }
+
         private void btn_killServer_Click(object sender, EventArgs e)
         {
             formMethods.killServer();
