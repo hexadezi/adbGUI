@@ -16,7 +16,7 @@ namespace adbGUI
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = "tools\\adb",
+                FileName = "cmd",
                 Arguments = null,
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -46,14 +46,24 @@ namespace adbGUI
 
                 if (!string.IsNullOrEmpty(serialnumber))
                 {
-                    serial += " -s " + serialnumber + " ";
+                    serial += "-s " + serialnumber + " ";
                 }
                 else
                 {
                     serial = "";
                 }
 
-                process.StartInfo.Arguments = serial + command;
+                if (command.StartsWith("shell") || command.StartsWith("shell screencap"))
+                {
+                    command = command.Remove(0, 5);
+                    command = "exec-out" + command;
+                }
+                if (command.StartsWith("logcat"))
+                {
+                    command = "exec-out " + command;
+                }
+
+                process.StartInfo.Arguments = "/C tools\\adb " + serial + command;
 
                 process.Start();
 
@@ -72,6 +82,8 @@ namespace adbGUI
         {
             try
             {
+                process.CancelOutputRead();
+                process.CancelErrorRead();
                 process.Kill();
             }
             catch { }

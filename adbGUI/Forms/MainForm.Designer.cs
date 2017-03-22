@@ -1122,6 +1122,7 @@
             treeNode4.Tag = "shell dumpsys account";
             treeNode4.Text = "Accounts";
             treeNode5.Name = "Knoten31";
+            treeNode5.Tag = "shell screencap -p > screen.png";
             treeNode5.Text = "Screenshot";
             treeNode6.Name = "Knoten3";
             treeNode6.Text = "Phone";
