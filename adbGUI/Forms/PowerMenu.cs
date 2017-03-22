@@ -29,7 +29,7 @@ namespace adbGUI
             combo_rebootmenu.SelectedIndex = 0;
         }
 
-        private void btn_rebootmenu_reboot_Click(object sender, EventArgs e)
+        private void Btn_rebootmenu_reboot_Click(object sender, EventArgs e)
         {
             Close();
 
@@ -59,7 +59,7 @@ namespace adbGUI
                     break;
             }
 
-            adb.StartProcessing(cmd, formMethods.selectedDevice());
+            adb.StartProcessing(cmd, formMethods.SelectedDevice());
 
         }
     }

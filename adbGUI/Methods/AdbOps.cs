@@ -65,19 +65,18 @@ namespace adbGUI
 
                 process.StartInfo.Arguments = "/C tools\\adb " + serial + command;
 
+                process.EnableRaisingEvents = true;
+
                 process.Start();
 
                 process.BeginOutputReadLine();
+
                 process.BeginErrorReadLine();
 
                 process.StartInfo.Arguments = null;
 
             }
-
-
-
         }
-
         public void StopProcessing()
         {
             try

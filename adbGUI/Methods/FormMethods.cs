@@ -18,7 +18,7 @@ namespace adbGUI
             frm = f;
         }
 
-        public List<string> parseDevicesL(string input)
+        public List<string> ParseDevicesL(string input)
         {
             List<string> listofserials = new List<string>();
 
@@ -49,7 +49,7 @@ namespace adbGUI
             return listofserials;
         }
 
-        public string selectedDevice()
+        public string SelectedDevice()
         {
             if (frm.cbx_connectedDevices.Items.Count == 0)
             {
@@ -62,7 +62,7 @@ namespace adbGUI
             }
         }
 
-        public void refreshSerialsInCombobox(List<string> devices)
+        public void RefreshSerialsInCombobox(List<string> devices)
         {
             frm.cbx_connectedDevices.Items.Clear();
 
@@ -75,13 +75,13 @@ namespace adbGUI
 
         }
 
-        public void refreshInstalledAppsInCombobox()
+        public void RefreshInstalledAppsInCombobox()
         {
             frm.cbx_installedApps.Items.Clear();
 
             frm.cbx_installedApps.Enabled = false;
 
-            string output = adb.StartProcessingInThread("shell \"pm list packages -3 | cut -c9- | sort\"", selectedDevice());
+            string output = adb.StartProcessingInThread("shell \"pm list packages -3 | cut -c9- | sort\"", SelectedDevice());
 
 
             foreach (var item in output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
@@ -100,7 +100,7 @@ namespace adbGUI
 
         }
 
-        public void killServer()
+        public void KillServer()
         {
             try
             {

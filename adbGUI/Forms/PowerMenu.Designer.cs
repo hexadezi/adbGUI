@@ -56,7 +56,7 @@
             this.btn_rebootmenu_reboot.TabIndex = 1;
             this.btn_rebootmenu_reboot.Text = "Go";
             this.btn_rebootmenu_reboot.UseVisualStyleBackColor = true;
-            this.btn_rebootmenu_reboot.Click += new System.EventHandler(this.btn_rebootmenu_reboot_Click);
+            this.btn_rebootmenu_reboot.Click += new System.EventHandler(this.Btn_rebootmenu_reboot_Click);
             // 
             // PowerMenu
             // 

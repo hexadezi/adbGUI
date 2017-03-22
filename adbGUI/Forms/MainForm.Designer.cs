@@ -29,84 +29,84 @@
             private void InitializeComponent()
             {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("All User");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Max User");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("IMEI");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Accounts");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Screenshot");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Phone", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Get build.prop");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Processes");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Memory");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Features");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Alarm Manager State");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Uptime");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Battery Info");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("CPU Info");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Diskstats");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Permissions");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Activities");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("System", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12,
-            treeNode13,
-            treeNode14,
-            treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("WiFi Info");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Netstat");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Hosts");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20,
-            treeNode21});
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("All packages");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Libraries");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
-            treeNode23,
-            treeNode24});
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Dumpsys Input Diagnostics");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Kernel Messages");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Logcat Live");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Logcat Dump");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Verbose");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Debug");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Info");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Warning");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Error");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Fatal");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Silent");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Filter", new System.Windows.Forms.TreeNode[] {
-            treeNode30,
-            treeNode31,
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35,
-            treeNode36});
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Logcat", new System.Windows.Forms.TreeNode[] {
-            treeNode28,
-            treeNode29,
-            treeNode37});
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Logs", new System.Windows.Forms.TreeNode[] {
-            treeNode26,
-            treeNode27,
-            treeNode38});
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Help");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("About");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
-            treeNode40,
-            treeNode41});
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("All User");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Max User");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("IMEI");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Accounts");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Screenshot");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Phone", new System.Windows.Forms.TreeNode[] {
+            treeNode43,
+            treeNode44,
+            treeNode45,
+            treeNode46,
+            treeNode47});
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Get build.prop");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Processes");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Memory");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Features");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Alarm Manager State");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Uptime");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Battery Info");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("CPU Info");
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("Diskstats");
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("Permissions");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("Activities");
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("System", new System.Windows.Forms.TreeNode[] {
+            treeNode49,
+            treeNode50,
+            treeNode51,
+            treeNode52,
+            treeNode53,
+            treeNode54,
+            treeNode55,
+            treeNode56,
+            treeNode57,
+            treeNode58,
+            treeNode59});
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("WiFi Info");
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("Netstat");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Hosts");
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
+            treeNode61,
+            treeNode62,
+            treeNode63});
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("All packages");
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Libraries");
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
+            treeNode65,
+            treeNode66});
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Dumpsys Input Diagnostics");
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("Kernel Messages");
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("Logcat Live");
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("Logcat Dump");
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("Verbose");
+            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("Debug");
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("Info");
+            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("Warning");
+            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("Error");
+            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("Fatal");
+            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("Silent");
+            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("Filter", new System.Windows.Forms.TreeNode[] {
+            treeNode72,
+            treeNode73,
+            treeNode74,
+            treeNode75,
+            treeNode76,
+            treeNode77,
+            treeNode78});
+            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("Logcat", new System.Windows.Forms.TreeNode[] {
+            treeNode70,
+            treeNode71,
+            treeNode79});
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Logs", new System.Windows.Forms.TreeNode[] {
+            treeNode68,
+            treeNode69,
+            treeNode80});
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("About");
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
+            treeNode82,
+            treeNode83});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.connectedDevices = new System.Windows.Forms.TabPage();
@@ -299,7 +299,7 @@
             this.btn_resetResolution.TabIndex = 35;
             this.btn_resetResolution.Text = "Reset";
             this.btn_resetResolution.UseVisualStyleBackColor = true;
-            this.btn_resetResolution.Click += new System.EventHandler(this.btn_resetResolution_Click);
+            this.btn_resetResolution.Click += new System.EventHandler(this.Btn_resetResolution_Click);
             // 
             // btn_showResolution
             // 
@@ -309,7 +309,7 @@
             this.btn_showResolution.TabIndex = 34;
             this.btn_showResolution.Text = "Show current DPI";
             this.btn_showResolution.UseVisualStyleBackColor = true;
-            this.btn_showResolution.Click += new System.EventHandler(this.btn_showResolution_Click);
+            this.btn_showResolution.Click += new System.EventHandler(this.Btn_showResolution_Click);
             // 
             // txt_phoneResolution
             // 
@@ -318,7 +318,7 @@
             this.txt_phoneResolution.Size = new System.Drawing.Size(83, 20);
             this.txt_phoneResolution.TabIndex = 32;
             this.txt_phoneResolution.Text = "1080x1920";
-            this.txt_phoneResolution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_phoneResolution_KeyDown);
+            this.txt_phoneResolution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_phoneResolution_KeyDown);
             // 
             // btn_setResolution
             // 
@@ -328,7 +328,7 @@
             this.btn_setResolution.TabIndex = 33;
             this.btn_setResolution.Text = "Set";
             this.btn_setResolution.UseVisualStyleBackColor = true;
-            this.btn_setResolution.Click += new System.EventHandler(this.btn_setResolution_Click);
+            this.btn_setResolution.Click += new System.EventHandler(this.Btn_setResolution_Click);
             // 
             // groupBox9
             // 
@@ -351,7 +351,7 @@
             this.btn_resetDpi.TabIndex = 31;
             this.btn_resetDpi.Text = "Reset";
             this.btn_resetDpi.UseVisualStyleBackColor = true;
-            this.btn_resetDpi.Click += new System.EventHandler(this.btn_resetDpi_Click);
+            this.btn_resetDpi.Click += new System.EventHandler(this.Btn_resetDpi_Click);
             // 
             // btn_showDpi
             // 
@@ -361,7 +361,7 @@
             this.btn_showDpi.TabIndex = 30;
             this.btn_showDpi.Text = "Show current DPI";
             this.btn_showDpi.UseVisualStyleBackColor = true;
-            this.btn_showDpi.Click += new System.EventHandler(this.btn_showDpi_show_Click);
+            this.btn_showDpi.Click += new System.EventHandler(this.Btn_showDpi_show_Click);
             // 
             // btn_setDpi
             // 
@@ -371,7 +371,7 @@
             this.btn_setDpi.TabIndex = 29;
             this.btn_setDpi.Text = "Set";
             this.btn_setDpi.UseVisualStyleBackColor = true;
-            this.btn_setDpi.Click += new System.EventHandler(this.btn_setDpi_Click);
+            this.btn_setDpi.Click += new System.EventHandler(this.Btn_setDpi_Click);
             // 
             // txt_phoneDpi
             // 
@@ -380,7 +380,7 @@
             this.txt_phoneDpi.Size = new System.Drawing.Size(93, 20);
             this.txt_phoneDpi.TabIndex = 28;
             this.txt_phoneDpi.Text = "480";
-            this.txt_phoneDpi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_phoneDpi_KeyDown);
+            this.txt_phoneDpi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_phoneDpi_KeyDown);
             // 
             // groupBox6
             // 
@@ -403,7 +403,7 @@
             this.btn_resetSpoofedMac.TabIndex = 27;
             this.btn_resetSpoofedMac.Text = "Reset";
             this.btn_resetSpoofedMac.UseVisualStyleBackColor = true;
-            this.btn_resetSpoofedMac.Click += new System.EventHandler(this.btn_resetSpoofedMac_Click);
+            this.btn_resetSpoofedMac.Click += new System.EventHandler(this.Btn_resetSpoofedMac_Click);
             // 
             // btn_setNewMac
             // 
@@ -413,7 +413,7 @@
             this.btn_setNewMac.TabIndex = 25;
             this.btn_setNewMac.Text = "Set";
             this.btn_setNewMac.UseVisualStyleBackColor = true;
-            this.btn_setNewMac.Click += new System.EventHandler(this.btn_setNewMac_Click);
+            this.btn_setNewMac.Click += new System.EventHandler(this.Btn_setNewMac_Click);
             // 
             // btn_showMac
             // 
@@ -423,7 +423,7 @@
             this.btn_showMac.TabIndex = 26;
             this.btn_showMac.Text = "Show";
             this.btn_showMac.UseVisualStyleBackColor = true;
-            this.btn_showMac.Click += new System.EventHandler(this.btn_showMac_Click);
+            this.btn_showMac.Click += new System.EventHandler(this.Btn_showMac_Click);
             // 
             // txt_phoneMacAdress
             // 
@@ -433,7 +433,7 @@
             this.txt_phoneMacAdress.Size = new System.Drawing.Size(93, 20);
             this.txt_phoneMacAdress.TabIndex = 24;
             this.txt_phoneMacAdress.Text = "00:11:22:33:44:55";
-            this.txt_phoneMacAdress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_phoneMacAdress_KeyDown);
+            this.txt_phoneMacAdress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_phoneMacAdress_KeyDown);
             // 
             // fileOperations
             // 
@@ -490,7 +490,7 @@
             this.btn_listPushDestination.TabIndex = 7;
             this.btn_listPushDestination.Text = "List";
             this.btn_listPushDestination.UseVisualStyleBackColor = true;
-            this.btn_listPushDestination.Click += new System.EventHandler(this.btn_listPushDestination_Click);
+            this.btn_listPushDestination.Click += new System.EventHandler(this.Btn_listPushDestination_Click);
             // 
             // label5
             // 
@@ -510,7 +510,7 @@
             this.btn_pushFile.TabIndex = 6;
             this.btn_pushFile.Text = "Push";
             this.btn_pushFile.UseVisualStyleBackColor = true;
-            this.btn_pushFile.Click += new System.EventHandler(this.btn_pushFile_Click);
+            this.btn_pushFile.Click += new System.EventHandler(this.Btn_pushFile_Click);
             // 
             // btn_push_openfile
             // 
@@ -521,7 +521,7 @@
             this.btn_push_openfile.TabIndex = 4;
             this.btn_push_openfile.Text = "Browse...";
             this.btn_push_openfile.UseVisualStyleBackColor = true;
-            this.btn_push_openfile.Click += new System.EventHandler(this.btn_push_openfile_Click);
+            this.btn_push_openfile.Click += new System.EventHandler(this.Btn_push_openfile_Click);
             // 
             // txt_pushFilePathFrom
             // 
@@ -532,7 +532,7 @@
             this.txt_pushFilePathFrom.Size = new System.Drawing.Size(320, 20);
             this.txt_pushFilePathFrom.TabIndex = 5;
             this.txt_pushFilePathFrom.Text = "/sdcard/";
-            this.txt_pushFilePathFrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_pushFilePathFrom_KeyDown);
+            this.txt_pushFilePathFrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_pushFilePathFrom_KeyDown);
             // 
             // txt_pushFilePathTo
             // 
@@ -570,7 +570,7 @@
             this.btn_listPullDestination.TabIndex = 8;
             this.btn_listPullDestination.Text = "List";
             this.btn_listPullDestination.UseVisualStyleBackColor = true;
-            this.btn_listPullDestination.Click += new System.EventHandler(this.btn_listPullDestination_Click);
+            this.btn_listPullDestination.Click += new System.EventHandler(this.Btn_listPullDestination_Click);
             // 
             // label2
             // 
@@ -590,7 +590,7 @@
             this.btn_pullFile.TabIndex = 10;
             this.btn_pullFile.Text = "Pull";
             this.btn_pullFile.UseVisualStyleBackColor = true;
-            this.btn_pullFile.Click += new System.EventHandler(this.btn_pullFile_Click);
+            this.btn_pullFile.Click += new System.EventHandler(this.Btn_pullFile_Click);
             // 
             // btn_pullfolderBrowserDialog
             // 
@@ -601,7 +601,7 @@
             this.btn_pullfolderBrowserDialog.TabIndex = 8;
             this.btn_pullfolderBrowserDialog.Text = "Browse...";
             this.btn_pullfolderBrowserDialog.UseVisualStyleBackColor = true;
-            this.btn_pullfolderBrowserDialog.Click += new System.EventHandler(this.btn_pullfolderBrowserDialog_Click);
+            this.btn_pullfolderBrowserDialog.Click += new System.EventHandler(this.Btn_pullfolderBrowserDialog_Click);
             // 
             // txt_pullFilePathFrom
             // 
@@ -612,7 +612,7 @@
             this.txt_pullFilePathFrom.Size = new System.Drawing.Size(319, 20);
             this.txt_pullFilePathFrom.TabIndex = 9;
             this.txt_pullFilePathFrom.Text = "/sdcard/";
-            this.txt_pullFilePathFrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_pullFilePathFrom_KeyDown);
+            this.txt_pullFilePathFrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_pullFilePathFrom_KeyDown);
             // 
             // txt_pullFilePathTo
             // 
@@ -687,7 +687,7 @@
             this.btn_installPackage.TabIndex = 2;
             this.btn_installPackage.Text = "Install";
             this.btn_installPackage.UseVisualStyleBackColor = true;
-            this.btn_installPackage.Click += new System.EventHandler(this.btn_installPackage_Click_1);
+            this.btn_installPackage.Click += new System.EventHandler(this.Btn_installPackage_Click_1);
             // 
             // btn_refreshInstalledApps
             // 
@@ -699,7 +699,7 @@
             this.btn_refreshInstalledApps.Size = new System.Drawing.Size(23, 23);
             this.btn_refreshInstalledApps.TabIndex = 5;
             this.btn_refreshInstalledApps.UseVisualStyleBackColor = true;
-            this.btn_refreshInstalledApps.Click += new System.EventHandler(this.btn_refreshInstalledApps_Click);
+            this.btn_refreshInstalledApps.Click += new System.EventHandler(this.Btn_refreshInstalledApps_Click);
             // 
             // btn_uninstallPackage
             // 
@@ -710,7 +710,7 @@
             this.btn_uninstallPackage.TabIndex = 5;
             this.btn_uninstallPackage.Text = "Uninstall";
             this.btn_uninstallPackage.UseVisualStyleBackColor = true;
-            this.btn_uninstallPackage.Click += new System.EventHandler(this.btn_uninstallPackage_Click);
+            this.btn_uninstallPackage.Click += new System.EventHandler(this.Btn_uninstallPackage_Click);
             // 
             // txt_packageFilePathTo
             // 
@@ -730,7 +730,7 @@
             this.btn_packagesOpenFileDialog.TabIndex = 1;
             this.btn_packagesOpenFileDialog.Text = "Browse...";
             this.btn_packagesOpenFileDialog.UseVisualStyleBackColor = true;
-            this.btn_packagesOpenFileDialog.Click += new System.EventHandler(this.btn_packagesOpenFileDialog_Click);
+            this.btn_packagesOpenFileDialog.Click += new System.EventHandler(this.Btn_packagesOpenFileDialog_Click);
             // 
             // groupBox2
             // 
@@ -757,7 +757,7 @@
             this.btn_sideloadOpenFileDialog.TabIndex = 1;
             this.btn_sideloadOpenFileDialog.Text = "Open file";
             this.btn_sideloadOpenFileDialog.UseVisualStyleBackColor = true;
-            this.btn_sideloadOpenFileDialog.Click += new System.EventHandler(this.btn_sideloadOpenFileDialog_Click);
+            this.btn_sideloadOpenFileDialog.Click += new System.EventHandler(this.Btn_sideloadOpenFileDialog_Click);
             // 
             // txt_sideload_path
             // 
@@ -786,7 +786,7 @@
             this.btn_sideloadFile.TabIndex = 2;
             this.btn_sideloadFile.Text = "Sideload";
             this.btn_sideloadFile.UseVisualStyleBackColor = true;
-            this.btn_sideloadFile.Click += new System.EventHandler(this.btn_sideloadFile_Click);
+            this.btn_sideloadFile.Click += new System.EventHandler(this.Btn_sideloadFile_Click);
             // 
             // backupAndRestore
             // 
@@ -878,7 +878,7 @@
             this.cbo_backupPackage.TabIndex = 10;
             this.cbo_backupPackage.Text = "Backup Package";
             this.cbo_backupPackage.UseVisualStyleBackColor = true;
-            this.cbo_backupPackage.CheckedChanged += new System.EventHandler(this.cbo_backupPackage_CheckedChanged);
+            this.cbo_backupPackage.CheckedChanged += new System.EventHandler(this.Cbo_backupPackage_CheckedChanged);
             // 
             // btn_backupSaveFileDialog
             // 
@@ -889,7 +889,7 @@
             this.btn_backupSaveFileDialog.TabIndex = 8;
             this.btn_backupSaveFileDialog.Text = "Save to";
             this.btn_backupSaveFileDialog.UseVisualStyleBackColor = true;
-            this.btn_backupSaveFileDialog.Click += new System.EventHandler(this.btn_backupSaveFileDialog_Click);
+            this.btn_backupSaveFileDialog.Click += new System.EventHandler(this.Btn_backupSaveFileDialog_Click);
             // 
             // cb_backup_nosystem
             // 
@@ -933,7 +933,7 @@
             this.btn_startBackup.TabIndex = 9;
             this.btn_startBackup.Text = "Backup";
             this.btn_startBackup.UseVisualStyleBackColor = true;
-            this.btn_startBackup.Click += new System.EventHandler(this.btn_startBackup_Click);
+            this.btn_startBackup.Click += new System.EventHandler(this.Btn_startBackup_Click);
             // 
             // txt_backupFilePathTo
             // 
@@ -987,7 +987,7 @@
             this.btn_restoreOpenFileDialog.TabIndex = 15;
             this.btn_restoreOpenFileDialog.Text = "Open file";
             this.btn_restoreOpenFileDialog.UseVisualStyleBackColor = true;
-            this.btn_restoreOpenFileDialog.Click += new System.EventHandler(this.btn_restoreOpenFileDialog_Click);
+            this.btn_restoreOpenFileDialog.Click += new System.EventHandler(this.Btn_restoreOpenFileDialog_Click);
             // 
             // btn_restoreBackup
             // 
@@ -998,7 +998,7 @@
             this.btn_restoreBackup.TabIndex = 16;
             this.btn_restoreBackup.Text = "Restore";
             this.btn_restoreBackup.UseVisualStyleBackColor = true;
-            this.btn_restoreBackup.Click += new System.EventHandler(this.btn_restoreBackup_Click);
+            this.btn_restoreBackup.Click += new System.EventHandler(this.Btn_restoreBackup_Click);
             // 
             // aboutTab
             // 
@@ -1044,7 +1044,7 @@
             this.btn_remountSystem.Text = "Remount";
             this.toolTip.SetToolTip(this.btn_remountSystem, "Remounts the /system partition on the device read-write");
             this.btn_remountSystem.UseVisualStyleBackColor = true;
-            this.btn_remountSystem.Click += new System.EventHandler(this.btn_remountSystemClick);
+            this.btn_remountSystem.Click += new System.EventHandler(this.Btn_remountSystemClick);
             // 
             // btn_reboot
             // 
@@ -1055,7 +1055,7 @@
             this.btn_reboot.Text = "Power Menu";
             this.toolTip.SetToolTip(this.btn_reboot, "Reboot the device");
             this.btn_reboot.UseVisualStyleBackColor = true;
-            this.btn_reboot.Click += new System.EventHandler(this.btn_reboot_Click);
+            this.btn_reboot.Click += new System.EventHandler(this.Btn_reboot_Click);
             // 
             // btn_killServer
             // 
@@ -1067,7 +1067,7 @@
             this.btn_killServer.Text = "Kill Server";
             this.toolTip.SetToolTip(this.btn_killServer, "Restart the adb process");
             this.btn_killServer.UseVisualStyleBackColor = true;
-            this.btn_killServer.Click += new System.EventHandler(this.btn_killServer_Click);
+            this.btn_killServer.Click += new System.EventHandler(this.Btn_killServer_Click);
             // 
             // btn_openShell
             // 
@@ -1079,7 +1079,7 @@
             this.btn_openShell.Text = "Open Shell";
             this.toolTip.SetToolTip(this.btn_openShell, "Open the shell");
             this.btn_openShell.UseVisualStyleBackColor = true;
-            this.btn_openShell.Click += new System.EventHandler(this.btn_openShell_Click);
+            this.btn_openShell.Click += new System.EventHandler(this.Btn_openShell_Click);
             // 
             // btn_executeCommand
             // 
@@ -1090,7 +1090,7 @@
             this.btn_executeCommand.TabIndex = 1;
             this.btn_executeCommand.Text = "Execute";
             this.btn_executeCommand.UseVisualStyleBackColor = true;
-            this.btn_executeCommand.Click += new System.EventHandler(this.btn_executeCommand_Click);
+            this.btn_executeCommand.Click += new System.EventHandler(this.Btn_executeCommand_Click);
             // 
             // txt_customCommand
             // 
@@ -1101,7 +1101,7 @@
             this.txt_customCommand.Size = new System.Drawing.Size(562, 20);
             this.txt_customCommand.TabIndex = 0;
             this.toolTip.SetToolTip(this.txt_customCommand, "No adb.exe needed. Just type the command.");
-            this.txt_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_customCommand_KeyDown);
+            this.txt_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_customCommand_KeyDown);
             // 
             // trv_commandTreeView
             // 
@@ -1109,134 +1109,134 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.trv_commandTreeView.Location = new System.Drawing.Point(12, 148);
             this.trv_commandTreeView.Name = "trv_commandTreeView";
-            treeNode1.Name = "Knoten15";
-            treeNode1.Tag = "shell pm list users";
-            treeNode1.Text = "All User";
-            treeNode2.Name = "Knoten17";
-            treeNode2.Tag = "shell pm get-max-users";
-            treeNode2.Text = "Max User";
-            treeNode3.Name = "Knoten19";
-            treeNode3.Tag = "shell service call iphonesubinfo 1";
-            treeNode3.Text = "IMEI";
-            treeNode4.Name = "Knoten27";
-            treeNode4.Tag = "shell dumpsys account";
-            treeNode4.Text = "Accounts";
-            treeNode5.Name = "Knoten31";
-            treeNode5.Tag = "shell screencap -p > screen.png";
-            treeNode5.Text = "Screenshot";
-            treeNode6.Name = "Knoten3";
-            treeNode6.Text = "Phone";
-            treeNode7.Name = "Knoten4";
-            treeNode7.Tag = "shell getprop";
-            treeNode7.Text = "Get build.prop";
-            treeNode8.Name = "Knoten8";
-            treeNode8.Tag = "shell ps";
-            treeNode8.Text = "Processes";
-            treeNode9.Name = "Knoten9";
-            treeNode9.Tag = "shell dumpsys meminfo";
-            treeNode9.Text = "Memory";
-            treeNode10.Name = "Knoten10";
-            treeNode10.Tag = "shell \\\"pm list features | cut -c9- | sort\\\"";
-            treeNode10.Text = "Features";
-            treeNode11.Name = "Knoten12";
-            treeNode11.Tag = "shell dumpsys alarm";
-            treeNode11.Text = "Alarm Manager State";
-            treeNode12.Name = "Knoten16";
-            treeNode12.Tag = "shell uptime";
-            treeNode12.Text = "Uptime";
-            treeNode13.Name = "Knoten22";
-            treeNode13.Tag = "shell dumpsys battery";
-            treeNode13.Text = "Battery Info";
-            treeNode14.Name = "Knoten24";
-            treeNode14.Tag = "shell dumpsys cpuinfo";
-            treeNode14.Text = "CPU Info";
-            treeNode15.Name = "Knoten26";
-            treeNode15.Tag = "shell dumpsys diskstats";
-            treeNode15.Text = "Diskstats";
-            treeNode16.Name = "Knoten28";
-            treeNode16.Tag = "shell pm list permissions";
-            treeNode16.Text = "Permissions";
-            treeNode17.Name = "Knoten30";
-            treeNode17.Tag = "shell dumpsys activity";
-            treeNode17.Text = "Activities";
-            treeNode18.Name = "Knoten0";
-            treeNode18.Text = "System";
-            treeNode19.Name = "Knoten23";
-            treeNode19.Tag = "shell dumpsys wifi";
-            treeNode19.Text = "WiFi Info";
-            treeNode20.Name = "Knoten25";
-            treeNode20.Tag = "shell netstat";
-            treeNode20.Text = "Netstat";
-            treeNode21.Name = "Knoten29";
-            treeNode21.Tag = "shell cat /etc/hosts";
-            treeNode21.Text = "Hosts";
-            treeNode22.Name = "Knoten1";
-            treeNode22.Text = "Network";
-            treeNode23.Name = "Knoten11";
-            treeNode23.Tag = "shell \"pm list packages -f | cut -c9- | sort\"";
-            treeNode23.Text = "All packages";
-            treeNode24.Name = "Knoten13";
-            treeNode24.Tag = "shell pm list libraries";
-            treeNode24.Text = "Libraries";
-            treeNode25.Name = "Knoten2";
-            treeNode25.Text = "Packages";
-            treeNode26.Name = "Knoten5";
-            treeNode26.Tag = "shell dumpsys";
-            treeNode26.Text = "Dumpsys Input Diagnostics";
-            treeNode27.Name = "Knoten21";
-            treeNode27.Tag = "shell dmesg";
-            treeNode27.Text = "Kernel Messages";
-            treeNode28.Name = "Knoten1";
-            treeNode28.Tag = "logcat";
-            treeNode28.Text = "Logcat Live";
-            treeNode29.Name = "Knoten6";
-            treeNode29.Tag = "shell logcat -d";
-            treeNode29.Text = "Logcat Dump";
-            treeNode30.Name = "Knoten4";
-            treeNode30.Tag = "logcat *:V";
-            treeNode30.Text = "Verbose";
-            treeNode31.Name = "Knoten5";
-            treeNode31.Tag = "logcat *:D";
-            treeNode31.Text = "Debug";
-            treeNode32.Name = "Knoten6";
-            treeNode32.Tag = "logcat *:I";
-            treeNode32.Text = "Info";
-            treeNode33.Name = "Knoten7";
-            treeNode33.Tag = "logcat *:W";
-            treeNode33.Text = "Warning";
-            treeNode34.Name = "Knoten8";
-            treeNode34.Tag = "logcat *:E";
-            treeNode34.Text = "Error";
-            treeNode35.Name = "Knoten9";
-            treeNode35.Tag = "logcat *:F";
-            treeNode35.Text = "Fatal";
-            treeNode36.Name = "Knoten11";
-            treeNode36.Tag = "logcat *:S";
-            treeNode36.Text = "Silent";
-            treeNode37.Name = "Knoten3";
-            treeNode37.Text = "Filter";
-            treeNode38.Name = "Knoten0";
-            treeNode38.Text = "Logcat";
-            treeNode39.Name = "Knoten20";
-            treeNode39.Text = "Logs";
-            treeNode40.Name = "Knoten1";
-            treeNode40.Tag = "help";
-            treeNode40.Text = "Help";
-            treeNode41.Name = "Knoten2";
-            treeNode41.Tag = "version";
-            treeNode41.Text = "About";
-            treeNode42.Name = "Knoten0";
-            treeNode42.Text = "Adb";
+            treeNode43.Name = "Knoten15";
+            treeNode43.Tag = "shell pm list users";
+            treeNode43.Text = "All User";
+            treeNode44.Name = "Knoten17";
+            treeNode44.Tag = "shell pm get-max-users";
+            treeNode44.Text = "Max User";
+            treeNode45.Name = "Knoten19";
+            treeNode45.Tag = "shell service call iphonesubinfo 1";
+            treeNode45.Text = "IMEI";
+            treeNode46.Name = "Knoten27";
+            treeNode46.Tag = "shell dumpsys account";
+            treeNode46.Text = "Accounts";
+            treeNode47.Name = "Knoten31";
+            treeNode47.Tag = "shell screencap -p > screen.png";
+            treeNode47.Text = "Screenshot";
+            treeNode48.Name = "Knoten3";
+            treeNode48.Text = "Phone";
+            treeNode49.Name = "Knoten4";
+            treeNode49.Tag = "shell getprop";
+            treeNode49.Text = "Get build.prop";
+            treeNode50.Name = "Knoten8";
+            treeNode50.Tag = "shell ps";
+            treeNode50.Text = "Processes";
+            treeNode51.Name = "Knoten9";
+            treeNode51.Tag = "shell dumpsys meminfo";
+            treeNode51.Text = "Memory";
+            treeNode52.Name = "Knoten10";
+            treeNode52.Tag = "shell \\\"pm list features | cut -c9- | sort\\\"";
+            treeNode52.Text = "Features";
+            treeNode53.Name = "Knoten12";
+            treeNode53.Tag = "shell dumpsys alarm";
+            treeNode53.Text = "Alarm Manager State";
+            treeNode54.Name = "Knoten16";
+            treeNode54.Tag = "shell uptime";
+            treeNode54.Text = "Uptime";
+            treeNode55.Name = "Knoten22";
+            treeNode55.Tag = "shell dumpsys battery";
+            treeNode55.Text = "Battery Info";
+            treeNode56.Name = "Knoten24";
+            treeNode56.Tag = "shell dumpsys cpuinfo";
+            treeNode56.Text = "CPU Info";
+            treeNode57.Name = "Knoten26";
+            treeNode57.Tag = "shell dumpsys diskstats";
+            treeNode57.Text = "Diskstats";
+            treeNode58.Name = "Knoten28";
+            treeNode58.Tag = "shell pm list permissions";
+            treeNode58.Text = "Permissions";
+            treeNode59.Name = "Knoten30";
+            treeNode59.Tag = "shell dumpsys activity";
+            treeNode59.Text = "Activities";
+            treeNode60.Name = "Knoten0";
+            treeNode60.Text = "System";
+            treeNode61.Name = "Knoten23";
+            treeNode61.Tag = "shell dumpsys wifi";
+            treeNode61.Text = "WiFi Info";
+            treeNode62.Name = "Knoten25";
+            treeNode62.Tag = "shell netstat";
+            treeNode62.Text = "Netstat";
+            treeNode63.Name = "Knoten29";
+            treeNode63.Tag = "shell cat /etc/hosts";
+            treeNode63.Text = "Hosts";
+            treeNode64.Name = "Knoten1";
+            treeNode64.Text = "Network";
+            treeNode65.Name = "Knoten11";
+            treeNode65.Tag = "shell \"pm list packages -f | cut -c9- | sort\"";
+            treeNode65.Text = "All packages";
+            treeNode66.Name = "Knoten13";
+            treeNode66.Tag = "shell pm list libraries";
+            treeNode66.Text = "Libraries";
+            treeNode67.Name = "Knoten2";
+            treeNode67.Text = "Packages";
+            treeNode68.Name = "Knoten5";
+            treeNode68.Tag = "shell dumpsys";
+            treeNode68.Text = "Dumpsys Input Diagnostics";
+            treeNode69.Name = "Knoten21";
+            treeNode69.Tag = "shell dmesg";
+            treeNode69.Text = "Kernel Messages";
+            treeNode70.Name = "Knoten1";
+            treeNode70.Tag = "logcat";
+            treeNode70.Text = "Logcat Live";
+            treeNode71.Name = "Knoten6";
+            treeNode71.Tag = "shell logcat -d";
+            treeNode71.Text = "Logcat Dump";
+            treeNode72.Name = "Knoten4";
+            treeNode72.Tag = "logcat *:V";
+            treeNode72.Text = "Verbose";
+            treeNode73.Name = "Knoten5";
+            treeNode73.Tag = "logcat *:D";
+            treeNode73.Text = "Debug";
+            treeNode74.Name = "Knoten6";
+            treeNode74.Tag = "logcat *:I";
+            treeNode74.Text = "Info";
+            treeNode75.Name = "Knoten7";
+            treeNode75.Tag = "logcat *:W";
+            treeNode75.Text = "Warning";
+            treeNode76.Name = "Knoten8";
+            treeNode76.Tag = "logcat *:E";
+            treeNode76.Text = "Error";
+            treeNode77.Name = "Knoten9";
+            treeNode77.Tag = "logcat *:F";
+            treeNode77.Text = "Fatal";
+            treeNode78.Name = "Knoten11";
+            treeNode78.Tag = "logcat *:S";
+            treeNode78.Text = "Silent";
+            treeNode79.Name = "Knoten3";
+            treeNode79.Text = "Filter";
+            treeNode80.Name = "Knoten0";
+            treeNode80.Text = "Logcat";
+            treeNode81.Name = "Knoten20";
+            treeNode81.Text = "Logs";
+            treeNode82.Name = "Knoten1";
+            treeNode82.Tag = "help";
+            treeNode82.Text = "Help";
+            treeNode83.Name = "Knoten2";
+            treeNode83.Tag = "version";
+            treeNode83.Text = "About";
+            treeNode84.Name = "Knoten0";
+            treeNode84.Text = "Adb";
             this.trv_commandTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode18,
-            treeNode22,
-            treeNode25,
-            treeNode39,
-            treeNode42});
+            treeNode48,
+            treeNode60,
+            treeNode64,
+            treeNode67,
+            treeNode81,
+            treeNode84});
             this.trv_commandTreeView.Size = new System.Drawing.Size(199, 403);
             this.trv_commandTreeView.TabIndex = 0;
-            this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.trv_commandTreeView_DoubleClick);
+            this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.Trv_commandTreeView_DoubleClick);
             // 
             // cbx_connectedDevices
             // 
@@ -1249,7 +1249,7 @@
             this.cbx_connectedDevices.Name = "cbx_connectedDevices";
             this.cbx_connectedDevices.Size = new System.Drawing.Size(187, 22);
             this.cbx_connectedDevices.TabIndex = 6;
-            this.cbx_connectedDevices.SelectedIndexChanged += new System.EventHandler(this.cbx_connectedDevices_SelectedIndexChanged);
+            this.cbx_connectedDevices.SelectedIndexChanged += new System.EventHandler(this.Cbx_connectedDevices_SelectedIndexChanged);
             // 
             // btn_disconnectWirelessDevices
             // 
@@ -1259,7 +1259,7 @@
             this.btn_disconnectWirelessDevices.TabIndex = 8;
             this.btn_disconnectWirelessDevices.Text = "Disconnect";
             this.btn_disconnectWirelessDevices.UseVisualStyleBackColor = true;
-            this.btn_disconnectWirelessDevices.Click += new System.EventHandler(this.btn_disconnectWirelessDevices_Click_1);
+            this.btn_disconnectWirelessDevices.Click += new System.EventHandler(this.Btn_disconnectWirelessDevices_Click_1);
             // 
             // txt_wirelessDeviceIp
             // 
@@ -1270,7 +1270,7 @@
             this.txt_wirelessDeviceIp.Size = new System.Drawing.Size(112, 22);
             this.txt_wirelessDeviceIp.TabIndex = 6;
             this.txt_wirelessDeviceIp.Text = "192.168.0.31";
-            this.txt_wirelessDeviceIp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_wirelessDeviceIp_KeyDown);
+            this.txt_wirelessDeviceIp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_wirelessDeviceIp_KeyDown);
             // 
             // btn_connectWirelessDevice
             // 
@@ -1280,7 +1280,7 @@
             this.btn_connectWirelessDevice.TabIndex = 7;
             this.btn_connectWirelessDevice.Text = "Connect";
             this.btn_connectWirelessDevice.UseVisualStyleBackColor = true;
-            this.btn_connectWirelessDevice.Click += new System.EventHandler(this.btn_connectWirelessDevice_Click);
+            this.btn_connectWirelessDevice.Click += new System.EventHandler(this.Btn_connectWirelessDevice_Click);
             // 
             // openFileDialog
             // 
@@ -1313,8 +1313,8 @@
             // timer
             // 
             this.timer.Enabled = true;
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // rtb_console
             // 
@@ -1333,7 +1333,7 @@
             this.rtb_console.Size = new System.Drawing.Size(805, 377);
             this.rtb_console.TabIndex = 11;
             this.rtb_console.Text = "";
-            this.rtb_console.Resize += new System.EventHandler(this.rtb_console_Resize);
+            this.rtb_console.Resize += new System.EventHandler(this.Rtb_console_Resize);
             // 
             // panel1
             // 
@@ -1356,7 +1356,7 @@
             this.btn_consoleStop.TabIndex = 1;
             this.btn_consoleStop.Text = "Abort";
             this.btn_consoleStop.UseVisualStyleBackColor = true;
-            this.btn_consoleStop.Click += new System.EventHandler(this.btn_consoleStop_Click);
+            this.btn_consoleStop.Click += new System.EventHandler(this.Btn_consoleStop_Click);
             // 
             // btn_consoleClear
             // 
@@ -1367,7 +1367,7 @@
             this.btn_consoleClear.TabIndex = 0;
             this.btn_consoleClear.Text = "Clear";
             this.btn_consoleClear.UseVisualStyleBackColor = true;
-            this.btn_consoleClear.Click += new System.EventHandler(this.btn_consoleClear_Click);
+            this.btn_consoleClear.Click += new System.EventHandler(this.Btn_consoleClear_Click);
             // 
             // MainForm
             // 
