@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI
@@ -35,8 +29,11 @@ namespace adbGUI
         {
             try
             {
-                process.CancelOutputRead();
-                process.CancelErrorRead();
+                StopProcessing();
+                while (!process.HasExited)
+                {
+                    Thread.Sleep(100);
+                }
             }
             catch { }
             finally
@@ -63,6 +60,7 @@ namespace adbGUI
                     command = "exec-out " + command;
                 }
 
+
                 process.StartInfo.Arguments = "/C tools\\adb " + serial + command;
 
                 process.EnableRaisingEvents = true;
@@ -79,13 +77,14 @@ namespace adbGUI
         }
         public void StopProcessing()
         {
-            try
+            process.CancelOutputRead();
+
+            process.CancelErrorRead();
+
+            if (!process.HasExited)
             {
-                process.CancelOutputRead();
-                process.CancelErrorRead();
                 process.Kill();
             }
-            catch { }
         }
 
         public string StartProcessingReadToEnd(string @command, string @serialnumber)
@@ -139,7 +138,7 @@ namespace adbGUI
                 Application.DoEvents();
             }
 
-            //t.Abort();
+            t.Abort();
 
             return output;
         }

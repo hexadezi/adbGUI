@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace adbGUI
@@ -62,7 +63,7 @@ namespace adbGUI
             }
         }
 
-        public void RefreshSerialsInCombobox(List<string> devices)
+        public void RefreshSerialsInCombobox(object sender, List<string> devices)
         {
             frm.cbx_connectedDevices.Items.Clear();
 
@@ -89,12 +90,12 @@ namespace adbGUI
                 frm.cbx_installedApps.Items.Add(item);
             }
 
-            try
+            if (frm.cbx_installedApps.Items.Count > 0)
             {
                 frm.cbx_installedApps.SelectedIndex = 0;
+
             }
-            catch (Exception)
-            { }
+
 
             frm.cbx_installedApps.Enabled = true;
 
@@ -113,6 +114,25 @@ namespace adbGUI
             {
 
                 MessageBox.Show(e.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        public void RefreshDevices(object sender, EventArgs e)
+        {
+            while (true)
+            {
+
+                string devicesRefreshedString = adb.StartProcessingReadToEnd("devices -l", "");
+
+                frm.BeginInvoke((MethodInvoker)delegate ()
+                {
+                    frm.txt_devices.Text = devicesRefreshedString;
+                    //todo unkommentieren
+                    //RefreshSerialsInCombobox(ParseDevicesL(devicesRefreshedString));
+                });
+
+                Thread.Sleep(2000);
+
             }
         }
 
