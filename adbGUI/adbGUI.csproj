@@ -90,21 +90,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Methods\AdbOps.cs" />
-    <Compile Include="Forms\PowerMenu.cs">
+    <Compile Include="Forms\SetProp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PowerMenu.Designer.cs">
-      <DependentUpon>PowerMenu.cs</DependentUpon>
+    <Compile Include="Forms\SetProp.Designer.cs">
+      <DependentUpon>SetProp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Methods\AdbOps.cs" />
     <Compile Include="Methods\DeviceWatcher.cs" />
     <Compile Include="Methods\FormMethods.cs" />
-    <Compile Include="Forms\Viewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Viewer.Designer.cs">
-      <DependentUpon>Viewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,14 +107,11 @@
     </Compile>
     <Compile Include="Methods\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\PowerMenu.resx">
-      <DependentUpon>PowerMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Viewer.resx">
-      <DependentUpon>Viewer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetProp.resx">
+      <DependentUpon>SetProp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

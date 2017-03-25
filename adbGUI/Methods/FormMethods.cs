@@ -63,7 +63,7 @@ namespace adbGUI
             }
         }
 
-        public void RefreshSerialsInCombobox(object sender, List<string> devices)
+        public void RefreshSerialsInCombobox(List<string> devices)
         {
             frm.cbx_connectedDevices.Items.Clear();
 

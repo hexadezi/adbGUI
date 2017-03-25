@@ -7,12 +7,16 @@ using System.Text;
 using System.Threading;
 using System.Management;
 using adbGUI.Methods;
+using System.Runtime.InteropServices;
+using adbGUI.Forms;
 
 namespace adbGUI
 {
     public partial class MainForm : Form
     {
+
         public FormMethods formMethods;
+        public SetProp setProp;
         AdbOps adb = new AdbOps();
         DeviceWatcher dw = new DeviceWatcher();
         StringBuilder builder = new StringBuilder();
@@ -24,15 +28,27 @@ namespace adbGUI
 
             InitializeComponent();
 
-            // subscribe to the process events
-            adb.GetProcess.OutputDataReceived += Display;
-
-            adb.GetProcess.ErrorDataReceived += Display;
-
-            adb.GetProcess.Exited += ProcessingExited;
-
+            // pass the formMethods the created Form
             formMethods = new FormMethods(this);
 
+            adb.GetProcess.Start();
+
+            // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
+            adb.GetProcess.BeginOutputReadLine();
+            adb.GetProcess.CancelOutputRead();
+
+            adb.GetProcess.OutputDataReceived += AppendReceivedData;
+            adb.GetProcess.ErrorDataReceived += AppendReceivedData;
+
+            Thread.Sleep(100);
+
+            adb.GetProcess.BeginOutputReadLine();
+            adb.GetProcess.BeginErrorReadLine();
+
+
+            adb.CommandExecutionStarted += Adb_CommandExecutionStarted;
+
+            // Select custom command control
             cbx_customCommand.Select();
 
             // Start the watcher which fires if devices changed
@@ -42,23 +58,26 @@ namespace adbGUI
 
         }
 
-        private void Dw_DeviceChanged(DeviceWatcher dw, DevicesList e)
+        private void Adb_CommandExecutionStarted()
         {
-            BeginInvoke((MethodInvoker) delegate () {
-
-                formMethods.RefreshSerialsInCombobox(dw, e.DeviceList);
-                txt_devices.Text = adb.StartProcessingInThread("devices -l", "");
-
+            BeginInvoke((MethodInvoker)delegate ()
+            {
+                if (cbo_clearEverytime.Checked)
+                {
+                    rtb_console.Clear();
+                }
             });
         }
 
-
-        //Exit with escape
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        private void Dw_DeviceChanged(DeviceWatcher dw, DevicesList e)
         {
-            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
-            Close();
-            return true;
+            BeginInvoke((MethodInvoker)delegate ()
+            {
+
+                formMethods.RefreshSerialsInCombobox(e.DeviceList);
+                txt_devices.Text = e.DevicesRaw.ToUpper();
+
+            });
         }
 
         private void Btn_backupSaveFileDialog_Click(object sender, EventArgs e)
@@ -242,13 +261,6 @@ namespace adbGUI
                 var s = "push \"" + txt_pushFilePathTo.Text + "\"" + " \"" + txt_pushFilePathFrom.Text + "\"";
                 adb.StartProcessing(s, formMethods.SelectedDevice());
             }
-        }
-
-        private void Btn_reboot_Click(object sender, EventArgs e)
-        {
-            PowerMenu powerMenu = new PowerMenu(this);
-
-            powerMenu.ShowDialog();
         }
 
         private void Btn_refreshInstalledApps_Click(object sender, EventArgs e)
@@ -463,61 +475,18 @@ namespace adbGUI
             formMethods.RefreshInstalledAppsInCombobox();
         }
 
-        void Display(object sender, DataReceivedEventArgs e)
+
+        void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
             builder.AppendLine(e.Data);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (File.Exists(@"tools\adb.exe") && File.Exists(@"tools\AdbWinApi.dll") && File.Exists(@"tools\AdbWinUsbApi.dll"))
-            {
-                trv_commandTreeView.ExpandAll();
-                trv_commandTreeView.SelectedNode = trv_commandTreeView.Nodes[0];
-            }
-            else
-            {
-                //todo Wenn Dateien fehlen, Exception. Behandeln.
-                MessageBox.Show("Missing files. Make soure adbGUI.exe, AdbWinApi.dll adn AdbWinUsbApi.dll are in the tools folder.", "Error - Missing files", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
+            trv_commandTreeView.ExpandAll();
+            trv_commandTreeView.SelectedNode = trv_commandTreeView.Nodes[0];
         }
 
-
-        void ProcessingExited(object sender, EventArgs e)
-        {
-            BeginInvoke((MethodInvoker)delegate ()
-           {
-               //string rtbText = rtb_console.Text;
-
-               //if (rtbText.EndsWith("\n") && rtbText.Length < 0)
-               //{
-               //    rtb_console.Text = rtbText.Remove(rtbText.IndexOf("\n"));
-               //}
-
-               //else if (rtbText.EndsWith("\n\n") && rtbText.Length > 0)
-               //{
-               //    rtb_console.Text = rtbText.Remove(rtbText.IndexOf("\n\n"));
-               //}
-
-               //else if (rtbText.EndsWith("\n\n\n") && rtbText.Length > 0)
-               //{
-               //    rtb_console.Text = rtbText.Remove(rtbText.IndexOf("\n\n\n"));
-               //}
-
-               //else if (rtbText.EndsWith("\n\n\n\n") && rtbText.Length > 0)
-               //{
-               //    rtb_console.Text = rtbText.Remove(rtb_console.Text.IndexOf("\n\n\n\n"));
-               //}
-
-               //builder.AppendLine("WAS GEEEEEEEEHT");
-
-               builder.Append("\n------ Processing completed ----------------------------------------\n\n");
-
-           });
-
-
-        }
 
         private void Rtb_console_Resize(object sender, EventArgs e)
         {
@@ -526,36 +495,48 @@ namespace adbGUI
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //string devicesRefreshedString = adb.StartProcessingInThread("devices -l", "");
+            ProcessTick();
+        }
 
-            //if (!devicesOldString.Equals(devicesRefreshedString))
-            //{
-            //    txt_devices.Text = devicesRefreshedString;
-
-            //    devicesOldString = devicesRefreshedString;
-
-            //    formMethods.RefreshSerialsInCombobox(formMethods.ParseDevicesL(devicesRefreshedString));
-            //}
-
+        private void ProcessTick()
+        {
             try
             {
+
                 rtb_console.AppendText(builder.ToString());
+
+
                 builder.Clear();
             }
             catch (Exception)
             { }
-
         }
 
         private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
         {
+            // todo add network capture tcpdump
             try
             {
                 string tag;
 
                 if ((tag = trv_commandTreeView.SelectedNode.Tag.ToString()) != null)
                 {
-                    adb.StartProcessing(tag, formMethods.SelectedDevice());
+
+                    switch (tag)
+                    {
+                        case "#prop":
+                            setProp = new SetProp(adb, formMethods);
+                            setProp.Show();
+                            break;
+
+                        default:
+                            adb.StartProcessing(tag, formMethods.SelectedDevice());
+                            break;
+
+
+                    }
+
+
                 }
 
             }
@@ -641,6 +622,22 @@ namespace adbGUI
             {
                 btn_executeCommand.PerformClick();
             }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Kill the process
+            if (!adb.GetProcess.HasExited)
+            {
+                adb.GetProcess.Kill();
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
+            adb.StopProcessing();
+            return true;
         }
     }
 }

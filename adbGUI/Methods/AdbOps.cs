@@ -4,22 +4,32 @@ using System.Windows.Forms;
 
 namespace adbGUI
 {
-    class AdbOps
+    public class AdbOps
     {
+        public event CommandExecutionStartedHandler CommandExecutionStarted;
+
+        public delegate void CommandExecutionStartedHandler();
+
         Process process = new Process
         {
+
             StartInfo = new ProcessStartInfo
             {
                 FileName = "cmd",
-                Arguments = null,
+                Arguments = "/K set prompt=INPUT -$G$S",
                 UseShellExecute = false,
                 CreateNoWindow = true,
+                ErrorDialog = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
             }
         };
 
+        public AdbOps()
+        {
+            process.EnableRaisingEvents = true;
+        }
         public Process GetProcess
         {
             get { return process; }
@@ -27,64 +37,46 @@ namespace adbGUI
 
         public void StartProcessing(string @command, string @serialnumber)
         {
-            try
+
+            string serial = "";
+
+            if (!string.IsNullOrEmpty(serialnumber))
             {
-                StopProcessing();
-                while (!process.HasExited)
-                {
-                    Thread.Sleep(100);
-                }
+                serial += "-s " + serialnumber + " ";
             }
-            catch { }
-            finally
+            else
             {
-
-                string serial = "";
-
-                if (!string.IsNullOrEmpty(serialnumber))
-                {
-                    serial += "-s " + serialnumber + " ";
-                }
-                else
-                {
-                    serial = "";
-                }
-
-                if (command.StartsWith("shell") || command.StartsWith("shell screencap"))
-                {
-                    command = command.Remove(0, 5);
-                    command = "exec-out" + command;
-                }
-                if (command.StartsWith("logcat"))
-                {
-                    command = "exec-out " + command;
-                }
-
-
-                process.StartInfo.Arguments = "/C tools\\adb " + serial + command;
-
-                process.EnableRaisingEvents = true;
-
-                process.Start();
-
-                process.BeginOutputReadLine();
-
-                process.BeginErrorReadLine();
-
-                process.StartInfo.Arguments = null;
-
+                serial = "";
             }
+
+            if (command.StartsWith("shell") || command.StartsWith("shell screencap"))
+            {
+                command = command.Remove(0, 5);
+                command = "exec-out" + command;
+            }
+            if (command.StartsWith("logcat"))
+            {
+                command = "exec-out " + command;
+            }
+
+            CommandExecutionStarted();
+
+            process.StandardInput.WriteLine("tools\\adb " + serial + command);
         }
+
+
         public void StopProcessing()
         {
             process.CancelOutputRead();
-
             process.CancelErrorRead();
 
-            if (!process.HasExited)
-            {
-                process.Kill();
-            }
+            process.Kill();
+
+            process.Start();
+
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
         }
 
         public string StartProcessingReadToEnd(string @command, string @serialnumber)

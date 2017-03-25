@@ -55,76 +55,86 @@
             treeNode11,
             treeNode12});
             System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Get build.prop");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Processes");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Memory");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Alarm Manager State");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Uptime");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Battery Info");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("CPU Info");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Diskstats");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Permissions");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Activities");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Filesystem");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("System", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Set Prop");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Prop", new System.Windows.Forms.TreeNode[] {
             treeNode14,
-            treeNode15,
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Processes");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Memory");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Battery Service State");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Collected Battery Stats");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Reset Battery Stats");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
+            treeNode19,
+            treeNode20,
+            treeNode21});
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Alarm Manager State");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Uptime");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("CPU Info");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Diskstats");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Permissions");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Filesystem");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("System", new System.Windows.Forms.TreeNode[] {
             treeNode16,
             treeNode17,
             treeNode18,
-            treeNode19,
-            treeNode20,
-            treeNode21,
             treeNode22,
             treeNode23,
-            treeNode24});
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Network Traffic");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Netstat");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("WiFi Info");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Hosts");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
+            treeNode24,
+            treeNode25,
             treeNode26,
             treeNode27,
-            treeNode28,
-            treeNode29});
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("All packages");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Libraries");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Features");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
+            treeNode28});
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Network Traffic");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Netstat");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("WiFi Info");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Hosts");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Network Info");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
+            treeNode30,
             treeNode31,
             treeNode32,
-            treeNode33});
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Dumpsys Input Diagnostics");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Kernel Messages");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Logcat Live");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Logcat Dump");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Verbose");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Debug");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Info");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Warning");
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Error");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Fatal");
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Silent");
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Filter", new System.Windows.Forms.TreeNode[] {
-            treeNode39,
-            treeNode40,
-            treeNode41,
-            treeNode42,
-            treeNode43,
-            treeNode44,
-            treeNode45});
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Logcat", new System.Windows.Forms.TreeNode[] {
-            treeNode37,
-            treeNode38,
-            treeNode46});
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Logs", new System.Windows.Forms.TreeNode[] {
-            treeNode35,
+            treeNode33,
+            treeNode34});
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("All packages");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Libraries");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Features");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
             treeNode36,
-            treeNode47});
-            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Help");
-            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("About");
-            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
+            treeNode37,
+            treeNode38});
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Dumpsys Input Diagnostics");
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Kernel Messages");
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Logcat Live");
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Logcat Dump");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Verbose");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Debug");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Info");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Warning");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Error");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Fatal");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Silent");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Filter", new System.Windows.Forms.TreeNode[] {
+            treeNode44,
+            treeNode45,
+            treeNode46,
+            treeNode47,
+            treeNode48,
             treeNode49,
             treeNode50});
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Logcat", new System.Windows.Forms.TreeNode[] {
+            treeNode42,
+            treeNode43,
+            treeNode51});
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Logs", new System.Windows.Forms.TreeNode[] {
+            treeNode40,
+            treeNode41,
+            treeNode52});
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Version");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
+            treeNode54,
+            treeNode55});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.connectedDevices = new System.Windows.Forms.TabPage();
@@ -196,6 +206,7 @@
             this.aboutTab = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbo_clearEverytime = new System.Windows.Forms.CheckBox();
             this.btn_adbUnroot = new System.Windows.Forms.Button();
             this.btn_adbRoot = new System.Windows.Forms.Button();
             this.btn_remountSystem = new System.Windows.Forms.Button();
@@ -208,6 +219,7 @@
             this.txt_wirelessDeviceIp = new System.Windows.Forms.TextBox();
             this.btn_connectWirelessDevice = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.cbx_customCommand = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -215,7 +227,6 @@
             this.gbox_devices = new System.Windows.Forms.GroupBox();
             this.rtb_console = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbx_customCommand = new System.Windows.Forms.ComboBox();
             this.btn_consoleStop = new System.Windows.Forms.Button();
             this.btn_consoleClear = new System.Windows.Forms.Button();
             timer = new System.Windows.Forms.Timer(this.components);
@@ -247,7 +258,7 @@
             // timer
             // 
             timer.Enabled = true;
-            timer.Interval = 1000;
+            timer.Interval = 10;
             timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // tabControl1
@@ -311,7 +322,7 @@
             this.groupBox12.Controls.Add(this.btn_setResolution);
             this.groupBox12.Location = new System.Drawing.Point(165, 6);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(151, 76);
+            this.groupBox12.Size = new System.Drawing.Size(151, 92);
             this.groupBox12.TabIndex = 14;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Resolution";
@@ -363,7 +374,7 @@
             this.groupBox9.Controls.Add(this.txt_phoneDpi);
             this.groupBox9.Location = new System.Drawing.Point(322, 6);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(151, 76);
+            this.groupBox9.Size = new System.Drawing.Size(151, 92);
             this.groupBox9.TabIndex = 13;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Change DPI";
@@ -415,7 +426,7 @@
             this.groupBox6.Controls.Add(this.txt_phoneMacAdress);
             this.groupBox6.Location = new System.Drawing.Point(8, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(151, 76);
+            this.groupBox6.Size = new System.Drawing.Size(151, 92);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Spoof MAC";
@@ -473,35 +484,31 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.groupBox7, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.groupBox10, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(992, 92);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(998, 98);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // groupBox7
             // 
-            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.btn_listPushDestination);
             this.groupBox7.Controls.Add(this.label5);
             this.groupBox7.Controls.Add(this.btn_pushFile);
             this.groupBox7.Controls.Add(this.btn_push_openfile);
             this.groupBox7.Controls.Add(this.txt_pushFilePathFrom);
             this.groupBox7.Controls.Add(this.txt_pushFilePathTo);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(3, 3);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(490, 86);
+            this.groupBox7.Size = new System.Drawing.Size(493, 92);
             this.groupBox7.TabIndex = 2;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Push Files";
@@ -509,7 +516,7 @@
             // btn_listPushDestination
             // 
             this.btn_listPushDestination.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_listPushDestination.Location = new System.Drawing.Point(413, 55);
+            this.btn_listPushDestination.Location = new System.Drawing.Point(416, 55);
             this.btn_listPushDestination.Name = "btn_listPushDestination";
             this.btn_listPushDestination.Size = new System.Drawing.Size(72, 23);
             this.btn_listPushDestination.TabIndex = 7;
@@ -529,7 +536,7 @@
             // btn_pushFile
             // 
             this.btn_pushFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_pushFile.Location = new System.Drawing.Point(332, 56);
+            this.btn_pushFile.Location = new System.Drawing.Point(335, 56);
             this.btn_pushFile.Name = "btn_pushFile";
             this.btn_pushFile.Size = new System.Drawing.Size(75, 23);
             this.btn_pushFile.TabIndex = 6;
@@ -540,7 +547,7 @@
             // btn_push_openfile
             // 
             this.btn_push_openfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_push_openfile.Location = new System.Drawing.Point(332, 19);
+            this.btn_push_openfile.Location = new System.Drawing.Point(335, 19);
             this.btn_push_openfile.Name = "btn_push_openfile";
             this.btn_push_openfile.Size = new System.Drawing.Size(152, 23);
             this.btn_push_openfile.TabIndex = 4;
@@ -554,7 +561,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_pushFilePathFrom.Location = new System.Drawing.Point(6, 58);
             this.txt_pushFilePathFrom.Name = "txt_pushFilePathFrom";
-            this.txt_pushFilePathFrom.Size = new System.Drawing.Size(320, 20);
+            this.txt_pushFilePathFrom.Size = new System.Drawing.Size(323, 20);
             this.txt_pushFilePathFrom.TabIndex = 5;
             this.txt_pushFilePathFrom.Text = "/sdcard/";
             this.txt_pushFilePathFrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_pushFilePathFrom_KeyDown);
@@ -565,23 +572,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_pushFilePathTo.Location = new System.Drawing.Point(6, 19);
             this.txt_pushFilePathTo.Name = "txt_pushFilePathTo";
-            this.txt_pushFilePathTo.Size = new System.Drawing.Size(320, 20);
+            this.txt_pushFilePathTo.Size = new System.Drawing.Size(323, 20);
             this.txt_pushFilePathTo.TabIndex = 3;
             // 
             // groupBox10
             // 
-            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.btn_listPullDestination);
             this.groupBox10.Controls.Add(this.label2);
             this.groupBox10.Controls.Add(this.btn_pullFile);
             this.groupBox10.Controls.Add(this.btn_pullfolderBrowserDialog);
             this.groupBox10.Controls.Add(this.txt_pullFilePathFrom);
             this.groupBox10.Controls.Add(this.txt_pullFilePathTo);
-            this.groupBox10.Location = new System.Drawing.Point(499, 3);
+            this.groupBox10.Location = new System.Drawing.Point(502, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(490, 86);
+            this.groupBox10.Size = new System.Drawing.Size(490, 92);
             this.groupBox10.TabIndex = 3;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Pull Files";
@@ -652,7 +656,9 @@
             // 
             this.appsAndSideload.Controls.Add(this.tableLayoutPanel2);
             this.appsAndSideload.Location = new System.Drawing.Point(4, 22);
+            this.appsAndSideload.Margin = new System.Windows.Forms.Padding(0);
             this.appsAndSideload.Name = "appsAndSideload";
+            this.appsAndSideload.Padding = new System.Windows.Forms.Padding(3);
             this.appsAndSideload.Size = new System.Drawing.Size(1004, 104);
             this.appsAndSideload.TabIndex = 5;
             this.appsAndSideload.Text = "Apps and Sideload";
@@ -660,14 +666,12 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -698,7 +702,7 @@
             this.cbx_installedApps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbx_installedApps.FormattingEnabled = true;
-            this.cbx_installedApps.Location = new System.Drawing.Point(6, 59);
+            this.cbx_installedApps.Location = new System.Drawing.Point(6, 56);
             this.cbx_installedApps.Name = "cbx_installedApps";
             this.cbx_installedApps.Size = new System.Drawing.Size(371, 21);
             this.cbx_installedApps.TabIndex = 6;
@@ -706,7 +710,7 @@
             // btn_installPackage
             // 
             this.btn_installPackage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_installPackage.Location = new System.Drawing.Point(412, 20);
+            this.btn_installPackage.Location = new System.Drawing.Point(412, 17);
             this.btn_installPackage.Name = "btn_installPackage";
             this.btn_installPackage.Size = new System.Drawing.Size(75, 23);
             this.btn_installPackage.TabIndex = 2;
@@ -719,7 +723,7 @@
             this.btn_refreshInstalledApps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_refreshInstalledApps.BackgroundImage = global::adbGUI.Properties.Resources._1460414981_Update;
             this.btn_refreshInstalledApps.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_refreshInstalledApps.Location = new System.Drawing.Point(383, 57);
+            this.btn_refreshInstalledApps.Location = new System.Drawing.Point(383, 54);
             this.btn_refreshInstalledApps.Name = "btn_refreshInstalledApps";
             this.btn_refreshInstalledApps.Size = new System.Drawing.Size(23, 23);
             this.btn_refreshInstalledApps.TabIndex = 5;
@@ -729,7 +733,7 @@
             // btn_uninstallPackage
             // 
             this.btn_uninstallPackage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_uninstallPackage.Location = new System.Drawing.Point(412, 57);
+            this.btn_uninstallPackage.Location = new System.Drawing.Point(412, 54);
             this.btn_uninstallPackage.Name = "btn_uninstallPackage";
             this.btn_uninstallPackage.Size = new System.Drawing.Size(75, 23);
             this.btn_uninstallPackage.TabIndex = 5;
@@ -741,7 +745,7 @@
             // 
             this.txt_packageFilePathTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_packageFilePathTo.Location = new System.Drawing.Point(6, 22);
+            this.txt_packageFilePathTo.Location = new System.Drawing.Point(6, 19);
             this.txt_packageFilePathTo.Name = "txt_packageFilePathTo";
             this.txt_packageFilePathTo.Size = new System.Drawing.Size(319, 20);
             this.txt_packageFilePathTo.TabIndex = 0;
@@ -749,7 +753,7 @@
             // btn_packagesOpenFileDialog
             // 
             this.btn_packagesOpenFileDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_packagesOpenFileDialog.Location = new System.Drawing.Point(331, 20);
+            this.btn_packagesOpenFileDialog.Location = new System.Drawing.Point(331, 17);
             this.btn_packagesOpenFileDialog.Name = "btn_packagesOpenFileDialog";
             this.btn_packagesOpenFileDialog.Size = new System.Drawing.Size(75, 23);
             this.btn_packagesOpenFileDialog.TabIndex = 1;
@@ -826,19 +830,17 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.groupBox8, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBox14, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(992, 95);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(998, 98);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
             // groupBox8
@@ -858,7 +860,7 @@
             this.groupBox8.Controls.Add(this.txt_backupFilePathTo);
             this.groupBox8.Location = new System.Drawing.Point(3, 3);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(490, 89);
+            this.groupBox8.Size = new System.Drawing.Size(493, 92);
             this.groupBox8.TabIndex = 7;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Backup";
@@ -868,7 +870,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label3.Location = new System.Drawing.Point(6, 71);
+            this.label3.Location = new System.Drawing.Point(6, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(272, 13);
             this.label3.TabIndex = 15;
@@ -877,7 +879,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(194, 52);
+            this.label8.Location = new System.Drawing.Point(194, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 13);
             this.label8.TabIndex = 14;
@@ -888,16 +890,16 @@
             // 
             this.txt_backup_packagename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_backup_packagename.Location = new System.Drawing.Point(250, 48);
+            this.txt_backup_packagename.Location = new System.Drawing.Point(250, 45);
             this.txt_backup_packagename.Name = "txt_backup_packagename";
-            this.txt_backup_packagename.Size = new System.Drawing.Size(156, 20);
+            this.txt_backup_packagename.Size = new System.Drawing.Size(159, 20);
             this.txt_backup_packagename.TabIndex = 7;
             this.txt_backup_packagename.Visible = false;
             // 
             // cbo_backupPackage
             // 
             this.cbo_backupPackage.AutoSize = true;
-            this.cbo_backupPackage.Location = new System.Drawing.Point(6, 51);
+            this.cbo_backupPackage.Location = new System.Drawing.Point(6, 48);
             this.cbo_backupPackage.Name = "cbo_backupPackage";
             this.cbo_backupPackage.Size = new System.Drawing.Size(109, 17);
             this.cbo_backupPackage.TabIndex = 10;
@@ -908,7 +910,7 @@
             // btn_backupSaveFileDialog
             // 
             this.btn_backupSaveFileDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_backupSaveFileDialog.Location = new System.Drawing.Point(250, 20);
+            this.btn_backupSaveFileDialog.Location = new System.Drawing.Point(253, 17);
             this.btn_backupSaveFileDialog.Name = "btn_backupSaveFileDialog";
             this.btn_backupSaveFileDialog.Size = new System.Drawing.Size(75, 23);
             this.btn_backupSaveFileDialog.TabIndex = 8;
@@ -920,7 +922,7 @@
             // 
             this.cb_backup_nosystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_backup_nosystem.AutoSize = true;
-            this.cb_backup_nosystem.Location = new System.Drawing.Point(412, 65);
+            this.cb_backup_nosystem.Location = new System.Drawing.Point(415, 62);
             this.cb_backup_nosystem.Name = "cb_backup_nosystem";
             this.cb_backup_nosystem.Size = new System.Drawing.Size(77, 17);
             this.cb_backup_nosystem.TabIndex = 13;
@@ -931,7 +933,7 @@
             // 
             this.cb_backup_shared.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_backup_shared.AutoSize = true;
-            this.cb_backup_shared.Location = new System.Drawing.Point(412, 42);
+            this.cb_backup_shared.Location = new System.Drawing.Point(415, 39);
             this.cb_backup_shared.Name = "cb_backup_shared";
             this.cb_backup_shared.Size = new System.Drawing.Size(60, 17);
             this.cb_backup_shared.TabIndex = 12;
@@ -942,7 +944,7 @@
             // 
             this.cb_backup_withapk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_backup_withapk.AutoSize = true;
-            this.cb_backup_withapk.Location = new System.Drawing.Point(412, 20);
+            this.cb_backup_withapk.Location = new System.Drawing.Point(415, 17);
             this.cb_backup_withapk.Name = "cb_backup_withapk";
             this.cb_backup_withapk.Size = new System.Drawing.Size(72, 17);
             this.cb_backup_withapk.TabIndex = 11;
@@ -952,7 +954,7 @@
             // btn_startBackup
             // 
             this.btn_startBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_startBackup.Location = new System.Drawing.Point(331, 19);
+            this.btn_startBackup.Location = new System.Drawing.Point(334, 16);
             this.btn_startBackup.Name = "btn_startBackup";
             this.btn_startBackup.Size = new System.Drawing.Size(75, 23);
             this.btn_startBackup.TabIndex = 9;
@@ -962,7 +964,7 @@
             // 
             // txt_backupFilePathTo
             // 
-            this.txt_backupFilePathTo.Location = new System.Drawing.Point(6, 22);
+            this.txt_backupFilePathTo.Location = new System.Drawing.Point(6, 19);
             this.txt_backupFilePathTo.Name = "txt_backupFilePathTo";
             this.txt_backupFilePathTo.Size = new System.Drawing.Size(238, 20);
             this.txt_backupFilePathTo.TabIndex = 6;
@@ -976,9 +978,9 @@
             this.groupBox14.Controls.Add(this.txt_restore_path);
             this.groupBox14.Controls.Add(this.btn_restoreOpenFileDialog);
             this.groupBox14.Controls.Add(this.btn_restoreBackup);
-            this.groupBox14.Location = new System.Drawing.Point(499, 3);
+            this.groupBox14.Location = new System.Drawing.Point(502, 3);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(490, 89);
+            this.groupBox14.Size = new System.Drawing.Size(493, 92);
             this.groupBox14.TabIndex = 8;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Restore";
@@ -1000,13 +1002,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_restore_path.Location = new System.Drawing.Point(7, 22);
             this.txt_restore_path.Name = "txt_restore_path";
-            this.txt_restore_path.Size = new System.Drawing.Size(315, 20);
+            this.txt_restore_path.Size = new System.Drawing.Size(318, 20);
             this.txt_restore_path.TabIndex = 14;
             // 
             // btn_restoreOpenFileDialog
             // 
             this.btn_restoreOpenFileDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_restoreOpenFileDialog.Location = new System.Drawing.Point(328, 20);
+            this.btn_restoreOpenFileDialog.Location = new System.Drawing.Point(331, 20);
             this.btn_restoreOpenFileDialog.Name = "btn_restoreOpenFileDialog";
             this.btn_restoreOpenFileDialog.Size = new System.Drawing.Size(75, 23);
             this.btn_restoreOpenFileDialog.TabIndex = 15;
@@ -1017,7 +1019,7 @@
             // btn_restoreBackup
             // 
             this.btn_restoreBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_restoreBackup.Location = new System.Drawing.Point(409, 20);
+            this.btn_restoreBackup.Location = new System.Drawing.Point(412, 20);
             this.btn_restoreBackup.Name = "btn_restoreBackup";
             this.btn_restoreBackup.Size = new System.Drawing.Size(75, 23);
             this.btn_restoreBackup.TabIndex = 16;
@@ -1040,7 +1042,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 3);
+            this.label10.Location = new System.Drawing.Point(6, 39);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 20);
             this.label10.TabIndex = 5;
@@ -1049,6 +1051,7 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.cbo_clearEverytime);
             this.groupBox1.Controls.Add(this.btn_adbUnroot);
             this.groupBox1.Controls.Add(this.btn_adbRoot);
             this.groupBox1.Controls.Add(this.btn_remountSystem);
@@ -1060,6 +1063,17 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Main Commands";
+            // 
+            // cbo_clearEverytime
+            // 
+            this.cbo_clearEverytime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbo_clearEverytime.AutoSize = true;
+            this.cbo_clearEverytime.Location = new System.Drawing.Point(411, 23);
+            this.cbo_clearEverytime.Name = "cbo_clearEverytime";
+            this.cbo_clearEverytime.Size = new System.Drawing.Size(98, 17);
+            this.cbo_clearEverytime.TabIndex = 8;
+            this.cbo_clearEverytime.Text = "Clear everytime";
+            this.cbo_clearEverytime.UseVisualStyleBackColor = true;
             // 
             // btn_adbUnroot
             // 
@@ -1173,118 +1187,132 @@
             treeNode14.Name = "Knoten4";
             treeNode14.Tag = "shell getprop";
             treeNode14.Text = "Get build.prop";
-            treeNode15.Name = "Knoten8";
-            treeNode15.Tag = "shell ps";
-            treeNode15.Text = "Processes";
-            treeNode16.Name = "Knoten9";
-            treeNode16.Tag = "shell dumpsys meminfo";
-            treeNode16.Text = "Memory";
-            treeNode17.Name = "Knoten12";
-            treeNode17.Tag = "shell dumpsys alarm";
-            treeNode17.Text = "Alarm Manager State";
-            treeNode18.Name = "Knoten16";
-            treeNode18.Tag = "shell uptime";
-            treeNode18.Text = "Uptime";
-            treeNode19.Name = "Knoten22";
+            treeNode15.Name = "Knoten1";
+            treeNode15.Tag = "#prop";
+            treeNode15.Text = "Set Prop";
+            treeNode16.Name = "Knoten0";
+            treeNode16.Text = "Prop";
+            treeNode17.Name = "Knoten8";
+            treeNode17.Tag = "shell ps";
+            treeNode17.Text = "Processes";
+            treeNode18.Name = "Knoten9";
+            treeNode18.Tag = "shell dumpsys meminfo";
+            treeNode18.Text = "Memory";
+            treeNode19.Name = "Knoten1";
             treeNode19.Tag = "shell dumpsys battery";
-            treeNode19.Text = "Battery Info";
-            treeNode20.Name = "Knoten24";
-            treeNode20.Tag = "shell dumpsys cpuinfo";
-            treeNode20.Text = "CPU Info";
-            treeNode21.Name = "Knoten26";
-            treeNode21.Tag = "shell dumpsys diskstats";
-            treeNode21.Text = "Diskstats";
-            treeNode22.Name = "Knoten28";
-            treeNode22.Tag = "shell pm list permissions";
-            treeNode22.Text = "Permissions";
-            treeNode23.Name = "Knoten30";
-            treeNode23.Tag = "shell dumpsys activity";
-            treeNode23.Text = "Activities";
-            treeNode24.Name = "Knoten0";
-            treeNode24.Tag = "shell df -h";
-            treeNode24.Text = "Filesystem";
-            treeNode25.Name = "Knoten0";
-            treeNode25.Text = "System";
-            treeNode26.Name = "Knoten7";
-            treeNode26.Tag = "shell iftop";
-            treeNode26.Text = "Network Traffic";
-            treeNode27.Name = "Knoten25";
-            treeNode27.Tag = "shell netstat";
-            treeNode27.Text = "Netstat";
-            treeNode28.Name = "Knoten23";
-            treeNode28.Tag = "shell dumpsys wifi";
-            treeNode28.Text = "WiFi Info";
-            treeNode29.Name = "Knoten29";
-            treeNode29.Tag = "shell cat /etc/hosts";
-            treeNode29.Text = "Hosts";
-            treeNode30.Name = "Knoten1";
-            treeNode30.Text = "Network";
-            treeNode31.Name = "Knoten11";
-            treeNode31.Tag = "shell \"pm list packages -f | cut -c9- | sort\"";
-            treeNode31.Text = "All packages";
-            treeNode32.Name = "Knoten13";
-            treeNode32.Tag = "shell pm list libraries";
-            treeNode32.Text = "Libraries";
-            treeNode33.Name = "Knoten10";
-            treeNode33.Tag = "shell \"pm list features | cut -c9- | sort\\";
-            treeNode33.Text = "Features";
-            treeNode34.Name = "Knoten2";
-            treeNode34.Text = "Packages";
-            treeNode35.Name = "Knoten5";
-            treeNode35.Tag = "shell dumpsys";
-            treeNode35.Text = "Dumpsys Input Diagnostics";
-            treeNode36.Name = "Knoten21";
-            treeNode36.Tag = "shell dmesg";
-            treeNode36.Text = "Kernel Messages";
-            treeNode37.Name = "Knoten1";
-            treeNode37.Tag = "logcat";
-            treeNode37.Text = "Logcat Live";
-            treeNode38.Name = "Knoten6";
-            treeNode38.Tag = "shell logcat -d";
-            treeNode38.Text = "Logcat Dump";
-            treeNode39.Name = "Knoten4";
-            treeNode39.Tag = "logcat *:V";
-            treeNode39.Text = "Verbose";
+            treeNode19.Text = "Battery Service State";
+            treeNode20.Name = "Knoten2";
+            treeNode20.Tag = "shell dumpsys batterystats";
+            treeNode20.Text = "Collected Battery Stats";
+            treeNode21.Name = "Knoten3";
+            treeNode21.Tag = "shell dumpsys batterystats --reset";
+            treeNode21.Text = "Reset Battery Stats";
+            treeNode22.Name = "Knoten22";
+            treeNode22.Tag = "";
+            treeNode22.Text = "Battery";
+            treeNode23.Name = "Knoten12";
+            treeNode23.Tag = "shell dumpsys alarm";
+            treeNode23.Text = "Alarm Manager State";
+            treeNode24.Name = "Knoten16";
+            treeNode24.Tag = "shell uptime";
+            treeNode24.Text = "Uptime";
+            treeNode25.Name = "Knoten24";
+            treeNode25.Tag = "shell dumpsys cpuinfo";
+            treeNode25.Text = "CPU Info";
+            treeNode26.Name = "Knoten26";
+            treeNode26.Tag = "shell dumpsys diskstats";
+            treeNode26.Text = "Diskstats";
+            treeNode27.Name = "Knoten28";
+            treeNode27.Tag = "shell pm list permissions";
+            treeNode27.Text = "Permissions";
+            treeNode28.Name = "Knoten0";
+            treeNode28.Tag = "shell df -h";
+            treeNode28.Text = "Filesystem";
+            treeNode29.Name = "Knoten0";
+            treeNode29.Text = "System";
+            treeNode30.Name = "Knoten7";
+            treeNode30.Tag = "shell iftop";
+            treeNode30.Text = "Network Traffic";
+            treeNode31.Name = "Knoten25";
+            treeNode31.Tag = "shell netstat";
+            treeNode31.Text = "Netstat";
+            treeNode32.Name = "Knoten23";
+            treeNode32.Tag = "shell dumpsys wifi";
+            treeNode32.Text = "WiFi Info";
+            treeNode33.Name = "Knoten29";
+            treeNode33.Tag = "shell cat /etc/hosts";
+            treeNode33.Text = "Hosts";
+            treeNode34.Name = "Knoten0";
+            treeNode34.Tag = "shell ifconfig";
+            treeNode34.Text = "Network Info";
+            treeNode35.Name = "Knoten1";
+            treeNode35.Text = "Network";
+            treeNode36.Name = "Knoten11";
+            treeNode36.Tag = "shell \"pm list packages -f | cut -c9- | sort\"";
+            treeNode36.Text = "All packages";
+            treeNode37.Name = "Knoten13";
+            treeNode37.Tag = "shell pm list libraries";
+            treeNode37.Text = "Libraries";
+            treeNode38.Name = "Knoten10";
+            treeNode38.Tag = "shell \"pm list features | cut -c9- | sort\\";
+            treeNode38.Text = "Features";
+            treeNode39.Name = "Knoten2";
+            treeNode39.Text = "Packages";
             treeNode40.Name = "Knoten5";
-            treeNode40.Tag = "logcat *:D";
-            treeNode40.Text = "Debug";
-            treeNode41.Name = "Knoten6";
-            treeNode41.Tag = "logcat *:I";
-            treeNode41.Text = "Info";
-            treeNode42.Name = "Knoten7";
-            treeNode42.Tag = "logcat *:W";
-            treeNode42.Text = "Warning";
-            treeNode43.Name = "Knoten8";
-            treeNode43.Tag = "logcat *:E";
-            treeNode43.Text = "Error";
-            treeNode44.Name = "Knoten9";
-            treeNode44.Tag = "logcat *:F";
-            treeNode44.Text = "Fatal";
-            treeNode45.Name = "Knoten11";
-            treeNode45.Tag = "logcat *:S";
-            treeNode45.Text = "Silent";
-            treeNode46.Name = "Knoten3";
-            treeNode46.Text = "Filter";
-            treeNode47.Name = "Knoten0";
-            treeNode47.Text = "Logcat";
-            treeNode48.Name = "Knoten20";
-            treeNode48.Text = "Logs";
-            treeNode49.Name = "Knoten1";
-            treeNode49.Tag = "help";
-            treeNode49.Text = "Help";
-            treeNode50.Name = "Knoten2";
-            treeNode50.Tag = "version";
-            treeNode50.Text = "About";
-            treeNode51.Name = "Knoten0";
-            treeNode51.Text = "Adb";
+            treeNode40.Tag = "shell dumpsys";
+            treeNode40.Text = "Dumpsys Input Diagnostics";
+            treeNode41.Name = "Knoten21";
+            treeNode41.Tag = "shell dmesg";
+            treeNode41.Text = "Kernel Messages";
+            treeNode42.Name = "Knoten1";
+            treeNode42.Tag = "logcat";
+            treeNode42.Text = "Logcat Live";
+            treeNode43.Name = "Knoten6";
+            treeNode43.Tag = "shell logcat -d";
+            treeNode43.Text = "Logcat Dump";
+            treeNode44.Name = "Knoten4";
+            treeNode44.Tag = "logcat *:V";
+            treeNode44.Text = "Verbose";
+            treeNode45.Name = "Knoten5";
+            treeNode45.Tag = "logcat *:D";
+            treeNode45.Text = "Debug";
+            treeNode46.Name = "Knoten6";
+            treeNode46.Tag = "logcat *:I";
+            treeNode46.Text = "Info";
+            treeNode47.Name = "Knoten7";
+            treeNode47.Tag = "logcat *:W";
+            treeNode47.Text = "Warning";
+            treeNode48.Name = "Knoten8";
+            treeNode48.Tag = "logcat *:E";
+            treeNode48.Text = "Error";
+            treeNode49.Name = "Knoten9";
+            treeNode49.Tag = "logcat *:F";
+            treeNode49.Text = "Fatal";
+            treeNode50.Name = "Knoten11";
+            treeNode50.Tag = "logcat *:S";
+            treeNode50.Text = "Silent";
+            treeNode51.Name = "Knoten3";
+            treeNode51.Text = "Filter";
+            treeNode52.Name = "Knoten0";
+            treeNode52.Text = "Logcat";
+            treeNode53.Name = "Knoten20";
+            treeNode53.Text = "Logs";
+            treeNode54.Name = "Knoten1";
+            treeNode54.Tag = "help";
+            treeNode54.Text = "Help";
+            treeNode55.Name = "Knoten2";
+            treeNode55.Tag = "version";
+            treeNode55.Text = "Version";
+            treeNode56.Name = "Knoten0";
+            treeNode56.Text = "Adb";
             this.trv_commandTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode6,
             treeNode13,
-            treeNode25,
-            treeNode30,
-            treeNode34,
-            treeNode48,
-            treeNode51});
+            treeNode29,
+            treeNode35,
+            treeNode39,
+            treeNode53,
+            treeNode56});
             this.trv_commandTreeView.Size = new System.Drawing.Size(199, 403);
             this.trv_commandTreeView.TabIndex = 0;
             this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.Trv_commandTreeView_DoubleClick);
@@ -1333,6 +1361,22 @@
             this.btn_connectWirelessDevice.UseVisualStyleBackColor = true;
             this.btn_connectWirelessDevice.Click += new System.EventHandler(this.Btn_connectWirelessDevice_Click);
             // 
+            // cbx_customCommand
+            // 
+            this.cbx_customCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbx_customCommand.AutoCompleteCustomSource.AddRange(new string[] {
+            "devices"});
+            this.cbx_customCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbx_customCommand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_customCommand.FormattingEnabled = true;
+            this.cbx_customCommand.Location = new System.Drawing.Point(217, 530);
+            this.cbx_customCommand.Name = "cbx_customCommand";
+            this.cbx_customCommand.Size = new System.Drawing.Size(562, 21);
+            this.cbx_customCommand.TabIndex = 12;
+            this.toolTip.SetToolTip(this.cbx_customCommand, "Enter commands without adb.");
+            this.cbx_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cbx_customCommand_KeyDown);
+            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
@@ -1363,19 +1407,17 @@
             // 
             // rtb_console
             // 
-            this.rtb_console.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtb_console.BackColor = System.Drawing.Color.Black;
             this.rtb_console.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtb_console.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb_console.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.rtb_console.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_console.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb_console.ForeColor = System.Drawing.Color.White;
             this.rtb_console.HideSelection = false;
-            this.rtb_console.Location = new System.Drawing.Point(-1, -1);
+            this.rtb_console.Location = new System.Drawing.Point(0, 0);
             this.rtb_console.Name = "rtb_console";
             this.rtb_console.ReadOnly = true;
-            this.rtb_console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.rtb_console.Size = new System.Drawing.Size(805, 377);
+            this.rtb_console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtb_console.Size = new System.Drawing.Size(803, 375);
             this.rtb_console.TabIndex = 11;
             this.rtb_console.Text = "";
             this.rtb_console.Resize += new System.EventHandler(this.Rtb_console_Resize);
@@ -1391,22 +1433,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(805, 377);
             this.panel1.TabIndex = 12;
-            // 
-            // cbx_customCommand
-            // 
-            this.cbx_customCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbx_customCommand.AutoCompleteCustomSource.AddRange(new string[] {
-            "devices"});
-            this.cbx_customCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cbx_customCommand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbx_customCommand.FormattingEnabled = true;
-            this.cbx_customCommand.Location = new System.Drawing.Point(217, 530);
-            this.cbx_customCommand.Name = "cbx_customCommand";
-            this.cbx_customCommand.Size = new System.Drawing.Size(562, 21);
-            this.cbx_customCommand.TabIndex = 12;
-            this.toolTip.SetToolTip(this.cbx_customCommand, "Enter commands without adb.");
-            this.cbx_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cbx_customCommand_KeyDown);
             // 
             // btn_consoleStop
             // 
@@ -1451,6 +1477,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "adbGUI";
             this.toolTip.SetToolTip(this, "Enter command without adb.");
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.connectedDevices.ResumeLayout(false);
@@ -1483,6 +1510,7 @@
             this.aboutTab.ResumeLayout(false);
             this.aboutTab.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.gbox_wireless.ResumeLayout(false);
             this.gbox_wireless.PerformLayout();
             this.gbox_devices.ResumeLayout(false);
@@ -1585,6 +1613,7 @@
         private System.Windows.Forms.Button btn_adbUnroot;
         private System.Windows.Forms.Button btn_adbRoot;
         private System.Windows.Forms.ComboBox cbx_customCommand;
+        private System.Windows.Forms.CheckBox cbo_clearEverytime;
     }
 }
 
