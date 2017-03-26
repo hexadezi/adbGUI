@@ -210,6 +210,16 @@ namespace adbGUI
                                 new SetProp(adb, formMethods).Show();
                                 break;
 
+                            case "#screenshot":
+
+                                saveFileDialog.FileName = "screenshot_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
+                                saveFileDialog.Filter = "PNG Image(.png)|*.png";
+                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                {
+                                    adb.StartProcessing("shell screencap -p > " + saveFileDialog.FileName, formMethods.SelectedDevice());
+                                }
+                                break;
+
                             case "#screenrecord":
                                 if (screenRecord == null || screenRecord.IsDisposed)
                                 {
