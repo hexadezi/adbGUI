@@ -29,7 +29,7 @@ namespace adbGUI
 
             InitializeComponent();
 
-            // pass the formMethods the created Form
+            // pass formMethods the created Form this
             formMethods = new FormMethods(this);
 
             adb.GetProcess.Start();
@@ -155,18 +155,6 @@ namespace adbGUI
             formMethods.KillServer();
         }
 
-        private void Btn_listPullDestination_Click(Object sender, EventArgs e)
-        {
-            string path = txt_pullFilePathFrom.Text;
-            adb.StartProcessing("shell ls -la \"" + path + "\" -F", formMethods.SelectedDevice());
-        }
-
-        private void Btn_listPushDestination_Click(Object sender, EventArgs e)
-        {
-            string path = txt_pushFilePathFrom.Text;
-            adb.StartProcessing("shell ls -la \"" + path + "\" -F", formMethods.SelectedDevice());
-        }
-
         private void Btn_openShell_Click(object sender, EventArgs e)
         {
             Process process = new Process
@@ -191,65 +179,6 @@ namespace adbGUI
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 txt_packageFilePathTo.Text = openFileDialog.FileName;
-            }
-        }
-
-        private void Btn_pullFile_Click(object sender, EventArgs e)
-        {
-            if (txt_pullFilePathTo.Text == "" || txt_pullFilePathFrom.Text == "")
-            {
-                MessageBox.Show("Please select a file and chose destination!", "Error", MessageBoxButtons.OK,
-                      MessageBoxIcon.Error);
-            }
-            else
-            {
-                var s = "pull \"" + txt_pullFilePathFrom.Text + "\"" + " \"" + txt_pullFilePathTo.Text + "\"";
-                adb.StartProcessing(s, formMethods.SelectedDevice());
-            }
-        }
-
-        private void Btn_pullfolderBrowserDialog_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog.Description = "Where should the file be saved?";
-
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_pullFilePathTo.Text = folderBrowserDialog.SelectedPath;
-            }
-        }
-
-        private void Btn_push_openfile_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = " "; //This is not a normal whitespace. ALT + 255
-            openFileDialog.CheckFileExists = false;
-            openFileDialog.CheckPathExists = true;
-            openFileDialog.ValidateNames = false;
-            openFileDialog.Filter = "All Files (*.*)|*.*";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                if (openFileDialog.SafeFileName == " ") //This is not a normal whitespace. ALT + 255
-                {
-                    txt_pushFilePathTo.Text =
-                          openFileDialog.FileName.Remove(openFileDialog.FileName.Length - 2, 2);
-                }
-                else
-                {
-                    txt_pushFilePathTo.Text = openFileDialog.FileName;
-                }
-            }
-        }
-
-        private void Btn_pushFile_Click(object sender, EventArgs e)
-        {
-            if (txt_pushFilePathTo.Text == "" || txt_pushFilePathFrom.Text == "")
-            {
-                MessageBox.Show("Please select a file and chose destination!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                var s = "push \"" + txt_pushFilePathTo.Text + "\"" + " \"" + txt_pushFilePathFrom.Text + "\"";
-                adb.StartProcessing(s, formMethods.SelectedDevice());
             }
         }
 
@@ -513,24 +442,6 @@ namespace adbGUI
                 }
             }
             catch (Exception) { }
-        }
-
-        private void Txt_pullFilePathFrom_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_pullFile.PerformClick();
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        private void Txt_pushFilePathFrom_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_pushFile.PerformClick();
-                e.SuppressKeyPress = true;
-            }
         }
 
         private void Txt_wirelessDeviceIp_KeyDown(object sender, KeyEventArgs e)
