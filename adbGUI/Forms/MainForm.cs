@@ -153,11 +153,6 @@ namespace adbGUI
             process.Start();
         }
 
-        private void Btn_refreshInstalledApps_Click(object sender, EventArgs e)
-        {
-            formMethods.RefreshInstalledAppsInCombobox();
-        }
-
         private void Btn_remountSystemClick(object sender, EventArgs e)
         {
             adb.StartProcessing("remount", formMethods.SelectedDevice());
@@ -256,11 +251,6 @@ namespace adbGUI
                 cb_backup_withapk.Enabled = true;
                 txt_backup_packagename.Text = "";
             }
-        }
-
-        private void Cbx_connectedDevices_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            formMethods.RefreshInstalledAppsInCombobox();
         }
 
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)

@@ -45,31 +45,6 @@ namespace adbGUI
 
         }
 
-        public void RefreshInstalledAppsInCombobox()
-        {
-            frm.cbx_installedApps.Items.Clear();
-
-            frm.cbx_installedApps.Enabled = false;
-
-            string output = adb.StartProcessingInThread("shell \"pm list packages -3 | cut -c9- | sort\"", SelectedDevice());
-
-
-            foreach (var item in output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                frm.cbx_installedApps.Items.Add(item);
-            }
-
-            if (frm.cbx_installedApps.Items.Count > 0)
-            {
-                frm.cbx_installedApps.SelectedIndex = 0;
-
-            }
-
-
-            frm.cbx_installedApps.Enabled = true;
-
-        }
-
         public void KillServer()
         {
             try

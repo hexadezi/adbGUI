@@ -768,7 +768,6 @@
             this.cbx_connectedDevices.Name = "cbx_connectedDevices";
             this.cbx_connectedDevices.Size = new System.Drawing.Size(187, 22);
             this.cbx_connectedDevices.TabIndex = 6;
-            this.cbx_connectedDevices.SelectedIndexChanged += new System.EventHandler(this.Cbx_connectedDevices_SelectedIndexChanged);
             // 
             // btn_disconnectWirelessDevices
             // 
