@@ -93,11 +93,13 @@
             this.Controls.Add(this.btn_setProp);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1000, 90);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 90);
             this.Name = "SetProp";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "SetProp";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

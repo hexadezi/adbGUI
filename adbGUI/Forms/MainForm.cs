@@ -14,9 +14,11 @@ namespace adbGUI
 {
     public partial class MainForm : Form
     {
+        private ScreenRecord screenRecord;
 
         public FormMethods formMethods;
-        public SetProp setProp;
+
+
         AdbOps adb = new AdbOps();
         DeviceWatcher dw = new DeviceWatcher();
         StringBuilder builder = new StringBuilder();
@@ -47,13 +49,12 @@ namespace adbGUI
 
 
             adb.CommandExecutionStarted += Adb_CommandExecutionStarted;
-
+            adb.CommandExecutionStopped += formMethods.ShowMboxAborted;
             // Select custom command control
             cbx_customCommand.Select();
 
             // Start the watcher which fires if devices changed
             dw.DeviceChanged += Dw_DeviceChanged;
-
             dw.StartDeviceWatcher();
 
         }
@@ -331,7 +332,7 @@ namespace adbGUI
 
             if (r.Match(s).Success)
             {
-                adb.StartProcessing("shell su root ifconfig wlan0 hw ether " + r, formMethods.SelectedDevice());
+                adb.StartProcessing("shell su root ifconfig wlan0 hw ether " + s, formMethods.SelectedDevice());
             }
             else
             {
@@ -475,7 +476,6 @@ namespace adbGUI
             formMethods.RefreshInstalledAppsInCombobox();
         }
 
-
         void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
             builder.AppendLine(e.Data);
@@ -521,21 +521,32 @@ namespace adbGUI
 
                 if ((tag = trv_commandTreeView.SelectedNode.Tag.ToString()) != null)
                 {
-
-                    switch (tag)
+                    if (tag.StartsWith("#"))
                     {
-                        case "#prop":
-                            setProp = new SetProp(adb, formMethods);
-                            setProp.Show();
-                            break;
-
-                        default:
-                            adb.StartProcessing(tag, formMethods.SelectedDevice());
-                            break;
+                        switch (tag)
+                        {
+                            case "#prop":
+                                new SetProp(adb, formMethods).Show();
+                                break;
 
 
+                            case "#screenrecord":
+                                if (screenRecord == null || screenRecord.IsDisposed)
+                                {
+                                    screenRecord = new ScreenRecord(adb, formMethods);
+                                    screenRecord.Show();
+                                }
+                                else
+                                {
+                                    screenRecord.Focus();
+                                }
+                                break;
+                        }
                     }
-
+                    else
+                    {
+                        adb.StartProcessing(tag, formMethods.SelectedDevice());
+                    }
 
                 }
 
@@ -626,11 +637,19 @@ namespace adbGUI
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+
             // Kill the process
-            if (!adb.GetProcess.HasExited)
+            // todo rename Forms
+            try
             {
+                //adb.StopProcessing();
                 adb.GetProcess.Kill();
+                adb.GetProcess.Dispose();
+
             }
+            catch (Exception)
+            { }
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

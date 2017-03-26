@@ -19,37 +19,6 @@ namespace adbGUI
             frm = f;
         }
 
-        public List<string> ParseDevicesL(string input)
-        {
-            List<string> listofserials = new List<string>();
-
-            if (input.Length > 29)
-            {
-                using (StringReader s = new StringReader(input))
-                {
-                    string line;
-
-                    while (s.Peek() != -1)
-                    {
-                        line = s.ReadLine();
-
-                        if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "" || line.StartsWith("*"))
-                            continue;
-
-                        if (line.IndexOf(' ') != -1)
-                        {
-                            line = line.Substring(0, line.IndexOf(' '));
-                            listofserials.Add(line);
-                        }
-                    }
-                    s.Close();
-
-                }
-            }
-
-            return listofserials;
-        }
-
         public string SelectedDevice()
         {
             if (frm.cbx_connectedDevices.Items.Count == 0)
@@ -116,25 +85,12 @@ namespace adbGUI
                 MessageBox.Show(e.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
-
-        public void RefreshDevices(object sender, EventArgs e)
+        
+        public void ShowMboxAborted()
         {
-            while (true)
-            {
-
-                string devicesRefreshedString = adb.StartProcessingReadToEnd("devices -l", "");
-
-                frm.BeginInvoke((MethodInvoker)delegate ()
-                {
-                    frm.txt_devices.Text = devicesRefreshedString;
-                    //todo unkommentieren
-                    //RefreshSerialsInCombobox(ParseDevicesL(devicesRefreshedString));
-                });
-
-                Thread.Sleep(2000);
-
-            }
+            MessageBox.Show("Processing aborted succesfully", "Abortion succesfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
     }
 }

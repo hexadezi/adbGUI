@@ -90,6 +90,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ScreenRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenRecord.Designer.cs">
+      <DependentUpon>ScreenRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SetProp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScreenRecord.resx">
+      <DependentUpon>ScreenRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetProp.resx">
       <DependentUpon>SetProp.cs</DependentUpon>

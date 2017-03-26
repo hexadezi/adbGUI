@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -7,8 +9,10 @@ namespace adbGUI
     public class AdbOps
     {
         public event CommandExecutionStartedHandler CommandExecutionStarted;
-
         public delegate void CommandExecutionStartedHandler();
+
+        public event CommandExecutionStoppedHandler CommandExecutionStopped;
+        public delegate void CommandExecutionStoppedHandler();
 
         Process process = new Process
         {
@@ -33,6 +37,43 @@ namespace adbGUI
         public Process GetProcess
         {
             get { return process; }
+        }
+
+
+        // Thanks to Vitaliy Fedorchenko
+        internal const int CTRL_C_EVENT = 0;
+        [DllImport("kernel32.dll")]
+        internal static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern bool AttachConsole(uint dwProcessId);
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        internal static extern bool FreeConsole();
+        [DllImport("kernel32.dll")]
+        static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate HandlerRoutine, bool Add);
+        // Delegate type to be used as the Handler Routine for SCCH
+        delegate Boolean ConsoleCtrlDelegate(uint CtrlType);
+        public bool StopProcessing()
+        {
+            if (AttachConsole((uint)GetProcess.Id))
+            {
+                SetConsoleCtrlHandler(null, true);
+                try
+                {
+                    if (!GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0))
+                    {
+                        return false;
+                    }
+
+                }
+                finally
+                {
+                    FreeConsole();
+                    CommandExecutionStopped();
+                }
+                return true;
+            }
+
+            return false;
         }
 
         public void StartProcessing(string @command, string @serialnumber)
@@ -64,20 +105,6 @@ namespace adbGUI
             process.StandardInput.WriteLine("tools\\adb " + serial + command);
         }
 
-
-        public void StopProcessing()
-        {
-            process.CancelOutputRead();
-            process.CancelErrorRead();
-
-            process.Kill();
-
-            process.Start();
-
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
-
-        }
 
         public string StartProcessingReadToEnd(string @command, string @serialnumber)
         {
