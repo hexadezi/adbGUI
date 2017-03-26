@@ -148,12 +148,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.connectedDevices = new System.Windows.Forms.TabPage();
             this.txt_devices = new System.Windows.Forms.TextBox();
-            this.phoneChanges = new System.Windows.Forms.TabPage();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.btn_resetDpi = new System.Windows.Forms.Button();
-            this.btn_showDpi = new System.Windows.Forms.Button();
-            this.btn_setDpi = new System.Windows.Forms.Button();
-            this.txt_phoneDpi = new System.Windows.Forms.TextBox();
             this.fileOperations = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -231,8 +225,6 @@
             timer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.connectedDevices.SuspendLayout();
-            this.phoneChanges.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.fileOperations.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -263,7 +255,6 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.connectedDevices);
-            this.tabControl1.Controls.Add(this.phoneChanges);
             this.tabControl1.Controls.Add(this.fileOperations);
             this.tabControl1.Controls.Add(this.appsAndSideload);
             this.tabControl1.Controls.Add(this.backupAndRestore);
@@ -297,69 +288,6 @@
             this.txt_devices.Name = "txt_devices";
             this.txt_devices.Size = new System.Drawing.Size(992, 92);
             this.txt_devices.TabIndex = 5;
-            // 
-            // phoneChanges
-            // 
-            this.phoneChanges.Controls.Add(this.groupBox9);
-            this.phoneChanges.Location = new System.Drawing.Point(4, 22);
-            this.phoneChanges.Name = "phoneChanges";
-            this.phoneChanges.Padding = new System.Windows.Forms.Padding(3);
-            this.phoneChanges.Size = new System.Drawing.Size(1004, 104);
-            this.phoneChanges.TabIndex = 3;
-            this.phoneChanges.Text = "Phone Changes";
-            this.phoneChanges.UseVisualStyleBackColor = true;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.btn_resetDpi);
-            this.groupBox9.Controls.Add(this.btn_showDpi);
-            this.groupBox9.Controls.Add(this.btn_setDpi);
-            this.groupBox9.Controls.Add(this.txt_phoneDpi);
-            this.groupBox9.Location = new System.Drawing.Point(322, 6);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(151, 92);
-            this.groupBox9.TabIndex = 13;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Change DPI";
-            // 
-            // btn_resetDpi
-            // 
-            this.btn_resetDpi.Location = new System.Drawing.Point(78, 45);
-            this.btn_resetDpi.Name = "btn_resetDpi";
-            this.btn_resetDpi.Size = new System.Drawing.Size(66, 23);
-            this.btn_resetDpi.TabIndex = 31;
-            this.btn_resetDpi.Text = "Reset";
-            this.btn_resetDpi.UseVisualStyleBackColor = true;
-            this.btn_resetDpi.Click += new System.EventHandler(this.Btn_resetDpi_Click);
-            // 
-            // btn_showDpi
-            // 
-            this.btn_showDpi.Location = new System.Drawing.Point(6, 45);
-            this.btn_showDpi.Name = "btn_showDpi";
-            this.btn_showDpi.Size = new System.Drawing.Size(66, 23);
-            this.btn_showDpi.TabIndex = 30;
-            this.btn_showDpi.Text = "Show current DPI";
-            this.btn_showDpi.UseVisualStyleBackColor = true;
-            this.btn_showDpi.Click += new System.EventHandler(this.Btn_showDpi_show_Click);
-            // 
-            // btn_setDpi
-            // 
-            this.btn_setDpi.Location = new System.Drawing.Point(105, 16);
-            this.btn_setDpi.Name = "btn_setDpi";
-            this.btn_setDpi.Size = new System.Drawing.Size(39, 23);
-            this.btn_setDpi.TabIndex = 29;
-            this.btn_setDpi.Text = "Set";
-            this.btn_setDpi.UseVisualStyleBackColor = true;
-            this.btn_setDpi.Click += new System.EventHandler(this.Btn_setDpi_Click);
-            // 
-            // txt_phoneDpi
-            // 
-            this.txt_phoneDpi.Location = new System.Drawing.Point(6, 19);
-            this.txt_phoneDpi.Name = "txt_phoneDpi";
-            this.txt_phoneDpi.Size = new System.Drawing.Size(93, 20);
-            this.txt_phoneDpi.TabIndex = 28;
-            this.txt_phoneDpi.Text = "480";
-            this.txt_phoneDpi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_phoneDpi_KeyDown);
             // 
             // fileOperations
             // 
@@ -1396,9 +1324,6 @@
             this.tabControl1.ResumeLayout(false);
             this.connectedDevices.ResumeLayout(false);
             this.connectedDevices.PerformLayout();
-            this.phoneChanges.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
             this.fileOperations.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -1444,7 +1369,6 @@
             private System.Windows.Forms.OpenFileDialog openFileDialog;
             private System.Windows.Forms.TabPage backupAndRestore;
             private System.Windows.Forms.GroupBox groupBox3;
-            private System.Windows.Forms.TabPage phoneChanges;
             private System.Windows.Forms.Button btn_executeCommand;
             private System.Windows.Forms.Button btn_openShell;
             private System.Windows.Forms.GroupBox groupBox7;
@@ -1478,11 +1402,6 @@
             private System.Windows.Forms.Label label8;
             private System.Windows.Forms.TextBox txt_backup_packagename;
             private System.Windows.Forms.CheckBox cbo_backupPackage;
-            private System.Windows.Forms.GroupBox groupBox9;
-            private System.Windows.Forms.Button btn_showDpi;
-            private System.Windows.Forms.Button btn_setDpi;
-            private System.Windows.Forms.TextBox txt_phoneDpi;
-            private System.Windows.Forms.Button btn_resetDpi;
             public System.Windows.Forms.TextBox txt_wirelessDeviceIp;
             private System.Windows.Forms.Button btn_connectWirelessDevice;
             private System.Windows.Forms.SaveFileDialog saveFileDialog;

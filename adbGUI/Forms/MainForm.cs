@@ -14,7 +14,7 @@ namespace adbGUI
         private ScreenRecord screenRecord;
         private SpoofMac spoofMac;
         private ResolutionChange resolutionChange;
-        //private DpiChange dpiChange;
+        private DpiChange dpiChange;
 
         public FormMethods formMethods;
 
@@ -262,24 +262,6 @@ namespace adbGUI
             adb.StartProcessing("remount", formMethods.SelectedDevice());
         }
 
-        private void Btn_resetDpi_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell wm density reset", formMethods.SelectedDevice());
-        }
-
-        private void Btn_resetResolution_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell wm size reset", formMethods.SelectedDevice());
-        }
-
-        private void Btn_resetSpoofedMac_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell su root ifconfig wlan0 down", formMethods.SelectedDevice());
-            //adb.StartProcessing("shell su root ifconfig wlan0 up", formMethods.SelectedDevice());
-
-            //todo Beide Befehle eventuelll zusammenführen
-        }
-
         private void Btn_restoreBackup_Click(object sender, EventArgs e)
         {
             if (txt_restore_path.Text == "")
@@ -301,26 +283,6 @@ namespace adbGUI
             {
                 txt_restore_path.Text = openFileDialog.FileName;
             }
-        }
-
-        private void Btn_setDpi_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell wm density " + txt_phoneDpi.Text, formMethods.SelectedDevice());
-        }
-
-        private void Btn_showDpi_show_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell wm density", formMethods.SelectedDevice());
-        }
-
-        private void Btn_showMac_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell su root cat /sys/class/net/wlan0/address", formMethods.SelectedDevice());
-        }
-
-        private void Btn_showResolution_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell wm size", formMethods.SelectedDevice());
         }
 
         private void Btn_sideloadFile_Click(object sender, EventArgs e)
@@ -519,17 +481,17 @@ namespace adbGUI
                                 }
                                 break;
 
-                                //case "#density":
-                                //    if (dpiChange == null || dpiChange.IsDisposed)
-                                //    {
-                                //        dpiChange = new DpiChange(adb, formMethods);
-                                //        dpiChange.Show();
-                                //    }
-                                //    else
-                                //    {
-                                //        dpiChange.Focus();
-                                //    }
-                                //    break;
+                            case "#density":
+                                if (dpiChange == null || dpiChange.IsDisposed)
+                                {
+                                    dpiChange = new DpiChange(adb, formMethods);
+                                    dpiChange.Show();
+                                }
+                                else
+                                {
+                                    dpiChange.Focus();
+                                }
+                                break;
                         }
                     }
                     else
@@ -539,24 +501,6 @@ namespace adbGUI
                 }
             }
             catch (Exception) { }
-        }
-
-        private void Txt_customCommand_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_executeCommand.PerformClick();
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        private void Txt_phoneDpi_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_setDpi.PerformClick();
-                e.SuppressKeyPress = true;
-            }
         }
 
         private void Txt_pullFilePathFrom_KeyDown(object sender, KeyEventArgs e)
@@ -620,9 +564,12 @@ namespace adbGUI
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
-            adb.StopProcessing();
-            return true;
+            if (keyData == Keys.Escape)
+            {
+                adb.StopProcessing();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

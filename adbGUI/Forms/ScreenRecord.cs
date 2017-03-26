@@ -16,6 +16,16 @@ namespace adbGUI.Forms
             formMethods = formMethodsFrm;
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void Trb_screenRecord_Scroll(object sender, EventArgs e)
         {
             lbl_screenRecordSeconds.Text = trb_screenRecordTimeLimit.Value.ToString();
@@ -113,6 +123,11 @@ namespace adbGUI.Forms
                 timer.Enabled = false;
                 btn_screenRecordStart.Text = "Start";
             }
+        }
+
+        private void ScreenRecord_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

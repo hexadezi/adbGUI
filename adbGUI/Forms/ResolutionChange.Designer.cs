@@ -57,7 +57,7 @@
             this.btn_ResolutionChangeReset.TabIndex = 35;
             this.btn_ResolutionChangeReset.Text = "Reset";
             this.btn_ResolutionChangeReset.UseVisualStyleBackColor = true;
-            this.btn_ResolutionChangeReset.Click += new System.EventHandler(this.btn_ResolutionChangeReset_Click);
+            this.btn_ResolutionChangeReset.Click += new System.EventHandler(this.Btn_ResolutionChangeReset_Click);
             // 
             // btn_ResolutionChangeShow
             // 
@@ -67,7 +67,7 @@
             this.btn_ResolutionChangeShow.TabIndex = 34;
             this.btn_ResolutionChangeShow.Text = "Show current DPI";
             this.btn_ResolutionChangeShow.UseVisualStyleBackColor = true;
-            this.btn_ResolutionChangeShow.Click += new System.EventHandler(this.btn_ResolutionChangeShow_Click);
+            this.btn_ResolutionChangeShow.Click += new System.EventHandler(this.Btn_ResolutionChangeShow_Click);
             // 
             // txt_phoneResolution
             // 
@@ -77,7 +77,7 @@
             this.txt_phoneResolution.TabIndex = 32;
             this.txt_phoneResolution.Text = "1080x1920";
             this.txt_phoneResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_phoneResolution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_phoneResolution_KeyDown);
+            this.txt_phoneResolution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_phoneResolution_KeyDown);
             // 
             // btn_ResolutionChangeSet
             // 

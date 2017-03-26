@@ -51,6 +51,7 @@
             // 
             // btn_SpoofMacReset
             // 
+            this.btn_SpoofMacReset.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_SpoofMacReset.Location = new System.Drawing.Point(194, 19);
             this.btn_SpoofMacReset.Name = "btn_SpoofMacReset";
             this.btn_SpoofMacReset.Size = new System.Drawing.Size(66, 23);
@@ -88,7 +89,7 @@
             this.txt_SpoofMacAdress.TabIndex = 24;
             this.txt_SpoofMacAdress.Text = "00:11:22:33:44:55";
             this.txt_SpoofMacAdress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_SpoofMacAdress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SpoofMacAdress_KeyDown);
+            this.txt_SpoofMacAdress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_SpoofMacAdress_KeyDown);
             // 
             // SpoofMac
             // 
