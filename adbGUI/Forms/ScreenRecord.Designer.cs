@@ -283,10 +283,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_screenRecordStart);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "ScreenRecord";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "ScreenRecord";
             this.TopMost = true;

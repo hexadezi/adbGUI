@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI.Forms
 {
     public partial class ScreenRecord : Form
     {
-        AdbOps adb;
-        FormMethods formMethods;
-        int time;
+        private AdbOps adb;
+        private FormMethods formMethods;
+        private int time;
+
         public ScreenRecord(AdbOps adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
@@ -98,7 +92,6 @@ namespace adbGUI.Forms
                     timer.Enabled = true;
                 }
             }
-
         }
 
         private void Btn_SreenRecordAbort_Click(object sender, EventArgs e)

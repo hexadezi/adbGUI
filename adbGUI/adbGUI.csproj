@@ -90,6 +90,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DpiChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DpiChange.Designer.cs">
+      <DependentUpon>DpiChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ResolutionChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ResolutionChange.Designer.cs">
+      <DependentUpon>ResolutionChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ScreenRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     <Compile Include="Forms\SetProp.Designer.cs">
       <DependentUpon>SetProp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SpoofMac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SpoofMac.Designer.cs">
+      <DependentUpon>SpoofMac.cs</DependentUpon>
+    </Compile>
     <Compile Include="Methods\AdbOps.cs" />
     <Compile Include="Methods\DeviceWatcher.cs" />
     <Compile Include="Methods\FormMethods.cs" />
@@ -113,14 +131,23 @@
     </Compile>
     <Compile Include="Methods\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DpiChange.resx">
+      <DependentUpon>DpiChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ResolutionChange.resx">
+      <DependentUpon>ResolutionChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ScreenRecord.resx">
       <DependentUpon>ScreenRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetProp.resx">
       <DependentUpon>SetProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SpoofMac.resx">
+      <DependentUpon>SpoofMac.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,31 +1,29 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Text;
-using System.Threading;
-using System.Management;
+﻿using adbGUI.Forms;
 using adbGUI.Methods;
-using System.Runtime.InteropServices;
-using adbGUI.Forms;
+using System;
+using System.Diagnostics;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace adbGUI
 {
     public partial class MainForm : Form
     {
         private ScreenRecord screenRecord;
+        private SpoofMac spoofMac;
+        private ResolutionChange resolutionChange;
+        //private DpiChange dpiChange;
 
         public FormMethods formMethods;
 
-
-        AdbOps adb = new AdbOps();
-        DeviceWatcher dw = new DeviceWatcher();
-        StringBuilder builder = new StringBuilder();
+        private AdbOps adb = new AdbOps();
+        private DeviceWatcher dw = new DeviceWatcher();
+        private StringBuilder builder = new StringBuilder();
 
         public MainForm()
         {
-
             // todo aapt implementieren
 
             InitializeComponent();
@@ -47,7 +45,6 @@ namespace adbGUI
             adb.GetProcess.BeginOutputReadLine();
             adb.GetProcess.BeginErrorReadLine();
 
-
             adb.CommandExecutionStarted += Adb_CommandExecutionStarted;
             adb.CommandExecutionStopped += formMethods.ShowMboxAborted;
             // Select custom command control
@@ -56,7 +53,6 @@ namespace adbGUI
             // Start the watcher which fires if devices changed
             dw.DeviceChanged += Dw_DeviceChanged;
             dw.StartDeviceWatcher();
-
         }
 
         private void Adb_CommandExecutionStarted()
@@ -74,10 +70,8 @@ namespace adbGUI
         {
             BeginInvoke((MethodInvoker)delegate ()
             {
-
                 formMethods.RefreshSerialsInCombobox(e.DeviceList);
                 txt_devices.Text = e.DevicesRaw.ToUpper();
-
             });
         }
 
@@ -93,7 +87,6 @@ namespace adbGUI
 
         private void Btn_connectWirelessDevice_Click(object sender, EventArgs e)
         {
-
             var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$");
 
             string ipadress = txt_wirelessDeviceIp.Text;
@@ -146,11 +139,9 @@ namespace adbGUI
 
             if (txt_packageFilePathTo.Text != "")
             {
-
                 adb.StartProcessing("install " + s, formMethods.SelectedDevice());
 
                 formMethods.RefreshInstalledAppsInCombobox();
-
             }
             else
             {
@@ -177,7 +168,6 @@ namespace adbGUI
 
         private void Btn_openShell_Click(object sender, EventArgs e)
         {
-
             Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -196,7 +186,6 @@ namespace adbGUI
             openFileDialog.CheckFileExists = true;
             openFileDialog.CheckPathExists = true;
             openFileDialog.Filter = " .apk|*.apk";
-
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -238,7 +227,6 @@ namespace adbGUI
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-
                 if (openFileDialog.SafeFileName == " ") //This is not a normal whitespace. ALT + 255
                 {
                     txt_pushFilePathTo.Text =
@@ -282,13 +270,10 @@ namespace adbGUI
         private void Btn_resetResolution_Click(object sender, EventArgs e)
         {
             adb.StartProcessing("shell wm size reset", formMethods.SelectedDevice());
-
         }
 
         private void Btn_resetSpoofedMac_Click(object sender, EventArgs e)
         {
-            string serial = formMethods.SelectedDevice();
-
             adb.StartProcessing("shell su root ifconfig wlan0 down", formMethods.SelectedDevice());
             //adb.StartProcessing("shell su root ifconfig wlan0 up", formMethods.SelectedDevice());
 
@@ -312,7 +297,6 @@ namespace adbGUI
             openFileDialog.FileName = "";
             openFileDialog.Filter = " .ab|*.ab";
 
-
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 txt_restore_path.Text = openFileDialog.FileName;
@@ -322,27 +306,6 @@ namespace adbGUI
         private void Btn_setDpi_Click(object sender, EventArgs e)
         {
             adb.StartProcessing("shell wm density " + txt_phoneDpi.Text, formMethods.SelectedDevice());
-        }
-
-        private void Btn_setNewMac_Click(object sender, EventArgs e)
-        {
-            var s = txt_phoneMacAdress.Text;
-
-            var r = new Regex(@"(([a-f]|[0-9]|[A-F]){2}\:){5}([a-f]|[0-9]|[A-F]){2}\b");
-
-            if (r.Match(s).Success)
-            {
-                adb.StartProcessing("shell su root ifconfig wlan0 hw ether " + s, formMethods.SelectedDevice());
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid MAC address", "Error");
-            }
-        }
-
-        private void Btn_setResolution_Click(object sender, EventArgs e)
-        {
-            adb.StartProcessing("shell wm size " + txt_phoneResolution.Text, formMethods.SelectedDevice());
         }
 
         private void Btn_showDpi_show_Click(object sender, EventArgs e)
@@ -378,7 +341,6 @@ namespace adbGUI
             openFileDialog.FileName = "";
             openFileDialog.Filter = @" .zip|*.zip";
 
-
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 txt_sideload_path.Text = openFileDialog.FileName;
@@ -393,7 +355,6 @@ namespace adbGUI
             var all = " -all";
             var system = " -system";
             var package = txt_backup_packagename.Text;
-
 
             if (cbo_backupPackage.Checked == false)
             {
@@ -418,9 +379,7 @@ namespace adbGUI
                     }
 
                     adb.StartProcessing("backup" + apk + shared + all + system + name, formMethods.SelectedDevice());
-
                 }
-
             }
             else
             {
@@ -443,7 +402,6 @@ namespace adbGUI
             adb.StartProcessing("uninstall " + s, formMethods.SelectedDevice());
 
             formMethods.RefreshInstalledAppsInCombobox();
-
         }
 
         private void Cbo_backupPackage_CheckedChanged(object sender, EventArgs e)
@@ -458,7 +416,6 @@ namespace adbGUI
                 cb_backup_withapk.Checked = false;
                 label8.Visible = true;
                 txt_backup_packagename.Visible = true;
-
             }
             else
             {
@@ -476,7 +433,7 @@ namespace adbGUI
             formMethods.RefreshInstalledAppsInCombobox();
         }
 
-        void AppendReceivedData(object sender, DataReceivedEventArgs e)
+        private void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
             builder.AppendLine(e.Data);
         }
@@ -486,7 +443,6 @@ namespace adbGUI
             trv_commandTreeView.ExpandAll();
             trv_commandTreeView.SelectedNode = trv_commandTreeView.Nodes[0];
         }
-
 
         private void Rtb_console_Resize(object sender, EventArgs e)
         {
@@ -502,9 +458,7 @@ namespace adbGUI
         {
             try
             {
-
                 rtb_console.AppendText(builder.ToString());
-
 
                 builder.Clear();
             }
@@ -529,7 +483,6 @@ namespace adbGUI
                                 new SetProp(adb, formMethods).Show();
                                 break;
 
-
                             case "#screenrecord":
                                 if (screenRecord == null || screenRecord.IsDisposed)
                                 {
@@ -541,15 +494,49 @@ namespace adbGUI
                                     screenRecord.Focus();
                                 }
                                 break;
+
+                            case "#spoofmac":
+                                if (spoofMac == null || spoofMac.IsDisposed)
+                                {
+                                    spoofMac = new SpoofMac(adb, formMethods);
+                                    spoofMac.Show();
+                                }
+                                else
+                                {
+                                    spoofMac.Focus();
+                                }
+                                break;
+
+                            case "#resolution":
+                                if (resolutionChange == null || resolutionChange.IsDisposed)
+                                {
+                                    resolutionChange = new ResolutionChange(adb, formMethods);
+                                    resolutionChange.Show();
+                                }
+                                else
+                                {
+                                    resolutionChange.Focus();
+                                }
+                                break;
+
+                                //case "#density":
+                                //    if (dpiChange == null || dpiChange.IsDisposed)
+                                //    {
+                                //        dpiChange = new DpiChange(adb, formMethods);
+                                //        dpiChange.Show();
+                                //    }
+                                //    else
+                                //    {
+                                //        dpiChange.Focus();
+                                //    }
+                                //    break;
                         }
                     }
                     else
                     {
                         adb.StartProcessing(tag, formMethods.SelectedDevice());
                     }
-
                 }
-
             }
             catch (Exception) { }
         }
@@ -572,23 +559,6 @@ namespace adbGUI
             }
         }
 
-        private void Txt_phoneMacAdress_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_setNewMac.PerformClick();
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        private void Txt_phoneResolution_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_setResolution.PerformClick();
-                e.SuppressKeyPress = true;
-            }
-        }
         private void Txt_pullFilePathFrom_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -613,7 +583,6 @@ namespace adbGUI
             {
                 btn_connectWirelessDevice.PerformClick();
                 e.SuppressKeyPress = true;
-
             }
         }
 
@@ -637,7 +606,6 @@ namespace adbGUI
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
             // Kill the process
             // todo rename Forms
             try
@@ -645,11 +613,9 @@ namespace adbGUI
                 //adb.StopProcessing();
                 adb.GetProcess.Kill();
                 adb.GetProcess.Dispose();
-
             }
             catch (Exception)
             { }
-
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

@@ -14,6 +14,7 @@ namespace adbGUI.Forms
     {
         private AdbOps adb;
         private FormMethods formMethods;
+
         public SetProp(AdbOps adbFrm, FormMethods fMethods)
         {
             adb = adbFrm;
