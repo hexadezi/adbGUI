@@ -326,7 +326,7 @@
             treeNode8.Name = "Knoten3";
             treeNode8.Text = "Phone";
             treeNode9.Name = "Knoten31";
-            treeNode9.Tag = "shell screencap -p > screen.png";
+            treeNode9.Tag = "#screenshot";
             treeNode9.Text = "Screenshot";
             treeNode9.ToolTipText = "Take a screenshot";
             treeNode10.Name = "Knoten0";
