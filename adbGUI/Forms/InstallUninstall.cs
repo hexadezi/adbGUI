@@ -31,7 +31,7 @@ namespace adbGUI.Forms
             {
                 adb.StartProcessing("install " + s, formMethods.SelectedDevice());
 
-                formMethods.RefreshInstalledAppsInCombobox();
+                RefreshInstalledApps();
             }
             else
             {
@@ -58,10 +58,16 @@ namespace adbGUI.Forms
 
             adb.StartProcessing("uninstall " + s, formMethods.SelectedDevice());
 
-            formMethods.RefreshInstalledAppsInCombobox();
+            RefreshInstalledApps();
+
         }
 
         private void Btn_InstallUninstallRefreshApps_Click(object sender, EventArgs e)
+        {
+            RefreshInstalledApps();
+        }
+
+        private void RefreshInstalledApps()
         {
             cbx_InstallUninstallPackageUninstall.Items.Clear();
 
