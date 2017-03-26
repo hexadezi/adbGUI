@@ -16,6 +16,7 @@ namespace adbGUI
         private ResolutionChange resolutionChange;
         private DpiChange dpiChange;
         private FileOps fileOps;
+        private InstallUninstall installUninstall;
 
         public FormMethods formMethods;
 
@@ -133,23 +134,6 @@ namespace adbGUI
             }
         }
 
-        private void Btn_installPackage_Click_1(object sender, EventArgs e)
-        {
-            var s = "\"" + txt_packageFilePathTo.Text + "\"";
-            string serial = " -s " + formMethods.SelectedDevice();
-
-            if (txt_packageFilePathTo.Text != "")
-            {
-                adb.StartProcessing("install " + s, formMethods.SelectedDevice());
-
-                formMethods.RefreshInstalledAppsInCombobox();
-            }
-            else
-            {
-                MessageBox.Show("Please select a file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void Btn_killServer_Click(object sender, EventArgs e)
         {
             formMethods.KillServer();
@@ -167,19 +151,6 @@ namespace adbGUI
             };
 
             process.Start();
-        }
-
-        private void Btn_packagesOpenFileDialog_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.CheckPathExists = true;
-            openFileDialog.Filter = " .apk|*.apk";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_packageFilePathTo.Text = openFileDialog.FileName;
-            }
         }
 
         private void Btn_refreshInstalledApps_Click(object sender, EventArgs e)
@@ -212,30 +183,6 @@ namespace adbGUI
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 txt_restore_path.Text = openFileDialog.FileName;
-            }
-        }
-
-        private void Btn_sideloadFile_Click(object sender, EventArgs e)
-        {
-            if (txt_sideload_path.Text != "")
-            {
-                var s = "sideload \"" + txt_sideload_path.Text + "\"";
-                adb.StartProcessing(s, formMethods.SelectedDevice());
-            }
-            else
-            {
-                MessageBox.Show("Please select a file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Btn_sideloadOpenFileDialog_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = @" .zip|*.zip";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_sideload_path.Text = openFileDialog.FileName;
             }
         }
 
@@ -285,15 +232,6 @@ namespace adbGUI
                     adb.StartProcessing("backup -apk " + package + name, formMethods.SelectedDevice());
                 }
             }
-        }
-
-        private void Btn_uninstallPackage_Click(object sender, EventArgs e)
-        {
-            var s = "\"" + cbx_installedApps.SelectedItem + "\"";
-
-            adb.StartProcessing("uninstall " + s, formMethods.SelectedDevice());
-
-            formMethods.RefreshInstalledAppsInCombobox();
         }
 
         private void Cbo_backupPackage_CheckedChanged(object sender, EventArgs e)
@@ -422,6 +360,7 @@ namespace adbGUI
                                     dpiChange.Focus();
                                 }
                                 break;
+
                             case "#files":
                                 if (fileOps == null || fileOps.IsDisposed)
                                 {
@@ -431,6 +370,18 @@ namespace adbGUI
                                 else
                                 {
                                     fileOps.Focus();
+                                }
+                                break;
+
+                            case "#installuninstall":
+                                if (installUninstall == null || installUninstall.IsDisposed)
+                                {
+                                    installUninstall = new InstallUninstall(adb, formMethods);
+                                    installUninstall.Show();
+                                }
+                                else
+                                {
+                                    installUninstall.Focus();
                                 }
                                 break;
                         }
