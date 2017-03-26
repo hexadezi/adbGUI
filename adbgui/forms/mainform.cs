@@ -18,6 +18,7 @@ namespace adbGUI
         private FileOps fileOps;
         private InstallUninstall installUninstall;
         private Sideload sideLoad;
+        private BackupRestore backupRestore;
 
         public FormMethods formMethods;
 
@@ -58,6 +59,16 @@ namespace adbGUI
             dw.StartDeviceWatcher();
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                adb.StopProcessing();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void Adb_CommandExecutionStarted()
         {
             BeginInvoke((MethodInvoker)delegate ()
@@ -76,16 +87,6 @@ namespace adbGUI
                 formMethods.RefreshSerialsInCombobox(e.DeviceList);
                 txt_devices.Text = e.DevicesRaw.ToUpper();
             });
-        }
-
-        private void Btn_backupSaveFileDialog_Click(object sender, EventArgs e)
-        {
-            saveFileDialog.FileName = "backup_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
-            saveFileDialog.Filter = " .ab|*.ab";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_backupFilePathTo.Text = saveFileDialog.FileName;
-            }
         }
 
         private void Btn_connectWirelessDevice_Click(object sender, EventArgs e)
@@ -157,101 +158,6 @@ namespace adbGUI
         private void Btn_remountSystemClick(object sender, EventArgs e)
         {
             adb.StartProcessing("remount", formMethods.SelectedDevice());
-        }
-
-        private void Btn_restoreBackup_Click(object sender, EventArgs e)
-        {
-            if (txt_restore_path.Text == "")
-            {
-                MessageBox.Show("Please select a file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                adb.StartProcessing("restore \"" + txt_restore_path.Text + "\"", formMethods.SelectedDevice());
-            }
-        }
-
-        private void Btn_restoreOpenFileDialog_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = " .ab|*.ab";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_restore_path.Text = openFileDialog.FileName;
-            }
-        }
-
-        private void Btn_startBackup_Click(object sender, EventArgs e)
-        {
-            var name = " -f \"" + txt_backupFilePathTo.Text + "\"";
-            var apk = " -noapk";
-            var shared = " -noshared";
-            var all = " -all";
-            var system = " -system";
-            var package = txt_backup_packagename.Text;
-
-            if (cbo_backupPackage.Checked == false)
-            {
-                if (txt_backupFilePathTo.Text == "")
-                {
-                    MessageBox.Show("Please select a destination!", "Error", MessageBoxButtons.OK,
-                          MessageBoxIcon.Error);
-                }
-                else
-                {
-                    if (cb_backup_withapk.Checked)
-                    {
-                        apk = " -apk";
-                    }
-                    if (cb_backup_shared.Checked)
-                    {
-                        shared = " -shared";
-                    }
-                    if (cb_backup_nosystem.Checked)
-                    {
-                        system = " -nosystem";
-                    }
-
-                    adb.StartProcessing("backup" + apk + shared + all + system + name, formMethods.SelectedDevice());
-                }
-            }
-            else
-            {
-                if (txt_backupFilePathTo.Text == "")
-                {
-                    MessageBox.Show("Please select a destination!", "Error", MessageBoxButtons.OK,
-                          MessageBoxIcon.Error);
-                }
-                else
-                {
-                    adb.StartProcessing("backup -apk " + package + name, formMethods.SelectedDevice());
-                }
-            }
-        }
-
-        private void Cbo_backupPackage_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbo_backupPackage.Checked)
-            {
-                cb_backup_nosystem.Enabled = false;
-                cb_backup_nosystem.Checked = false;
-                cb_backup_shared.Enabled = false;
-                cb_backup_shared.Checked = false;
-                cb_backup_withapk.Enabled = false;
-                cb_backup_withapk.Checked = false;
-                label8.Visible = true;
-                txt_backup_packagename.Visible = true;
-            }
-            else
-            {
-                cb_backup_nosystem.Enabled = true;
-                cb_backup_shared.Enabled = true;
-                label8.Visible = false;
-                txt_backup_packagename.Visible = false;
-                cb_backup_withapk.Enabled = true;
-                txt_backup_packagename.Text = "";
-            }
         }
 
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
@@ -387,6 +293,18 @@ namespace adbGUI
                                     sideLoad.Focus();
                                 }
                                 break;
+
+                            case "#backuprestore":
+                                if (backupRestore == null || backupRestore.IsDisposed)
+                                {
+                                    backupRestore = new BackupRestore(adb, formMethods);
+                                    backupRestore.Show();
+                                }
+                                else
+                                {
+                                    backupRestore.Focus();
+                                }
+                                break;
                         }
                     }
                     else
@@ -437,16 +355,6 @@ namespace adbGUI
             }
             catch (Exception)
             { }
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Escape)
-            {
-                adb.StopProcessing();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
