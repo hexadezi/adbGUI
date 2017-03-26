@@ -96,6 +96,12 @@
     <Compile Include="Forms\DpiChange.Designer.cs">
       <DependentUpon>DpiChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FileOps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FileOps.Designer.cs">
+      <DependentUpon>FileOps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ResolutionChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\DpiChange.resx">
       <DependentUpon>DpiChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FileOps.resx">
+      <DependentUpon>FileOps.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

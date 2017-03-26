@@ -24,6 +24,7 @@ namespace adbGUI.Forms
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
         private void Btn_ResolutionChangeSet_Click(object sender, EventArgs e)
         {
             adb.StartProcessing("shell wm size " + txt_phoneResolution.Text, formMethods.SelectedDevice());

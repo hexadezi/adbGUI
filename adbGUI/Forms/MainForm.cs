@@ -15,6 +15,7 @@ namespace adbGUI
         private SpoofMac spoofMac;
         private ResolutionChange resolutionChange;
         private DpiChange dpiChange;
+        private FileOps fileOps;
 
         public FormMethods formMethods;
 
@@ -490,6 +491,17 @@ namespace adbGUI
                                 else
                                 {
                                     dpiChange.Focus();
+                                }
+                                break;
+                            case "#files":
+                                if (fileOps == null || fileOps.IsDisposed)
+                                {
+                                    fileOps = new FileOps(adb, formMethods);
+                                    fileOps.Show();
+                                }
+                                else
+                                {
+                                    fileOps.Focus();
                                 }
                                 break;
                         }
