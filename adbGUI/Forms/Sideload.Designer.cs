@@ -45,7 +45,7 @@
             this.groupBox2.Controls.Add(this.btn_SideloadStart);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(459, 92);
+            this.groupBox2.Size = new System.Drawing.Size(459, 64);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sideload";
@@ -53,7 +53,7 @@
             // btn_SideloadBrowse
             // 
             this.btn_SideloadBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SideloadBrowse.Location = new System.Drawing.Point(297, 56);
+            this.btn_SideloadBrowse.Location = new System.Drawing.Point(297, 32);
             this.btn_SideloadBrowse.Name = "btn_SideloadBrowse";
             this.btn_SideloadBrowse.Size = new System.Drawing.Size(75, 23);
             this.btn_SideloadBrowse.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             this.txt_SideloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_SideloadPath.Location = new System.Drawing.Point(6, 59);
+            this.txt_SideloadPath.Location = new System.Drawing.Point(6, 35);
             this.txt_SideloadPath.Name = "txt_SideloadPath";
             this.txt_SideloadPath.Size = new System.Drawing.Size(285, 20);
             this.txt_SideloadPath.TabIndex = 0;
@@ -73,7 +73,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(372, 13);
             this.label1.TabIndex = 1;
@@ -82,7 +82,7 @@
             // btn_SideloadStart
             // 
             this.btn_SideloadStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SideloadStart.Location = new System.Drawing.Point(378, 56);
+            this.btn_SideloadStart.Location = new System.Drawing.Point(378, 32);
             this.btn_SideloadStart.Name = "btn_SideloadStart";
             this.btn_SideloadStart.Size = new System.Drawing.Size(75, 23);
             this.btn_SideloadStart.TabIndex = 2;
@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 116);
+            this.ClientSize = new System.Drawing.Size(483, 88);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Sideload";
