@@ -17,6 +17,7 @@ namespace adbGUI
         private DpiChange dpiChange;
         private FileOps fileOps;
         private InstallUninstall installUninstall;
+        private Sideload sideLoad;
 
         public FormMethods formMethods;
 
@@ -372,6 +373,18 @@ namespace adbGUI
                                 else
                                 {
                                     installUninstall.Focus();
+                                }
+                                break;
+
+                            case "#sideload":
+                                if (sideLoad == null || sideLoad.IsDisposed)
+                                {
+                                    sideLoad = new Sideload(adb, formMethods);
+                                    sideLoad.Show();
+                                }
+                                else
+                                {
+                                    sideLoad.Focus();
                                 }
                                 break;
                         }
