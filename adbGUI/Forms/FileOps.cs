@@ -1,26 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI.Forms
 {
     public partial class FileOps : Form
     {
-        AdbOps adb;
-        FormMethods formMethods;
+        private AdbOps adb;
+        private FormMethods formMethods;
 
         public FileOps(AdbOps adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
             adb = adbFrm;
             formMethods = formMethodsFrm;
-            
         }
 
         private void Btn_FileOpsPushBrowse_Click(object sender, EventArgs e)

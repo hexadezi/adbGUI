@@ -12,8 +12,8 @@ namespace adbGUI.Forms
 {
     public partial class Sideload : Form
     {
-        AdbOps adb;
-        FormMethods formMethods;
+        private AdbOps adb;
+        private FormMethods formMethods;
 
         public Sideload(AdbOps adbFrm, FormMethods formMethodsFrm)
         {

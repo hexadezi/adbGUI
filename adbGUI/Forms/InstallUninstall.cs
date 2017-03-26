@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI.Forms
 {
     public partial class InstallUninstall : Form
     {
-        AdbOps adb;
-        FormMethods formMethods;
+        private AdbOps adb;
+        private FormMethods formMethods;
+
         public InstallUninstall(AdbOps adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
@@ -59,7 +53,6 @@ namespace adbGUI.Forms
             adb.StartProcessing("uninstall " + s, formMethods.SelectedDevice());
 
             RefreshInstalledApps();
-
         }
 
         private void Btn_InstallUninstallRefreshApps_Click(object sender, EventArgs e)
@@ -75,7 +68,6 @@ namespace adbGUI.Forms
 
             string output = adb.StartProcessingInThread("shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
 
-
             foreach (var item in output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 cbx_InstallUninstallPackageUninstall.Items.Add(item);
@@ -84,9 +76,7 @@ namespace adbGUI.Forms
             if (cbx_InstallUninstallPackageUninstall.Items.Count > 0)
             {
                 cbx_InstallUninstallPackageUninstall.SelectedIndex = 0;
-
             }
-
 
             cbx_InstallUninstallPackageUninstall.Enabled = true;
         }

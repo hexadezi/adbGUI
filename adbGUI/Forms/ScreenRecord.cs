@@ -127,7 +127,6 @@ namespace adbGUI.Forms
 
         private void ScreenRecord_KeyDown(object sender, KeyEventArgs e)
         {
-
         }
     }
 }
