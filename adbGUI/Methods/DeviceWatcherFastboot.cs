@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace adbGUI.Methods
 {
-
-    public class DevicesList : EventArgs
+    public class DeviceListFastboot : EventArgs
     {
         private List<string> devices;
+
         public List<string> DeviceList
         {
             set
@@ -39,14 +38,14 @@ namespace adbGUI.Methods
         }
 
     }
-
-    class DeviceWatcher
+    class DeviceWatcherFastboot
     {
-        AdbOps adb = new AdbOps();
 
-        public event DeviceChangedHandler DeviceChanged;
+        FastbootOps fastboot = new FastbootOps();
 
-        public delegate void DeviceChangedHandler(DeviceWatcher sender, DevicesList e);
+        public event DeviceChangedHandlerFastboot DeviceChangedFastboot;
+
+        public delegate void DeviceChangedHandlerFastboot(DeviceWatcherFastboot sender, DeviceListFastboot e);
 
         private string devicesRawOld;
 
@@ -69,22 +68,22 @@ namespace adbGUI.Methods
         {
             while (true)
             {
-                if (DeviceChanged != null)
+                if (DeviceChangedFastboot != null)
                 {
-                    devicesRawNew = adb.StartProcessingReadToEnd("devices -l", "");
+                    devicesRawNew = fastboot.StartProcessingReadToEnd("devices", "");
 
                     if (devicesRawNew != devicesRawOld)
                     {
                         devicesRawOld = devicesRawNew;
 
-                        DevicesList dl = new DevicesList()
+                        DeviceListFastboot dl = new DeviceListFastboot()
                         {
                             DevicesRaw = devicesRawNew,
                             DeviceList = ParseDevicesL(devicesRawNew)
 
                         };
 
-                        DeviceChanged(this, dl);
+                        DeviceChangedFastboot(this, dl);
                     }
                 }
                 Thread.Sleep(1000);

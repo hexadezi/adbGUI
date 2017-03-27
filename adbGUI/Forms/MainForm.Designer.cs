@@ -147,13 +147,20 @@
             treeNode49,
             treeNode50,
             treeNode61});
-            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Devices");
             System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("Version");
-            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Fastboot", new System.Windows.Forms.TreeNode[] {
             treeNode63,
-            treeNode64});
+            treeNode64,
+            treeNode65});
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Version");
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
+            treeNode67,
+            treeNode68});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.txt_devices = new System.Windows.Forms.TextBox();
+            this.txt_DevicesAdb = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbo_clearEverytime = new System.Windows.Forms.CheckBox();
             this.btn_adbUnroot = new System.Windows.Forms.Button();
@@ -178,11 +185,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_consoleStop = new System.Windows.Forms.Button();
             this.btn_consoleClear = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_DevicesFastboot = new System.Windows.Forms.TextBox();
             timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.gbox_wireless.SuspendLayout();
             this.gbox_devices.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer
@@ -191,17 +208,16 @@
             timer.Interval = 200;
             timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // txt_devices
+            // txt_DevicesAdb
             // 
-            this.txt_devices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_devices.Enabled = false;
-            this.txt_devices.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_devices.Location = new System.Drawing.Point(12, 473);
-            this.txt_devices.Multiline = true;
-            this.txt_devices.Name = "txt_devices";
-            this.txt_devices.Size = new System.Drawing.Size(1010, 78);
-            this.txt_devices.TabIndex = 5;
+            this.txt_DevicesAdb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_DevicesAdb.Enabled = false;
+            this.txt_DevicesAdb.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_DevicesAdb.Location = new System.Drawing.Point(3, 16);
+            this.txt_DevicesAdb.Multiline = true;
+            this.txt_DevicesAdb.Name = "txt_DevicesAdb";
+            this.txt_DevicesAdb.Size = new System.Drawing.Size(594, 74);
+            this.txt_DevicesAdb.TabIndex = 5;
             // 
             // groupBox1
             // 
@@ -288,7 +304,7 @@
             // btn_executeCommand
             // 
             this.btn_executeCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_executeCommand.Location = new System.Drawing.Point(786, 446);
+            this.btn_executeCommand.Location = new System.Drawing.Point(786, 431);
             this.btn_executeCommand.Name = "btn_executeCommand";
             this.btn_executeCommand.Size = new System.Drawing.Size(75, 22);
             this.btn_executeCommand.TabIndex = 1;
@@ -429,7 +445,7 @@
             treeNode43.Name = "Knoten1";
             treeNode43.Text = "Network";
             treeNode44.Name = "Knoten11";
-            treeNode44.Tag = "shell \"pm list packages -f | cut -c9- | sort\"";
+            treeNode44.Tag = "shell pm list packages -f";
             treeNode44.Text = "All packages";
             treeNode45.Name = "Knoten13";
             treeNode45.Tag = "shell pm list libraries";
@@ -481,14 +497,25 @@
             treeNode61.Text = "Logcat";
             treeNode62.Name = "Knoten20";
             treeNode62.Text = "Logs";
-            treeNode63.Name = "Knoten1";
-            treeNode63.Tag = "help";
-            treeNode63.Text = "Help";
-            treeNode64.Name = "Knoten2";
-            treeNode64.Tag = "version";
+            treeNode63.Name = "Knoten2";
+            treeNode63.Tag = "+devices";
+            treeNode63.Text = "Devices";
+            treeNode64.Name = "Knoten3";
+            treeNode64.Tag = "+--version";
             treeNode64.Text = "Version";
-            treeNode65.Name = "Knoten0";
-            treeNode65.Text = "Adb";
+            treeNode65.Name = "Knoten1";
+            treeNode65.Tag = "+help";
+            treeNode65.Text = "Help";
+            treeNode66.Name = "Knoten0";
+            treeNode66.Text = "Fastboot";
+            treeNode67.Name = "Knoten1";
+            treeNode67.Tag = "help";
+            treeNode67.Text = "Help";
+            treeNode68.Name = "Knoten2";
+            treeNode68.Tag = "version";
+            treeNode68.Text = "Version";
+            treeNode69.Name = "Knoten0";
+            treeNode69.Text = "Adb";
             this.trv_commandTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode8,
             treeNode13,
@@ -497,8 +524,9 @@
             treeNode43,
             treeNode48,
             treeNode62,
-            treeNode65});
-            this.trv_commandTreeView.Size = new System.Drawing.Size(199, 455);
+            treeNode66,
+            treeNode69});
+            this.trv_commandTreeView.Size = new System.Drawing.Size(199, 440);
             this.trv_commandTreeView.TabIndex = 0;
             this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.Trv_commandTreeView_DoubleClick);
             // 
@@ -560,7 +588,7 @@
             this.cbx_customCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbx_customCommand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbx_customCommand.FormattingEnabled = true;
-            this.cbx_customCommand.Location = new System.Drawing.Point(217, 446);
+            this.cbx_customCommand.Location = new System.Drawing.Point(217, 431);
             this.cbx_customCommand.Name = "cbx_customCommand";
             this.cbx_customCommand.Size = new System.Drawing.Size(562, 21);
             this.cbx_customCommand.TabIndex = 12;
@@ -607,7 +635,7 @@
             this.rtb_console.Name = "rtb_console";
             this.rtb_console.ReadOnly = true;
             this.rtb_console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtb_console.Size = new System.Drawing.Size(803, 426);
+            this.rtb_console.Size = new System.Drawing.Size(803, 411);
             this.rtb_console.TabIndex = 11;
             this.rtb_console.Text = "";
             this.rtb_console.Resize += new System.EventHandler(this.Rtb_console_Resize);
@@ -621,13 +649,13 @@
             this.panel1.Controls.Add(this.rtb_console);
             this.panel1.Location = new System.Drawing.Point(217, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(805, 428);
+            this.panel1.Size = new System.Drawing.Size(805, 413);
             this.panel1.TabIndex = 12;
             // 
             // btn_consoleStop
             // 
             this.btn_consoleStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_consoleStop.Location = new System.Drawing.Point(948, 446);
+            this.btn_consoleStop.Location = new System.Drawing.Point(948, 431);
             this.btn_consoleStop.Name = "btn_consoleStop";
             this.btn_consoleStop.Size = new System.Drawing.Size(75, 22);
             this.btn_consoleStop.TabIndex = 1;
@@ -638,7 +666,7 @@
             // btn_consoleClear
             // 
             this.btn_consoleClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_consoleClear.Location = new System.Drawing.Point(867, 446);
+            this.btn_consoleClear.Location = new System.Drawing.Point(867, 431);
             this.btn_consoleClear.Name = "btn_consoleClear";
             this.btn_consoleClear.Size = new System.Drawing.Size(75, 22);
             this.btn_consoleClear.TabIndex = 0;
@@ -646,12 +674,63 @@
             this.btn_consoleClear.UseVisualStyleBackColor = true;
             this.btn_consoleClear.Click += new System.EventHandler(this.Btn_consoleClear_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(12, 458);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer1.Size = new System.Drawing.Size(1009, 93);
+            this.splitContainer1.SplitterDistance = 600;
+            this.splitContainer1.TabIndex = 13;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txt_DevicesAdb);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(600, 93);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Android Debug Bridge Devices";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txt_DevicesFastboot);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(405, 93);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Fastboot Devices";
+            // 
+            // txt_DevicesFastboot
+            // 
+            this.txt_DevicesFastboot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_DevicesFastboot.Enabled = false;
+            this.txt_DevicesFastboot.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_DevicesFastboot.Location = new System.Drawing.Point(3, 16);
+            this.txt_DevicesFastboot.Multiline = true;
+            this.txt_DevicesFastboot.Name = "txt_DevicesFastboot";
+            this.txt_DevicesFastboot.Size = new System.Drawing.Size(399, 74);
+            this.txt_DevicesFastboot.TabIndex = 6;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 617);
-            this.Controls.Add(this.txt_devices);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.cbx_customCommand);
             this.Controls.Add(this.btn_consoleStop);
             this.Controls.Add(this.btn_consoleClear);
@@ -675,8 +754,15 @@
             this.gbox_wireless.PerformLayout();
             this.gbox_devices.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
             }
 
@@ -691,7 +777,7 @@
             public System.Windows.Forms.TextBox txt_wirelessDeviceIp;
             private System.Windows.Forms.Button btn_connectWirelessDevice;
             private System.Windows.Forms.SaveFileDialog saveFileDialog;
-            public System.Windows.Forms.TextBox txt_devices;
+            public System.Windows.Forms.TextBox txt_DevicesAdb;
             private System.Windows.Forms.Button btn_disconnectWirelessDevices;
             public System.Windows.Forms.ComboBox cbx_connectedDevices;
             public System.Windows.Forms.Button btn_killServer;
@@ -706,6 +792,10 @@
         private System.Windows.Forms.Button btn_adbRoot;
         private System.Windows.Forms.ComboBox cbx_customCommand;
         private System.Windows.Forms.CheckBox cbo_clearEverytime;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.TextBox txt_DevicesFastboot;
     }
 }
 
