@@ -23,7 +23,11 @@ namespace adbGUI
         public FormMethods formMethods;
 
         private AdbOps adb = new AdbOps();
-        private DeviceWatcher dw = new DeviceWatcher();
+        private FastbootOps fastboot = new FastbootOps();
+
+        private DeviceWatcherAdb dwAdb = new DeviceWatcherAdb();
+        private DeviceWatcherFastboot dwFastboot = new DeviceWatcherFastboot();
+
         private StringBuilder builder = new StringBuilder();
 
         public MainForm()
@@ -51,12 +55,59 @@ namespace adbGUI
 
             adb.CommandExecutionStarted += Adb_CommandExecutionStarted;
             adb.CommandExecutionStopped += formMethods.ShowMboxAborted;
+
+
+
+
+
+
+
+            fastboot.GetProcess.Start();
+
+            // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
+            fastboot.GetProcess.BeginOutputReadLine();
+            fastboot.GetProcess.CancelOutputRead();
+
+            fastboot.GetProcess.OutputDataReceived += AppendReceivedData;
+            fastboot.GetProcess.ErrorDataReceived += AppendReceivedData;
+
+            Thread.Sleep(100);
+
+            fastboot.GetProcess.BeginOutputReadLine();
+            fastboot.GetProcess.BeginErrorReadLine();
+
+            // todo fix
+            fastboot.CommandExecutionStarted += Adb_CommandExecutionStarted;
+            fastboot.CommandExecutionStopped += formMethods.ShowMboxAborted;
+
+
+
+
+
+
+
             // Select custom command control
             cbx_customCommand.Select();
 
-            // Start the watcher which fires if devices changed
-            dw.DeviceChanged += Dw_DeviceChanged;
-            dw.StartDeviceWatcher();
+
+
+
+            // Start the watcher which fires if adb devices changed
+            dwAdb.DeviceChanged += DwAdb_DeviceChangedAdb;
+            dwAdb.StartDeviceWatcher();
+
+            // Start the watcher which fires if fastboot devices changed
+            dwFastboot.DeviceChangedFastboot += DwFastboot_DeviceChangedFastboot;
+            dwFastboot.StartDeviceWatcher();
+        }
+
+        private void DwFastboot_DeviceChangedFastboot(DeviceWatcherFastboot sender, DeviceListFastboot e)
+        {
+            BeginInvoke((MethodInvoker)delegate ()
+            {
+                //formMethods.RefreshSerialsInCombobox(e.DeviceList);
+                txt_DevicesFastboot.Text = e.DevicesRaw.ToUpper();
+            });
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -80,12 +131,12 @@ namespace adbGUI
             });
         }
 
-        private void Dw_DeviceChanged(DeviceWatcher dw, DevicesList e)
+        private void DwAdb_DeviceChangedAdb(DeviceWatcherAdb dw, DeviceListAdb e)
         {
             BeginInvoke((MethodInvoker)delegate ()
             {
                 formMethods.RefreshSerialsInCombobox(e.DeviceList);
-                txt_devices.Text = e.DevicesRaw.ToUpper();
+                txt_DevicesAdb.Text = e.DevicesRaw.ToUpper();
             });
         }
 
@@ -315,6 +366,19 @@ namespace adbGUI
                                     backupRestore.Focus();
                                 }
                                 break;
+                        }
+                    }
+
+                    if (tag.StartsWith("+"))
+                    {
+                        if (tag.StartsWith("++"))
+                        {
+
+                        }
+                        else
+                        {
+                            // todo seriennummer und command fixen
+                            fastboot.StartProcessing(tag.Remove(0,1), "");
                         }
                     }
                     else
