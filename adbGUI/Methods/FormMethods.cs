@@ -11,7 +11,7 @@ namespace adbGUI
     {
         private MainForm frm;
 
-        AdbOps adb = new AdbOps();
+        CmdProcess adb = new CmdProcess();
 
         public FormMethods(MainForm f)
         {
@@ -32,7 +32,7 @@ namespace adbGUI
             }
         }
 
-        public void RefreshSerialsInCombobox(List<string> devices)
+        public void RefreshAdbSerialsInCombobox(List<string> devices)
         {
             frm.cbx_connectedDevices.Items.Clear();
 

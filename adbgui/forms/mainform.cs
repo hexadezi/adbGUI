@@ -14,7 +14,7 @@ namespace adbGUI
         private ScreenRecord screenRecord;
         private SpoofMac spoofMac;
         private ResolutionChange resolutionChange;
-        private DpiChange dpiChange;
+        private Density densityChange;
         private FileOps fileOps;
         private InstallUninstall installUninstall;
         private Sideload sideLoad;
@@ -22,11 +22,10 @@ namespace adbGUI
 
         public FormMethods formMethods;
 
-        private AdbOps adb = new AdbOps();
-        private FastbootOps fastboot = new FastbootOps();
+        private CmdProcess cmdProcess = new CmdProcess();
 
-        private DeviceWatcherAdb dwAdb = new DeviceWatcherAdb();
-        private DeviceWatcherFastboot dwFastboot = new DeviceWatcherFastboot();
+        private DeviceWatcher dwAdb = new DeviceWatcher(true);
+        private DeviceWatcher dwFastboot = new DeviceWatcher(false);
 
         private StringBuilder builder = new StringBuilder();
 
@@ -39,88 +38,47 @@ namespace adbGUI
             // pass formMethods the created Form this
             formMethods = new FormMethods(this);
 
-            adb.GetProcess.Start();
+
+            cmdProcess.GetProcess.Start();
 
             // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
-            adb.GetProcess.BeginOutputReadLine();
-            adb.GetProcess.CancelOutputRead();
-
-            adb.GetProcess.OutputDataReceived += AppendReceivedData;
-            adb.GetProcess.ErrorDataReceived += AppendReceivedData;
-
-            Thread.Sleep(100);
-
-            adb.GetProcess.BeginOutputReadLine();
-            adb.GetProcess.BeginErrorReadLine();
-
-            adb.CommandExecutionStarted += Adb_CommandExecutionStarted;
-            adb.CommandExecutionStopped += formMethods.ShowMboxAborted;
+            cmdProcess.GetProcess.BeginOutputReadLine();
+            cmdProcess.GetProcess.CancelOutputRead();
 
 
+            cmdProcess.GetProcess.OutputDataReceived += AppendReceivedData;
+            cmdProcess.GetProcess.ErrorDataReceived += AppendReceivedData;
 
+            Thread.Sleep(200);
 
+            cmdProcess.GetProcess.BeginOutputReadLine();
+            cmdProcess.GetProcess.BeginErrorReadLine();
 
-
-
-            fastboot.GetProcess.Start();
-
-            // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
-            fastboot.GetProcess.BeginOutputReadLine();
-            fastboot.GetProcess.CancelOutputRead();
-
-            fastboot.GetProcess.OutputDataReceived += AppendReceivedData;
-            fastboot.GetProcess.ErrorDataReceived += AppendReceivedData;
-
-            Thread.Sleep(100);
-
-            fastboot.GetProcess.BeginOutputReadLine();
-            fastboot.GetProcess.BeginErrorReadLine();
-
-            // todo fix
-            fastboot.CommandExecutionStarted += Adb_CommandExecutionStarted;
-            fastboot.CommandExecutionStopped += formMethods.ShowMboxAborted;
-
-
-
-
-
+            cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
+            cmdProcess.CommandExecutionStopped += formMethods.ShowMboxAborted;
 
 
             // Select custom command control
             cbx_customCommand.Select();
 
 
-
-
             // Start the watcher which fires if adb devices changed
-            dwAdb.DeviceChanged += DwAdb_DeviceChangedAdb;
+            dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
 
-            // Start the watcher which fires if fastboot devices changed
-            dwFastboot.DeviceChangedFastboot += DwFastboot_DeviceChangedFastboot;
-            dwFastboot.StartDeviceWatcher();
-        }
-
-        private void DwFastboot_DeviceChangedFastboot(DeviceWatcherFastboot sender, DeviceListFastboot e)
-        {
-            BeginInvoke((MethodInvoker)delegate ()
-            {
-                //formMethods.RefreshSerialsInCombobox(e.DeviceList);
-                txt_DevicesFastboot.Text = e.DevicesRaw.ToUpper();
-            });
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
             {
-                adb.StopProcessing();
+                cmdProcess.StopProcessing();
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void Adb_CommandExecutionStarted()
+        private void CommandExecutionStarted()
         {
             BeginInvoke((MethodInvoker)delegate ()
             {
@@ -131,12 +89,12 @@ namespace adbGUI
             });
         }
 
-        private void DwAdb_DeviceChangedAdb(DeviceWatcherAdb dw, DeviceListAdb e)
+        private void DwAdb_DeviceChanged(DeviceWatcher dw, DeviceList e)
         {
             BeginInvoke((MethodInvoker)delegate ()
             {
-                formMethods.RefreshSerialsInCombobox(e.DeviceList);
-                txt_DevicesAdb.Text = e.DevicesRaw.ToUpper();
+                formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
+                txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
             });
         }
 
@@ -148,7 +106,7 @@ namespace adbGUI
 
             if (r.Match(ipadress).Success)
             {
-                adb.StartProcessing("connect " + ipadress, "");
+                cmdProcess.StartProcessing("adb connect " + ipadress, "");
             }
             else
             {
@@ -163,12 +121,12 @@ namespace adbGUI
 
         private void Btn_consoleStop_Click(object sender, EventArgs e)
         {
-            adb.StopProcessing();
+            cmdProcess.StopProcessing();
         }
 
         private void Btn_disconnectWirelessDevices_Click_1(object sender, EventArgs e)
         {
-            adb.StartProcessing("disconnect", "");
+            cmdProcess.StartProcessing("adb disconnect", "");
         }
 
         private void Btn_executeCommand_Click(object sender, EventArgs e)
@@ -179,7 +137,7 @@ namespace adbGUI
             {
                 cbx_customCommand.Items.Add(command);
 
-                adb.StartProcessing(command, formMethods.SelectedDevice());
+                cmdProcess.StartProcessing(command, formMethods.SelectedDevice());
             }
             else
             {
@@ -194,21 +152,32 @@ namespace adbGUI
 
         private void Btn_openShell_Click(object sender, EventArgs e)
         {
-            Process process = new Process
+            if (!string.IsNullOrEmpty(formMethods.SelectedDevice()))
             {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = @"tools\adb",
-                    Arguments = "shell",
-                }
-            };
+                string serial = "";
 
-            process.Start();
+                serial += "-s " + formMethods.SelectedDevice() + " ";
+
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd",
+                        Arguments = "/K tools\\adb " + serial + " shell",
+                    }
+                };
+
+                process.Start();
+            }
+            else
+            {
+                MessageBox.Show("No device connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Btn_remountSystemClick(object sender, EventArgs e)
         {
-            adb.StartProcessing("remount", formMethods.SelectedDevice());
+            cmdProcess.StartProcessing("adb remount", formMethods.SelectedDevice());
         }
 
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
@@ -253,12 +222,19 @@ namespace adbGUI
 
                 if ((tag = trv_commandTreeView.SelectedNode.Tag.ToString()) != null)
                 {
-                    if (tag.StartsWith("#"))
+
+                    if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
+                    {
+                        // seriennummer für fastboot implementieren
+                        cmdProcess.StartProcessing(tag, formMethods.SelectedDevice());
+                    }
+
+                    else if (tag.StartsWith("#"))
                     {
                         switch (tag)
                         {
                             case "#prop":
-                                new SetProp(adb, formMethods).Show();
+                                new SetProp(cmdProcess, formMethods).Show();
                                 break;
 
                             case "#screenshot":
@@ -267,14 +243,14 @@ namespace adbGUI
                                 saveFileDialog.Filter = "PNG Image(.png)|*.png";
                                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                                 {
-                                    adb.StartProcessing("shell screencap -p > " + saveFileDialog.FileName, formMethods.SelectedDevice());
+                                    cmdProcess.StartProcessing("adb shell screencap -p > " + saveFileDialog.FileName, formMethods.SelectedDevice());
                                 }
                                 break;
 
                             case "#screenrecord":
                                 if (screenRecord == null || screenRecord.IsDisposed)
                                 {
-                                    screenRecord = new ScreenRecord(adb, formMethods);
+                                    screenRecord = new ScreenRecord(cmdProcess, formMethods);
                                     screenRecord.Show();
                                 }
                                 else
@@ -286,7 +262,7 @@ namespace adbGUI
                             case "#spoofmac":
                                 if (spoofMac == null || spoofMac.IsDisposed)
                                 {
-                                    spoofMac = new SpoofMac(adb, formMethods);
+                                    spoofMac = new SpoofMac(cmdProcess, formMethods);
                                     spoofMac.Show();
                                 }
                                 else
@@ -298,7 +274,7 @@ namespace adbGUI
                             case "#resolution":
                                 if (resolutionChange == null || resolutionChange.IsDisposed)
                                 {
-                                    resolutionChange = new ResolutionChange(adb, formMethods);
+                                    resolutionChange = new ResolutionChange(cmdProcess, formMethods);
                                     resolutionChange.Show();
                                 }
                                 else
@@ -308,21 +284,21 @@ namespace adbGUI
                                 break;
 
                             case "#density":
-                                if (dpiChange == null || dpiChange.IsDisposed)
+                                if (densityChange == null || densityChange.IsDisposed)
                                 {
-                                    dpiChange = new DpiChange(adb, formMethods);
-                                    dpiChange.Show();
+                                    densityChange = new Density(cmdProcess, formMethods);
+                                    densityChange.Show();
                                 }
                                 else
                                 {
-                                    dpiChange.Focus();
+                                    densityChange.Focus();
                                 }
                                 break;
 
                             case "#files":
                                 if (fileOps == null || fileOps.IsDisposed)
                                 {
-                                    fileOps = new FileOps(adb, formMethods);
+                                    fileOps = new FileOps(cmdProcess, formMethods);
                                     fileOps.Show();
                                 }
                                 else
@@ -334,7 +310,7 @@ namespace adbGUI
                             case "#installuninstall":
                                 if (installUninstall == null || installUninstall.IsDisposed)
                                 {
-                                    installUninstall = new InstallUninstall(adb, formMethods);
+                                    installUninstall = new InstallUninstall(cmdProcess, formMethods);
                                     installUninstall.Show();
                                 }
                                 else
@@ -346,7 +322,7 @@ namespace adbGUI
                             case "#sideload":
                                 if (sideLoad == null || sideLoad.IsDisposed)
                                 {
-                                    sideLoad = new Sideload(adb, formMethods);
+                                    sideLoad = new Sideload(cmdProcess, formMethods);
                                     sideLoad.Show();
                                 }
                                 else
@@ -358,7 +334,7 @@ namespace adbGUI
                             case "#backuprestore":
                                 if (backupRestore == null || backupRestore.IsDisposed)
                                 {
-                                    backupRestore = new BackupRestore(adb, formMethods);
+                                    backupRestore = new BackupRestore(cmdProcess, formMethods);
                                     backupRestore.Show();
                                 }
                                 else
@@ -369,22 +345,6 @@ namespace adbGUI
                         }
                     }
 
-                    if (tag.StartsWith("+"))
-                    {
-                        if (tag.StartsWith("++"))
-                        {
-
-                        }
-                        else
-                        {
-                            // todo seriennummer und command fixen
-                            fastboot.StartProcessing(tag.Remove(0,1), "");
-                        }
-                    }
-                    else
-                    {
-                        adb.StartProcessing(tag, formMethods.SelectedDevice());
-                    }
                 }
             }
             catch (Exception) { }
@@ -401,12 +361,12 @@ namespace adbGUI
 
         private void Btn_adbRoot_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("root", formMethods.SelectedDevice());
+            cmdProcess.StartProcessing("adb root", formMethods.SelectedDevice());
         }
 
         private void Btn_adbUnroot_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("unroot", formMethods.SelectedDevice());
+            cmdProcess.StartProcessing("adb unroot", formMethods.SelectedDevice());
         }
 
         private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
@@ -424,8 +384,8 @@ namespace adbGUI
             try
             {
                 //adb.StopProcessing();
-                adb.GetProcess.Kill();
-                adb.GetProcess.Dispose();
+                cmdProcess.GetProcess.Kill();
+                cmdProcess.GetProcess.Dispose();
             }
             catch (Exception)
             { }

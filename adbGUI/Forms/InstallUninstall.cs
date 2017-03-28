@@ -5,10 +5,10 @@ namespace adbGUI.Forms
 {
     public partial class InstallUninstall : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public InstallUninstall(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public InstallUninstall(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
 
@@ -23,7 +23,7 @@ namespace adbGUI.Forms
 
             if (txt_InstallUninstallPackageInstall.Text != "")
             {
-                adb.StartProcessing("install " + s, formMethods.SelectedDevice());
+                adb.StartProcessing("adb install " + s, formMethods.SelectedDevice());
 
                 RefreshInstalledApps();
             }
@@ -50,7 +50,7 @@ namespace adbGUI.Forms
         {
             var s = "\"" + cbx_InstallUninstallPackageUninstall.SelectedItem + "\"";
 
-            adb.StartProcessing("uninstall " + s, formMethods.SelectedDevice());
+            adb.StartProcessing("adb uninstall " + s, formMethods.SelectedDevice());
 
             RefreshInstalledApps();
         }
@@ -66,7 +66,7 @@ namespace adbGUI.Forms
 
             cbx_InstallUninstallPackageUninstall.Enabled = false;
 
-            string output = adb.StartProcessingInThread("shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
+            string output = adb.StartProcessingInThread("adb shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
 
             foreach (var item in output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {

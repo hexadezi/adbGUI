@@ -3,12 +3,12 @@ using System.Windows.Forms;
 
 namespace adbGUI.Forms
 {
-    public partial class DpiChange : Form
+    public partial class Density : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public DpiChange(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public Density(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
             adb = adbFrm;
@@ -27,17 +27,17 @@ namespace adbGUI.Forms
 
         private void Btn_showDpi_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell wm density", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell wm density", formMethods.SelectedDevice());
         }
 
         private void Btn_setDpi_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell wm density " + txt_phoneDpi.Text, formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell wm density " + txt_phoneDpi.Text, formMethods.SelectedDevice());
         }
 
         private void Btn_resetDpi_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell wm density reset", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell wm density reset", formMethods.SelectedDevice());
         }
 
         private void DpiChange_KeyDown(object sender, KeyEventArgs e)

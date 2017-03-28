@@ -5,11 +5,11 @@ namespace adbGUI.Forms
 {
     public partial class ScreenRecord : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
         private int time;
 
-        public ScreenRecord(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public ScreenRecord(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
             adb = adbFrm;
@@ -84,7 +84,7 @@ namespace adbGUI.Forms
             if (rab_screenRecordSavePhone.Checked)
             {
                 string destination = txt_ScreenRecordDestination.Text;
-                adb.StartProcessing("shell screenrecord --verbose" + size + bitrate + timelimit + rotate + destination, formMethods.SelectedDevice());
+                adb.StartProcessing("adb shell screenrecord --verbose" + size + bitrate + timelimit + rotate + destination, formMethods.SelectedDevice());
                 timer.Enabled = true;
             }
             else

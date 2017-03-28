@@ -14,10 +14,10 @@ namespace adbGUI.Forms
     {
         // todo backup restore testen
 
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public BackupRestore(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public BackupRestore(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
 
@@ -66,7 +66,7 @@ namespace adbGUI.Forms
                         system = " -nosystem";
                     }
 
-                    adb.StartProcessing("backup" + apk + shared + all + system + name, formMethods.SelectedDevice());
+                    adb.StartProcessing("adb backup" + apk + shared + all + system + name, formMethods.SelectedDevice());
                 }
             }
             else
@@ -78,7 +78,7 @@ namespace adbGUI.Forms
                 }
                 else
                 {
-                    adb.StartProcessing("backup -apk " + package + name, formMethods.SelectedDevice());
+                    adb.StartProcessing("adb backup -apk " + package + name, formMethods.SelectedDevice());
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace adbGUI.Forms
             }
             else
             {
-                adb.StartProcessing("restore \"" + txt_RestorePath.Text + "\"", formMethods.SelectedDevice());
+                adb.StartProcessing("adb restore \"" + txt_RestorePath.Text + "\"", formMethods.SelectedDevice());
             }
         }
 

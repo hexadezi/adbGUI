@@ -12,10 +12,10 @@ namespace adbGUI.Forms
 {
     public partial class Sideload : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public Sideload(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public Sideload(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace adbGUI.Forms
         {
             if (!String.IsNullOrEmpty(txt_SideloadPath.Text))
             {
-                var s = "sideload \"" + txt_SideloadPath.Text + "\"";
+                var s = "adb sideload \"" + txt_SideloadPath.Text + "\"";
                 adb.StartProcessing(s, formMethods.SelectedDevice());
             }
             else

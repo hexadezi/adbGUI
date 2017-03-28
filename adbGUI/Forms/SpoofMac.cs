@@ -6,10 +6,10 @@ namespace adbGUI.Forms
 {
     public partial class SpoofMac : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public SpoofMac(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public SpoofMac(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
             adb = adbFrm;
@@ -35,7 +35,7 @@ namespace adbGUI.Forms
 
             if (r.Match(s).Success)
             {
-                adb.StartProcessing("shell su root ifconfig wlan0 hw ether " + s, formMethods.SelectedDevice());
+                adb.StartProcessing("adb shell su root ifconfig wlan0 hw ether " + s, formMethods.SelectedDevice());
             }
             else
             {
@@ -45,12 +45,12 @@ namespace adbGUI.Forms
 
         private void Btn_SpoofMacReset_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell su root ifconfig wlan0 down", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell su root ifconfig wlan0 down", formMethods.SelectedDevice());
         }
 
         private void Btn_SpoofMacShow_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell su root cat /sys/class/net/wlan0/address", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell su root cat /sys/class/net/wlan0/address", formMethods.SelectedDevice());
         }
 
         private void Txt_SpoofMacAdress_KeyDown(object sender, KeyEventArgs e)

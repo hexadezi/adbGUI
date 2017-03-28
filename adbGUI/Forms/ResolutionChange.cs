@@ -5,10 +5,10 @@ namespace adbGUI.Forms
 {
     public partial class ResolutionChange : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public ResolutionChange(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public ResolutionChange(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
             adb = adbFrm;
@@ -27,17 +27,17 @@ namespace adbGUI.Forms
 
         private void Btn_ResolutionChangeSet_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell wm size " + txt_phoneResolution.Text, formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell wm size " + txt_phoneResolution.Text, formMethods.SelectedDevice());
         }
 
         private void Btn_ResolutionChangeReset_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell wm size reset", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell wm size reset", formMethods.SelectedDevice());
         }
 
         private void Btn_ResolutionChangeShow_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell wm size", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell wm size", formMethods.SelectedDevice());
         }
 
         private void Txt_phoneResolution_KeyDown(object sender, KeyEventArgs e)

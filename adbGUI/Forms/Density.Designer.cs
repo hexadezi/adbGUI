@@ -1,6 +1,6 @@
 ﻿namespace adbGUI.Forms
 {
-    partial class DpiChange
+    partial class Density
     {
         /// <summary>
         /// Required designer variable.

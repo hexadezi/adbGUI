@@ -5,10 +5,10 @@ namespace adbGUI.Forms
 {
     public partial class SetProp : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public SetProp(AdbOps adbFrm, FormMethods fMethods)
+        public SetProp(CmdProcess adbFrm, FormMethods fMethods)
         {
             adb = adbFrm;
             formMethods = fMethods;
@@ -27,7 +27,7 @@ namespace adbGUI.Forms
 
         private void Btn_setProp_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("shell su root setprop " + txt_setPropKey.Text + " " + txt_setPropValue.Text, formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell su root setprop " + txt_setPropKey.Text + " " + txt_setPropValue.Text, formMethods.SelectedDevice());
         }
 
         private void SetProp_KeyDown(object sender, KeyEventArgs e)

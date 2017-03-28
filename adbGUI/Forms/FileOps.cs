@@ -5,10 +5,10 @@ namespace adbGUI.Forms
 {
     public partial class FileOps : Form
     {
-        private AdbOps adb;
+        private CmdProcess adb;
         private FormMethods formMethods;
 
-        public FileOps(AdbOps adbFrm, FormMethods formMethodsFrm)
+        public FileOps(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
             adb = adbFrm;
@@ -45,7 +45,7 @@ namespace adbGUI.Forms
             }
             else
             {
-                var s = "push \"" + txt_FileOpsPushFrom.Text + "\"" + " \"" + txt_FileOpsPushTo.Text + "\"";
+                var s = "adb push \"" + txt_FileOpsPushFrom.Text + "\"" + " \"" + txt_FileOpsPushTo.Text + "\"";
                 adb.StartProcessing(s, formMethods.SelectedDevice());
             }
         }
@@ -53,7 +53,7 @@ namespace adbGUI.Forms
         private void Btn_FileOpsPushList_Click(object sender, EventArgs e)
         {
             string path = txt_FileOpsPushTo.Text;
-            adb.StartProcessing("shell ls -la " + path + " -F", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell ls -la " + path + " -F", formMethods.SelectedDevice());
         }
 
         private void Btn_FileOpsPullBrowse_Click(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace adbGUI.Forms
             }
             else
             {
-                var s = "pull \"" + txt_FileOpsPullFrom.Text + "\"" + " \"" + txt_FileOpsPullTo.Text + "\"";
+                var s = "adb pull \"" + txt_FileOpsPullFrom.Text + "\"" + " \"" + txt_FileOpsPullTo.Text + "\"";
                 adb.StartProcessing(s, formMethods.SelectedDevice());
             }
         }
@@ -83,7 +83,7 @@ namespace adbGUI.Forms
         private void Btn_FileOpsPullList_Click(object sender, EventArgs e)
         {
             string path = txt_FileOpsPullFrom.Text;
-            adb.StartProcessing("shell ls -la " + path + " -F", formMethods.SelectedDevice());
+            adb.StartProcessing("adb shell ls -la " + path + " -F", formMethods.SelectedDevice());
         }
     }
 }
