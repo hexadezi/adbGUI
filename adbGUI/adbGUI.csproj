@@ -148,11 +148,11 @@
     <Compile Include="Methods\CmdProcess.cs" />
     <Compile Include="Methods\DeviceWatcher.cs" />
     <Compile Include="Methods\FormMethods.cs" />
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Methods\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="Forms\InstallUninstall.resx">
       <DependentUpon>InstallUninstall.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResolutionChange.resx">
       <DependentUpon>ResolutionChange.cs</DependentUpon>
