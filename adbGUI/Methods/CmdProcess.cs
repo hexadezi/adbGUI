@@ -189,9 +189,9 @@ namespace adbGUI
     public static class CheckAndDownloadDependencies
     {
 
-        private static string tmpPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
+        private static string downloadToTempPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
 
-        private static string[] strFiles = { "adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe" };
+        private static string[] strFiles = { "adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe", "libwinpthread-1.dll" };
 
 
         public static void Start()
@@ -207,7 +207,7 @@ namespace adbGUI
                     ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
                     WebClient wc = new WebClient();
                     wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-                    wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), tmpPath);
+                    wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), downloadToTempPath);
                 }
                 else if (dialogResult == DialogResult.No)
                 {
@@ -226,19 +226,14 @@ namespace adbGUI
                 {
                     return false;
                 }
-                return true;
             }
-            return false;
+            return true;
         }
 
         private static void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            Directory.CreateDirectory("tools");
-
             Thread tr = new Thread(new ThreadStart(ExtractFiles));
-
             tr.Start();
-
         }
 
 
@@ -246,28 +241,36 @@ namespace adbGUI
         private delegate void ExtractionCompletedHandler();
         private static void ExtractFiles()
         {
-
             if (Directory.Exists(Path.GetTempPath() + "platform-tools"))
             {
                 Directory.Delete(Path.GetTempPath() + "platform-tools", true);
             }
 
-            ZipFile.ExtractToDirectory(tmpPath, Path.GetTempPath());
+            ZipFile.ExtractToDirectory(downloadToTempPath, Path.GetTempPath());
 
             ExtractionCompleted();
         }
 
         private static void DependenciesChecker_ExtractionCompleted()
         {
-            string extractPath = Path.GetTempPath() + "platform-tools";
+            string extractedFilesPath = Path.GetTempPath() + "platform-tools";
+
+            Directory.CreateDirectory("tools");
 
             foreach (var item in strFiles)
             {
-                File.Copy(extractPath + "\\" + item, "tools\\" + item);
+                try
+                {
+                    File.Copy(extractedFilesPath + "\\" + item, "tools\\" + item);
+                }
+                catch (Exception){}
+
             }
 
             ExtractionCompleted -= DependenciesChecker_ExtractionCompleted;
+
             MessageBox.Show("Files downloaded, decompressed and moved successfully", "Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
     }
