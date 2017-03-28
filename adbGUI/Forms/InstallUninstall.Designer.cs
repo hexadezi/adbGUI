@@ -88,8 +88,10 @@
             // 
             this.cbx_InstallUninstallPackageUninstall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbx_InstallUninstallPackageUninstall.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cbx_InstallUninstallPackageUninstall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_InstallUninstallPackageUninstall.FormattingEnabled = true;
-            this.cbx_InstallUninstallPackageUninstall.Location = new System.Drawing.Point(6, 21);
+            this.cbx_InstallUninstallPackageUninstall.Location = new System.Drawing.Point(6, 20);
             this.cbx_InstallUninstallPackageUninstall.Name = "cbx_InstallUninstallPackageUninstall";
             this.cbx_InstallUninstallPackageUninstall.Size = new System.Drawing.Size(371, 21);
             this.cbx_InstallUninstallPackageUninstall.TabIndex = 6;
@@ -145,7 +147,7 @@
             this.Name = "InstallUninstall";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "InstallUninstall";
+            this.Text = "Install and Uninstall Packages";
             this.TopMost = true;
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -157,7 +159,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox3;
-        public System.Windows.Forms.ComboBox cbx_InstallUninstallPackageUninstall;
         private System.Windows.Forms.Button btn_InstallUninstallInstall;
         private System.Windows.Forms.Button btn_InstallUninstallRefreshApps;
         private System.Windows.Forms.Button btn_InstallUninstallUninstall;
@@ -165,5 +166,6 @@
         private System.Windows.Forms.Button btn_InstallUninstallBrowse;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ComboBox cbx_InstallUninstallPackageUninstall;
     }
 }

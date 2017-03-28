@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -92,11 +94,15 @@ namespace adbGUI
             string output = "";
 
             Thread t = new Thread(
-                delegate ()
+                () =>
                 {
                     output = StartProcessingReadToEnd(command, serialnumber);
                 }
-            );
+            )
+
+            {
+                IsBackground = true
+            };
 
             t.Start();
 
@@ -104,8 +110,6 @@ namespace adbGUI
             {
                 Application.DoEvents();
             }
-
-            t.Abort();
 
             return output;
         }
@@ -180,6 +184,92 @@ namespace adbGUI
             }
 
         }
+    }
+
+    public static class CheckAndDownloadDependencies
+    {
+
+        private static string tmpPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
+
+        private static string[] strFiles = { "adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe" };
+
+
+        public static void Start()
+        {
+
+            if (!CheckIfFilesExist())
+            {
+                DialogResult dialogResult = MessageBox.Show("Some files are missing. \nShould all dependencies be downloaded and extracted?", "Error: Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
+                    WebClient wc = new WebClient();
+                    wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+                    wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), tmpPath);
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    Environment.Exit(0);
+                }
+
+            }
+
+        }
+
+        private static bool CheckIfFilesExist()
+        {
+            foreach (var item in strFiles)
+            {
+                if (!File.Exists("tools\\" + item))
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private static void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            Directory.CreateDirectory("tools");
+
+            Thread tr = new Thread(new ThreadStart(ExtractFiles));
+
+            tr.Start();
+
+        }
+
+
+        private static event ExtractionCompletedHandler ExtractionCompleted;
+        private delegate void ExtractionCompletedHandler();
+        private static void ExtractFiles()
+        {
+
+            if (Directory.Exists(Path.GetTempPath() + "platform-tools"))
+            {
+                Directory.Delete(Path.GetTempPath() + "platform-tools", true);
+            }
+
+            ZipFile.ExtractToDirectory(tmpPath, Path.GetTempPath());
+
+            ExtractionCompleted();
+        }
+
+        private static void DependenciesChecker_ExtractionCompleted()
+        {
+            string extractPath = Path.GetTempPath() + "platform-tools";
+
+            foreach (var item in strFiles)
+            {
+                File.Copy(extractPath + "\\" + item, "tools\\" + item);
+            }
+
+            ExtractionCompleted -= DependenciesChecker_ExtractionCompleted;
+            MessageBox.Show("Files downloaded, decompressed and moved successfully", "Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 
 }

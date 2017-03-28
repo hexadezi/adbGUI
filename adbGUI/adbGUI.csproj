@@ -86,6 +86,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -96,6 +97,12 @@
     </Compile>
     <Compile Include="Forms\BackupRestore.Designer.cs">
       <DependentUpon>BackupRestore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Credits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Credits.Designer.cs">
+      <DependentUpon>Credits.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Density.cs">
       <SubType>Form</SubType>
@@ -163,6 +170,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\BackupRestore.resx">
       <DependentUpon>BackupRestore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Credits.resx">
+      <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Density.resx">
       <DependentUpon>Density.cs</DependentUpon>
@@ -236,6 +246,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hash1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -57,7 +57,11 @@ namespace adbGUI.Forms
 
         private void Btn_InstallUninstallRefreshApps_Click(object sender, EventArgs e)
         {
+            groupBox1.Enabled = false;
+            groupBox3.Enabled = false;
             RefreshInstalledApps();
+            groupBox1.Enabled = true;
+            groupBox3.Enabled = true;
         }
 
         private void RefreshInstalledApps()
@@ -68,7 +72,7 @@ namespace adbGUI.Forms
 
             string output = adb.StartProcessingInThread("adb shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
 
-            foreach (var item in output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
                 cbx_InstallUninstallPackageUninstall.Items.Add(item);
             }

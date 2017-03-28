@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.cbx_BackupPackage = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txt_BackupPackageName = new System.Windows.Forms.TextBox();
             this.cbo_BackupPackage = new System.Windows.Forms.CheckBox();
             this.btn_BackupBrowse = new System.Windows.Forms.Button();
             this.cbo_BackupNoSystem = new System.Windows.Forms.CheckBox();
@@ -51,8 +51,8 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.cbx_BackupPackage);
             this.groupBox8.Controls.Add(this.label8);
-            this.groupBox8.Controls.Add(this.txt_BackupPackageName);
             this.groupBox8.Controls.Add(this.cbo_BackupPackage);
             this.groupBox8.Controls.Add(this.btn_BackupBrowse);
             this.groupBox8.Controls.Add(this.cbo_BackupNoSystem);
@@ -67,6 +67,16 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Backup";
             // 
+            // cbx_BackupPackage
+            // 
+            this.cbx_BackupPackage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_BackupPackage.FormattingEnabled = true;
+            this.cbx_BackupPackage.Location = new System.Drawing.Point(177, 49);
+            this.cbx_BackupPackage.Name = "cbx_BackupPackage";
+            this.cbx_BackupPackage.Size = new System.Drawing.Size(229, 21);
+            this.cbx_BackupPackage.TabIndex = 15;
+            this.cbx_BackupPackage.Visible = false;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -76,16 +86,6 @@
             this.label8.TabIndex = 14;
             this.label8.Text = "Package";
             this.label8.Visible = false;
-            // 
-            // txt_BackupPackageName
-            // 
-            this.txt_BackupPackageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_BackupPackageName.Location = new System.Drawing.Point(177, 50);
-            this.txt_BackupPackageName.Name = "txt_BackupPackageName";
-            this.txt_BackupPackageName.Size = new System.Drawing.Size(229, 20);
-            this.txt_BackupPackageName.TabIndex = 7;
-            this.txt_BackupPackageName.Visible = false;
             // 
             // cbo_BackupPackage
             // 
@@ -165,11 +165,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label3.Location = new System.Drawing.Point(118, 171);
+            this.label3.Location = new System.Drawing.Point(64, 171);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(300, 15);
+            this.label3.Size = new System.Drawing.Size(377, 15);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Attention: Backup seems broken in adb 1.0.39";
+            this.label3.Text = "Attention! Backup and restore seems broken in adb 1.0.39";
             // 
             // groupBox14
             // 
@@ -247,7 +247,6 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txt_BackupPackageName;
         private System.Windows.Forms.CheckBox cbo_BackupPackage;
         private System.Windows.Forms.Button btn_BackupBrowse;
         private System.Windows.Forms.CheckBox cbo_BackupNoSystem;
@@ -261,5 +260,6 @@
         private System.Windows.Forms.Button btn_RestoreStart;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ComboBox cbx_BackupPackage;
     }
 }

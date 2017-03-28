@@ -2,6 +2,7 @@
 using adbGUI.Methods;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -30,6 +31,8 @@ namespace adbGUI
 
         public MainForm()
         {
+            CheckAndDownloadDependencies.Start();
+
             // todo aapt implementieren
 
             InitializeComponent();
@@ -65,8 +68,10 @@ namespace adbGUI
             dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
 
+            
+            
         }
-
+        
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -81,7 +86,7 @@ namespace adbGUI
         {
             BeginInvoke((MethodInvoker)delegate ()
             {
-                if (cbo_clearEverytime.Checked)
+                if (tsb_AlwaysClearConsole.Checked)
                 {
                     rtb_console.Clear();
                 }
@@ -125,7 +130,9 @@ namespace adbGUI
 
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
-            builder.AppendLine(e.Data);
+            BeginInvoke((MethodInvoker)delegate () { rtb_console.AppendText(e.Data + Environment.NewLine); });
+            
+            //builder.AppendLine(e.Data);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -285,6 +292,10 @@ namespace adbGUI
                                     backupRestore.Focus();
                                 }
                                 break;
+
+                            case "#credits":
+                                new Credits().ShowDialog();
+                                break;
                         }
                     }
 
@@ -378,13 +389,17 @@ namespace adbGUI
 
         private void Tsb_AdbRoot_Click(object sender, EventArgs e)
         {
-            tsb_AdbRoot.Checked = true;
             cmdProcess.StartProcessing("adb root", formMethods.SelectedDevice());
         }
 
         private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
         {
             cmdProcess.StartProcessing("adb unroot", formMethods.SelectedDevice());
+        }
+
+        private void Tsb_AlwaysClearConsole_Click(object sender, EventArgs e)
+        {
+            if (tsb_AlwaysClearConsole.Checked = !tsb_AlwaysClearConsole.Checked) ;
         }
     }
 }

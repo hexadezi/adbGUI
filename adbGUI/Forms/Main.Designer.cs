@@ -173,13 +173,10 @@
             treeNode149});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.txt_DevicesAdb = new System.Windows.Forms.TextBox();
-            this.cbo_clearEverytime = new System.Windows.Forms.CheckBox();
             this.btn_executeCommand = new System.Windows.Forms.Button();
             this.trv_commandTreeView = new System.Windows.Forms.TreeView();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.cbx_customCommand = new System.Windows.Forms.ComboBox();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.rtb_console = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -196,6 +193,7 @@
             this.tsb_AdbRoot = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tsb_AdbUnroot = new System.Windows.Forms.ToolStripButton();
+            this.tsb_AlwaysClearConsole = new System.Windows.Forms.ToolStripButton();
             timer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -220,19 +218,6 @@
             this.txt_DevicesAdb.Size = new System.Drawing.Size(1009, 50);
             this.txt_DevicesAdb.TabIndex = 5;
             // 
-            // cbo_clearEverytime
-            // 
-            this.cbo_clearEverytime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbo_clearEverytime.AutoSize = true;
-            this.cbo_clearEverytime.BackColor = System.Drawing.SystemColors.Control;
-            this.cbo_clearEverytime.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbo_clearEverytime.Location = new System.Drawing.Point(904, 588);
-            this.cbo_clearEverytime.Name = "cbo_clearEverytime";
-            this.cbo_clearEverytime.Size = new System.Drawing.Size(98, 17);
-            this.cbo_clearEverytime.TabIndex = 8;
-            this.cbo_clearEverytime.Text = "Clear everytime";
-            this.cbo_clearEverytime.UseVisualStyleBackColor = false;
-            // 
             // btn_executeCommand
             // 
             this.btn_executeCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -246,6 +231,7 @@
             // 
             // trv_commandTreeView
             // 
+            this.trv_commandTreeView.AllowDrop = true;
             this.trv_commandTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.trv_commandTreeView.Location = new System.Drawing.Point(12, 39);
@@ -461,6 +447,7 @@
             treeNode148.Name = "Knoten0";
             treeNode148.Text = "Adb";
             treeNode149.Name = "Knoten1";
+            treeNode149.Tag = "#credits";
             treeNode149.Text = "Credits";
             treeNode150.Name = "Knoten0";
             treeNode150.Text = "About";
@@ -499,17 +486,11 @@
             this.cbx_customCommand.TabIndex = 12;
             this.cbx_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cbx_customCommand_KeyDown);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // rtb_console
             // 
-            this.rtb_console.BackColor = System.Drawing.Color.Black;
             this.rtb_console.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtb_console.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_console.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb_console.ForeColor = System.Drawing.Color.White;
+            this.rtb_console.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtb_console.HideSelection = false;
             this.rtb_console.Location = new System.Drawing.Point(0, 0);
             this.rtb_console.Name = "rtb_console";
@@ -565,7 +546,8 @@
             this.tsb_OpenShell,
             this.tsb_AdbRoot,
             this.toolStripLabel1,
-            this.tsb_AdbUnroot});
+            this.tsb_AdbUnroot,
+            this.tsb_AlwaysClearConsole});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(12, 10, 17, 3);
@@ -655,17 +637,27 @@
             // 
             this.tsb_AdbUnroot.Image = global::adbGUI.Properties.Resources.unroot;
             this.tsb_AdbUnroot.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_AdbUnroot.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsb_AdbUnroot.Name = "tsb_AdbUnroot";
             this.tsb_AdbUnroot.Size = new System.Drawing.Size(90, 20);
             this.tsb_AdbUnroot.Text = "ADB Unroot";
             this.tsb_AdbUnroot.Click += new System.EventHandler(this.Tsb_AdbUnroot_Click);
+            // 
+            // tsb_AlwaysClearConsole
+            // 
+            this.tsb_AlwaysClearConsole.Image = global::adbGUI.Properties.Resources.eraser;
+            this.tsb_AlwaysClearConsole.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_AlwaysClearConsole.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
+            this.tsb_AlwaysClearConsole.Name = "tsb_AlwaysClearConsole";
+            this.tsb_AlwaysClearConsole.Size = new System.Drawing.Size(135, 20);
+            this.tsb_AlwaysClearConsole.Text = "Alway Clear Console";
+            this.tsb_AlwaysClearConsole.Click += new System.EventHandler(this.Tsb_AlwaysClearConsole_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 617);
-            this.Controls.Add(this.cbo_clearEverytime);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.txt_DevicesAdb);
             this.Controls.Add(this.cbx_customCommand);
@@ -692,9 +684,7 @@
 
             #endregion
             private System.Windows.Forms.ToolTip toolTip;
-            private System.Windows.Forms.OpenFileDialog openFileDialog;
             private System.Windows.Forms.Button btn_executeCommand;
-            private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
             private System.Windows.Forms.SaveFileDialog saveFileDialog;
             public System.Windows.Forms.TextBox txt_DevicesAdb;
         private System.Windows.Forms.TreeView trv_commandTreeView;
@@ -703,7 +693,6 @@
         private System.Windows.Forms.Button btn_consoleStop;
         private System.Windows.Forms.Button btn_consoleClear;
         private System.Windows.Forms.ComboBox cbx_customCommand;
-        private System.Windows.Forms.CheckBox cbo_clearEverytime;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripDropDownButton tsd_WirelessAdb;
         private System.Windows.Forms.ToolStripTextBox tst_IpAdress;
@@ -715,6 +704,7 @@
         public System.Windows.Forms.ToolStripComboBox tsc_ConnectedDevices;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton tsb_AdbUnroot;
+        private System.Windows.Forms.ToolStripButton tsb_AlwaysClearConsole;
     }
 }
 

@@ -86,7 +86,7 @@ namespace adbGUI.Methods
                 {
                     if (DeviceChanged != null)
                     {
-                        devicesRawNew = cmdProcess.StartProcessingInThread("tools\\adb devices -l", "");
+                        devicesRawNew = cmdProcess.StartProcessingReadToEnd("tools\\adb devices -l", "");
 
                         if (devicesRawNew != devicesRawOld)
                         {
@@ -102,7 +102,7 @@ namespace adbGUI.Methods
                             DeviceChanged(this, dl);
                         }
                     }
-                    Thread.Sleep(1000);
+                    Thread.Sleep(750);
                 } 
             }
             else

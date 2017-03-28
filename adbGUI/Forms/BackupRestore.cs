@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,6 +28,8 @@ namespace adbGUI.Forms
 
         private void Btn_BackupBrowse_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(cbx_BackupPackage.SelectedItem.ToString());
+
             saveFileDialog.FileName = "backup_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
             saveFileDialog.Filter = " .ab|*.ab";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -42,7 +45,7 @@ namespace adbGUI.Forms
             var shared = " -noshared";
             var all = " -all";
             var system = " -system";
-            var package = txt_BackupPackageName.Text;
+
 
             if (cbo_BackupPackage.Checked == false)
             {
@@ -71,6 +74,8 @@ namespace adbGUI.Forms
             }
             else
             {
+                var package = cbx_BackupPackage.SelectedItem.ToString();
+
                 if (txt_BackupPathTo.Text == "")
                 {
                     MessageBox.Show("Please select a destination!", "Error", MessageBoxButtons.OK,
@@ -93,18 +98,37 @@ namespace adbGUI.Forms
                 cbo_BackupShared.Checked = false;
                 cbo_BackupWithApk.Enabled = false;
                 cbo_BackupWithApk.Checked = false;
-                txt_BackupPackageName.Visible = true;
+                cbx_BackupPackage.Visible = true;
                 label8.Visible = true;
+
+                groupBox8.Enabled = false;
+                groupBox14.Enabled = false;
+
+                string output = adb.StartProcessingInThread("adb shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
+
+                foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    cbx_BackupPackage.Items.Add(item);
+                }
+
+                if (cbx_BackupPackage.Items.Count > 0)
+                {
+                    cbx_BackupPackage.SelectedIndex = 0;
+                }
+
+                groupBox8.Enabled = true;
+                groupBox14.Enabled = true;
             }
             else
             {
                 cbo_BackupNoSystem.Enabled = true;
                 cbo_BackupShared.Enabled = true;
                 cbo_BackupWithApk.Enabled = true;
-                txt_BackupPackageName.Visible = false;
-                txt_BackupPackageName.Text = "";
+                cbx_BackupPackage.Visible = false;
+                cbx_BackupPackage.Items.Clear();
                 label8.Visible = false;
             }
+
         }
 
         private void Btn_RestoreStart_Click(object sender, EventArgs e)
@@ -129,5 +153,6 @@ namespace adbGUI.Forms
                 txt_RestorePath.Text = openFileDialog.FileName;
             }
         }
+
     }
 }

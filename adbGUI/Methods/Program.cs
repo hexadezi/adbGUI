@@ -15,18 +15,10 @@ namespace adbGUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (File.Exists("tools\\adb.exe") && File.Exists("tools\\AdbWinApi.dll") && File.Exists("tools\\AdbWinUsbApi.dll"))
-            {
-                Application.Run(new MainForm());
-            }
-            else
-            {
+            Application.Run(new MainForm());
 
-                MessageBox.Show("Missing files. Make soure adbGUI.exe, AdbWinApi.dll adn AdbWinUsbApi.dll are in the tools folder.", "Error - Missing files", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                Application.Exit();
 
-            }
         }
     }
 }

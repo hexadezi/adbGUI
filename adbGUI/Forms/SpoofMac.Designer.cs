@@ -44,7 +44,7 @@
             this.groupBox6.Controls.Add(this.txt_SpoofMacAdress);
             this.groupBox6.Location = new System.Drawing.Point(12, 12);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(347, 49);
+            this.groupBox6.Size = new System.Drawing.Size(357, 49);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Spoof MAC";
@@ -54,7 +54,7 @@
             this.btn_SpoofMacReset.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_SpoofMacReset.Location = new System.Drawing.Point(194, 19);
             this.btn_SpoofMacReset.Name = "btn_SpoofMacReset";
-            this.btn_SpoofMacReset.Size = new System.Drawing.Size(66, 23);
+            this.btn_SpoofMacReset.Size = new System.Drawing.Size(75, 23);
             this.btn_SpoofMacReset.TabIndex = 27;
             this.btn_SpoofMacReset.Text = "Reset";
             this.btn_SpoofMacReset.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             // 
             // btn_SpoofMacShow
             // 
-            this.btn_SpoofMacShow.Location = new System.Drawing.Point(266, 19);
+            this.btn_SpoofMacShow.Location = new System.Drawing.Point(275, 19);
             this.btn_SpoofMacShow.Name = "btn_SpoofMacShow";
             this.btn_SpoofMacShow.Size = new System.Drawing.Size(75, 23);
             this.btn_SpoofMacShow.TabIndex = 26;
@@ -95,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 73);
+            this.ClientSize = new System.Drawing.Size(382, 73);
             this.Controls.Add(this.groupBox6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
