@@ -25,7 +25,6 @@ namespace adbGUI
         private CmdProcess cmdProcess = new CmdProcess();
 
         private DeviceWatcher dwAdb = new DeviceWatcher(true);
-        private DeviceWatcher dwFastboot = new DeviceWatcher(false);
 
         private StringBuilder builder = new StringBuilder();
 
@@ -98,22 +97,6 @@ namespace adbGUI
             });
         }
 
-        private void Btn_connectWirelessDevice_Click(object sender, EventArgs e)
-        {
-            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$");
-
-            string ipadress = txt_wirelessDeviceIp.Text;
-
-            if (r.Match(ipadress).Success)
-            {
-                cmdProcess.StartProcessing("adb connect " + ipadress, "");
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid IP adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
         private void Btn_consoleClear_Click(object sender, EventArgs e)
         {
             rtb_console.Clear();
@@ -122,11 +105,6 @@ namespace adbGUI
         private void Btn_consoleStop_Click(object sender, EventArgs e)
         {
             cmdProcess.StopProcessing();
-        }
-
-        private void Btn_disconnectWirelessDevices_Click_1(object sender, EventArgs e)
-        {
-            cmdProcess.StartProcessing("adb disconnect", "");
         }
 
         private void Btn_executeCommand_Click(object sender, EventArgs e)
@@ -143,41 +121,6 @@ namespace adbGUI
             {
                 MessageBox.Show("Please enter a command!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Btn_killServer_Click(object sender, EventArgs e)
-        {
-            formMethods.KillServer();
-        }
-
-        private void Btn_openShell_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(formMethods.SelectedDevice()))
-            {
-                string serial = "";
-
-                serial += "-s " + formMethods.SelectedDevice() + " ";
-
-                Process process = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "cmd",
-                        Arguments = "/K tools\\adb " + serial + " shell",
-                    }
-                };
-
-                process.Start();
-            }
-            else
-            {
-                MessageBox.Show("No device connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Btn_remountSystemClick(object sender, EventArgs e)
-        {
-            cmdProcess.StartProcessing("adb remount", formMethods.SelectedDevice());
         }
 
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
@@ -350,23 +293,9 @@ namespace adbGUI
             catch (Exception) { }
         }
 
-        private void Txt_wirelessDeviceIp_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_connectWirelessDevice.PerformClick();
-                e.SuppressKeyPress = true;
-            }
-        }
-
         private void Btn_adbRoot_Click(object sender, EventArgs e)
         {
             cmdProcess.StartProcessing("adb root", formMethods.SelectedDevice());
-        }
-
-        private void Btn_adbUnroot_Click(object sender, EventArgs e)
-        {
-            cmdProcess.StartProcessing("adb unroot", formMethods.SelectedDevice());
         }
 
         private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
@@ -389,6 +318,73 @@ namespace adbGUI
             }
             catch (Exception)
             { }
+        }
+
+        private void Tsb_OpenShell_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(formMethods.SelectedDevice()))
+            {
+                string serial = "";
+
+                serial += "-s " + formMethods.SelectedDevice() + " ";
+
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd",
+                        Arguments = "/K tools\\adb " + serial + " shell",
+                    }
+                };
+
+                process.Start();
+            }
+            else
+            {
+                MessageBox.Show("No device connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
+        {
+            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$");
+
+            string ipadress = tst_IpAdress.Text;
+
+            if (r.Match(ipadress).Success)
+            {
+                cmdProcess.StartProcessing("adb connect " + ipadress, "");
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid IP adress", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e)
+        {
+            cmdProcess.StartProcessing("adb disconnect", "");
+        }
+
+        private void Tsb_KillServer_Click(object sender, EventArgs e)
+        {
+            formMethods.KillServer();
+        }
+
+        private void Tsb_RemountSystem_Click(object sender, EventArgs e)
+        {
+            cmdProcess.StartProcessing("adb remount", formMethods.SelectedDevice());
+        }
+
+        private void Tsb_AdbRoot_Click(object sender, EventArgs e)
+        {
+            tsb_AdbRoot.Checked = true;
+            cmdProcess.StartProcessing("adb root", formMethods.SelectedDevice());
+        }
+
+        private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
+        {
+            cmdProcess.StartProcessing("adb unroot", formMethods.SelectedDevice());
         }
     }
 }

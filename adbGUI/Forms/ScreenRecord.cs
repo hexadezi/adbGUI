@@ -100,6 +100,7 @@ namespace adbGUI.Forms
                     txt_ScreenRecordDestination.Text = destination;
                     adb.StartProcessing("shell screenrecord " + size + bitrate + timelimit + rotate + " --output-format=h264 - > " + destination, formMethods.SelectedDevice());
                     timer.Enabled = true;
+                    adb.StartProcessing("shell pull " + destination + "C:\\Users\\labin\\Desktop", formMethods.SelectedDevice());
                 }
             }
         }

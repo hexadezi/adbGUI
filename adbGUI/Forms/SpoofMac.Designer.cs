@@ -98,6 +98,7 @@
             this.ClientSize = new System.Drawing.Size(371, 73);
             this.Controls.Add(this.groupBox6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "SpoofMac";
             this.ShowInTaskbar = false;
             this.Text = "SpoofMac";

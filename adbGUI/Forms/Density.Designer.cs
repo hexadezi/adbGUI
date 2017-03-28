@@ -87,14 +87,15 @@
             this.txt_phoneDpi.TabIndex = 28;
             this.txt_phoneDpi.Text = "480";
             // 
-            // DpiChange
+            // Density
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 73);
             this.Controls.Add(this.groupBox9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "DpiChange";
+            this.MaximizeBox = false;
+            this.Name = "Density";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "DpiChange";

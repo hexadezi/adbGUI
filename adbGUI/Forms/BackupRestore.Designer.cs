@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txt_BackupPackageName = new System.Windows.Forms.TextBox();
             this.cbo_BackupPackage = new System.Windows.Forms.CheckBox();
@@ -39,6 +38,7 @@
             this.cbo_BackupWithApk = new System.Windows.Forms.CheckBox();
             this.btn_BackupStart = new System.Windows.Forms.Button();
             this.txt_BackupPathTo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.txt_RestorePath = new System.Windows.Forms.TextBox();
             this.btn_RestoreBrowse = new System.Windows.Forms.Button();
@@ -66,17 +66,6 @@
             this.groupBox8.TabIndex = 8;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Backup";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label3.Location = new System.Drawing.Point(118, 171);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(300, 15);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Attention: Backup seems broken in adb 1.0.39";
             // 
             // label8
             // 
@@ -171,6 +160,17 @@
             this.txt_BackupPathTo.Size = new System.Drawing.Size(400, 20);
             this.txt_BackupPathTo.TabIndex = 6;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label3.Location = new System.Drawing.Point(118, 171);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(300, 15);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Attention: Backup seems broken in adb 1.0.39";
+            // 
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.txt_RestorePath);
@@ -227,6 +227,7 @@
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox8);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "BackupRestore";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

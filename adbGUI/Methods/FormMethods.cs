@@ -21,27 +21,27 @@ namespace adbGUI
 
         public string SelectedDevice()
         {
-            if (frm.cbx_connectedDevices.Items.Count == 0)
+            if (frm.tsc_ConnectedDevices.Items.Count == 0)
             {
                 return "";
             }
             else
             {
-                return frm.cbx_connectedDevices.SelectedItem.ToString();
+                return frm.tsc_ConnectedDevices.SelectedItem.ToString();
 
             }
         }
 
         public void RefreshAdbSerialsInCombobox(List<string> devices)
         {
-            frm.cbx_connectedDevices.Items.Clear();
+            frm.tsc_ConnectedDevices.Items.Clear();
 
             foreach (var item in devices)
             {
-                frm.cbx_connectedDevices.Items.Add(item);
+                frm.tsc_ConnectedDevices.Items.Add(item);
             }
 
-            frm.cbx_connectedDevices.SelectedIndex = frm.cbx_connectedDevices.Items.Count - 1;
+            frm.tsc_ConnectedDevices.SelectedIndex = frm.tsc_ConnectedDevices.Items.Count - 1;
 
         }
 

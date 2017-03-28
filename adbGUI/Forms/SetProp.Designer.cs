@@ -99,6 +99,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 90);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1000, 123);
             this.MinimumSize = new System.Drawing.Size(638, 123);
             this.Name = "SetProp";

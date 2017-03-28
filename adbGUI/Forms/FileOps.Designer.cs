@@ -234,6 +234,7 @@
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox10);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "FileOps";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
