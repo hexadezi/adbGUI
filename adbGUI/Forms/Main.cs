@@ -3,6 +3,7 @@ using adbGUI.Methods;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -25,9 +26,7 @@ namespace adbGUI
 
         private CmdProcess cmdProcess = new CmdProcess();
 
-        private DeviceWatcher dwAdb = new DeviceWatcher(true);
-
-        private StringBuilder builder = new StringBuilder();
+        private DeviceWatcher dwAdb = new DeviceWatcher();
 
         public MainForm()
         {
@@ -50,6 +49,7 @@ namespace adbGUI
 
             cmdProcess.GetProcess.OutputDataReceived += AppendReceivedData;
             cmdProcess.GetProcess.ErrorDataReceived += AppendReceivedData;
+            cmdProcess.GetProcess.Exited += GetProcess_Exited;
 
             Thread.Sleep(200);
 
@@ -68,10 +68,37 @@ namespace adbGUI
             dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
 
-            
-            
+
+
         }
-        
+
+        private void GetProcess_Exited(object sender, EventArgs e)
+        {
+            var exitCode = this.cmdProcess.GetProcess.ExitCode;
+            var message = string.Empty;
+            switch (exitCode)
+            {
+                //verbessern
+                case 0:
+                    message = "Format done.";
+                    break;
+                case 1:
+                    message = "Format failed. Incorrect parameters were supplied.";
+                    break;
+                case 4:
+                    message = "Format failed. A fatal error occurred.";
+                    break;
+                case 5:
+                    message = "Format ended by user.";
+                    break;
+                default:
+                    message = "Format failed. ExitCode = " + this.cmdProcess.GetProcess.ExitCode;
+                    break;
+            }
+
+            MessageBox.Show(message);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -91,6 +118,7 @@ namespace adbGUI
                     rtb_console.Clear();
                 }
             });
+
         }
 
         private void DwAdb_DeviceChanged(DeviceWatcher dw, DeviceList e)
@@ -131,8 +159,7 @@ namespace adbGUI
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
             BeginInvoke((MethodInvoker)delegate () { rtb_console.AppendText(e.Data + Environment.NewLine); });
-            
-            //builder.AppendLine(e.Data);
+            Thread.Sleep(3);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -145,24 +172,7 @@ namespace adbGUI
         {
             rtb_console.ScrollToCaret();
         }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            ProcessTick();
-        }
-
-        private void ProcessTick()
-        {
-            try
-            {
-                rtb_console.AppendText(builder.ToString());
-
-                builder.Clear();
-            }
-            catch (Exception)
-            { }
-        }
-
+        
         private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
         {
             // todo add network capture tcpdump
@@ -189,12 +199,16 @@ namespace adbGUI
 
                             case "#screenshot":
 
-                                saveFileDialog.FileName = "screenshot_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
-                                saveFileDialog.Filter = "PNG Image(.png)|*.png";
-                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                if (!String.IsNullOrEmpty(formMethods.SelectedDevice()))
                                 {
-                                    cmdProcess.StartProcessing("adb shell screencap -p > " + saveFileDialog.FileName, formMethods.SelectedDevice());
+                                    saveFileDialog.FileName = "screenshot_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
+                                    saveFileDialog.Filter = "PNG Image(.png)|*.png";
+                                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                    {
+                                        cmdProcess.StartProcessing("adb shell screencap -p > " + saveFileDialog.FileName, formMethods.SelectedDevice());
+                                    }
                                 }
+
                                 break;
 
                             case "#screenrecord":

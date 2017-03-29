@@ -44,7 +44,9 @@ namespace adbGUI
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
-            }
+                StandardOutputEncoding = System.Text.Encoding.GetEncoding(437),
+                StandardErrorEncoding = System.Text.Encoding.GetEncoding(437)
+    }
         };
 
         public CmdProcess()
@@ -62,7 +64,6 @@ namespace adbGUI
             CommandExecutionStarted?.Invoke();
 
             process.StandardInput.WriteLine(CommandParser(command, serialnumber));
-
         }
 
         public bool StopProcessing()
@@ -263,7 +264,7 @@ namespace adbGUI
                 {
                     File.Copy(extractedFilesPath + "\\" + item, "tools\\" + item);
                 }
-                catch (Exception){}
+                catch (Exception) { }
 
             }
 

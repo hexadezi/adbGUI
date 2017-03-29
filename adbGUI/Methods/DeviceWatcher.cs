@@ -44,6 +44,7 @@ namespace adbGUI.Methods
 
     class DeviceWatcher
     {
+
         CmdProcess cmdProcess = new CmdProcess();
 
         public event DeviceChangedHandler DeviceChanged;
@@ -55,20 +56,10 @@ namespace adbGUI.Methods
         private string devicesRawNew;
 
         Thread tr;
-
-        private bool isAdbWatcher;
-
-        /// <summary>
-        /// True for adb or false for fastboot
-        /// </summary>
-        /// <param name="isAdbWatcher"></param>
-        public DeviceWatcher(bool isAdbWatcher)
-        {
-            this.isAdbWatcher = isAdbWatcher;
-        }
-
+        
         public void StartDeviceWatcher()
         {
+
             tr = new Thread(Watcher)
             {
                 IsBackground = true
@@ -80,57 +71,29 @@ namespace adbGUI.Methods
 
         private void Watcher()
         {
-            if (isAdbWatcher)
+
+            while (true)
             {
-                while (true)
+                if (DeviceChanged != null)
                 {
-                    if (DeviceChanged != null)
+                    devicesRawNew = cmdProcess.StartProcessingReadToEnd("tools\\adb devices -l", "");
+
+                    if (devicesRawNew != devicesRawOld)
                     {
-                        devicesRawNew = cmdProcess.StartProcessingReadToEnd("tools\\adb devices -l", "");
+                        devicesRawOld = devicesRawNew;
 
-                        if (devicesRawNew != devicesRawOld)
+                        DeviceList dl = new DeviceList()
                         {
-                            devicesRawOld = devicesRawNew;
+                            GetDevicesRaw = devicesRawNew,
+                            GetDevicesList = ParseDevicesL(devicesRawNew)
 
-                            DeviceList dl = new DeviceList()
-                            {
-                                GetDevicesRaw = devicesRawNew,
-                                GetDevicesList = ParseDevicesL(devicesRawNew)
-
-                            };
-
-                            DeviceChanged(this, dl);
-                        }
+                        };
+                        DeviceChanged(this, dl);
                     }
-                    Thread.Sleep(750);
-                } 
-            }
-            else
-            {
-                while (true)
-                {
-                    if (DeviceChanged != null)
-                    {
-                        devicesRawNew = cmdProcess.StartProcessingReadToEnd("tools\\fastboot devices", "");
-
-                        if (devicesRawNew != devicesRawOld)
-                        {
-                            devicesRawOld = devicesRawNew;
-
-                            DeviceList dl = new DeviceList()
-                            {
-                                GetDevicesRaw = devicesRawNew,
-                                // todo Fastboot output parsen
-                                //GetDevicesList = ParseDevicesL(devicesRawNew)
-
-                            };
-
-                            DeviceChanged(this, dl);
-                        }
-                    }
-                    Thread.Sleep(2500);
                 }
+                Thread.Sleep(750);
             }
+
         }
 
         private List<string> ParseDevicesL(string input)
@@ -152,8 +115,7 @@ namespace adbGUI.Methods
 
                         if (line.IndexOf(' ') != -1)
                         {
-                            line = line.Substring(0, line.IndexOf(' '));
-                            listofserials.Add(line);
+                            listofserials.Add(line = line.Substring(0, line.IndexOf(' ')));
                         }
                     }
                     s.Close();
