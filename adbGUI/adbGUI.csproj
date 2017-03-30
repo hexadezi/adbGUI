@@ -122,6 +122,12 @@
     <Compile Include="Forms\InstallUninstall.Designer.cs">
       <DependentUpon>InstallUninstall.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LogcatAdvanced.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LogcatAdvanced.Designer.cs">
+      <DependentUpon>LogcatAdvanced.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ResolutionChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InstallUninstall.resx">
       <DependentUpon>InstallUninstall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LogcatAdvanced.resx">
+      <DependentUpon>LogcatAdvanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

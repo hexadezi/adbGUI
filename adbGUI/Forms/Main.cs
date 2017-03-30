@@ -21,6 +21,7 @@ namespace adbGUI
         private InstallUninstall installUninstall;
         private Sideload sideLoad;
         private BackupRestore backupRestore;
+        private LogcatAdvanced logcatAdvanced;
 
         public FormMethods formMethods;
 
@@ -39,37 +40,33 @@ namespace adbGUI
             // pass formMethods the created Form this
             formMethods = new FormMethods(this);
 
-
             cmdProcess.GetProcess.Start();
+
 
             // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
             cmdProcess.GetProcess.BeginOutputReadLine();
             cmdProcess.GetProcess.CancelOutputRead();
 
-
             cmdProcess.GetProcess.OutputDataReceived += AppendReceivedData;
             cmdProcess.GetProcess.ErrorDataReceived += AppendReceivedData;
             cmdProcess.GetProcess.Exited += GetProcess_Exited;
 
-            Thread.Sleep(200);
+            Thread.Sleep(20);
 
             cmdProcess.GetProcess.BeginOutputReadLine();
             cmdProcess.GetProcess.BeginErrorReadLine();
+            rtb_console.Clear();
 
             cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
             cmdProcess.CommandExecutionStopped += formMethods.ShowMboxAborted;
 
-
             // Select custom command control
             cbx_customCommand.Select();
-
 
             // Start the watcher which fires if adb devices changed
             dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
-
-
-
+            
         }
 
         private void GetProcess_Exited(object sender, EventArgs e)
@@ -304,6 +301,18 @@ namespace adbGUI
                                 else
                                 {
                                     backupRestore.Focus();
+                                }
+                                break;
+
+                            case "#logcatadvanced":
+                                if (logcatAdvanced == null || logcatAdvanced.IsDisposed)
+                                {
+                                    logcatAdvanced = new LogcatAdvanced(cmdProcess, formMethods);
+                                    logcatAdvanced.Show();
+                                }
+                                else
+                                {
+                                    logcatAdvanced.Focus();
                                 }
                                 break;
 
