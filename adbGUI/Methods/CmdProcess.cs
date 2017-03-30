@@ -46,7 +46,7 @@ namespace adbGUI
                 RedirectStandardInput = true,
                 StandardOutputEncoding = System.Text.Encoding.GetEncoding(437),
                 StandardErrorEncoding = System.Text.Encoding.GetEncoding(437)
-    }
+            }
         };
 
         public CmdProcess()
@@ -62,7 +62,6 @@ namespace adbGUI
         public void StartProcessing(string @command, string @serialnumber)
         {
             CommandExecutionStarted?.Invoke();
-
             process.StandardInput.WriteLine(CommandParser(command, serialnumber));
         }
 
@@ -82,7 +81,7 @@ namespace adbGUI
                 finally
                 {
                     FreeConsole();
-                    CommandExecutionStopped();
+                    CommandExecutionStopped?.Invoke();
                 }
                 return true;
             }

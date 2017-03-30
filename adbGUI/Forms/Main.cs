@@ -58,7 +58,7 @@ namespace adbGUI
             rtb_console.Clear();
 
             cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
-            cmdProcess.CommandExecutionStopped += formMethods.ShowMboxAborted;
+            //cmdProcess.CommandExecutionStopped += formMethods.ShowMboxAborted;
 
             // Select custom command control
             cbx_customCommand.Select();
