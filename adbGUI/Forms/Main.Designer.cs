@@ -211,15 +211,15 @@
             this.txt_DevicesAdb.Name = "txt_DevicesAdb";
             this.txt_DevicesAdb.ReadOnly = true;
             this.txt_DevicesAdb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_DevicesAdb.Size = new System.Drawing.Size(1009, 50);
+            this.txt_DevicesAdb.Size = new System.Drawing.Size(1016, 50);
             this.txt_DevicesAdb.TabIndex = 5;
             // 
             // btn_executeCommand
             // 
             this.btn_executeCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_executeCommand.Location = new System.Drawing.Point(786, 528);
+            this.btn_executeCommand.Location = new System.Drawing.Point(792, 527);
             this.btn_executeCommand.Name = "btn_executeCommand";
-            this.btn_executeCommand.Size = new System.Drawing.Size(75, 22);
+            this.btn_executeCommand.Size = new System.Drawing.Size(75, 23);
             this.btn_executeCommand.TabIndex = 1;
             this.btn_executeCommand.Text = "Execute";
             this.btn_executeCommand.UseVisualStyleBackColor = true;
@@ -230,7 +230,7 @@
             this.trv_commandTreeView.AllowDrop = true;
             this.trv_commandTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.trv_commandTreeView.Location = new System.Drawing.Point(12, 40);
+            this.trv_commandTreeView.Location = new System.Drawing.Point(12, 39);
             this.trv_commandTreeView.Name = "trv_commandTreeView";
             treeNode1.Name = "Knoten0";
             treeNode1.Tag = "#files";
@@ -463,7 +463,7 @@
             treeNode66,
             treeNode72,
             treeNode77});
-            this.trv_commandTreeView.Size = new System.Drawing.Size(199, 509);
+            this.trv_commandTreeView.Size = new System.Drawing.Size(200, 510);
             this.trv_commandTreeView.TabIndex = 0;
             this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.Trv_commandTreeView_DoubleClick);
             // 
@@ -483,9 +483,9 @@
             this.cbx_customCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbx_customCommand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbx_customCommand.FormattingEnabled = true;
-            this.cbx_customCommand.Location = new System.Drawing.Point(217, 528);
+            this.cbx_customCommand.Location = new System.Drawing.Point(218, 528);
             this.cbx_customCommand.Name = "cbx_customCommand";
-            this.cbx_customCommand.Size = new System.Drawing.Size(562, 21);
+            this.cbx_customCommand.Size = new System.Drawing.Size(568, 21);
             this.cbx_customCommand.TabIndex = 12;
             this.cbx_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cbx_customCommand_KeyDown);
             // 
@@ -498,7 +498,7 @@
             this.rtb_console.Location = new System.Drawing.Point(0, 0);
             this.rtb_console.Name = "rtb_console";
             this.rtb_console.ReadOnly = true;
-            this.rtb_console.Size = new System.Drawing.Size(803, 480);
+            this.rtb_console.Size = new System.Drawing.Size(808, 479);
             this.rtb_console.TabIndex = 11;
             this.rtb_console.Text = "";
             this.rtb_console.WordWrap = false;
@@ -511,17 +511,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.rtb_console);
-            this.panel1.Location = new System.Drawing.Point(217, 40);
+            this.panel1.Location = new System.Drawing.Point(218, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(805, 482);
+            this.panel1.Size = new System.Drawing.Size(810, 481);
             this.panel1.TabIndex = 12;
             // 
             // btn_consoleStop
             // 
             this.btn_consoleStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_consoleStop.Location = new System.Drawing.Point(948, 528);
+            this.btn_consoleStop.Location = new System.Drawing.Point(954, 527);
             this.btn_consoleStop.Name = "btn_consoleStop";
-            this.btn_consoleStop.Size = new System.Drawing.Size(75, 22);
+            this.btn_consoleStop.Size = new System.Drawing.Size(75, 23);
             this.btn_consoleStop.TabIndex = 1;
             this.btn_consoleStop.Text = "Stop";
             this.btn_consoleStop.UseVisualStyleBackColor = true;
@@ -530,9 +530,9 @@
             // btn_consoleClear
             // 
             this.btn_consoleClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_consoleClear.Location = new System.Drawing.Point(867, 528);
+            this.btn_consoleClear.Location = new System.Drawing.Point(873, 527);
             this.btn_consoleClear.Name = "btn_consoleClear";
-            this.btn_consoleClear.Size = new System.Drawing.Size(75, 22);
+            this.btn_consoleClear.Size = new System.Drawing.Size(75, 23);
             this.btn_consoleClear.TabIndex = 0;
             this.btn_consoleClear.Text = "Clear";
             this.btn_consoleClear.UseVisualStyleBackColor = true;
@@ -553,7 +553,7 @@
             this.tsb_AlwaysClearConsole});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(12, 10, 17, 3);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(12, 10, 11, 3);
             this.toolStrip1.Size = new System.Drawing.Size(1040, 36);
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
@@ -669,14 +669,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 617);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.txt_DevicesAdb);
-            this.Controls.Add(this.cbx_customCommand);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_consoleStop);
+            this.Controls.Add(this.trv_commandTreeView);
             this.Controls.Add(this.btn_consoleClear);
             this.Controls.Add(this.btn_executeCommand);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.trv_commandTreeView);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.cbx_customCommand);
+            this.Controls.Add(this.txt_DevicesAdb);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1050, 650);
             this.Name = "MainForm";

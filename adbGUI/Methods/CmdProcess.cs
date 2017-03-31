@@ -117,7 +117,6 @@ namespace adbGUI
             return output;
         }
 
-        // auf private stellen
         public string StartProcessingReadToEnd(string command, string serialnumber)
         {
 
@@ -135,6 +134,7 @@ namespace adbGUI
                 }
             };
 
+            //process2.StartInfo.EnvironmentVariables["Path"] = Environment.GetEnvironmentVariable("Path",EnvironmentVariableTarget.User);
             process2.Start();
 
             return process2.StandardOutput.ReadToEnd();
@@ -168,7 +168,7 @@ namespace adbGUI
                     serial = "";
                 }
 
-                string fullcommand = "tools\\adb " + serial + command;
+                string fullcommand = "adb " + serial + command;
 
                 return fullcommand;
 
@@ -177,7 +177,7 @@ namespace adbGUI
             {
                 command = command.Remove(0, 9);
 
-                string fullcommand = "tools\\fastboot " + command;
+                string fullcommand = "fastboot " + command;
 
                 return fullcommand;
             }
@@ -199,25 +199,73 @@ namespace adbGUI
 
         public static void Start()
         {
-
-            if (!CheckIfFilesExist())
+            if (!EnvironmentVariableExists())
             {
-                DialogResult dialogResult = MessageBox.Show("Some files are missing. \nShould all dependencies be downloaded and extracted?", "Error: Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                if (dialogResult == DialogResult.Yes)
+                if (!CheckIfFilesExist())
                 {
+                    DialogResult dialogResult = MessageBox.Show("Enviroment Variables not set and files missing. \nShould all dependencies be downloaded and extracted?", "Error: Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
-                    ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
-                    WebClient wc = new WebClient();
-                    wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-                    wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), downloadToTempPath);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        DownloadFiles();
+                    }
+
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        Environment.Exit(0);
+                    }
                 }
-                else if (dialogResult == DialogResult.No)
+            }
+        }
+
+        public static bool EnvironmentVariableExists()
+        {
+            string adb = Environment.ExpandEnvironmentVariables("adb.exe");
+
+            string fastboot = Environment.ExpandEnvironmentVariables("fastboot.exe");
+
+
+
+            string pathsUsr = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
+
+            string[] pathsUsrArr = pathsUsr.Split(new char[1] { Path.PathSeparator });
+
+            if (Path.GetDirectoryName(adb) == String.Empty)
+            {
+                foreach (string item in pathsUsrArr)
                 {
-                    Environment.Exit(0);
+                    string path = item.Trim();
+
+                    if (File.Exists(Path.Combine(path, adb)) && File.Exists(Path.Combine(path, fastboot)))
+                    {
+                        return true;
+                    }
+
                 }
 
             }
+
+
+            string pathsSys = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine);
+
+            string[] pathsSysArr = pathsSys.Split(new char[1] { Path.PathSeparator });
+
+            if (Path.GetDirectoryName(adb) == String.Empty)
+            {
+                foreach (string item in pathsSysArr)
+                {
+                    string path = item.Trim();
+
+                    if (File.Exists(Path.Combine(path, adb)) && File.Exists(Path.Combine(path, fastboot)))
+                    {
+                        return true;
+                    }
+
+                }
+
+            }
+
+            return false;
 
         }
 
@@ -225,7 +273,7 @@ namespace adbGUI
         {
             foreach (var item in strFiles)
             {
-                if (!File.Exists("tools\\" + item))
+                if (!File.Exists(item))
                 {
                     return false;
                 }
@@ -233,6 +281,13 @@ namespace adbGUI
             return true;
         }
 
+        private static void DownloadFiles()
+        {
+            ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
+            WebClient wc = new WebClient();
+            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+            wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), downloadToTempPath);
+        }
         private static void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             Thread tr = new Thread(new ThreadStart(ExtractFiles));
@@ -258,13 +313,12 @@ namespace adbGUI
         {
             string extractedFilesPath = Path.GetTempPath() + "platform-tools";
 
-            Directory.CreateDirectory("tools");
 
             foreach (var item in strFiles)
             {
                 try
                 {
-                    File.Copy(extractedFilesPath + "\\" + item, "tools\\" + item);
+                    File.Copy(extractedFilesPath + "\\" + item, item);
                 }
                 catch (Exception) { }
 

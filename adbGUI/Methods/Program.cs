@@ -12,13 +12,18 @@ namespace adbGUI
         [STAThread]
         private static void Main()
         {
+
+
+
+            CheckAndDownloadDependencies.Start();
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new MainForm());
-
-
-
+            
         }
     }
 }

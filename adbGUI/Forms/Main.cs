@@ -31,7 +31,6 @@ namespace adbGUI
 
         public MainForm()
         {
-            CheckAndDownloadDependencies.Start();
 
             // todo aapt implementieren
 

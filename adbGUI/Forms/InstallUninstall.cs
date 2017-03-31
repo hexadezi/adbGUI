@@ -70,12 +70,14 @@ namespace adbGUI.Forms
 
             cbx_InstallUninstallPackageUninstall.Enabled = false;
 
-            string output = adb.StartProcessingInThread("adb shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
+            string output = adb.StartProcessingInThread("adb shell \"pm list packages -3", formMethods.SelectedDevice());
 
             foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
-                cbx_InstallUninstallPackageUninstall.Items.Add(item);
+                cbx_InstallUninstallPackageUninstall.Items.Add(item.Remove(0,8));
             }
+
+            cbx_InstallUninstallPackageUninstall.Sorted = true;
 
             if (cbx_InstallUninstallPackageUninstall.Items.Count > 0)
             {
