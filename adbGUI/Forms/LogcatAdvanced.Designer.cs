@@ -77,6 +77,7 @@
             this.opt_LogcatAdvancedFilterDebug = new System.Windows.Forms.RadioButton();
             this.opt_LogcatAdvancedFilterVerbose = new System.Windows.Forms.RadioButton();
             this.btn_LogcatAdvancedStatistics = new System.Windows.Forms.Button();
+            this.cbo_LogcatAdvancedSeparateWindow = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -186,7 +187,7 @@
             // 
             // toolTip
             // 
-            this.toolTip.AutoPopDelay = 5000;
+            this.toolTip.AutoPopDelay = 50000;
             this.toolTip.InitialDelay = 0;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.UseFading = false;
@@ -353,7 +354,7 @@
             // 
             // btn_LogcatAdvancedClearBuffers
             // 
-            this.btn_LogcatAdvancedClearBuffers.Location = new System.Drawing.Point(52, 370);
+            this.btn_LogcatAdvancedClearBuffers.Location = new System.Drawing.Point(12, 370);
             this.btn_LogcatAdvancedClearBuffers.Name = "btn_LogcatAdvancedClearBuffers";
             this.btn_LogcatAdvancedClearBuffers.Size = new System.Drawing.Size(124, 23);
             this.btn_LogcatAdvancedClearBuffers.TabIndex = 2;
@@ -484,7 +485,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 402);
+            this.label1.Location = new System.Drawing.Point(10, 435);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(430, 12);
             this.label1.TabIndex = 10;
@@ -598,7 +599,7 @@
             // 
             // btn_LogcatAdvancedStatistics
             // 
-            this.btn_LogcatAdvancedStatistics.Location = new System.Drawing.Point(182, 370);
+            this.btn_LogcatAdvancedStatistics.Location = new System.Drawing.Point(142, 370);
             this.btn_LogcatAdvancedStatistics.Name = "btn_LogcatAdvancedStatistics";
             this.btn_LogcatAdvancedStatistics.Size = new System.Drawing.Size(94, 23);
             this.btn_LogcatAdvancedStatistics.TabIndex = 14;
@@ -606,11 +607,24 @@
             this.btn_LogcatAdvancedStatistics.UseVisualStyleBackColor = true;
             this.btn_LogcatAdvancedStatistics.Click += new System.EventHandler(this.Btn_LogcatAdvancedStatistics_Click);
             // 
+            // cbo_LogcatAdvancedSeparateWindow
+            // 
+            this.cbo_LogcatAdvancedSeparateWindow.AutoSize = true;
+            this.cbo_LogcatAdvancedSeparateWindow.Location = new System.Drawing.Point(282, 399);
+            this.cbo_LogcatAdvancedSeparateWindow.Name = "cbo_LogcatAdvancedSeparateWindow";
+            this.cbo_LogcatAdvancedSeparateWindow.Size = new System.Drawing.Size(111, 17);
+            this.cbo_LogcatAdvancedSeparateWindow.TabIndex = 15;
+            this.cbo_LogcatAdvancedSeparateWindow.Text = "Separate Window";
+            this.cbo_LogcatAdvancedSeparateWindow.UseVisualStyleBackColor = true;
+            // 
             // LogcatAdvanced
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 431);
+            this.ClientSize = new System.Drawing.Size(450, 454);
+            this.Controls.Add(this.cbo_LogcatAdvancedSeparateWindow);
+            this.Controls.Add(this.btn_LogcatAdvancedStart);
+            this.Controls.Add(this.btn_LogcatAdvancedStop);
             this.Controls.Add(this.btn_LogcatAdvancedStatistics);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -620,17 +634,15 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.btn_LogcatAdvancedStop);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_LogcatAdvancedClearBuffers);
-            this.Controls.Add(this.btn_LogcatAdvancedStart);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "LogcatAdvanced";
-            this.ShowInTaskbar = false;
             this.Text = "Logcat Advanced";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogcatAdvanced_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -703,5 +715,6 @@
         private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterDebug;
         private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterVerbose;
         private System.Windows.Forms.Button btn_LogcatAdvancedStatistics;
+        private System.Windows.Forms.CheckBox cbo_LogcatAdvancedSeparateWindow;
     }
 }

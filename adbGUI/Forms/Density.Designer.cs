@@ -97,7 +97,6 @@
             this.MaximizeBox = false;
             this.Name = "Density";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "DpiChange";
             this.TopMost = true;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DpiChange_KeyDown);

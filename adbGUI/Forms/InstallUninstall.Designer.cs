@@ -146,7 +146,6 @@
             this.MaximizeBox = false;
             this.Name = "InstallUninstall";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "Install and Uninstall Packages";
             this.TopMost = true;
             this.groupBox3.ResumeLayout(false);

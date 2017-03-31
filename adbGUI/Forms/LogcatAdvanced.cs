@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,8 @@ namespace adbGUI.Forms
     public partial class LogcatAdvanced : Form
     {
         CmdProcess adb;
+        CmdProcess altAdb = new CmdProcess();
+        LogcatOutput lOut = new LogcatOutput();
         FormMethods formMethods;
 
         public LogcatAdvanced(CmdProcess adbFrm, FormMethods formMethodsFrm)
@@ -21,12 +24,31 @@ namespace adbGUI.Forms
 
             adb = adbFrm;
             formMethods = formMethodsFrm;
+
+            altAdb.GetProcess.Start();
+            altAdb.GetProcess.BeginOutputReadLine();
+            altAdb.GetProcess.BeginErrorReadLine();
+
+            altAdb.GetProcess.OutputDataReceived += GetProcess_OutputDataReceived;
+            altAdb.GetProcess.ErrorDataReceived += GetProcess_OutputDataReceived;
+
+            altAdb.CommandExecutionStarted += AltAdb_CommandExecutionStarted;
         }
+
+        private void AltAdb_CommandExecutionStarted()
+        {
+            BeginInvoke((MethodInvoker)delegate ()
+            {
+                if (formMethods.AlwaysClearConsole())
+                {
+                    lOut.rtb_console.Clear();
+                }
+            });
+        }
+
         // todo change Abort to Cancel
         private void Btn_LogcatAdvancedStart_Click(object sender, EventArgs e)
         {
-            // todo noch die restlichen filter einpflegen
-
             string alternativeBuffers = GetAlternativeBufferString();
             string regEx = GetRegularExpressionString();
             string quitAfterNumberOfLines = GetQuitAfterNumberOfLines();
@@ -37,10 +59,30 @@ namespace adbGUI.Forms
             string outputFormat = GetOutputFormat();
             string outputFilter = GetOutputFilter();
 
-            adb.StartProcessing("adb logcat" + outputFilter + alternativeBuffers + outputFormat + quitAfterNumberOfLines + recentNumberOfLines + specifiedTime + regEx + bypassRegEx + pidFilter, formMethods.SelectedDevice());
 
+            if (cbo_LogcatAdvancedSeparateWindow.Checked)
+            {
+                lOut.Show();
+                altAdb.StartProcessing("adb logcat" + outputFilter + alternativeBuffers + outputFormat + quitAfterNumberOfLines + recentNumberOfLines + specifiedTime + regEx + bypassRegEx + pidFilter, formMethods.SelectedDevice());
+            }
+            else
+            {
+                adb.StartProcessing("adb logcat" + outputFilter + alternativeBuffers + outputFormat + quitAfterNumberOfLines + recentNumberOfLines + specifiedTime + regEx + bypassRegEx + pidFilter, formMethods.SelectedDevice());
+            }
         }
 
+        private void GetProcess_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
+        {
+            try
+            {
+                BeginInvoke((MethodInvoker)delegate () { lOut.rtb_console.AppendText(e.Data + Environment.NewLine); });
+            }
+            catch (Exception)
+            { }
+
+            Thread.Sleep(3);
+
+        }
 
         private void Btn_LogcatAdvancedClearBuffers_Click(object sender, EventArgs e)
         {
@@ -54,7 +96,15 @@ namespace adbGUI.Forms
 
         private void Btn_LogcatAdvancedStop_Click(object sender, EventArgs e)
         {
-            adb.StopProcessing();
+            if (cbo_LogcatAdvancedSeparateWindow.Checked)
+            {
+                altAdb.StopProcessing();
+            }
+            else
+            {
+                adb.StopProcessing();
+            }
+
         }
 
         private void Btn_LogcatAdvancedNewBufferSize_Click(object sender, EventArgs e)
@@ -176,7 +226,15 @@ namespace adbGUI.Forms
 
             if (!String.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim()))
             {
-                regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
+                if (txt_LogcatAdvancedRegularExpressions.Text.Contains("|"))
+                {
+
+                    regEx = " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"";
+                }
+                else
+                {
+                    regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
+                }
             }
 
             return regEx;
@@ -337,7 +395,23 @@ namespace adbGUI.Forms
 
         private void Btn_LogcatAdvancedStatistics_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("adb logcat -S", formMethods.SelectedDevice());
+            if (cbo_LogcatAdvancedSeparateWindow.Checked)
+            {
+                lOut.Show();
+
+                altAdb.StartProcessing("adb logcat -S", formMethods.SelectedDevice());
+            }
+            else
+            {
+                adb.StartProcessing("adb logcat -S", formMethods.SelectedDevice());
+            }
+        }
+
+        private void LogcatAdvanced_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            lOut.Close();
+            lOut.Dispose();
+            altAdb.GetProcess.Close();
         }
     }
 }

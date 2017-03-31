@@ -237,7 +237,6 @@
             this.MaximizeBox = false;
             this.Name = "FileOps";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "FileOps";
             this.TopMost = true;
             this.groupBox10.ResumeLayout(false);

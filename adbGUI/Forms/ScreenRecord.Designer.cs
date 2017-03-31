@@ -285,7 +285,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ScreenRecord";
-            this.ShowInTaskbar = false;
             this.Text = "ScreenRecord";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.trb_screenRecordTimeLimit)).EndInit();

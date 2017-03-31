@@ -100,7 +100,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "SpoofMac";
-            this.ShowInTaskbar = false;
             this.Text = "SpoofMac";
             this.TopMost = true;
             this.groupBox6.ResumeLayout(false);

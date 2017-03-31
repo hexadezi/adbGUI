@@ -98,7 +98,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ResolutionChange";
-            this.ShowInTaskbar = false;
             this.Text = "ResolutionChange";
             this.TopMost = true;
             this.groupBox12.ResumeLayout(false);

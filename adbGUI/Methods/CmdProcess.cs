@@ -63,7 +63,7 @@ namespace adbGUI
         public void StartProcessing(string @command, string @serialnumber)
         {
             StopProcessing();
-            Thread.Sleep(50);
+            Thread.Sleep(150);
             CommandExecutionStarted?.Invoke();
             process.StandardInput.WriteLine(CommandParser(command, serialnumber));
         }

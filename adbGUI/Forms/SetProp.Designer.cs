@@ -103,7 +103,6 @@
             this.MaximumSize = new System.Drawing.Size(1000, 123);
             this.MinimumSize = new System.Drawing.Size(638, 123);
             this.Name = "SetProp";
-            this.ShowInTaskbar = false;
             this.Text = "SetProp";
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);

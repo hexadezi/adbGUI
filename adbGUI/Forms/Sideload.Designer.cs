@@ -103,7 +103,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Sideload";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "Sideload";
             this.TopMost = true;
             this.groupBox2.ResumeLayout(false);

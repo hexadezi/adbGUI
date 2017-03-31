@@ -230,7 +230,6 @@
             this.MaximizeBox = false;
             this.Name = "BackupRestore";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "BackupRestore";
             this.TopMost = true;
             this.groupBox8.ResumeLayout(false);

@@ -60,12 +60,24 @@ namespace adbGUI
                 MessageBox.Show(e.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
-        
+
         public void ShowMboxAborted()
         {
             MessageBox.Show("Processing aborted succesfully", "Abortion succesfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+
+        public bool AlwaysClearConsole()
+        {
+            if (frm.tsb_AlwaysClearConsole.Checked)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
