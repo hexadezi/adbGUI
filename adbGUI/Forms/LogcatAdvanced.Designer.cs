@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogcatAdvanced));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbo_LogcatAdvancedAlternativeBuffersCrash = new System.Windows.Forms.CheckBox();
             this.cbo_LogcatAdvancedAlternativeBuffersEvents = new System.Windows.Forms.CheckBox();
@@ -43,6 +44,14 @@
             this.txt_LogcatAdvancedPidFilter = new System.Windows.Forms.TextBox();
             this.txt_LogcatAdvancedRecentNumberOfLines = new System.Windows.Forms.TextBox();
             this.txt_LogcatAdvancedSpecifiedTime = new System.Windows.Forms.TextBox();
+            this.opt_LogcatAdvancedOutputFormatThreadTime = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedOutputFormatBrief = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedOutputFormatProcess = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedOutputFormatTag = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedOutputFormatTime = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedOutputFormatRaw = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedOutputFormatLong = new System.Windows.Forms.RadioButton();
+            this.txt_LogcatAdvancedFilter = new System.Windows.Forms.TextBox();
             this.btn_LogcatAdvancedStart = new System.Windows.Forms.Button();
             this.btn_LogcatAdvancedClearBuffers = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -59,13 +68,15 @@
             this.txt_LogcatAdvancedBufferSize = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.opt_LogcatAdvancedOutputFormatThreadTime = new System.Windows.Forms.RadioButton();
-            this.opt_LogcatAdvancedOutputFormatBrief = new System.Windows.Forms.RadioButton();
-            this.opt_LogcatAdvancedOutputFormatProcess = new System.Windows.Forms.RadioButton();
-            this.opt_LogcatAdvancedOutputFormatTag = new System.Windows.Forms.RadioButton();
-            this.opt_LogcatAdvancedOutputFormatTime = new System.Windows.Forms.RadioButton();
-            this.opt_LogcatAdvancedOutputFormatRaw = new System.Windows.Forms.RadioButton();
-            this.opt_LogcatAdvancedOutputFormatLong = new System.Windows.Forms.RadioButton();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.opt_LogcatAdvancedFilterSilent = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedFilterFatal = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedFilterError = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedFilterWarning = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedFilterInfo = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedFilterDebug = new System.Windows.Forms.RadioButton();
+            this.opt_LogcatAdvancedFilterVerbose = new System.Windows.Forms.RadioButton();
+            this.btn_LogcatAdvancedStatistics = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -74,6 +85,7 @@
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -175,7 +187,7 @@
             // toolTip
             // 
             this.toolTip.AutoPopDelay = 5000;
-            this.toolTip.InitialDelay = 500;
+            this.toolTip.InitialDelay = 0;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.UseFading = false;
             // 
@@ -234,9 +246,104 @@
             this.toolTip.SetToolTip(this.txt_LogcatAdvancedSpecifiedTime, "Print the most recent lines since the specified time\r\nExample: 03-30 20:43:00.000" +
         "");
             // 
+            // opt_LogcatAdvancedOutputFormatThreadTime
+            // 
+            this.opt_LogcatAdvancedOutputFormatThreadTime.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatThreadTime.Checked = true;
+            this.opt_LogcatAdvancedOutputFormatThreadTime.Location = new System.Drawing.Point(6, 19);
+            this.opt_LogcatAdvancedOutputFormatThreadTime.Name = "opt_LogcatAdvancedOutputFormatThreadTime";
+            this.opt_LogcatAdvancedOutputFormatThreadTime.Size = new System.Drawing.Size(78, 17);
+            this.opt_LogcatAdvancedOutputFormatThreadTime.TabIndex = 13;
+            this.opt_LogcatAdvancedOutputFormatThreadTime.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatThreadTime.Text = "Threadtime";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatThreadTime, "(Default) Display the date, invocation time, priority, tag, and the PID and TID o" +
+        "f the thread issuing the message");
+            this.opt_LogcatAdvancedOutputFormatThreadTime.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedOutputFormatBrief
+            // 
+            this.opt_LogcatAdvancedOutputFormatBrief.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatBrief.Location = new System.Drawing.Point(371, 19);
+            this.opt_LogcatAdvancedOutputFormatBrief.Name = "opt_LogcatAdvancedOutputFormatBrief";
+            this.opt_LogcatAdvancedOutputFormatBrief.Size = new System.Drawing.Size(46, 17);
+            this.opt_LogcatAdvancedOutputFormatBrief.TabIndex = 14;
+            this.opt_LogcatAdvancedOutputFormatBrief.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatBrief.Text = "Brief";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatBrief, "Display priority/tag and PID of the process issuing the message");
+            this.opt_LogcatAdvancedOutputFormatBrief.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedOutputFormatProcess
+            // 
+            this.opt_LogcatAdvancedOutputFormatProcess.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatProcess.Location = new System.Drawing.Point(302, 19);
+            this.opt_LogcatAdvancedOutputFormatProcess.Name = "opt_LogcatAdvancedOutputFormatProcess";
+            this.opt_LogcatAdvancedOutputFormatProcess.Size = new System.Drawing.Size(63, 17);
+            this.opt_LogcatAdvancedOutputFormatProcess.TabIndex = 15;
+            this.opt_LogcatAdvancedOutputFormatProcess.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatProcess.Text = "Process";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatProcess, "Display PID only.");
+            this.opt_LogcatAdvancedOutputFormatProcess.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedOutputFormatTag
+            // 
+            this.opt_LogcatAdvancedOutputFormatTag.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatTag.Location = new System.Drawing.Point(252, 19);
+            this.opt_LogcatAdvancedOutputFormatTag.Name = "opt_LogcatAdvancedOutputFormatTag";
+            this.opt_LogcatAdvancedOutputFormatTag.Size = new System.Drawing.Size(44, 17);
+            this.opt_LogcatAdvancedOutputFormatTag.TabIndex = 16;
+            this.opt_LogcatAdvancedOutputFormatTag.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatTag.Text = "Tag";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatTag, "Display the priority/tag only");
+            this.opt_LogcatAdvancedOutputFormatTag.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedOutputFormatTime
+            // 
+            this.opt_LogcatAdvancedOutputFormatTime.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatTime.Location = new System.Drawing.Point(145, 19);
+            this.opt_LogcatAdvancedOutputFormatTime.Name = "opt_LogcatAdvancedOutputFormatTime";
+            this.opt_LogcatAdvancedOutputFormatTime.Size = new System.Drawing.Size(48, 17);
+            this.opt_LogcatAdvancedOutputFormatTime.TabIndex = 17;
+            this.opt_LogcatAdvancedOutputFormatTime.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatTime.Text = "Time";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatTime, "Display the date, invocation time, priority/tag, and PID of the process issuing t" +
+        "he message");
+            this.opt_LogcatAdvancedOutputFormatTime.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedOutputFormatRaw
+            // 
+            this.opt_LogcatAdvancedOutputFormatRaw.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatRaw.Location = new System.Drawing.Point(199, 19);
+            this.opt_LogcatAdvancedOutputFormatRaw.Name = "opt_LogcatAdvancedOutputFormatRaw";
+            this.opt_LogcatAdvancedOutputFormatRaw.Size = new System.Drawing.Size(47, 17);
+            this.opt_LogcatAdvancedOutputFormatRaw.TabIndex = 18;
+            this.opt_LogcatAdvancedOutputFormatRaw.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatRaw.Text = "Raw";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatRaw, "Display the raw log message, with no other metadata fields");
+            this.opt_LogcatAdvancedOutputFormatRaw.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedOutputFormatLong
+            // 
+            this.opt_LogcatAdvancedOutputFormatLong.AutoSize = true;
+            this.opt_LogcatAdvancedOutputFormatLong.Location = new System.Drawing.Point(90, 19);
+            this.opt_LogcatAdvancedOutputFormatLong.Name = "opt_LogcatAdvancedOutputFormatLong";
+            this.opt_LogcatAdvancedOutputFormatLong.Size = new System.Drawing.Size(49, 17);
+            this.opt_LogcatAdvancedOutputFormatLong.TabIndex = 19;
+            this.opt_LogcatAdvancedOutputFormatLong.TabStop = true;
+            this.opt_LogcatAdvancedOutputFormatLong.Text = "Long";
+            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatLong, "Display all metadata fields and separate messages with blank lines");
+            this.opt_LogcatAdvancedOutputFormatLong.UseVisualStyleBackColor = true;
+            // 
+            // txt_LogcatAdvancedFilter
+            // 
+            this.txt_LogcatAdvancedFilter.Location = new System.Drawing.Point(6, 42);
+            this.txt_LogcatAdvancedFilter.Name = "txt_LogcatAdvancedFilter";
+            this.txt_LogcatAdvancedFilter.Size = new System.Drawing.Size(414, 20);
+            this.txt_LogcatAdvancedFilter.TabIndex = 15;
+            this.toolTip.SetToolTip(this.txt_LogcatAdvancedFilter, resources.GetString("txt_LogcatAdvancedFilter.ToolTip"));
+            // 
             // btn_LogcatAdvancedStart
             // 
-            this.btn_LogcatAdvancedStart.Location = new System.Drawing.Point(282, 295);
+            this.btn_LogcatAdvancedStart.Location = new System.Drawing.Point(282, 370);
             this.btn_LogcatAdvancedStart.Name = "btn_LogcatAdvancedStart";
             this.btn_LogcatAdvancedStart.Size = new System.Drawing.Size(75, 23);
             this.btn_LogcatAdvancedStart.TabIndex = 1;
@@ -246,7 +353,7 @@
             // 
             // btn_LogcatAdvancedClearBuffers
             // 
-            this.btn_LogcatAdvancedClearBuffers.Location = new System.Drawing.Point(152, 295);
+            this.btn_LogcatAdvancedClearBuffers.Location = new System.Drawing.Point(52, 370);
             this.btn_LogcatAdvancedClearBuffers.Name = "btn_LogcatAdvancedClearBuffers";
             this.btn_LogcatAdvancedClearBuffers.Size = new System.Drawing.Size(124, 23);
             this.btn_LogcatAdvancedClearBuffers.TabIndex = 2;
@@ -286,7 +393,7 @@
             // 
             // btn_LogcatAdvancedStop
             // 
-            this.btn_LogcatAdvancedStop.Location = new System.Drawing.Point(363, 295);
+            this.btn_LogcatAdvancedStop.Location = new System.Drawing.Point(363, 370);
             this.btn_LogcatAdvancedStop.Name = "btn_LogcatAdvancedStop";
             this.btn_LogcatAdvancedStop.Size = new System.Drawing.Size(75, 23);
             this.btn_LogcatAdvancedStop.TabIndex = 4;
@@ -377,7 +484,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 327);
+            this.label1.Location = new System.Drawing.Point(10, 402);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(430, 12);
             this.label1.TabIndex = 10;
@@ -393,105 +500,119 @@
             this.groupBox8.Controls.Add(this.opt_LogcatAdvancedOutputFormatLong);
             this.groupBox8.Controls.Add(this.opt_LogcatAdvancedOutputFormatTime);
             this.groupBox8.Controls.Add(this.opt_LogcatAdvancedOutputFormatThreadTime);
-            this.groupBox8.Location = new System.Drawing.Point(12, 240);
+            this.groupBox8.Location = new System.Drawing.Point(12, 315);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(426, 49);
             this.groupBox8.TabIndex = 12;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Output Format";
             // 
-            // opt_LogcatAdvancedOutputFormatThreadTime
+            // groupBox9
             // 
-            this.opt_LogcatAdvancedOutputFormatThreadTime.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatThreadTime.Checked = true;
-            this.opt_LogcatAdvancedOutputFormatThreadTime.Location = new System.Drawing.Point(6, 19);
-            this.opt_LogcatAdvancedOutputFormatThreadTime.Name = "opt_LogcatAdvancedOutputFormatThreadTime";
-            this.opt_LogcatAdvancedOutputFormatThreadTime.Size = new System.Drawing.Size(78, 17);
-            this.opt_LogcatAdvancedOutputFormatThreadTime.TabIndex = 13;
-            this.opt_LogcatAdvancedOutputFormatThreadTime.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatThreadTime.Text = "Threadtime";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatThreadTime, "(Default) Display the date, invocation time, priority, tag, and the PID and TID o" +
-        "f the thread issuing the message");
-            this.opt_LogcatAdvancedOutputFormatThreadTime.UseVisualStyleBackColor = true;
+            this.groupBox9.Controls.Add(this.txt_LogcatAdvancedFilter);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterSilent);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterFatal);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterError);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterWarning);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterInfo);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterDebug);
+            this.groupBox9.Controls.Add(this.opt_LogcatAdvancedFilterVerbose);
+            this.groupBox9.Location = new System.Drawing.Point(12, 240);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(426, 69);
+            this.groupBox9.TabIndex = 13;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Filter Log Output";
             // 
-            // opt_LogcatAdvancedOutputFormatBrief
+            // opt_LogcatAdvancedFilterSilent
             // 
-            this.opt_LogcatAdvancedOutputFormatBrief.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatBrief.Location = new System.Drawing.Point(371, 19);
-            this.opt_LogcatAdvancedOutputFormatBrief.Name = "opt_LogcatAdvancedOutputFormatBrief";
-            this.opt_LogcatAdvancedOutputFormatBrief.Size = new System.Drawing.Size(46, 17);
-            this.opt_LogcatAdvancedOutputFormatBrief.TabIndex = 14;
-            this.opt_LogcatAdvancedOutputFormatBrief.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatBrief.Text = "Brief";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatBrief, "Display priority/tag and PID of the process issuing the message");
-            this.opt_LogcatAdvancedOutputFormatBrief.UseVisualStyleBackColor = true;
+            this.opt_LogcatAdvancedFilterSilent.AutoSize = true;
+            this.opt_LogcatAdvancedFilterSilent.Location = new System.Drawing.Point(366, 19);
+            this.opt_LogcatAdvancedFilterSilent.Name = "opt_LogcatAdvancedFilterSilent";
+            this.opt_LogcatAdvancedFilterSilent.Size = new System.Drawing.Size(51, 17);
+            this.opt_LogcatAdvancedFilterSilent.TabIndex = 14;
+            this.opt_LogcatAdvancedFilterSilent.Text = "Silent";
+            this.opt_LogcatAdvancedFilterSilent.UseVisualStyleBackColor = true;
             // 
-            // opt_LogcatAdvancedOutputFormatProcess
+            // opt_LogcatAdvancedFilterFatal
             // 
-            this.opt_LogcatAdvancedOutputFormatProcess.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatProcess.Location = new System.Drawing.Point(302, 19);
-            this.opt_LogcatAdvancedOutputFormatProcess.Name = "opt_LogcatAdvancedOutputFormatProcess";
-            this.opt_LogcatAdvancedOutputFormatProcess.Size = new System.Drawing.Size(63, 17);
-            this.opt_LogcatAdvancedOutputFormatProcess.TabIndex = 15;
-            this.opt_LogcatAdvancedOutputFormatProcess.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatProcess.Text = "Process";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatProcess, "Display PID only.");
-            this.opt_LogcatAdvancedOutputFormatProcess.UseVisualStyleBackColor = true;
+            this.opt_LogcatAdvancedFilterFatal.AutoSize = true;
+            this.opt_LogcatAdvancedFilterFatal.Location = new System.Drawing.Point(312, 19);
+            this.opt_LogcatAdvancedFilterFatal.Name = "opt_LogcatAdvancedFilterFatal";
+            this.opt_LogcatAdvancedFilterFatal.Size = new System.Drawing.Size(48, 17);
+            this.opt_LogcatAdvancedFilterFatal.TabIndex = 5;
+            this.opt_LogcatAdvancedFilterFatal.Text = "Fatal";
+            this.opt_LogcatAdvancedFilterFatal.UseVisualStyleBackColor = true;
             // 
-            // opt_LogcatAdvancedOutputFormatTag
+            // opt_LogcatAdvancedFilterError
             // 
-            this.opt_LogcatAdvancedOutputFormatTag.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatTag.Location = new System.Drawing.Point(252, 19);
-            this.opt_LogcatAdvancedOutputFormatTag.Name = "opt_LogcatAdvancedOutputFormatTag";
-            this.opt_LogcatAdvancedOutputFormatTag.Size = new System.Drawing.Size(44, 17);
-            this.opt_LogcatAdvancedOutputFormatTag.TabIndex = 16;
-            this.opt_LogcatAdvancedOutputFormatTag.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatTag.Text = "Tag";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatTag, "Display the priority/tag only");
-            this.opt_LogcatAdvancedOutputFormatTag.UseVisualStyleBackColor = true;
+            this.opt_LogcatAdvancedFilterError.AutoSize = true;
+            this.opt_LogcatAdvancedFilterError.Location = new System.Drawing.Point(259, 19);
+            this.opt_LogcatAdvancedFilterError.Name = "opt_LogcatAdvancedFilterError";
+            this.opt_LogcatAdvancedFilterError.Size = new System.Drawing.Size(47, 17);
+            this.opt_LogcatAdvancedFilterError.TabIndex = 4;
+            this.opt_LogcatAdvancedFilterError.Text = "Error";
+            this.opt_LogcatAdvancedFilterError.UseVisualStyleBackColor = true;
             // 
-            // opt_LogcatAdvancedOutputFormatTime
+            // opt_LogcatAdvancedFilterWarning
             // 
-            this.opt_LogcatAdvancedOutputFormatTime.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatTime.Location = new System.Drawing.Point(145, 19);
-            this.opt_LogcatAdvancedOutputFormatTime.Name = "opt_LogcatAdvancedOutputFormatTime";
-            this.opt_LogcatAdvancedOutputFormatTime.Size = new System.Drawing.Size(48, 17);
-            this.opt_LogcatAdvancedOutputFormatTime.TabIndex = 17;
-            this.opt_LogcatAdvancedOutputFormatTime.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatTime.Text = "Time";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatTime, "Display the date, invocation time, priority/tag, and PID of the process issuing t" +
-        "he message");
-            this.opt_LogcatAdvancedOutputFormatTime.UseVisualStyleBackColor = true;
+            this.opt_LogcatAdvancedFilterWarning.AutoSize = true;
+            this.opt_LogcatAdvancedFilterWarning.Location = new System.Drawing.Point(188, 19);
+            this.opt_LogcatAdvancedFilterWarning.Name = "opt_LogcatAdvancedFilterWarning";
+            this.opt_LogcatAdvancedFilterWarning.Size = new System.Drawing.Size(65, 17);
+            this.opt_LogcatAdvancedFilterWarning.TabIndex = 3;
+            this.opt_LogcatAdvancedFilterWarning.Text = "Warning";
+            this.opt_LogcatAdvancedFilterWarning.UseVisualStyleBackColor = true;
             // 
-            // opt_LogcatAdvancedOutputFormatRaw
+            // opt_LogcatAdvancedFilterInfo
             // 
-            this.opt_LogcatAdvancedOutputFormatRaw.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatRaw.Location = new System.Drawing.Point(199, 19);
-            this.opt_LogcatAdvancedOutputFormatRaw.Name = "opt_LogcatAdvancedOutputFormatRaw";
-            this.opt_LogcatAdvancedOutputFormatRaw.Size = new System.Drawing.Size(47, 17);
-            this.opt_LogcatAdvancedOutputFormatRaw.TabIndex = 18;
-            this.opt_LogcatAdvancedOutputFormatRaw.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatRaw.Text = "Raw";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatRaw, "Display the raw log message, with no other metadata fields");
-            this.opt_LogcatAdvancedOutputFormatRaw.UseVisualStyleBackColor = true;
+            this.opt_LogcatAdvancedFilterInfo.AutoSize = true;
+            this.opt_LogcatAdvancedFilterInfo.Location = new System.Drawing.Point(139, 19);
+            this.opt_LogcatAdvancedFilterInfo.Name = "opt_LogcatAdvancedFilterInfo";
+            this.opt_LogcatAdvancedFilterInfo.Size = new System.Drawing.Size(43, 17);
+            this.opt_LogcatAdvancedFilterInfo.TabIndex = 2;
+            this.opt_LogcatAdvancedFilterInfo.Text = "Info";
+            this.opt_LogcatAdvancedFilterInfo.UseVisualStyleBackColor = true;
             // 
-            // opt_LogcatAdvancedOutputFormatLong
+            // opt_LogcatAdvancedFilterDebug
             // 
-            this.opt_LogcatAdvancedOutputFormatLong.AutoSize = true;
-            this.opt_LogcatAdvancedOutputFormatLong.Location = new System.Drawing.Point(90, 19);
-            this.opt_LogcatAdvancedOutputFormatLong.Name = "opt_LogcatAdvancedOutputFormatLong";
-            this.opt_LogcatAdvancedOutputFormatLong.Size = new System.Drawing.Size(49, 17);
-            this.opt_LogcatAdvancedOutputFormatLong.TabIndex = 19;
-            this.opt_LogcatAdvancedOutputFormatLong.TabStop = true;
-            this.opt_LogcatAdvancedOutputFormatLong.Text = "Long";
-            this.toolTip.SetToolTip(this.opt_LogcatAdvancedOutputFormatLong, "Display all metadata fields and separate messages with blank lines");
-            this.opt_LogcatAdvancedOutputFormatLong.UseVisualStyleBackColor = true;
+            this.opt_LogcatAdvancedFilterDebug.AutoSize = true;
+            this.opt_LogcatAdvancedFilterDebug.Location = new System.Drawing.Point(76, 19);
+            this.opt_LogcatAdvancedFilterDebug.Name = "opt_LogcatAdvancedFilterDebug";
+            this.opt_LogcatAdvancedFilterDebug.Size = new System.Drawing.Size(57, 17);
+            this.opt_LogcatAdvancedFilterDebug.TabIndex = 1;
+            this.opt_LogcatAdvancedFilterDebug.Text = "Debug";
+            this.opt_LogcatAdvancedFilterDebug.UseVisualStyleBackColor = true;
+            // 
+            // opt_LogcatAdvancedFilterVerbose
+            // 
+            this.opt_LogcatAdvancedFilterVerbose.AutoSize = true;
+            this.opt_LogcatAdvancedFilterVerbose.Checked = true;
+            this.opt_LogcatAdvancedFilterVerbose.Location = new System.Drawing.Point(6, 19);
+            this.opt_LogcatAdvancedFilterVerbose.Name = "opt_LogcatAdvancedFilterVerbose";
+            this.opt_LogcatAdvancedFilterVerbose.Size = new System.Drawing.Size(64, 17);
+            this.opt_LogcatAdvancedFilterVerbose.TabIndex = 0;
+            this.opt_LogcatAdvancedFilterVerbose.TabStop = true;
+            this.opt_LogcatAdvancedFilterVerbose.Text = "Verbose";
+            this.opt_LogcatAdvancedFilterVerbose.UseVisualStyleBackColor = true;
+            // 
+            // btn_LogcatAdvancedStatistics
+            // 
+            this.btn_LogcatAdvancedStatistics.Location = new System.Drawing.Point(182, 370);
+            this.btn_LogcatAdvancedStatistics.Name = "btn_LogcatAdvancedStatistics";
+            this.btn_LogcatAdvancedStatistics.Size = new System.Drawing.Size(94, 23);
+            this.btn_LogcatAdvancedStatistics.TabIndex = 14;
+            this.btn_LogcatAdvancedStatistics.Text = "Logcat Statistics";
+            this.btn_LogcatAdvancedStatistics.UseVisualStyleBackColor = true;
+            this.btn_LogcatAdvancedStatistics.Click += new System.EventHandler(this.Btn_LogcatAdvancedStatistics_Click);
             // 
             // LogcatAdvanced
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 357);
+            this.ClientSize = new System.Drawing.Size(450, 431);
+            this.Controls.Add(this.btn_LogcatAdvancedStatistics);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox7);
@@ -508,7 +629,7 @@
             this.MaximizeBox = false;
             this.Name = "LogcatAdvanced";
             this.ShowInTaskbar = false;
-            this.Text = "LogcatAdvanced";
+            this.Text = "Logcat Advanced";
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -526,6 +647,8 @@
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -570,5 +693,15 @@
         private System.Windows.Forms.RadioButton opt_LogcatAdvancedOutputFormatTime;
         private System.Windows.Forms.RadioButton opt_LogcatAdvancedOutputFormatRaw;
         private System.Windows.Forms.RadioButton opt_LogcatAdvancedOutputFormatLong;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.TextBox txt_LogcatAdvancedFilter;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterSilent;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterFatal;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterError;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterWarning;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterInfo;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterDebug;
+        private System.Windows.Forms.RadioButton opt_LogcatAdvancedFilterVerbose;
+        private System.Windows.Forms.Button btn_LogcatAdvancedStatistics;
     }
 }

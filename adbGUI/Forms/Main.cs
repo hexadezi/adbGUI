@@ -66,7 +66,7 @@ namespace adbGUI
             // Start the watcher which fires if adb devices changed
             dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
-            
+
         }
 
         private void GetProcess_Exited(object sender, EventArgs e)
@@ -120,11 +120,18 @@ namespace adbGUI
 
         private void DwAdb_DeviceChanged(DeviceWatcher dw, DeviceList e)
         {
-            BeginInvoke((MethodInvoker)delegate ()
+            try
             {
-                formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
-                txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
-            });
+                BeginInvoke((MethodInvoker)delegate ()
+                {
+                    formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
+                    txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
+                });
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void Btn_consoleClear_Click(object sender, EventArgs e)
@@ -153,9 +160,16 @@ namespace adbGUI
             }
         }
 
+        Color clr = new Color();
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
-            BeginInvoke((MethodInvoker)delegate () { rtb_console.AppendText(e.Data + Environment.NewLine); });
+            try
+            {
+                BeginInvoke((MethodInvoker)delegate () { rtb_console.AppendText(e.Data + Environment.NewLine); });
+            }
+            catch (Exception)
+            { }
+
             Thread.Sleep(3);
         }
 
@@ -169,7 +183,7 @@ namespace adbGUI
         {
             rtb_console.ScrollToCaret();
         }
-        
+
         private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
         {
             // todo add network capture tcpdump
@@ -424,5 +438,6 @@ namespace adbGUI
         {
             if (tsb_AlwaysClearConsole.Checked = !tsb_AlwaysClearConsole.Checked) ;
         }
+
     }
 }

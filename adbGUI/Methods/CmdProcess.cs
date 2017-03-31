@@ -49,6 +49,7 @@ namespace adbGUI
             }
         };
 
+
         public CmdProcess()
         {
             process.EnableRaisingEvents = true;
@@ -61,6 +62,8 @@ namespace adbGUI
 
         public void StartProcessing(string @command, string @serialnumber)
         {
+            StopProcessing();
+            Thread.Sleep(50);
             CommandExecutionStarted?.Invoke();
             process.StandardInput.WriteLine(CommandParser(command, serialnumber));
         }

@@ -25,6 +25,8 @@ namespace adbGUI.Forms
         // todo change Abort to Cancel
         private void Btn_LogcatAdvancedStart_Click(object sender, EventArgs e)
         {
+            // todo noch die restlichen filter einpflegen
+
             string alternativeBuffers = GetAlternativeBufferString();
             string regEx = GetRegularExpressionString();
             string quitAfterNumberOfLines = GetQuitAfterNumberOfLines();
@@ -33,11 +35,11 @@ namespace adbGUI.Forms
             string recentNumberOfLines = GetRecentNumberOfLines();
             string specifiedTime = GetSpecifiedTime();
             string outputFormat = GetOutputFormat();
+            string outputFilter = GetOutputFilter();
 
-            adb.StartProcessing("adb logcat" + alternativeBuffers + outputFormat + quitAfterNumberOfLines + recentNumberOfLines + specifiedTime + regEx + bypassRegEx + pidFilter, formMethods.SelectedDevice());
+            adb.StartProcessing("adb logcat" + outputFilter + alternativeBuffers + outputFormat + quitAfterNumberOfLines + recentNumberOfLines + specifiedTime + regEx + bypassRegEx + pidFilter, formMethods.SelectedDevice());
 
         }
-
 
 
         private void Btn_LogcatAdvancedClearBuffers_Click(object sender, EventArgs e)
@@ -64,7 +66,7 @@ namespace adbGUI.Forms
         {
             if (!String.IsNullOrEmpty(txt_LogcatAdvancedBufferSize.Text))
             {
-                adb.StartProcessing("adb logcat -G " + txt_LogcatAdvancedBufferSize.Text, formMethods.SelectedDevice());
+                adb.StartProcessing("adb logcat -G " + txt_LogcatAdvancedBufferSize.Text.Trim(), formMethods.SelectedDevice());
             }
         }
 
@@ -172,9 +174,9 @@ namespace adbGUI.Forms
         {
             string regEx = "";
 
-            if (!String.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text))
+            if (!String.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim()))
             {
-                regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text;
+                regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
             }
 
             return regEx;
@@ -184,9 +186,9 @@ namespace adbGUI.Forms
         {
             string countNumber = "";
 
-            if (!String.IsNullOrEmpty(txt_LogcatAdvancedQuitAfterNumberLines.Text))
+            if (!String.IsNullOrEmpty(txt_LogcatAdvancedQuitAfterNumberLines.Text.Trim()))
             {
-                countNumber = " -m " + txt_LogcatAdvancedQuitAfterNumberLines.Text;
+                countNumber = " -m " + txt_LogcatAdvancedQuitAfterNumberLines.Text.Trim();
             }
 
             return countNumber;
@@ -196,7 +198,7 @@ namespace adbGUI.Forms
         {
             string bypassRegEx = "";
 
-            if (cbo_LogcatAdvancedBypassRegEx.Checked && !String.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text))
+            if (cbo_LogcatAdvancedBypassRegEx.Checked && !String.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim()))
             {
                 bypassRegEx = " --print";
             }
@@ -208,9 +210,9 @@ namespace adbGUI.Forms
         {
             string pidFilter = "";
 
-            if (!String.IsNullOrEmpty(txt_LogcatAdvancedPidFilter.Text))
+            if (!String.IsNullOrEmpty(txt_LogcatAdvancedPidFilter.Text.Trim()))
             {
-                pidFilter = " --pid=" + txt_LogcatAdvancedPidFilter.Text;
+                pidFilter = " --pid=" + txt_LogcatAdvancedPidFilter.Text.Trim();
             }
 
             return pidFilter;
@@ -221,9 +223,9 @@ namespace adbGUI.Forms
         {
             string recentNumberOfLines = "";
 
-            if (!String.IsNullOrEmpty(txt_LogcatAdvancedRecentNumberOfLines.Text))
+            if (!String.IsNullOrEmpty(txt_LogcatAdvancedRecentNumberOfLines.Text.Trim()))
             {
-                recentNumberOfLines = " -T " + txt_LogcatAdvancedRecentNumberOfLines.Text;
+                recentNumberOfLines = " -t " + txt_LogcatAdvancedRecentNumberOfLines.Text.Trim();
             }
 
             return recentNumberOfLines;
@@ -233,12 +235,62 @@ namespace adbGUI.Forms
         {
             string specifiedTime = "";
 
-            if (!String.IsNullOrEmpty(txt_LogcatAdvancedSpecifiedTime.Text))
+            if (!String.IsNullOrEmpty(txt_LogcatAdvancedSpecifiedTime.Text.Trim()))
             {
-                specifiedTime = " -T \"" + txt_LogcatAdvancedSpecifiedTime.Text + "\"";
+                specifiedTime = " -T \"" + txt_LogcatAdvancedSpecifiedTime.Text.Trim() + "\"";
             }
 
             return specifiedTime;
+        }
+
+        private string GetOutputFilter()
+        {
+            string outputFilter = "";
+
+            string customOutputFilter = "";
+
+            if (!String.IsNullOrEmpty(txt_LogcatAdvancedFilter.Text.Trim()))
+            {
+                outputFilter = " " + txt_LogcatAdvancedFilter.Text.Trim();
+            }
+
+            if (opt_LogcatAdvancedFilterVerbose.Checked)
+            {
+                outputFilter += " *:V";
+            }
+
+            else if (opt_LogcatAdvancedFilterDebug.Checked)
+            {
+                outputFilter += " *:D";
+            }
+
+            else if (opt_LogcatAdvancedFilterInfo.Checked)
+            {
+                outputFilter += " *:I";
+            }
+
+            else if (opt_LogcatAdvancedFilterWarning.Checked)
+            {
+                outputFilter += " *:W";
+            }
+
+            else if (opt_LogcatAdvancedFilterError.Checked)
+            {
+                outputFilter += " *:E";
+            }
+
+            else if (opt_LogcatAdvancedFilterFatal.Checked)
+            {
+                outputFilter += " *:F";
+            }
+
+            else if (opt_LogcatAdvancedFilterSilent.Checked)
+            {
+                outputFilter += " *:S";
+            }
+
+            return outputFilter;
+
         }
 
         private string GetOutputFormat()
@@ -281,6 +333,11 @@ namespace adbGUI.Forms
             {
                 return "";
             }
+        }
+
+        private void Btn_LogcatAdvancedStatistics_Click(object sender, EventArgs e)
+        {
+            adb.StartProcessing("adb logcat -S", formMethods.SelectedDevice());
         }
     }
 }
