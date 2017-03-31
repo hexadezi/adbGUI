@@ -380,7 +380,7 @@ namespace adbGUI
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = "cmd",
-                        Arguments = "/K tools\\adb " + serial + " shell",
+                        Arguments = "/K adb " + serial + " shell",
                     }
                 };
 

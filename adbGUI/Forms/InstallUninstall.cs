@@ -70,7 +70,7 @@ namespace adbGUI.Forms
 
             cbx_InstallUninstallPackageUninstall.Enabled = false;
 
-            string output = adb.StartProcessingInThread("adb shell \"pm list packages -3", formMethods.SelectedDevice());
+            string output = adb.StartProcessingInThread("adb shell pm list packages -3", formMethods.SelectedDevice());
 
             foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {

@@ -104,12 +104,14 @@ namespace adbGUI.Forms
                 groupBox8.Enabled = false;
                 groupBox14.Enabled = false;
 
-                string output = adb.StartProcessingInThread("adb shell \"pm list packages -3 | cut -c9- | sort\"", formMethods.SelectedDevice());
+                string output = adb.StartProcessingInThread("adb shell pm list packages -3", formMethods.SelectedDevice());
 
                 foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    cbx_BackupPackage.Items.Add(item);
+                    cbx_BackupPackage.Items.Add(item.Remove(0, 8));
                 }
+
+                cbx_BackupPackage.Sorted = true;
 
                 if (cbx_BackupPackage.Items.Count > 0)
                 {
