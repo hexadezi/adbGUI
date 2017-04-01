@@ -438,5 +438,48 @@ namespace adbGUI
             if (tsb_AlwaysClearConsole.Checked = !tsb_AlwaysClearConsole.Checked) ;
         }
 
+        private void Tsb_Power_Click(object sender, EventArgs e)
+        {
+            switch (sender.ToString())
+            {
+                case "Reboot Normal":
+                    cmdProcess.StartProcessing("adb reboot", formMethods.SelectedDevice());
+                    break;
+
+
+                case "Reboot Recovery":
+                    cmdProcess.StartProcessing("adb reboot recovery", formMethods.SelectedDevice());
+                    break;
+
+
+                case "Reboot Bootloader":
+                    cmdProcess.StartProcessing("adb reboot bootloader", formMethods.SelectedDevice());
+                    break;
+
+
+                case "Reboot Fastboot":
+                    cmdProcess.StartProcessing("adb reboot fastboot", formMethods.SelectedDevice());
+                    break;
+
+
+                case "Sideload Mode":
+                    cmdProcess.StartProcessing("adb reboot sideload", formMethods.SelectedDevice());
+                    break;
+
+
+                case "Shutdown":
+                    cmdProcess.StartProcessing("adb shell reboot -p", formMethods.SelectedDevice());
+                    break;
+
+
+                case "Sleep":
+                    cmdProcess.StartProcessing("adb shell input keyevent POWER", formMethods.SelectedDevice());
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
     }
 }
