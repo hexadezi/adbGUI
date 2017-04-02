@@ -52,9 +52,9 @@
             // btn_SpoofMacReset
             // 
             this.btn_SpoofMacReset.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_SpoofMacReset.Location = new System.Drawing.Point(194, 19);
+            this.btn_SpoofMacReset.Location = new System.Drawing.Point(194, 18);
             this.btn_SpoofMacReset.Name = "btn_SpoofMacReset";
-            this.btn_SpoofMacReset.Size = new System.Drawing.Size(75, 23);
+            this.btn_SpoofMacReset.Size = new System.Drawing.Size(75, 22);
             this.btn_SpoofMacReset.TabIndex = 27;
             this.btn_SpoofMacReset.Text = "Reset";
             this.btn_SpoofMacReset.UseVisualStyleBackColor = true;
@@ -62,9 +62,9 @@
             // 
             // btn_SpoofMacSet
             // 
-            this.btn_SpoofMacSet.Location = new System.Drawing.Point(113, 19);
+            this.btn_SpoofMacSet.Location = new System.Drawing.Point(113, 18);
             this.btn_SpoofMacSet.Name = "btn_SpoofMacSet";
-            this.btn_SpoofMacSet.Size = new System.Drawing.Size(75, 23);
+            this.btn_SpoofMacSet.Size = new System.Drawing.Size(75, 22);
             this.btn_SpoofMacSet.TabIndex = 25;
             this.btn_SpoofMacSet.Text = "Set";
             this.btn_SpoofMacSet.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@
             // 
             // btn_SpoofMacShow
             // 
-            this.btn_SpoofMacShow.Location = new System.Drawing.Point(275, 19);
+            this.btn_SpoofMacShow.Location = new System.Drawing.Point(275, 18);
             this.btn_SpoofMacShow.Name = "btn_SpoofMacShow";
-            this.btn_SpoofMacShow.Size = new System.Drawing.Size(75, 23);
+            this.btn_SpoofMacShow.Size = new System.Drawing.Size(75, 22);
             this.btn_SpoofMacShow.TabIndex = 26;
             this.btn_SpoofMacShow.Text = "Show";
             this.btn_SpoofMacShow.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             // txt_SpoofMacAdress
             // 
             this.txt_SpoofMacAdress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txt_SpoofMacAdress.Location = new System.Drawing.Point(6, 21);
+            this.txt_SpoofMacAdress.Location = new System.Drawing.Point(6, 19);
             this.txt_SpoofMacAdress.Name = "txt_SpoofMacAdress";
             this.txt_SpoofMacAdress.Size = new System.Drawing.Size(101, 20);
             this.txt_SpoofMacAdress.TabIndex = 24;

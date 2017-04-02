@@ -46,7 +46,6 @@ namespace adbGUI.Forms
             });
         }
 
-        // todo change Abort to Cancel
         private void Btn_LogcatAdvancedStart_Click(object sender, EventArgs e)
         {
             string alternativeBuffers = GetAlternativeBufferString();

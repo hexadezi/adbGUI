@@ -39,6 +39,7 @@
             // 
             // btn_setProp
             // 
+            this.btn_setProp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_setProp.Location = new System.Drawing.Point(520, 31);
             this.btn_setProp.Name = "btn_setProp";
             this.btn_setProp.Size = new System.Drawing.Size(75, 23);
@@ -49,6 +50,8 @@
             // 
             // txt_setPropKey
             // 
+            this.txt_setPropKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_setPropKey.Location = new System.Drawing.Point(9, 33);
             this.txt_setPropKey.Name = "txt_setPropKey";
             this.txt_setPropKey.Size = new System.Drawing.Size(379, 20);
@@ -56,6 +59,7 @@
             // 
             // txt_setPropValue
             // 
+            this.txt_setPropValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_setPropValue.Location = new System.Drawing.Point(394, 33);
             this.txt_setPropValue.Name = "txt_setPropValue";
             this.txt_setPropValue.Size = new System.Drawing.Size(123, 20);
@@ -72,6 +76,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(391, 16);
             this.label2.Name = "label2";
@@ -81,6 +86,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btn_setProp);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txt_setPropKey);
@@ -103,6 +110,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 123);
             this.MinimumSize = new System.Drawing.Size(638, 123);
             this.Name = "SetProp";
+            this.ShowIcon = false;
             this.Text = "SetProp";
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);

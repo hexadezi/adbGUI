@@ -18,6 +18,7 @@ namespace adbGUI.Forms
 
         private void Btn_InstallUninstallInstall_Click(object sender, EventArgs e)
         {
+            // Funktionen einbauen: starten, stoppen, cache leeren, apk ziehen, aktivieren, deaktivieren
             var s = "\"" + txt_InstallUninstallPackageInstall.Text + "\"";
             string serial = " -s " + formMethods.SelectedDevice();
 
@@ -72,17 +73,21 @@ namespace adbGUI.Forms
 
             string output = adb.StartProcessingInThread("adb shell pm list packages -3", formMethods.SelectedDevice());
 
-            foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            if (!String.IsNullOrEmpty(output))
             {
-                cbx_InstallUninstallPackageUninstall.Items.Add(item.Remove(0,8));
+                foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    cbx_InstallUninstallPackageUninstall.Items.Add(item.Remove(0, 8));
+                }
+
+                cbx_InstallUninstallPackageUninstall.Sorted = true;
+
+                if (cbx_InstallUninstallPackageUninstall.Items.Count > 0)
+                {
+                    cbx_InstallUninstallPackageUninstall.SelectedIndex = 0;
+                }
             }
 
-            cbx_InstallUninstallPackageUninstall.Sorted = true;
-
-            if (cbx_InstallUninstallPackageUninstall.Items.Count > 0)
-            {
-                cbx_InstallUninstallPackageUninstall.SelectedIndex = 0;
-            }
 
             cbx_InstallUninstallPackageUninstall.Enabled = true;
         }

@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace adbGUI.Methods
 {
-
-    public class DeviceList : EventArgs
+    public class AdbDeviceList : EventArgs
     {
         private List<string> devicesList;
 
@@ -42,21 +38,20 @@ namespace adbGUI.Methods
 
     }
 
-    class DeviceWatcher
+    public class AdbDeviceWatcher
     {
-
-        CmdProcess cmdProcess = new CmdProcess();
-
         public event DeviceChangedHandler DeviceChanged;
 
-        public delegate void DeviceChangedHandler(DeviceWatcher sender, DeviceList e);
+        public delegate void DeviceChangedHandler(AdbDeviceWatcher sender, AdbDeviceList e);
 
         private string devicesRawOld;
 
         private string devicesRawNew;
 
-        Thread tr;
-        
+        private static int connectedDevices = 0;
+
+        private Thread tr;
+
         public void StartDeviceWatcher()
         {
 
@@ -71,29 +66,29 @@ namespace adbGUI.Methods
 
         private void Watcher()
         {
-
             while (true)
             {
                 if (DeviceChanged != null)
                 {
-                    devicesRawNew = cmdProcess.StartProcessingReadToEnd("adb devices -l", "");
+                    devicesRawNew = StartProcessingGetDevices("adb devices -l");
 
                     if (devicesRawNew != devicesRawOld)
                     {
                         devicesRawOld = devicesRawNew;
 
-                        DeviceList dl = new DeviceList()
+                        AdbDeviceList dl = new AdbDeviceList()
                         {
                             GetDevicesRaw = devicesRawNew,
                             GetDevicesList = ParseDevicesL(devicesRawNew)
-
                         };
+
+                        connectedDevices = dl.GetDevicesList.Count;
+
                         DeviceChanged(this, dl);
                     }
                 }
                 Thread.Sleep(750);
             }
-
         }
 
         private List<string> ParseDevicesL(string input)
@@ -124,6 +119,31 @@ namespace adbGUI.Methods
             }
 
             return listofserials;
+        }
+
+        public static int GetConnectedAdbDevices() {
+            return connectedDevices;
+        }
+
+        private string StartProcessingGetDevices(string command)
+        {
+            Process process2 = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd",
+                    Arguments = "/C " + command,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    RedirectStandardInput = true,
+                }
+            };
+
+            process2.Start();
+
+            return process2.StandardOutput.ReadToEnd();
         }
 
     }

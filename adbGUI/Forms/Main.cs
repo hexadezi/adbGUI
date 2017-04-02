@@ -27,13 +27,10 @@ namespace adbGUI
 
         private CmdProcess cmdProcess = new CmdProcess();
 
-        private DeviceWatcher dwAdb = new DeviceWatcher();
+        private AdbDeviceWatcher dwAdb = new AdbDeviceWatcher();
 
         public MainForm()
         {
-
-            // todo aapt implementieren
-
             InitializeComponent();
 
             // pass formMethods the created Form this
@@ -65,8 +62,9 @@ namespace adbGUI
             // Start the watcher which fires if adb devices changed
             dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
-
+            
         }
+        
 
         private void GetProcess_Exited(object sender, EventArgs e)
         {
@@ -117,7 +115,7 @@ namespace adbGUI
 
         }
 
-        private void DwAdb_DeviceChanged(DeviceWatcher dw, DeviceList e)
+        private void DwAdb_DeviceChanged(AdbDeviceWatcher dw, AdbDeviceList e)
         {
             try
             {
@@ -394,7 +392,7 @@ namespace adbGUI
 
         private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
         {
-            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$");
+            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
 
             string ipadress = tst_IpAdress.Text;
 

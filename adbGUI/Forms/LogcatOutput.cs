@@ -19,8 +19,8 @@ namespace adbGUI.Forms
 
         private void LogcatOutput_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
             Visible = false;
+            e.Cancel = true;
         }
     }
 }

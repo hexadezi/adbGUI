@@ -106,16 +106,19 @@ namespace adbGUI.Forms
 
                 string output = adb.StartProcessingInThread("adb shell pm list packages -3", formMethods.SelectedDevice());
 
-                foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+                if (!String.IsNullOrEmpty(output))
                 {
-                    cbx_BackupPackage.Items.Add(item.Remove(0, 8));
-                }
+                    foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        cbx_BackupPackage.Items.Add(item.Remove(0, 8));
+                    }
 
-                cbx_BackupPackage.Sorted = true;
+                    cbx_BackupPackage.Sorted = true;
 
-                if (cbx_BackupPackage.Items.Count > 0)
-                {
-                    cbx_BackupPackage.SelectedIndex = 0;
+                    if (cbx_BackupPackage.Items.Count > 0)
+                    {
+                        cbx_BackupPackage.SelectedIndex = 0;
+                    }
                 }
 
                 groupBox8.Enabled = true;

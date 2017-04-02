@@ -7,6 +7,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI
 {
@@ -49,7 +50,6 @@ namespace adbGUI
             }
         };
 
-
         public CmdProcess()
         {
             process.EnableRaisingEvents = true;
@@ -62,10 +62,28 @@ namespace adbGUI
 
         public void StartProcessing(string @command, string @serialnumber)
         {
-            StopProcessing();
-            Thread.Sleep(150);
-            CommandExecutionStarted?.Invoke();
-            process.StandardInput.WriteLine(CommandParser(command, serialnumber));
+            if (command.StartsWith("adb"))
+            {
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0)
+                {
+                    StopProcessing();
+                    Thread.Sleep(150);
+                    CommandExecutionStarted?.Invoke();
+                    process.StandardInput.WriteLine(CommandParser(command, serialnumber));
+                }
+                else
+                {
+                    MessageBox.Show("No device connected. Please connect a device for adb commands.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                StopProcessing();
+                Thread.Sleep(150);
+                CommandExecutionStarted?.Invoke();
+                process.StandardInput.WriteLine(CommandParser(command, serialnumber));
+            }
+
         }
 
         public bool StopProcessing()
@@ -94,30 +112,64 @@ namespace adbGUI
 
         public string StartProcessingInThread(string @command, string @serialnumber)
         {
-            string output = "";
-
-            Thread t = new Thread(
-                () =>
+            if (command.StartsWith("adb"))
+            {
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0)
                 {
-                    output = StartProcessingReadToEnd(command, serialnumber);
+                    string output = "";
+
+                    Thread t = new Thread(
+                        () =>
+                        {
+                            output = StartProcessingReadToEnd(command, serialnumber);
+                        }
+                    )
+
+                    {
+                        IsBackground = true
+                    };
+
+                    t.Start();
+
+                    while (t.IsAlive)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    return output;
                 }
-            )
-
-            {
-                IsBackground = true
-            };
-
-            t.Start();
-
-            while (t.IsAlive)
-            {
-                Application.DoEvents();
+                else
+                {
+                    return null;
+                }
             }
+            else
+            {
+                string output = "";
 
-            return output;
+                Thread t = new Thread(
+                    () =>
+                    {
+                        output = StartProcessingReadToEnd(command, serialnumber);
+                    }
+                )
+
+                {
+                    IsBackground = true
+                };
+
+                t.Start();
+
+                while (t.IsAlive)
+                {
+                    Application.DoEvents();
+                }
+
+                return output;
+            }
         }
 
-        public string StartProcessingReadToEnd(string command, string serialnumber)
+        private string StartProcessingReadToEnd(string command, string serialnumber)
         {
 
             Process process2 = new Process
@@ -135,6 +187,7 @@ namespace adbGUI
             };
 
             //process2.StartInfo.EnvironmentVariables["Path"] = Environment.GetEnvironmentVariable("Path",EnvironmentVariableTarget.User);
+
             process2.Start();
 
             return process2.StandardOutput.ReadToEnd();
@@ -187,15 +240,14 @@ namespace adbGUI
             }
 
         }
+
     }
 
     public static class CheckAndDownloadDependencies
     {
-
         private static string downloadToTempPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
 
         private static string[] strFiles = { "adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe", "libwinpthread-1.dll" };
-
 
         public static void Start()
         {
@@ -288,15 +340,17 @@ namespace adbGUI
             wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
             wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), downloadToTempPath);
         }
+
         private static void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             Thread tr = new Thread(new ThreadStart(ExtractFiles));
             tr.Start();
         }
 
-
         private static event ExtractionCompletedHandler ExtractionCompleted;
+
         private delegate void ExtractionCompletedHandler();
+
         private static void ExtractFiles()
         {
             if (Directory.Exists(Path.GetTempPath() + "platform-tools"))
