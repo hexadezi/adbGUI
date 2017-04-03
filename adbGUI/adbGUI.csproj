@@ -24,8 +24,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>adbGUI</ProductName>
     <PublisherName>Labo</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -52,7 +52,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\1428882391_416405.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\programIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -78,32 +78,7 @@
     <StartupObject>adbGUI.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -111,39 +86,138 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\RebootMenu.cs">
+    <Compile Include="Forms\BackupRestore.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RebootMenu.Designer.cs">
-      <DependentUpon>RebootMenu.cs</DependentUpon>
+    <Compile Include="Forms\BackupRestore.Designer.cs">
+      <DependentUpon>BackupRestore.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StandardIO.cs" />
-    <Compile Include="Forms\Viewer.cs">
+    <Compile Include="Forms\Credits.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Viewer.Designer.cs">
-      <DependentUpon>Viewer.cs</DependentUpon>
+    <Compile Include="Forms\Credits.Designer.cs">
+      <DependentUpon>Credits.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="Forms\Density.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\Density.Designer.cs">
+      <DependentUpon>Density.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Forms\FileOps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FileOps.Designer.cs">
+      <DependentUpon>FileOps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InstallUninstall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InstallUninstall.Designer.cs">
+      <DependentUpon>InstallUninstall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LogcatAdvanced.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LogcatAdvanced.Designer.cs">
+      <DependentUpon>LogcatAdvanced.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LogcatOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LogcatOutput.Designer.cs">
+      <DependentUpon>LogcatOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ResolutionChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ResolutionChange.Designer.cs">
+      <DependentUpon>ResolutionChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ScreenRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenRecord.Designer.cs">
+      <DependentUpon>ScreenRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetProp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetProp.Designer.cs">
+      <DependentUpon>SetProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sideload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sideload.Designer.cs">
+      <DependentUpon>Sideload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SpoofMac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SpoofMac.Designer.cs">
+      <DependentUpon>SpoofMac.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Methods\CmdProcess.cs" />
+    <Compile Include="Methods\DeviceWatcher.cs" />
+    <Compile Include="Methods\FormMethods.cs" />
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Methods\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\RebootMenu.resx">
-      <DependentUpon>RebootMenu.cs</DependentUpon>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\BackupRestore.resx">
+      <DependentUpon>BackupRestore.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Viewer.resx">
-      <DependentUpon>Viewer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Credits.resx">
+      <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Density.resx">
+      <DependentUpon>Density.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FileOps.resx">
+      <DependentUpon>FileOps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InstallUninstall.resx">
+      <DependentUpon>InstallUninstall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LogcatAdvanced.resx">
+      <DependentUpon>LogcatAdvanced.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LogcatOutput.resx">
+      <DependentUpon>LogcatOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ResolutionChange.resx">
+      <DependentUpon>ResolutionChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScreenRecord.resx">
+      <DependentUpon>ScreenRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetProp.resx">
+      <DependentUpon>SetProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sideload.resx">
+      <DependentUpon>Sideload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SpoofMac.resx">
+      <DependentUpon>SpoofMac.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,19 +225,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1428882391_416405.ico" />
-    <None Include="Resources\ProcessOnG1003.png" />
-    <None Include="Resources\ProcessOnG1002.png" />
-    <None Include="Resources\IU7CO.gif" />
-    <None Include="Resources\1460414981_Update.png" />
-    <None Include="Resources\noun_56146_cc.png" />
+    <None Include="Resources\wifi.png" />
+    <None Include="Resources\hash.png" />
+    <None Include="Resources\programIcon.ico" />
+    <None Include="Resources\stop-button.png" />
+    <None Include="Resources\beer.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -182,7 +250,27 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\programIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\programIcon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\command window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hash1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power-button-off.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
