@@ -45,7 +45,6 @@ namespace adbGUI
 
             cmdProcess.GetProcess.OutputDataReceived += AppendReceivedData;
             cmdProcess.GetProcess.ErrorDataReceived += AppendReceivedData;
-            cmdProcess.GetProcess.Exited += GetProcess_Exited;
 
             Thread.Sleep(20);
 
@@ -54,7 +53,6 @@ namespace adbGUI
             rtb_console.Clear();
 
             cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
-            //cmdProcess.CommandExecutionStopped += formMethods.ShowMboxAborted;
 
             // Select custom command control
             cbx_customCommand.Select();
@@ -63,34 +61,6 @@ namespace adbGUI
             dwAdb.DeviceChanged += DwAdb_DeviceChanged;
             dwAdb.StartDeviceWatcher();
             
-        }
-        
-
-        private void GetProcess_Exited(object sender, EventArgs e)
-        {
-            var exitCode = this.cmdProcess.GetProcess.ExitCode;
-            var message = string.Empty;
-            switch (exitCode)
-            {
-                //verbessern
-                case 0:
-                    message = "Format done.";
-                    break;
-                case 1:
-                    message = "Format failed. Incorrect parameters were supplied.";
-                    break;
-                case 4:
-                    message = "Format failed. A fatal error occurred.";
-                    break;
-                case 5:
-                    message = "Format ended by user.";
-                    break;
-                default:
-                    message = "Format failed. ExitCode = " + this.cmdProcess.GetProcess.ExitCode;
-                    break;
-            }
-
-            MessageBox.Show(message);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
