@@ -98,7 +98,6 @@
             this.Name = "Density";
             this.ShowIcon = false;
             this.Text = "DpiChange";
-            this.TopMost = true;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DpiChange_KeyDown);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();

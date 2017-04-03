@@ -101,7 +101,6 @@
             this.MaximizeBox = false;
             this.Name = "SpoofMac";
             this.Text = "SpoofMac";
-            this.TopMost = true;
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.ResumeLayout(false);

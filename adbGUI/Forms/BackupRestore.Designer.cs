@@ -231,7 +231,6 @@
             this.Name = "BackupRestore";
             this.ShowIcon = false;
             this.Text = "BackupRestore";
-            this.TopMost = true;
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox14.ResumeLayout(false);

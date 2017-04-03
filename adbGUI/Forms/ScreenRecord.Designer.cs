@@ -286,7 +286,6 @@
             this.MaximizeBox = false;
             this.Name = "ScreenRecord";
             this.Text = "ScreenRecord";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.trb_screenRecordTimeLimit)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

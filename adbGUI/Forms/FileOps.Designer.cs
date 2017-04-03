@@ -238,7 +238,6 @@
             this.Name = "FileOps";
             this.ShowIcon = false;
             this.Text = "FileOps";
-            this.TopMost = true;
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox7.ResumeLayout(false);

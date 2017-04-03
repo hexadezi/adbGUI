@@ -99,7 +99,6 @@
             this.MaximizeBox = false;
             this.Name = "ResolutionChange";
             this.Text = "ResolutionChange";
-            this.TopMost = true;
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.ResumeLayout(false);

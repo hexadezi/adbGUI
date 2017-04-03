@@ -112,7 +112,6 @@
             this.Name = "SetProp";
             this.ShowIcon = false;
             this.Text = "SetProp";
-            this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

@@ -66,7 +66,6 @@
             this.Name = "LogcatOutput";
             this.ShowIcon = false;
             this.Text = "LogcatOutput";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogcatOutput_FormClosing);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
