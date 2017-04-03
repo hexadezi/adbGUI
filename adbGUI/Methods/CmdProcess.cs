@@ -64,7 +64,9 @@ namespace adbGUI
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0)
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 ||
+                    command.EndsWith("help") ||
+                    command.EndsWith("version"))//
                 {
                     StopProcessing();
                     Thread.Sleep(150);

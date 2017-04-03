@@ -199,18 +199,19 @@
             this.txt_DevicesAdb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_DevicesAdb.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_DevicesAdb.Location = new System.Drawing.Point(12, 555);
+            this.txt_DevicesAdb.Location = new System.Drawing.Point(12, 512);
             this.txt_DevicesAdb.Multiline = true;
             this.txt_DevicesAdb.Name = "txt_DevicesAdb";
             this.txt_DevicesAdb.ReadOnly = true;
             this.txt_DevicesAdb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_DevicesAdb.Size = new System.Drawing.Size(1016, 50);
+            this.txt_DevicesAdb.Size = new System.Drawing.Size(1016, 46);
             this.txt_DevicesAdb.TabIndex = 5;
             // 
             // btn_executeCommand
             // 
             this.btn_executeCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_executeCommand.Location = new System.Drawing.Point(792, 527);
+            this.btn_executeCommand.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_executeCommand.Location = new System.Drawing.Point(792, 486);
             this.btn_executeCommand.Name = "btn_executeCommand";
             this.btn_executeCommand.Size = new System.Drawing.Size(75, 23);
             this.btn_executeCommand.TabIndex = 1;
@@ -223,7 +224,8 @@
             this.trv_commandTreeView.AllowDrop = true;
             this.trv_commandTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.trv_commandTreeView.Location = new System.Drawing.Point(12, 39);
+            this.trv_commandTreeView.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.trv_commandTreeView.Location = new System.Drawing.Point(12, 36);
             this.trv_commandTreeView.Name = "trv_commandTreeView";
             treeNode70.Name = "Knoten0";
             treeNode70.Tag = "#files";
@@ -432,7 +434,7 @@
             treeNode127,
             treeNode133,
             treeNode138});
-            this.trv_commandTreeView.Size = new System.Drawing.Size(200, 510);
+            this.trv_commandTreeView.Size = new System.Drawing.Size(200, 471);
             this.trv_commandTreeView.TabIndex = 0;
             this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.Trv_commandTreeView_DoubleClick);
             // 
@@ -452,9 +454,9 @@
             this.cbx_customCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbx_customCommand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbx_customCommand.FormattingEnabled = true;
-            this.cbx_customCommand.Location = new System.Drawing.Point(218, 528);
+            this.cbx_customCommand.Location = new System.Drawing.Point(218, 487);
             this.cbx_customCommand.Name = "cbx_customCommand";
-            this.cbx_customCommand.Size = new System.Drawing.Size(568, 21);
+            this.cbx_customCommand.Size = new System.Drawing.Size(568, 20);
             this.cbx_customCommand.TabIndex = 12;
             this.cbx_customCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cbx_customCommand_KeyDown);
             // 
@@ -467,7 +469,7 @@
             this.rtb_console.Location = new System.Drawing.Point(0, 0);
             this.rtb_console.Name = "rtb_console";
             this.rtb_console.ReadOnly = true;
-            this.rtb_console.Size = new System.Drawing.Size(808, 479);
+            this.rtb_console.Size = new System.Drawing.Size(808, 442);
             this.rtb_console.TabIndex = 11;
             this.rtb_console.Text = "";
             this.rtb_console.WordWrap = false;
@@ -480,15 +482,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.rtb_console);
-            this.panel1.Location = new System.Drawing.Point(218, 39);
+            this.panel1.Location = new System.Drawing.Point(218, 36);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(810, 481);
+            this.panel1.Size = new System.Drawing.Size(810, 444);
             this.panel1.TabIndex = 12;
             // 
             // btn_consoleStop
             // 
             this.btn_consoleStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_consoleStop.Location = new System.Drawing.Point(954, 527);
+            this.btn_consoleStop.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_consoleStop.Location = new System.Drawing.Point(954, 486);
             this.btn_consoleStop.Name = "btn_consoleStop";
             this.btn_consoleStop.Size = new System.Drawing.Size(75, 23);
             this.btn_consoleStop.TabIndex = 1;
@@ -499,7 +502,8 @@
             // btn_consoleClear
             // 
             this.btn_consoleClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_consoleClear.Location = new System.Drawing.Point(873, 527);
+            this.btn_consoleClear.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_consoleClear.Location = new System.Drawing.Point(873, 486);
             this.btn_consoleClear.Name = "btn_consoleClear";
             this.btn_consoleClear.Size = new System.Drawing.Size(75, 23);
             this.btn_consoleClear.TabIndex = 0;
@@ -523,8 +527,8 @@
             this.tsb_AlwaysClearConsole});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(12, 10, 11, 3);
-            this.toolStrip1.Size = new System.Drawing.Size(1040, 36);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(12, 9, 11, 3);
+            this.toolStrip1.Size = new System.Drawing.Size(1040, 37);
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -534,7 +538,7 @@
             this.tsc_ConnectedDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tsc_ConnectedDevices.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.tsc_ConnectedDevices.Name = "tsc_ConnectedDevices";
-            this.tsc_ConnectedDevices.Size = new System.Drawing.Size(150, 23);
+            this.tsc_ConnectedDevices.Size = new System.Drawing.Size(150, 25);
             // 
             // tsd_Power
             // 
@@ -549,55 +553,55 @@
             this.tsd_Power.Image = global::adbGUI.Properties.Resources.power_button_off;
             this.tsd_Power.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsd_Power.Name = "tsd_Power";
-            this.tsd_Power.Size = new System.Drawing.Size(103, 20);
+            this.tsd_Power.Size = new System.Drawing.Size(110, 22);
             this.tsd_Power.Text = "Power Menu";
             // 
             // tsm_PowerRebootNormal
             // 
             this.tsm_PowerRebootNormal.Name = "tsm_PowerRebootNormal";
-            this.tsm_PowerRebootNormal.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerRebootNormal.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerRebootNormal.Text = "Reboot Normal";
             this.tsm_PowerRebootNormal.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
             // tsm_PowerRebootRecovery
             // 
             this.tsm_PowerRebootRecovery.Name = "tsm_PowerRebootRecovery";
-            this.tsm_PowerRebootRecovery.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerRebootRecovery.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerRebootRecovery.Text = "Reboot Recovery";
             this.tsm_PowerRebootRecovery.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
             // tsm_PowerRebootBootloader
             // 
             this.tsm_PowerRebootBootloader.Name = "tsm_PowerRebootBootloader";
-            this.tsm_PowerRebootBootloader.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerRebootBootloader.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerRebootBootloader.Text = "Reboot Bootloader";
             this.tsm_PowerRebootBootloader.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
             // tsm_PowerRebootFastboot
             // 
             this.tsm_PowerRebootFastboot.Name = "tsm_PowerRebootFastboot";
-            this.tsm_PowerRebootFastboot.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerRebootFastboot.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerRebootFastboot.Text = "Reboot Fastboot";
             this.tsm_PowerRebootFastboot.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
             // tsm_PowerSideloadMode
             // 
             this.tsm_PowerSideloadMode.Name = "tsm_PowerSideloadMode";
-            this.tsm_PowerSideloadMode.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerSideloadMode.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerSideloadMode.Text = "Sideload Mode";
             this.tsm_PowerSideloadMode.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
             // tsm_PowerShutdown
             // 
             this.tsm_PowerShutdown.Name = "tsm_PowerShutdown";
-            this.tsm_PowerShutdown.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerShutdown.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerShutdown.Text = "Shutdown";
             this.tsm_PowerShutdown.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
             // tsm_PowerSleep
             // 
             this.tsm_PowerSleep.Name = "tsm_PowerSleep";
-            this.tsm_PowerSleep.Size = new System.Drawing.Size(173, 22);
+            this.tsm_PowerSleep.Size = new System.Drawing.Size(189, 22);
             this.tsm_PowerSleep.Text = "Sleep";
             this.tsm_PowerSleep.Click += new System.EventHandler(this.Tsb_Power_Click);
             // 
@@ -612,7 +616,7 @@
             this.tsd_WirelessAdb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsd_WirelessAdb.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsd_WirelessAdb.Name = "tsd_WirelessAdb";
-            this.tsd_WirelessAdb.Size = new System.Drawing.Size(105, 20);
+            this.tsd_WirelessAdb.Size = new System.Drawing.Size(115, 22);
             this.tsd_WirelessAdb.Text = "Wireless ADB";
             // 
             // tst_IpAdress
@@ -642,7 +646,7 @@
             this.tsb_KillServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_KillServer.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsb_KillServer.Name = "tsb_KillServer";
-            this.tsb_KillServer.Size = new System.Drawing.Size(78, 20);
+            this.tsb_KillServer.Size = new System.Drawing.Size(86, 22);
             this.tsb_KillServer.Text = "Kill Server";
             this.tsb_KillServer.Click += new System.EventHandler(this.Tsb_KillServer_Click);
             // 
@@ -653,7 +657,7 @@
             this.tsb_OpenShell.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_OpenShell.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsb_OpenShell.Name = "tsb_OpenShell";
-            this.tsb_OpenShell.Size = new System.Drawing.Size(84, 20);
+            this.tsb_OpenShell.Size = new System.Drawing.Size(91, 22);
             this.tsb_OpenShell.Text = "Open Shell";
             this.tsb_OpenShell.Click += new System.EventHandler(this.Tsb_OpenShell_Click);
             // 
@@ -664,7 +668,7 @@
             this.tsb_AdbRoot.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_AdbRoot.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsb_AdbRoot.Name = "tsb_AdbRoot";
-            this.tsb_AdbRoot.Size = new System.Drawing.Size(78, 20);
+            this.tsb_AdbRoot.Size = new System.Drawing.Size(85, 22);
             this.tsb_AdbRoot.Text = "ADB Root";
             this.tsb_AdbRoot.Click += new System.EventHandler(this.Tsb_AdbRoot_Click);
             // 
@@ -672,7 +676,7 @@
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(114, 20);
+            this.toolStripLabel1.Size = new System.Drawing.Size(125, 22);
             this.toolStripLabel1.Text = "Connected Devices: ";
             // 
             // tsb_AdbUnroot
@@ -682,7 +686,7 @@
             this.tsb_AdbUnroot.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_AdbUnroot.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsb_AdbUnroot.Name = "tsb_AdbUnroot";
-            this.tsb_AdbUnroot.Size = new System.Drawing.Size(90, 20);
+            this.tsb_AdbUnroot.Size = new System.Drawing.Size(98, 22);
             this.tsb_AdbUnroot.Text = "ADB Unroot";
             this.tsb_AdbUnroot.Click += new System.EventHandler(this.Tsb_AdbUnroot_Click);
             // 
@@ -695,15 +699,15 @@
             this.tsb_AlwaysClearConsole.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_AlwaysClearConsole.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
             this.tsb_AlwaysClearConsole.Name = "tsb_AlwaysClearConsole";
-            this.tsb_AlwaysClearConsole.Size = new System.Drawing.Size(135, 20);
+            this.tsb_AlwaysClearConsole.Size = new System.Drawing.Size(146, 22);
             this.tsb_AlwaysClearConsole.Text = "Alway Clear Console";
             this.tsb_AlwaysClearConsole.Click += new System.EventHandler(this.Tsb_AlwaysClearConsole_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 617);
+            this.ClientSize = new System.Drawing.Size(1040, 570);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_consoleStop);
             this.Controls.Add(this.trv_commandTreeView);
@@ -713,7 +717,7 @@
             this.Controls.Add(this.cbx_customCommand);
             this.Controls.Add(this.txt_DevicesAdb);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1050, 650);
+            this.MinimumSize = new System.Drawing.Size(1050, 603);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "adbGUI";
