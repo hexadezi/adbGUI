@@ -165,7 +165,7 @@
       <DependentUpon>SpoofMac.cs</DependentUpon>
     </Compile>
     <Compile Include="Methods\CmdProcess.cs" />
-    <Compile Include="Methods\DeviceWatcher.cs" />
+    <Compile Include="Methods\AdbDeviceWatcher.cs" />
     <Compile Include="Methods\FormMethods.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>

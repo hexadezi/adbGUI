@@ -28,10 +28,9 @@ namespace adbGUI.Forms
 
         private void Btn_BackupBrowse_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(cbx_BackupPackage.SelectedItem.ToString());
-
             saveFileDialog.FileName = "backup_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
             saveFileDialog.Filter = " .ab|*.ab";
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 txt_BackupPathTo.Text = saveFileDialog.FileName;

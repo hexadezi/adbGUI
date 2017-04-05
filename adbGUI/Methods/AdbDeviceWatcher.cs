@@ -38,21 +38,21 @@ namespace adbGUI.Methods
 
     }
 
-    public class AdbDeviceWatcher
+    public static class AdbDeviceWatcher
     {
-        public event DeviceChangedHandler DeviceChanged;
+        public static event DeviceChangedHandler DeviceChanged;
 
-        public delegate void DeviceChangedHandler(AdbDeviceWatcher sender, AdbDeviceList e);
+        public delegate void DeviceChangedHandler(AdbDeviceList e);
 
-        private string devicesRawOld;
+        private static string devicesRawOld;
 
-        private string devicesRawNew;
+        private static string devicesRawNew;
 
         private static int connectedDevices = 0;
 
-        private Thread tr;
+        private static Thread tr;
 
-        public void StartDeviceWatcher()
+        public static void StartDeviceWatcher()
         {
 
             tr = new Thread(Watcher)
@@ -64,7 +64,7 @@ namespace adbGUI.Methods
 
         }
 
-        private void Watcher()
+        private static void Watcher()
         {
             while (true)
             {
@@ -84,14 +84,14 @@ namespace adbGUI.Methods
 
                         connectedDevices = dl.GetDevicesList.Count;
 
-                        DeviceChanged(this, dl);
+                        DeviceChanged(dl);
                     }
                 }
                 Thread.Sleep(750);
             }
         }
 
-        private List<string> ParseDevicesL(string input)
+        private static List<string> ParseDevicesL(string input)
         {
             List<string> listofserials = new List<string>();
 
@@ -125,7 +125,7 @@ namespace adbGUI.Methods
             return connectedDevices;
         }
 
-        private string StartProcessingGetDevices(string command)
+        private static string StartProcessingGetDevices(string command)
         {
             Process process2 = new Process
             {

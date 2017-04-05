@@ -641,7 +641,6 @@
             this.MaximizeBox = false;
             this.Name = "LogcatAdvanced";
             this.Text = "Logcat Advanced";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogcatAdvanced_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

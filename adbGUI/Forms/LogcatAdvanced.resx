@@ -120,9 +120,6 @@
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="txt_LogcatAdvancedFilter.ToolTip" xml:space="preserve">
     <value>A filter expression follows this format &lt;tag:priority&gt; , where tag indicates the tag of interest and priority indicates the minimum level of priority to report for that tag. 
 Messages for that tag at or above the specified priority are printed. 

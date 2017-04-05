@@ -64,12 +64,10 @@ namespace adbGUI
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 ||
-                    command.EndsWith("help") ||
-                    command.EndsWith("version"))//
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") || command.EndsWith("version") || command.StartsWith("adb connect") || command.StartsWith("adb disconnect"))
                 {
                     StopProcessing();
-                    Thread.Sleep(150);
+                    Thread.Sleep(50);
                     CommandExecutionStarted?.Invoke();
                     process.StandardInput.WriteLine(CommandParser(command, serialnumber));
                 }
@@ -81,7 +79,7 @@ namespace adbGUI
             else
             {
                 StopProcessing();
-                Thread.Sleep(150);
+                Thread.Sleep(50);
                 CommandExecutionStarted?.Invoke();
                 process.StandardInput.WriteLine(CommandParser(command, serialnumber));
             }
@@ -116,17 +114,11 @@ namespace adbGUI
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0)
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") || command.EndsWith("version") || command.StartsWith("adb connect") || command.StartsWith("adb disconnect"))
                 {
                     string output = "";
 
-                    Thread t = new Thread(
-                        () =>
-                        {
-                            output = StartProcessingReadToEnd(command, serialnumber);
-                        }
-                    )
-
+                    Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
                     {
                         IsBackground = true
                     };
@@ -149,13 +141,7 @@ namespace adbGUI
             {
                 string output = "";
 
-                Thread t = new Thread(
-                    () =>
-                    {
-                        output = StartProcessingReadToEnd(command, serialnumber);
-                    }
-                )
-
+                Thread t = new Thread(() =>{output = StartProcessingReadToEnd(command, serialnumber);})
                 {
                     IsBackground = true
                 };
@@ -188,12 +174,9 @@ namespace adbGUI
                 }
             };
 
-            //process2.StartInfo.EnvironmentVariables["Path"] = Environment.GetEnvironmentVariable("Path",EnvironmentVariableTarget.User);
-
             process2.Start();
 
             return process2.StandardOutput.ReadToEnd();
-
         }
 
         private string CommandParser(string @command, string @serialnumber)

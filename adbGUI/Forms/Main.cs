@@ -27,8 +27,6 @@ namespace adbGUI
 
         private CmdProcess cmdProcess = new CmdProcess();
 
-        private AdbDeviceWatcher dwAdb = new AdbDeviceWatcher();
-
         public MainForm()
         {
             InitializeComponent();
@@ -58,8 +56,8 @@ namespace adbGUI
             cbx_customCommand.Select();
 
             // Start the watcher which fires if adb devices changed
-            dwAdb.DeviceChanged += DwAdb_DeviceChanged;
-            dwAdb.StartDeviceWatcher();
+            AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
+            AdbDeviceWatcher.StartDeviceWatcher();
             
         }
 
@@ -85,7 +83,7 @@ namespace adbGUI
 
         }
 
-        private void DwAdb_DeviceChanged(AdbDeviceWatcher dw, AdbDeviceList e)
+        private void DwAdb_DeviceChanged(AdbDeviceList e)
         {
             try
             {
