@@ -51,6 +51,7 @@ namespace adbGUI
             rtb_console.Clear();
 
             cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
+            cmdProcess.ClearConsole += () => { rtb_console.Clear(); };
 
             // Select custom command control
             cbx_customCommand.Select();
@@ -58,7 +59,7 @@ namespace adbGUI
             // Start the watcher which fires if adb devices changed
             AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
             AdbDeviceWatcher.StartDeviceWatcher();
-            
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -131,11 +132,11 @@ namespace adbGUI
             try
             {
                 BeginInvoke((MethodInvoker)delegate () { rtb_console.AppendText(e.Data + Environment.NewLine); });
+                Thread.Sleep(2);
             }
             catch (Exception)
             { }
-
-            Thread.Sleep(3);
+            //Thread.Sleep(2);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -354,7 +355,7 @@ namespace adbGUI
             }
             else
             {
-                MessageBox.Show("No device connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No device connected. Please connect a device for adb commands.", "Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

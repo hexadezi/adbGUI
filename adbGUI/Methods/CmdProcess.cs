@@ -60,6 +60,8 @@ namespace adbGUI
             get { return process; }
         }
 
+        public event ClearConsoleHandler ClearConsole;
+        public delegate void ClearConsoleHandler();
         public void StartProcessing(string @command, string @serialnumber)
         {
             if (command.StartsWith("adb"))
@@ -73,9 +75,15 @@ namespace adbGUI
                 }
                 else
                 {
-                    MessageBox.Show("No device connected. Please connect a device for adb commands.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No device connected. Please connect a device for adb commands.", "Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            else if (command.StartsWith("cls"))
+            {
+                ClearConsole?.Invoke();
+            }
+
             else
             {
                 StopProcessing();
@@ -141,7 +149,7 @@ namespace adbGUI
             {
                 string output = "";
 
-                Thread t = new Thread(() =>{output = StartProcessingReadToEnd(command, serialnumber);})
+                Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
                 {
                     IsBackground = true
                 };
