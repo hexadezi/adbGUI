@@ -31,20 +31,6 @@ namespace adbGUI.Forms
             lbl_screenRecordSeconds.Text = trb_screenRecordTimeLimit.Value.ToString();
         }
 
-        private void Rab_screenRecordSaveLocal_CheckedChanged(object sender, EventArgs e)
-        {
-            rab_screenRecordSavePhone.Checked = !rab_screenRecordSaveLocal.Checked;
-            txt_ScreenRecordDestination.Clear();
-            lbl_ScreenRecordSlowVideo.Text = "Bug: Video will be slow";
-        }
-
-        private void Rab_screenRecordSavePhone_CheckedChanged(object sender, EventArgs e)
-        {
-            rab_screenRecordSaveLocal.Checked = !rab_screenRecordSavePhone.Checked;
-            txt_ScreenRecordDestination.Text = "/sdcard/record.mp4";
-            lbl_ScreenRecordSlowVideo.Text = "";
-        }
-
         private void Cbo_ScreenRecordCustomResolution_CheckedChanged(object sender, EventArgs e)
         {
             if (cbo_ScreenRecordCustomResolution.Checked)
@@ -81,28 +67,21 @@ namespace adbGUI.Forms
                 bitrate = " --bit-rate " + txt_ScreenRecordBitrate.Text + " ";
             }
 
-            if (rab_screenRecordSavePhone.Checked)
+
+            saveFileDialog.FileName = "record";
+            saveFileDialog.Filter = "Video File (*.mp4)|*.mp4";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string destination = txt_ScreenRecordDestination.Text;
-                adb.StartProcessing("adb shell screenrecord --verbose" + size + bitrate + timelimit + rotate + destination, formMethods.SelectedDevice());
+                string phoneDestination = "/sdcard/screenrecord.mp4";
+                string localDestination = saveFileDialog.FileName;
+
+                adb.StartProcessing("adb shell screenrecord --verbose" + size + bitrate + timelimit + rotate + phoneDestination, formMethods.SelectedDevice());
                 timer.Enabled = true;
+                adb.StartProcessing("adb pull " + phoneDestination + " " + localDestination + " && adb shell rm " + phoneDestination, formMethods.SelectedDevice());
             }
-            else
-            {
-                string destination = "";
 
-                saveFileDialog.FileName = "record";
-                saveFileDialog.Filter = "Video File (*.mp4)|*.mp4";
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    destination = saveFileDialog.FileName;
-                    txt_ScreenRecordDestination.Text = destination;
-                    adb.StartProcessing("shell screenrecord " + size + bitrate + timelimit + rotate + " --output-format=h264 - > " + destination, formMethods.SelectedDevice());
-                    timer.Enabled = true;
-                    adb.StartProcessing("shell pull " + destination + "C:\\Users\\labin\\Desktop", formMethods.SelectedDevice());
-                }
-            }
         }
 
         private void Btn_SreenRecordAbort_Click(object sender, EventArgs e)

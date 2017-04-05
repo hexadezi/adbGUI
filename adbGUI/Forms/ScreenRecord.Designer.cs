@@ -36,17 +36,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lbl_screenRecordSeconds = new System.Windows.Forms.Label();
             this.btn_screenRecordStart = new System.Windows.Forms.Button();
-            this.rab_screenRecordSaveLocal = new System.Windows.Forms.RadioButton();
-            this.rab_screenRecordSavePhone = new System.Windows.Forms.RadioButton();
             this.cbo_ScreenRecordRotate = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbo_ScreenRecordCustomResolution = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lbl_ScreenRecordSlowVideo = new System.Windows.Forms.Label();
-            this.txt_ScreenRecordDestination = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.btn_SreenRecordAbort = new System.Windows.Forms.Button();
@@ -55,7 +49,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,37 +110,13 @@
             // 
             // btn_screenRecordStart
             // 
-            this.btn_screenRecordStart.Location = new System.Drawing.Point(12, 319);
+            this.btn_screenRecordStart.Location = new System.Drawing.Point(12, 230);
             this.btn_screenRecordStart.Name = "btn_screenRecordStart";
             this.btn_screenRecordStart.Size = new System.Drawing.Size(100, 23);
             this.btn_screenRecordStart.TabIndex = 7;
             this.btn_screenRecordStart.Text = "Start";
             this.btn_screenRecordStart.UseVisualStyleBackColor = true;
             this.btn_screenRecordStart.Click += new System.EventHandler(this.Btn_screenRecordStart_Click);
-            // 
-            // rab_screenRecordSaveLocal
-            // 
-            this.rab_screenRecordSaveLocal.AutoSize = true;
-            this.rab_screenRecordSaveLocal.Location = new System.Drawing.Point(96, 20);
-            this.rab_screenRecordSaveLocal.Name = "rab_screenRecordSaveLocal";
-            this.rab_screenRecordSaveLocal.Size = new System.Drawing.Size(79, 17);
-            this.rab_screenRecordSaveLocal.TabIndex = 10;
-            this.rab_screenRecordSaveLocal.Text = "Save Local";
-            this.rab_screenRecordSaveLocal.UseVisualStyleBackColor = true;
-            this.rab_screenRecordSaveLocal.CheckedChanged += new System.EventHandler(this.Rab_screenRecordSaveLocal_CheckedChanged);
-            // 
-            // rab_screenRecordSavePhone
-            // 
-            this.rab_screenRecordSavePhone.AutoSize = true;
-            this.rab_screenRecordSavePhone.Checked = true;
-            this.rab_screenRecordSavePhone.Location = new System.Drawing.Point(6, 20);
-            this.rab_screenRecordSavePhone.Name = "rab_screenRecordSavePhone";
-            this.rab_screenRecordSavePhone.Size = new System.Drawing.Size(84, 17);
-            this.rab_screenRecordSavePhone.TabIndex = 11;
-            this.rab_screenRecordSavePhone.TabStop = true;
-            this.rab_screenRecordSavePhone.Text = "Save Phone";
-            this.rab_screenRecordSavePhone.UseVisualStyleBackColor = true;
-            this.rab_screenRecordSavePhone.CheckedChanged += new System.EventHandler(this.Rab_screenRecordSavePhone_CheckedChanged);
             // 
             // cbo_ScreenRecordRotate
             // 
@@ -204,47 +173,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Time Limit";
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.lbl_ScreenRecordSlowVideo);
-            this.groupBox4.Controls.Add(this.txt_ScreenRecordDestination);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.rab_screenRecordSaveLocal);
-            this.groupBox4.Controls.Add(this.rab_screenRecordSavePhone);
-            this.groupBox4.Location = new System.Drawing.Point(12, 230);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(206, 83);
-            this.groupBox4.TabIndex = 16;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Save Destination";
-            // 
-            // lbl_ScreenRecordSlowVideo
-            // 
-            this.lbl_ScreenRecordSlowVideo.AutoSize = true;
-            this.lbl_ScreenRecordSlowVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ScreenRecordSlowVideo.ForeColor = System.Drawing.Color.Red;
-            this.lbl_ScreenRecordSlowVideo.Location = new System.Drawing.Point(94, 40);
-            this.lbl_ScreenRecordSlowVideo.Name = "lbl_ScreenRecordSlowVideo";
-            this.lbl_ScreenRecordSlowVideo.Size = new System.Drawing.Size(0, 12);
-            this.lbl_ScreenRecordSlowVideo.TabIndex = 14;
-            // 
-            // txt_ScreenRecordDestination
-            // 
-            this.txt_ScreenRecordDestination.Location = new System.Drawing.Point(6, 56);
-            this.txt_ScreenRecordDestination.Name = "txt_ScreenRecordDestination";
-            this.txt_ScreenRecordDestination.Size = new System.Drawing.Size(194, 20);
-            this.txt_ScreenRecordDestination.TabIndex = 13;
-            this.txt_ScreenRecordDestination.Text = "/sdcard/record.mp4";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Destination";
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.cbo_ScreenRecordRotate);
@@ -257,7 +185,7 @@
             // 
             // btn_SreenRecordAbort
             // 
-            this.btn_SreenRecordAbort.Location = new System.Drawing.Point(118, 319);
+            this.btn_SreenRecordAbort.Location = new System.Drawing.Point(118, 230);
             this.btn_SreenRecordAbort.Name = "btn_SreenRecordAbort";
             this.btn_SreenRecordAbort.Size = new System.Drawing.Size(100, 23);
             this.btn_SreenRecordAbort.TabIndex = 18;
@@ -274,10 +202,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 355);
+            this.ClientSize = new System.Drawing.Size(230, 265);
             this.Controls.Add(this.btn_SreenRecordAbort);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -293,8 +220,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
@@ -310,20 +235,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_screenRecordSeconds;
         private System.Windows.Forms.Button btn_screenRecordStart;
-        private System.Windows.Forms.RadioButton rab_screenRecordSaveLocal;
-        private System.Windows.Forms.RadioButton rab_screenRecordSavePhone;
         private System.Windows.Forms.CheckBox cbo_ScreenRecordRotate;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox cbo_ScreenRecordCustomResolution;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_ScreenRecordDestination;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button btn_SreenRecordAbort;
-        private System.Windows.Forms.Label lbl_ScreenRecordSlowVideo;
         private System.Windows.Forms.Timer timer;
     }
 }

@@ -136,7 +136,6 @@ namespace adbGUI
             }
             catch (Exception)
             { }
-            //Thread.Sleep(2);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
