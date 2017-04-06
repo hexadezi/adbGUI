@@ -103,9 +103,9 @@ namespace adbGUI.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap power_button_off {
+        internal static System.Drawing.Bitmap power {
             get {
-                object obj = ResourceManager.GetObject("power-button-off", resourceCulture);
+                object obj = ResourceManager.GetObject("power", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
