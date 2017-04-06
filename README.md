@@ -2,11 +2,8 @@
 
 
 #### Screenshots
-Some screenshots
+This is the main window.
 ![new gui](screenshot/main.PNG)  
-![new gui](screenshot/logcatadvanced.PNG)  
-![new gui](screenshot/screenrecorder.PNG)  
-
-
 
 #### Download
+- [latest version](https://github.com/labo89/adbGUI/releases/latest)
