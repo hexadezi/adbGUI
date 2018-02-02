@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace adbGUI
 {
-    public class FormMethods
+    public class FormMethods : IDisposable
     {
         private MainForm frm;
 
@@ -17,6 +15,11 @@ namespace adbGUI
         {
             //Pass the MainForm instance
             frm = f;
+        }
+
+        public void Dispose()
+        {
+            adb.Dispose();
         }
 
         public string SelectedDevice()

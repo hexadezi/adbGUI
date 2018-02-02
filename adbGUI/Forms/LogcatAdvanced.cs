@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI.Forms
 {
-    public partial class LogcatAdvanced : Form
+    public partial class LogcatAdvanced : Form, IDisposable
     {
         CmdProcess adb;
         CmdProcess altAdb = new CmdProcess();
@@ -34,6 +27,12 @@ namespace adbGUI.Forms
 
             altAdb.CommandExecutionStarted += AltAdb_CommandExecutionStarted;
         }
+
+        public new void Dispose()
+        {
+            altAdb.Dispose();
+        }
+
 
         private void AltAdb_CommandExecutionStarted()
         {
@@ -303,8 +302,6 @@ namespace adbGUI.Forms
         private string GetOutputFilter()
         {
             string outputFilter = "";
-
-            string customOutputFilter = "";
 
             if (!String.IsNullOrEmpty(txt_LogcatAdvancedFilter.Text.Trim()))
             {

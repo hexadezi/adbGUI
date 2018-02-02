@@ -3,15 +3,13 @@ using adbGUI.Methods;
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace adbGUI
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IDisposable
     {
         private ScreenRecord screenRecord;
         private SpoofMac spoofMac;
@@ -59,6 +57,14 @@ namespace adbGUI
             // Start the watcher which fires if adb devices changed
             AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
             AdbDeviceWatcher.StartDeviceWatcher();
+
+        }
+
+        public new void Dispose()
+        {
+            logcatAdvanced.Dispose();
+            cmdProcess.Dispose();
+            formMethods.Dispose();
 
         }
 
@@ -126,7 +132,6 @@ namespace adbGUI
             }
         }
 
-        Color clr = new Color();
         private void AppendReceivedData(object sender, DataReceivedEventArgs e)
         {
             try
@@ -401,7 +406,6 @@ namespace adbGUI
 
         private void Tsb_AlwaysClearConsole_Click(object sender, EventArgs e)
         {
-            if (tsb_AlwaysClearConsole.Checked = !tsb_AlwaysClearConsole.Checked) ;
         }
 
         private void Tsb_Power_Click(object sender, EventArgs e)

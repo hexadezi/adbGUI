@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -11,7 +10,7 @@ using adbGUI.Methods;
 
 namespace adbGUI
 {
-    public class CmdProcess
+    public class CmdProcess : IDisposable
     {
         // Thanks to Vitaliy Fedorchenko
         internal const int CTRL_C_EVENT = 0;
@@ -34,7 +33,6 @@ namespace adbGUI
 
         Process process = new Process
         {
-
             StartInfo = new ProcessStartInfo
             {
                 FileName = "cmd",
@@ -45,10 +43,16 @@ namespace adbGUI
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
-                StandardOutputEncoding = System.Text.Encoding.GetEncoding(437),
-                StandardErrorEncoding = System.Text.Encoding.GetEncoding(437)
+                StandardOutputEncoding = System.Text.Encoding.GetEncoding(866),
+                StandardErrorEncoding = System.Text.Encoding.GetEncoding(866)
             }
         };
+
+        public void Dispose()
+        {
+            process.Dispose();
+        }
+
 
         public CmdProcess()
         {
@@ -193,7 +197,7 @@ namespace adbGUI
             {
                 command = command.Remove(0, 4);
 
-                if (command.StartsWith("shell") || command.StartsWith("shell screencap"))
+                if (command.Contains("shell"))
                 {
                     command = command.Remove(0, 5);
                     command = "exec-out" + command;
@@ -353,7 +357,7 @@ namespace adbGUI
 
             ZipFile.ExtractToDirectory(downloadToTempPath, Path.GetTempPath());
 
-            ExtractionCompleted();
+            ExtractionCompleted?.Invoke();
         }
 
         private static void DependenciesChecker_ExtractionCompleted()

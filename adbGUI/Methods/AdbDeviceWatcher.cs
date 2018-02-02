@@ -84,7 +84,7 @@ namespace adbGUI.Methods
 
                         connectedDevices = dl.GetDevicesList.Count;
 
-                        DeviceChanged(dl);
+                        DeviceChanged?.Invoke(dl);
                     }
                 }
                 Thread.Sleep(750);
