@@ -2,7 +2,6 @@
 using adbGUI.Methods;
 using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -20,9 +19,7 @@ namespace adbGUI
         private Sideload sideLoad;
         private BackupRestore backupRestore;
         private LogcatAdvanced logcatAdvanced;
-
         public FormMethods formMethods;
-
         private CmdProcess cmdProcess = new CmdProcess();
 
         public MainForm()
@@ -65,7 +62,6 @@ namespace adbGUI
             logcatAdvanced.Dispose();
             cmdProcess.Dispose();
             formMethods.Dispose();
-
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

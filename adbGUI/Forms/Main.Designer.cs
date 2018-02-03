@@ -29,136 +29,136 @@
             private void InitializeComponent()
             {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Files");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Sideload");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("All User");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Max User");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("IMEI");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Accounts");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Backup Restore");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Phone", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Screenshot");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Screenrecord");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Resolution");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Density");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Display", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Get Prop");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Set Prop");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Prop", new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Processes");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Memory");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Battery Service State");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Collected Battery Stats");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Reset Battery Stats");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20,
-            treeNode21});
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Alarm Manager State");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Uptime");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("CPU Info");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Diskstats");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Permissions");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Filesystem");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Remount System");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("System", new System.Windows.Forms.TreeNode[] {
-            treeNode16,
-            treeNode17,
-            treeNode18,
-            treeNode22,
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26,
-            treeNode27,
-            treeNode28,
-            treeNode29});
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Network Traffic");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Netstat");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("WiFi Info");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Hosts");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Network Info");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Spoof MAC");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
-            treeNode31,
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35,
-            treeNode36});
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("All packages");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Libraries");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Features");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Install and Uninstall");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
-            treeNode38,
-            treeNode39,
-            treeNode40,
-            treeNode41});
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Logcat Live");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Logcat Dump");
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Clear all buffers");
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Logcat Advanced");
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Verbose");
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Debug");
-            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Info");
-            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Warning");
-            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Error");
-            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Fatal");
-            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Silent");
-            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Filter", new System.Windows.Forms.TreeNode[] {
-            treeNode47,
-            treeNode48,
-            treeNode49,
-            treeNode50,
-            treeNode51,
-            treeNode52,
-            treeNode53});
-            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Logcat", new System.Windows.Forms.TreeNode[] {
-            treeNode43,
-            treeNode44,
-            treeNode45,
-            treeNode46,
-            treeNode54});
-            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Dumpsys");
-            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("Kernel Messages");
-            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("Logs", new System.Windows.Forms.TreeNode[] {
-            treeNode55,
-            treeNode56,
-            treeNode57});
-            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("Devices");
-            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Reboot Normal");
-            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("Reboot Bootloader");
-            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("Help");
-            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Version");
-            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("Fastboot", new System.Windows.Forms.TreeNode[] {
-            treeNode59,
-            treeNode60,
-            treeNode61,
-            treeNode62,
-            treeNode63});
-            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Help");
-            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Version");
-            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
-            treeNode65,
-            treeNode66});
-            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Credits");
-            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("About", new System.Windows.Forms.TreeNode[] {
-            treeNode67,
-            treeNode68});
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("Files");
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("Sideload");
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("All User");
+            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("Max User");
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("IMEI");
+            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("Accounts");
+            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("Backup Restore");
+            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("Phone", new System.Windows.Forms.TreeNode[] {
+            treeNode70,
+            treeNode71,
+            treeNode72,
+            treeNode73,
+            treeNode74,
+            treeNode75,
+            treeNode76});
+            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("Screenshot");
+            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("Screenrecord");
+            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("Resolution");
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Density");
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("Display", new System.Windows.Forms.TreeNode[] {
+            treeNode78,
+            treeNode79,
+            treeNode80,
+            treeNode81});
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("Get Prop");
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Set Prop");
+            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("Prop", new System.Windows.Forms.TreeNode[] {
+            treeNode83,
+            treeNode84});
+            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("Processes");
+            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("Memory");
+            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("Battery Service State");
+            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("Collected Battery Stats");
+            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("Reset Battery Stats");
+            System.Windows.Forms.TreeNode treeNode91 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
+            treeNode88,
+            treeNode89,
+            treeNode90});
+            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("Alarm Manager State");
+            System.Windows.Forms.TreeNode treeNode93 = new System.Windows.Forms.TreeNode("Uptime");
+            System.Windows.Forms.TreeNode treeNode94 = new System.Windows.Forms.TreeNode("CPU Info");
+            System.Windows.Forms.TreeNode treeNode95 = new System.Windows.Forms.TreeNode("Diskstats");
+            System.Windows.Forms.TreeNode treeNode96 = new System.Windows.Forms.TreeNode("Permissions");
+            System.Windows.Forms.TreeNode treeNode97 = new System.Windows.Forms.TreeNode("Filesystem");
+            System.Windows.Forms.TreeNode treeNode98 = new System.Windows.Forms.TreeNode("Remount System");
+            System.Windows.Forms.TreeNode treeNode99 = new System.Windows.Forms.TreeNode("System", new System.Windows.Forms.TreeNode[] {
+            treeNode85,
+            treeNode86,
+            treeNode87,
+            treeNode91,
+            treeNode92,
+            treeNode93,
+            treeNode94,
+            treeNode95,
+            treeNode96,
+            treeNode97,
+            treeNode98});
+            System.Windows.Forms.TreeNode treeNode100 = new System.Windows.Forms.TreeNode("Network Traffic");
+            System.Windows.Forms.TreeNode treeNode101 = new System.Windows.Forms.TreeNode("Netstat");
+            System.Windows.Forms.TreeNode treeNode102 = new System.Windows.Forms.TreeNode("WiFi Info");
+            System.Windows.Forms.TreeNode treeNode103 = new System.Windows.Forms.TreeNode("Hosts");
+            System.Windows.Forms.TreeNode treeNode104 = new System.Windows.Forms.TreeNode("Network Info");
+            System.Windows.Forms.TreeNode treeNode105 = new System.Windows.Forms.TreeNode("Spoof MAC");
+            System.Windows.Forms.TreeNode treeNode106 = new System.Windows.Forms.TreeNode("Network", new System.Windows.Forms.TreeNode[] {
+            treeNode100,
+            treeNode101,
+            treeNode102,
+            treeNode103,
+            treeNode104,
+            treeNode105});
+            System.Windows.Forms.TreeNode treeNode107 = new System.Windows.Forms.TreeNode("All packages");
+            System.Windows.Forms.TreeNode treeNode108 = new System.Windows.Forms.TreeNode("Libraries");
+            System.Windows.Forms.TreeNode treeNode109 = new System.Windows.Forms.TreeNode("Features");
+            System.Windows.Forms.TreeNode treeNode110 = new System.Windows.Forms.TreeNode("Install and Uninstall");
+            System.Windows.Forms.TreeNode treeNode111 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
+            treeNode107,
+            treeNode108,
+            treeNode109,
+            treeNode110});
+            System.Windows.Forms.TreeNode treeNode112 = new System.Windows.Forms.TreeNode("Logcat Live");
+            System.Windows.Forms.TreeNode treeNode113 = new System.Windows.Forms.TreeNode("Logcat Dump");
+            System.Windows.Forms.TreeNode treeNode114 = new System.Windows.Forms.TreeNode("Clear all buffers");
+            System.Windows.Forms.TreeNode treeNode115 = new System.Windows.Forms.TreeNode("Logcat Advanced");
+            System.Windows.Forms.TreeNode treeNode116 = new System.Windows.Forms.TreeNode("Verbose");
+            System.Windows.Forms.TreeNode treeNode117 = new System.Windows.Forms.TreeNode("Debug");
+            System.Windows.Forms.TreeNode treeNode118 = new System.Windows.Forms.TreeNode("Info");
+            System.Windows.Forms.TreeNode treeNode119 = new System.Windows.Forms.TreeNode("Warning");
+            System.Windows.Forms.TreeNode treeNode120 = new System.Windows.Forms.TreeNode("Error");
+            System.Windows.Forms.TreeNode treeNode121 = new System.Windows.Forms.TreeNode("Fatal");
+            System.Windows.Forms.TreeNode treeNode122 = new System.Windows.Forms.TreeNode("Silent");
+            System.Windows.Forms.TreeNode treeNode123 = new System.Windows.Forms.TreeNode("Filter", new System.Windows.Forms.TreeNode[] {
+            treeNode116,
+            treeNode117,
+            treeNode118,
+            treeNode119,
+            treeNode120,
+            treeNode121,
+            treeNode122});
+            System.Windows.Forms.TreeNode treeNode124 = new System.Windows.Forms.TreeNode("Logcat", new System.Windows.Forms.TreeNode[] {
+            treeNode112,
+            treeNode113,
+            treeNode114,
+            treeNode115,
+            treeNode123});
+            System.Windows.Forms.TreeNode treeNode125 = new System.Windows.Forms.TreeNode("Dumpsys");
+            System.Windows.Forms.TreeNode treeNode126 = new System.Windows.Forms.TreeNode("Kernel Messages");
+            System.Windows.Forms.TreeNode treeNode127 = new System.Windows.Forms.TreeNode("Logs", new System.Windows.Forms.TreeNode[] {
+            treeNode124,
+            treeNode125,
+            treeNode126});
+            System.Windows.Forms.TreeNode treeNode128 = new System.Windows.Forms.TreeNode("Devices");
+            System.Windows.Forms.TreeNode treeNode129 = new System.Windows.Forms.TreeNode("Reboot Normal");
+            System.Windows.Forms.TreeNode treeNode130 = new System.Windows.Forms.TreeNode("Reboot Bootloader");
+            System.Windows.Forms.TreeNode treeNode131 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode132 = new System.Windows.Forms.TreeNode("Version");
+            System.Windows.Forms.TreeNode treeNode133 = new System.Windows.Forms.TreeNode("Fastboot", new System.Windows.Forms.TreeNode[] {
+            treeNode128,
+            treeNode129,
+            treeNode130,
+            treeNode131,
+            treeNode132});
+            System.Windows.Forms.TreeNode treeNode134 = new System.Windows.Forms.TreeNode("Help");
+            System.Windows.Forms.TreeNode treeNode135 = new System.Windows.Forms.TreeNode("Version");
+            System.Windows.Forms.TreeNode treeNode136 = new System.Windows.Forms.TreeNode("Adb", new System.Windows.Forms.TreeNode[] {
+            treeNode134,
+            treeNode135});
+            System.Windows.Forms.TreeNode treeNode137 = new System.Windows.Forms.TreeNode("Credits");
+            System.Windows.Forms.TreeNode treeNode138 = new System.Windows.Forms.TreeNode("About", new System.Windows.Forms.TreeNode[] {
+            treeNode136,
+            treeNode137});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.txt_DevicesAdb = new System.Windows.Forms.TextBox();
             this.btn_executeCommand = new System.Windows.Forms.Button();
@@ -224,213 +224,213 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.trv_commandTreeView.Location = new System.Drawing.Point(12, 39);
             this.trv_commandTreeView.Name = "trv_commandTreeView";
-            treeNode1.Name = "Knoten0";
-            treeNode1.Tag = "#files";
-            treeNode1.Text = "Files";
-            treeNode2.Name = "Knoten2";
-            treeNode2.Tag = "#sideload";
-            treeNode2.Text = "Sideload";
-            treeNode3.Name = "Knoten15";
-            treeNode3.Tag = "adb shell pm list users";
-            treeNode3.Text = "All User";
-            treeNode4.Name = "Knoten17";
-            treeNode4.Tag = "adb shell pm get-max-users";
-            treeNode4.Text = "Max User";
-            treeNode5.Name = "Knoten19";
-            treeNode5.Tag = "adb shell service call iphonesubinfo 1";
-            treeNode5.Text = "IMEI";
-            treeNode6.Name = "Knoten27";
-            treeNode6.Tag = "adb shell dumpsys account";
-            treeNode6.Text = "Accounts";
-            treeNode7.Name = "Knoten3";
-            treeNode7.Tag = "#backuprestore";
-            treeNode7.Text = "Backup Restore";
-            treeNode8.Name = "Knoten3";
-            treeNode8.Text = "Phone";
-            treeNode9.Name = "Knoten31";
-            treeNode9.Tag = "#screenshot";
-            treeNode9.Text = "Screenshot";
-            treeNode9.ToolTipText = "Take a screenshot";
-            treeNode10.Name = "Knoten0";
-            treeNode10.Tag = "#screenrecord";
-            treeNode10.Text = "Screenrecord";
-            treeNode10.ToolTipText = "Record screen up to 3 minutes";
-            treeNode11.Name = "Knoten1";
-            treeNode11.Tag = "#resolution";
-            treeNode11.Text = "Resolution";
-            treeNode11.ToolTipText = "Change Resolution";
-            treeNode12.Name = "Knoten2";
-            treeNode12.Tag = "#density";
-            treeNode12.Text = "Density";
-            treeNode13.Name = "Knoten0";
-            treeNode13.Text = "Display";
-            treeNode14.Name = "Knoten4";
-            treeNode14.Tag = "adb shell getprop";
-            treeNode14.Text = "Get Prop";
-            treeNode15.Name = "Knoten1";
-            treeNode15.Tag = "#prop";
-            treeNode15.Text = "Set Prop";
-            treeNode16.Name = "Knoten0";
-            treeNode16.Text = "Prop";
-            treeNode17.Name = "Knoten8";
-            treeNode17.Tag = "adb shell ps";
-            treeNode17.Text = "Processes";
-            treeNode18.Name = "Knoten9";
-            treeNode18.Tag = "adb shell dumpsys meminfo";
-            treeNode18.Text = "Memory";
-            treeNode19.Name = "Knoten1";
-            treeNode19.Tag = "adb shell dumpsys battery";
-            treeNode19.Text = "Battery Service State";
-            treeNode20.Name = "Knoten2";
-            treeNode20.Tag = "adb shell dumpsys batterystats";
-            treeNode20.Text = "Collected Battery Stats";
-            treeNode21.Name = "Knoten3";
-            treeNode21.Tag = "adb shell dumpsys batterystats --reset";
-            treeNode21.Text = "Reset Battery Stats";
-            treeNode22.Name = "Knoten22";
-            treeNode22.Tag = "";
-            treeNode22.Text = "Battery";
-            treeNode23.Name = "Knoten12";
-            treeNode23.Tag = "adb shell dumpsys alarm";
-            treeNode23.Text = "Alarm Manager State";
-            treeNode24.Name = "Knoten16";
-            treeNode24.Tag = "adb shell uptime";
-            treeNode24.Text = "Uptime";
-            treeNode25.Name = "Knoten24";
-            treeNode25.Tag = "adb shell dumpsys cpuinfo";
-            treeNode25.Text = "CPU Info";
-            treeNode26.Name = "Knoten26";
-            treeNode26.Tag = "adb shell dumpsys diskstats";
-            treeNode26.Text = "Diskstats";
-            treeNode27.Name = "Knoten28";
-            treeNode27.Tag = "adb shell pm list permissions";
-            treeNode27.Text = "Permissions";
-            treeNode28.Name = "Knoten0";
-            treeNode28.Tag = "adb shell df -h";
-            treeNode28.Text = "Filesystem";
-            treeNode29.Name = "Knoten0";
-            treeNode29.Tag = "adb remount";
-            treeNode29.Text = "Remount System";
-            treeNode30.Name = "Knoten0";
-            treeNode30.Text = "System";
-            treeNode31.Name = "Knoten7";
-            treeNode31.Tag = "adb shell iftop";
-            treeNode31.Text = "Network Traffic";
-            treeNode32.Name = "Knoten25";
-            treeNode32.Tag = "adb shell netstat";
-            treeNode32.Text = "Netstat";
-            treeNode33.Name = "Knoten23";
-            treeNode33.Tag = "adb shell dumpsys wifi";
-            treeNode33.Text = "WiFi Info";
-            treeNode34.Name = "Knoten29";
-            treeNode34.Tag = "adb shell cat /etc/hosts";
-            treeNode34.Text = "Hosts";
-            treeNode35.Name = "Knoten0";
-            treeNode35.Tag = "adb shell ifconfig";
-            treeNode35.Text = "Network Info";
-            treeNode36.Name = "Knoten3";
-            treeNode36.Tag = "#spoofmac";
-            treeNode36.Text = "Spoof MAC";
-            treeNode37.Name = "Knoten1";
-            treeNode37.Text = "Network";
-            treeNode38.Name = "Knoten11";
-            treeNode38.Tag = "adb shell pm list packages -f";
-            treeNode38.Text = "All packages";
-            treeNode39.Name = "Knoten13";
-            treeNode39.Tag = "adb shell pm list libraries";
-            treeNode39.Text = "Libraries";
-            treeNode40.Name = "Knoten10";
-            treeNode40.Tag = "adb shell \"pm list features | cut -c9- | sort\\";
-            treeNode40.Text = "Features";
-            treeNode41.Name = "Knoten1";
-            treeNode41.Tag = "#installuninstall";
-            treeNode41.Text = "Install and Uninstall";
-            treeNode42.Name = "Knoten2";
-            treeNode42.Text = "Packages";
-            treeNode43.Name = "Knoten1";
-            treeNode43.Tag = "adb logcat";
-            treeNode43.Text = "Logcat Live";
-            treeNode44.Name = "Knoten6";
-            treeNode44.Tag = "adb logcat -d";
-            treeNode44.Text = "Logcat Dump";
-            treeNode45.Name = "Knoten0";
-            treeNode45.Tag = "adb logcat -b all -c";
-            treeNode45.Text = "Clear all buffers";
-            treeNode46.Name = "Knoten0";
-            treeNode46.Tag = "#logcatadvanced";
-            treeNode46.Text = "Logcat Advanced";
-            treeNode47.Name = "Knoten4";
-            treeNode47.Tag = "adb logcat *:V";
-            treeNode47.Text = "Verbose";
-            treeNode48.Name = "Knoten5";
-            treeNode48.Tag = "adb logcat *:D";
-            treeNode48.Text = "Debug";
-            treeNode49.Name = "Knoten6";
-            treeNode49.Tag = "adb logcat *:I";
-            treeNode49.Text = "Info";
-            treeNode50.Name = "Knoten7";
-            treeNode50.Tag = "adb logcat *:W";
-            treeNode50.Text = "Warning";
-            treeNode51.Name = "Knoten8";
-            treeNode51.Tag = "adb logcat *:E";
-            treeNode51.Text = "Error";
-            treeNode52.Name = "Knoten9";
-            treeNode52.Tag = "adb logcat *:F";
-            treeNode52.Text = "Fatal";
-            treeNode53.Name = "Knoten11";
-            treeNode53.Tag = "adb logcat *:S";
-            treeNode53.Text = "Silent";
-            treeNode54.Name = "Knoten3";
-            treeNode54.Text = "Filter";
-            treeNode55.Name = "Knoten0";
-            treeNode55.Text = "Logcat";
-            treeNode56.Name = "Knoten5";
-            treeNode56.Tag = "adb shell dumpsys";
-            treeNode56.Text = "Dumpsys";
-            treeNode57.Name = "Knoten21";
-            treeNode57.Tag = "adb shell dmesg";
-            treeNode57.Text = "Kernel Messages";
-            treeNode58.Name = "Knoten20";
-            treeNode58.Text = "Logs";
-            treeNode59.Name = "Knoten2";
-            treeNode59.Tag = "fastboot devices";
-            treeNode59.Text = "Devices";
-            treeNode60.Name = "Knoten4";
-            treeNode60.Tag = "fastboot reboot";
-            treeNode60.Text = "Reboot Normal";
-            treeNode61.Name = "Knoten3";
-            treeNode61.Tag = "fastboot reboot bootloader";
-            treeNode61.Text = "Reboot Bootloader";
-            treeNode62.Name = "Knoten1";
-            treeNode62.Tag = "fastboot help";
-            treeNode62.Text = "Help";
-            treeNode63.Name = "Knoten3";
-            treeNode63.Tag = "fastboot --version";
-            treeNode63.Text = "Version";
-            treeNode64.Name = "Knoten0";
-            treeNode64.Text = "Fastboot";
-            treeNode65.Name = "Knoten1";
-            treeNode65.Tag = "adb help";
-            treeNode65.Text = "Help";
-            treeNode66.Name = "Knoten2";
-            treeNode66.Tag = "adb version";
-            treeNode66.Text = "Version";
-            treeNode67.Name = "Knoten0";
-            treeNode67.Text = "Adb";
-            treeNode68.Name = "Knoten1";
-            treeNode68.Tag = "#credits";
-            treeNode68.Text = "Credits";
-            treeNode69.Name = "Knoten0";
-            treeNode69.Text = "About";
+            treeNode70.Name = "Knoten0";
+            treeNode70.Tag = "#files";
+            treeNode70.Text = "Files";
+            treeNode71.Name = "Knoten2";
+            treeNode71.Tag = "#sideload";
+            treeNode71.Text = "Sideload";
+            treeNode72.Name = "Knoten15";
+            treeNode72.Tag = "adb shell pm list users";
+            treeNode72.Text = "All User";
+            treeNode73.Name = "Knoten17";
+            treeNode73.Tag = "adb shell pm get-max-users";
+            treeNode73.Text = "Max User";
+            treeNode74.Name = "Knoten19";
+            treeNode74.Tag = "adb shell service call iphonesubinfo 1";
+            treeNode74.Text = "IMEI";
+            treeNode75.Name = "Knoten27";
+            treeNode75.Tag = "adb shell dumpsys account";
+            treeNode75.Text = "Accounts";
+            treeNode76.Name = "Knoten3";
+            treeNode76.Tag = "#backuprestore";
+            treeNode76.Text = "Backup Restore";
+            treeNode77.Name = "Knoten3";
+            treeNode77.Text = "Phone";
+            treeNode78.Name = "Knoten31";
+            treeNode78.Tag = "#screenshot";
+            treeNode78.Text = "Screenshot";
+            treeNode78.ToolTipText = "Take a screenshot";
+            treeNode79.Name = "Knoten0";
+            treeNode79.Tag = "#screenrecord";
+            treeNode79.Text = "Screenrecord";
+            treeNode79.ToolTipText = "Record screen up to 3 minutes";
+            treeNode80.Name = "Knoten1";
+            treeNode80.Tag = "#resolution";
+            treeNode80.Text = "Resolution";
+            treeNode80.ToolTipText = "Change Resolution";
+            treeNode81.Name = "Knoten2";
+            treeNode81.Tag = "#density";
+            treeNode81.Text = "Density";
+            treeNode82.Name = "Knoten0";
+            treeNode82.Text = "Display";
+            treeNode83.Name = "Knoten4";
+            treeNode83.Tag = "adb shell getprop";
+            treeNode83.Text = "Get Prop";
+            treeNode84.Name = "Knoten1";
+            treeNode84.Tag = "#prop";
+            treeNode84.Text = "Set Prop";
+            treeNode85.Name = "Knoten0";
+            treeNode85.Text = "Prop";
+            treeNode86.Name = "Knoten8";
+            treeNode86.Tag = "adb shell ps";
+            treeNode86.Text = "Processes";
+            treeNode87.Name = "Knoten9";
+            treeNode87.Tag = "adb shell dumpsys meminfo";
+            treeNode87.Text = "Memory";
+            treeNode88.Name = "Knoten1";
+            treeNode88.Tag = "adb shell dumpsys battery";
+            treeNode88.Text = "Battery Service State";
+            treeNode89.Name = "Knoten2";
+            treeNode89.Tag = "adb shell dumpsys batterystats";
+            treeNode89.Text = "Collected Battery Stats";
+            treeNode90.Name = "Knoten3";
+            treeNode90.Tag = "adb shell dumpsys batterystats --reset";
+            treeNode90.Text = "Reset Battery Stats";
+            treeNode91.Name = "Knoten22";
+            treeNode91.Tag = "";
+            treeNode91.Text = "Battery";
+            treeNode92.Name = "Knoten12";
+            treeNode92.Tag = "adb shell dumpsys alarm";
+            treeNode92.Text = "Alarm Manager State";
+            treeNode93.Name = "Knoten16";
+            treeNode93.Tag = "adb shell uptime";
+            treeNode93.Text = "Uptime";
+            treeNode94.Name = "Knoten24";
+            treeNode94.Tag = "adb shell dumpsys cpuinfo";
+            treeNode94.Text = "CPU Info";
+            treeNode95.Name = "Knoten26";
+            treeNode95.Tag = "adb shell dumpsys diskstats";
+            treeNode95.Text = "Diskstats";
+            treeNode96.Name = "Knoten28";
+            treeNode96.Tag = "adb shell pm list permissions";
+            treeNode96.Text = "Permissions";
+            treeNode97.Name = "Knoten0";
+            treeNode97.Tag = "adb shell df -h";
+            treeNode97.Text = "Filesystem";
+            treeNode98.Name = "Knoten0";
+            treeNode98.Tag = "adb remount";
+            treeNode98.Text = "Remount System";
+            treeNode99.Name = "Knoten0";
+            treeNode99.Text = "System";
+            treeNode100.Name = "Knoten7";
+            treeNode100.Tag = "adb shell iftop";
+            treeNode100.Text = "Network Traffic";
+            treeNode101.Name = "Knoten25";
+            treeNode101.Tag = "adb shell netstat";
+            treeNode101.Text = "Netstat";
+            treeNode102.Name = "Knoten23";
+            treeNode102.Tag = "adb shell dumpsys wifi";
+            treeNode102.Text = "WiFi Info";
+            treeNode103.Name = "Knoten29";
+            treeNode103.Tag = "adb shell cat /etc/hosts";
+            treeNode103.Text = "Hosts";
+            treeNode104.Name = "Knoten0";
+            treeNode104.Tag = "adb shell ifconfig";
+            treeNode104.Text = "Network Info";
+            treeNode105.Name = "Knoten3";
+            treeNode105.Tag = "#spoofmac";
+            treeNode105.Text = "Spoof MAC";
+            treeNode106.Name = "Knoten1";
+            treeNode106.Text = "Network";
+            treeNode107.Name = "Knoten11";
+            treeNode107.Tag = "adb shell pm list packages -f";
+            treeNode107.Text = "All packages";
+            treeNode108.Name = "Knoten13";
+            treeNode108.Tag = "adb shell pm list libraries";
+            treeNode108.Text = "Libraries";
+            treeNode109.Name = "Knoten10";
+            treeNode109.Tag = "adb shell \"pm list features | cut -c9- | sort\\";
+            treeNode109.Text = "Features";
+            treeNode110.Name = "Knoten1";
+            treeNode110.Tag = "#installuninstall";
+            treeNode110.Text = "Install and Uninstall";
+            treeNode111.Name = "Knoten2";
+            treeNode111.Text = "Packages";
+            treeNode112.Name = "Knoten1";
+            treeNode112.Tag = "adb logcat";
+            treeNode112.Text = "Logcat Live";
+            treeNode113.Name = "Knoten6";
+            treeNode113.Tag = "adb logcat -d";
+            treeNode113.Text = "Logcat Dump";
+            treeNode114.Name = "Knoten0";
+            treeNode114.Tag = "adb logcat -b all -c";
+            treeNode114.Text = "Clear all buffers";
+            treeNode115.Name = "Knoten0";
+            treeNode115.Tag = "#logcatadvanced";
+            treeNode115.Text = "Logcat Advanced";
+            treeNode116.Name = "Knoten4";
+            treeNode116.Tag = "adb logcat *:V";
+            treeNode116.Text = "Verbose";
+            treeNode117.Name = "Knoten5";
+            treeNode117.Tag = "adb logcat *:D";
+            treeNode117.Text = "Debug";
+            treeNode118.Name = "Knoten6";
+            treeNode118.Tag = "adb logcat *:I";
+            treeNode118.Text = "Info";
+            treeNode119.Name = "Knoten7";
+            treeNode119.Tag = "adb logcat *:W";
+            treeNode119.Text = "Warning";
+            treeNode120.Name = "Knoten8";
+            treeNode120.Tag = "adb logcat *:E";
+            treeNode120.Text = "Error";
+            treeNode121.Name = "Knoten9";
+            treeNode121.Tag = "adb logcat *:F";
+            treeNode121.Text = "Fatal";
+            treeNode122.Name = "Knoten11";
+            treeNode122.Tag = "adb logcat *:S";
+            treeNode122.Text = "Silent";
+            treeNode123.Name = "Knoten3";
+            treeNode123.Text = "Filter";
+            treeNode124.Name = "Knoten0";
+            treeNode124.Text = "Logcat";
+            treeNode125.Name = "Knoten5";
+            treeNode125.Tag = "adb shell dumpsys";
+            treeNode125.Text = "Dumpsys";
+            treeNode126.Name = "Knoten21";
+            treeNode126.Tag = "adb shell dmesg";
+            treeNode126.Text = "Kernel Messages";
+            treeNode127.Name = "Knoten20";
+            treeNode127.Text = "Logs";
+            treeNode128.Name = "Knoten2";
+            treeNode128.Tag = "fastboot devices";
+            treeNode128.Text = "Devices";
+            treeNode129.Name = "Knoten4";
+            treeNode129.Tag = "fastboot reboot";
+            treeNode129.Text = "Reboot Normal";
+            treeNode130.Name = "Knoten3";
+            treeNode130.Tag = "fastboot reboot bootloader";
+            treeNode130.Text = "Reboot Bootloader";
+            treeNode131.Name = "Knoten1";
+            treeNode131.Tag = "fastboot help";
+            treeNode131.Text = "Help";
+            treeNode132.Name = "Knoten3";
+            treeNode132.Tag = "fastboot --version";
+            treeNode132.Text = "Version";
+            treeNode133.Name = "Knoten0";
+            treeNode133.Text = "Fastboot";
+            treeNode134.Name = "Knoten1";
+            treeNode134.Tag = "adb help";
+            treeNode134.Text = "Help";
+            treeNode135.Name = "Knoten2";
+            treeNode135.Tag = "adb version";
+            treeNode135.Text = "Version";
+            treeNode136.Name = "Knoten0";
+            treeNode136.Text = "Adb";
+            treeNode137.Name = "Knoten1";
+            treeNode137.Tag = "#credits";
+            treeNode137.Text = "Credits";
+            treeNode138.Name = "Knoten0";
+            treeNode138.Text = "About";
             this.trv_commandTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode13,
-            treeNode30,
-            treeNode37,
-            treeNode42,
-            treeNode58,
-            treeNode64,
-            treeNode69});
+            treeNode77,
+            treeNode82,
+            treeNode99,
+            treeNode106,
+            treeNode111,
+            treeNode127,
+            treeNode133,
+            treeNode138});
             this.trv_commandTreeView.Size = new System.Drawing.Size(200, 510);
             this.trv_commandTreeView.TabIndex = 0;
             this.trv_commandTreeView.DoubleClick += new System.EventHandler(this.Trv_commandTreeView_DoubleClick);
