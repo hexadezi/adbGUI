@@ -21,7 +21,7 @@ namespace adbGUI
         private LogcatAdvanced logcatAdvanced;
         public FormMethods formMethods;
         private CmdProcess cmdProcess = new CmdProcess();
-
+        
         public MainForm()
         {
             InitializeComponent();
@@ -56,14 +56,7 @@ namespace adbGUI
             AdbDeviceWatcher.StartDeviceWatcher();
 
         }
-
-        public new void Dispose()
-        {
-            logcatAdvanced.Dispose();
-            cmdProcess.Dispose();
-            formMethods.Dispose();
-        }
-
+        
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -446,6 +439,13 @@ namespace adbGUI
                     break;
             }
 
+        }
+
+        public new void Dispose()
+        {
+            cmdProcess.Dispose();
+            formMethods.Dispose();
+            logcatAdvanced.Dispose();
         }
     }
 }

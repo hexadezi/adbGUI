@@ -31,8 +31,10 @@ namespace adbGUI
         public event CommandExecutionStoppedHandler CommandExecutionStopped;
         public delegate void CommandExecutionStoppedHandler();
 
+        
         Process process = new Process
         {
+
             StartInfo = new ProcessStartInfo
             {
                 FileName = "cmd",
@@ -46,13 +48,13 @@ namespace adbGUI
                 StandardOutputEncoding = System.Text.Encoding.GetEncoding(866),
                 StandardErrorEncoding = System.Text.Encoding.GetEncoding(866)
             }
+
         };
 
         public void Dispose()
         {
             process.Dispose();
         }
-
 
         public CmdProcess()
         {
@@ -63,6 +65,8 @@ namespace adbGUI
         {
             get { return process; }
         }
+
+        public Process Process { get => process; set => process = value; }
 
         public event ClearConsoleHandler ClearConsole;
         public delegate void ClearConsoleHandler();

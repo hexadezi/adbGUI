@@ -113,7 +113,6 @@ namespace adbGUI.Methods
                             listofserials.Add(line = line.Substring(0, line.IndexOf(' ')));
                         }
                     }
-                    s.Close();
 
                 }
             }

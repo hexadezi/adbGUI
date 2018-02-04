@@ -28,12 +28,7 @@ namespace adbGUI.Forms
             altAdb.CommandExecutionStarted += AltAdb_CommandExecutionStarted;
         }
 
-        public new void Dispose()
-        {
-            altAdb.Dispose();
-        }
-
-
+     
         private void AltAdb_CommandExecutionStarted()
         {
             BeginInvoke((MethodInvoker)delegate ()
@@ -408,6 +403,11 @@ namespace adbGUI.Forms
             lOut.Close();
             lOut.Dispose();
             altAdb.GetProcess.Close();
+        }
+
+        public new void Dispose()
+        {
+            altAdb.Dispose();
         }
     }
 }
