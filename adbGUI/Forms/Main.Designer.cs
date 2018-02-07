@@ -188,7 +188,6 @@
             this.tsb_AdbRoot = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tsb_AdbUnroot = new System.Windows.Forms.ToolStripButton();
-            this.tsb_AlwaysClearConsole = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -219,7 +218,6 @@
             // 
             // trv_commandTreeView
             // 
-            this.trv_commandTreeView.AllowDrop = true;
             this.trv_commandTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.trv_commandTreeView.Location = new System.Drawing.Point(12, 39);
@@ -246,6 +244,7 @@
             treeNode76.Tag = "#backuprestore";
             treeNode76.Text = "Backup Restore";
             treeNode77.Name = "Knoten3";
+            treeNode77.Tag = "0";
             treeNode77.Text = "Phone";
             treeNode78.Name = "Knoten31";
             treeNode78.Tag = "#screenshot";
@@ -263,6 +262,7 @@
             treeNode81.Tag = "#density";
             treeNode81.Text = "Density";
             treeNode82.Name = "Knoten0";
+            treeNode82.Tag = "0";
             treeNode82.Text = "Display";
             treeNode83.Name = "Knoten4";
             treeNode83.Tag = "adb shell getprop";
@@ -271,6 +271,7 @@
             treeNode84.Tag = "#prop";
             treeNode84.Text = "Set Prop";
             treeNode85.Name = "Knoten0";
+            treeNode85.Tag = "0";
             treeNode85.Text = "Prop";
             treeNode86.Name = "Knoten8";
             treeNode86.Tag = "adb shell ps";
@@ -312,6 +313,7 @@
             treeNode98.Tag = "adb remount";
             treeNode98.Text = "Remount System";
             treeNode99.Name = "Knoten0";
+            treeNode99.Tag = "0";
             treeNode99.Text = "System";
             treeNode100.Name = "Knoten7";
             treeNode100.Tag = "adb shell iftop";
@@ -332,6 +334,7 @@
             treeNode105.Tag = "#spoofmac";
             treeNode105.Text = "Spoof MAC";
             treeNode106.Name = "Knoten1";
+            treeNode106.Tag = "0";
             treeNode106.Text = "Network";
             treeNode107.Name = "Knoten11";
             treeNode107.Tag = "adb shell pm list packages -f";
@@ -346,6 +349,7 @@
             treeNode110.Tag = "#installuninstall";
             treeNode110.Text = "Install and Uninstall";
             treeNode111.Name = "Knoten2";
+            treeNode111.Tag = "0";
             treeNode111.Text = "Packages";
             treeNode112.Name = "Knoten1";
             treeNode112.Tag = "adb logcat";
@@ -381,8 +385,10 @@
             treeNode122.Tag = "adb logcat *:S";
             treeNode122.Text = "Silent";
             treeNode123.Name = "Knoten3";
+            treeNode123.Tag = "0";
             treeNode123.Text = "Filter";
             treeNode124.Name = "Knoten0";
+            treeNode124.Tag = "0";
             treeNode124.Text = "Logcat";
             treeNode125.Name = "Knoten5";
             treeNode125.Tag = "adb shell dumpsys";
@@ -391,6 +397,7 @@
             treeNode126.Tag = "adb shell dmesg";
             treeNode126.Text = "Kernel Messages";
             treeNode127.Name = "Knoten20";
+            treeNode127.Tag = "0";
             treeNode127.Text = "Logs";
             treeNode128.Name = "Knoten2";
             treeNode128.Tag = "fastboot devices";
@@ -408,6 +415,7 @@
             treeNode132.Tag = "fastboot --version";
             treeNode132.Text = "Version";
             treeNode133.Name = "Knoten0";
+            treeNode133.Tag = "0";
             treeNode133.Text = "Fastboot";
             treeNode134.Name = "Knoten1";
             treeNode134.Tag = "adb help";
@@ -416,11 +424,13 @@
             treeNode135.Tag = "adb version";
             treeNode135.Text = "Version";
             treeNode136.Name = "Knoten0";
+            treeNode136.Tag = "0";
             treeNode136.Text = "Adb";
             treeNode137.Name = "Knoten1";
             treeNode137.Tag = "#credits";
             treeNode137.Text = "Credits";
             treeNode138.Name = "Knoten0";
+            treeNode138.Tag = "0";
             treeNode138.Text = "About";
             this.trv_commandTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode77,
@@ -508,8 +518,7 @@
             this.tsb_OpenShell,
             this.tsb_AdbRoot,
             this.toolStripLabel1,
-            this.tsb_AdbUnroot,
-            this.tsb_AlwaysClearConsole});
+            this.tsb_AdbUnroot});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(12, 10, 11, 3);
@@ -678,19 +687,6 @@
             this.tsb_AdbUnroot.Text = "ADB Unroot";
             this.tsb_AdbUnroot.Click += new System.EventHandler(this.Tsb_AdbUnroot_Click);
             // 
-            // tsb_AlwaysClearConsole
-            // 
-            this.tsb_AlwaysClearConsole.AutoToolTip = false;
-            this.tsb_AlwaysClearConsole.Checked = true;
-            this.tsb_AlwaysClearConsole.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsb_AlwaysClearConsole.Image = global::adbGUI.Properties.Resources.eraser;
-            this.tsb_AlwaysClearConsole.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_AlwaysClearConsole.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
-            this.tsb_AlwaysClearConsole.Name = "tsb_AlwaysClearConsole";
-            this.tsb_AlwaysClearConsole.Size = new System.Drawing.Size(123, 20);
-            this.tsb_AlwaysClearConsole.Text = "Alway Clear Console";
-            this.tsb_AlwaysClearConsole.Click += new System.EventHandler(this.Tsb_AlwaysClearConsole_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -740,7 +736,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton tsb_AdbUnroot;
         internal System.Windows.Forms.ToolStripComboBox tsc_ConnectedDevices;
-        internal System.Windows.Forms.ToolStripButton tsb_AlwaysClearConsole;
         private System.Windows.Forms.ToolStripDropDownButton tsd_Power;
         private System.Windows.Forms.ToolStripMenuItem tsm_PowerRebootNormal;
         private System.Windows.Forms.ToolStripMenuItem tsm_PowerRebootRecovery;

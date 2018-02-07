@@ -5,22 +5,15 @@ namespace adbGUI
 {
     internal static class Program
     {
-        /// <summary>
-        /// Der Haupteinstiegspunkt für die Anwendung.
-        /// </summary>
+
         [STAThread]
         private static void Main()
         {
-
-
-
-            CheckAndDownloadDependencies.Start();
-
-
+            try { CheckAndDownloadDependencies.Start(); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             Application.Run(new MainForm());
             
         }

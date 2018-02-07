@@ -66,7 +66,6 @@ namespace adbGUI
             get { return process; }
         }
 
-        public Process Process { get => process; set => process = value; }
 
         public event ClearConsoleHandler ClearConsole;
         public delegate void ClearConsoleHandler();
@@ -122,7 +121,6 @@ namespace adbGUI
                 }
                 return true;
             }
-
             return false;
         }
 
@@ -247,20 +245,23 @@ namespace adbGUI
     public static class CheckAndDownloadDependencies
     {
         private static string downloadToTempPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
-
         private static string[] strFiles = { "adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe", "libwinpthread-1.dll" };
-
+        
         public static void Start()
         {
-            if (!EnvironmentVariableExists())
-            {
+
                 if (!CheckIfFilesExist())
                 {
                     DialogResult dialogResult = MessageBox.Show("Enviroment Variables not set and files missing. \nShould all dependencies be downloaded and extracted?", "Error: Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        DownloadFiles();
+                        try
+                        {
+                            DownloadFiles();
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
                     }
 
                     else if (dialogResult == DialogResult.No)
@@ -268,57 +269,6 @@ namespace adbGUI
                         Environment.Exit(0);
                     }
                 }
-            }
-        }
-
-        public static bool EnvironmentVariableExists()
-        {
-            string adb = Environment.ExpandEnvironmentVariables("adb.exe");
-
-            string fastboot = Environment.ExpandEnvironmentVariables("fastboot.exe");
-
-
-
-            string pathsUsr = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
-
-            string[] pathsUsrArr = pathsUsr.Split(new char[1] { Path.PathSeparator });
-
-            if (Path.GetDirectoryName(adb) == String.Empty)
-            {
-                foreach (string item in pathsUsrArr)
-                {
-                    string path = item.Trim();
-
-                    if (File.Exists(Path.Combine(path, adb)) && File.Exists(Path.Combine(path, fastboot)))
-                    {
-                        return true;
-                    }
-
-                }
-
-            }
-
-
-            string pathsSys = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine);
-
-            string[] pathsSysArr = pathsSys.Split(new char[1] { Path.PathSeparator });
-
-            if (Path.GetDirectoryName(adb) == String.Empty)
-            {
-                foreach (string item in pathsSysArr)
-                {
-                    string path = item.Trim();
-
-                    if (File.Exists(Path.Combine(path, adb)) && File.Exists(Path.Combine(path, fastboot)))
-                    {
-                        return true;
-                    }
-
-                }
-
-            }
-
-            return false;
 
         }
 
@@ -375,7 +325,7 @@ namespace adbGUI
                 {
                     File.Copy(extractedFilesPath + "\\" + item, item);
                 }
-                catch (Exception) { }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
 
             }
 

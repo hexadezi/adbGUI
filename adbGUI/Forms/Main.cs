@@ -31,7 +31,6 @@ namespace adbGUI
 
             cmdProcess.GetProcess.Start();
 
-
             // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
             cmdProcess.GetProcess.BeginOutputReadLine();
             cmdProcess.GetProcess.CancelOutputRead();
@@ -71,10 +70,7 @@ namespace adbGUI
         {
             BeginInvoke((MethodInvoker)delegate ()
             {
-                if (tsb_AlwaysClearConsole.Checked)
-                {
-                    rtb_console.Clear();
-                }
+                rtb_console.Clear();
             });
 
         }
@@ -89,10 +85,7 @@ namespace adbGUI
                     txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
                 });
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Btn_consoleClear_Click(object sender, EventArgs e)
@@ -128,8 +121,7 @@ namespace adbGUI
                 BeginInvoke((MethodInvoker)delegate () { rtb_console.AppendText(e.Data + Environment.NewLine); });
                 Thread.Sleep(2);
             }
-            catch (Exception)
-            { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -150,12 +142,12 @@ namespace adbGUI
             {
                 string tag;
 
-                if ((tag = trv_commandTreeView.SelectedNode.Tag.ToString()) != null)
+                if (!String.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString()))
                 {
 
                     if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
                     {
-                        // seriennummer für fastboot implementieren
+                        // Implement serial number for fastboot
                         cmdProcess.StartProcessing(tag, formMethods.SelectedDevice());
                     }
 
@@ -168,7 +160,6 @@ namespace adbGUI
                                 break;
 
                             case "#screenshot":
-
                                 if (!String.IsNullOrEmpty(formMethods.SelectedDevice()))
                                 {
                                     saveFileDialog.FileName = "screenshot_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
@@ -178,7 +169,6 @@ namespace adbGUI
                                         cmdProcess.StartProcessing("adb shell screencap -p > " + saveFileDialog.FileName, formMethods.SelectedDevice());
                                     }
                                 }
-
                                 break;
 
                             case "#screenrecord":
@@ -297,7 +287,7 @@ namespace adbGUI
 
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Btn_adbRoot_Click(object sender, EventArgs e)
@@ -323,8 +313,7 @@ namespace adbGUI
                 cmdProcess.GetProcess.Kill();
                 cmdProcess.GetProcess.Dispose();
             }
-            catch (Exception)
-            { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Tsb_OpenShell_Click(object sender, EventArgs e)
@@ -393,10 +382,6 @@ namespace adbGUI
             cmdProcess.StartProcessing("adb unroot", formMethods.SelectedDevice());
         }
 
-        private void Tsb_AlwaysClearConsole_Click(object sender, EventArgs e)
-        {
-        }
-
         private void Tsb_Power_Click(object sender, EventArgs e)
         {
             switch (sender.ToString())
@@ -447,5 +432,7 @@ namespace adbGUI
             formMethods.Dispose();
             logcatAdvanced.Dispose();
         }
+
+
     }
 }

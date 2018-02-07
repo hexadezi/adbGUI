@@ -70,8 +70,7 @@ namespace adbGUI.Forms
             {
                 BeginInvoke((MethodInvoker)delegate () { lOut.rtb_console.AppendText(e.Data + Environment.NewLine); });
             }
-            catch (Exception)
-            { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
             Thread.Sleep(3);
 

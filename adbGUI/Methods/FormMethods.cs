@@ -72,14 +72,7 @@ namespace adbGUI
 
         public bool AlwaysClearConsole()
         {
-            if (frm.tsb_AlwaysClearConsole.Checked)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
     }
