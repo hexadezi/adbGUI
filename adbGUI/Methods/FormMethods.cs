@@ -19,7 +19,8 @@ namespace adbGUI
 
         public void Dispose()
         {
-            adb.Dispose();
+            adb?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public string SelectedDevice()

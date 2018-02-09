@@ -311,7 +311,7 @@ namespace adbGUI
             {
                 //adb.StopProcessing();
                 cmdProcess.GetProcess.Kill();
-                cmdProcess.GetProcess.Dispose();
+                
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -428,11 +428,13 @@ namespace adbGUI
 
         public new void Dispose()
         {
-            cmdProcess.Dispose();
-            formMethods.Dispose();
-            logcatAdvanced.Dispose();
+            logcatAdvanced?.Dispose();
+            cmdProcess?.Dispose();
+            formMethods?.Dispose();
+            cmdProcess.GetProcess?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
-
+        
     }
 }

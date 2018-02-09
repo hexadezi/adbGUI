@@ -53,7 +53,8 @@ namespace adbGUI
 
         public void Dispose()
         {
-            process.Dispose();
+            process?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public CmdProcess()

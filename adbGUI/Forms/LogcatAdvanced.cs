@@ -400,13 +400,14 @@ namespace adbGUI.Forms
         private void LogcatAdvanced_FormClosing(object sender, FormClosingEventArgs e)
         {
             lOut.Close();
-            lOut.Dispose();
             altAdb.GetProcess.Close();
         }
 
         public new void Dispose()
         {
-            altAdb.Dispose();
+            altAdb?.Dispose();
+            lOut?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
