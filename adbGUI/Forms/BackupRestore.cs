@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI.Forms
 {
@@ -7,26 +9,24 @@ namespace adbGUI.Forms
     {
         // todo backup restore testen
 
-        private CmdProcess adb;
-        private FormMethods formMethods;
+        private readonly CmdProcess _adb;
+        private readonly FormMethods _formMethods;
 
         public BackupRestore(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
 
-            adb = adbFrm;
-            formMethods = formMethodsFrm;
+            _adb = adbFrm;
+            _formMethods = formMethodsFrm;
         }
 
         private void Btn_BackupBrowse_Click(object sender, EventArgs e)
         {
-            saveFileDialog.FileName = "backup_" + DateTime.Now.ToString().Replace(' ', '_').Replace(':', '.');
-            saveFileDialog.Filter = " .ab|*.ab";
+            saveFileDialog.FileName = "backup_" + DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(' ', '_')
+                                          .Replace(':', '.');
+            saveFileDialog.Filter = @" .ab|*.ab";
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_BackupPathTo.Text = saveFileDialog.FileName;
-            }
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) txt_BackupPathTo.Text = saveFileDialog.FileName;
         }
 
         private void Btn_BackupStart_Click(object sender, EventArgs e)
@@ -42,25 +42,17 @@ namespace adbGUI.Forms
             {
                 if (txt_BackupPathTo.Text == "")
                 {
-                    MessageBox.Show("Please select a destination!", "Error", MessageBoxButtons.OK,
-                          MessageBoxIcon.Error);
+                    MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
                 else
                 {
-                    if (cbo_BackupWithApk.Checked)
-                    {
-                        apk = " -apk";
-                    }
-                    if (cbo_BackupShared.Checked)
-                    {
-                        shared = " -shared";
-                    }
-                    if (cbo_BackupNoSystem.Checked)
-                    {
-                        system = " -nosystem";
-                    }
+                    if (cbo_BackupWithApk.Checked) apk = " -apk";
+                    if (cbo_BackupShared.Checked) shared = " -shared";
+                    if (cbo_BackupNoSystem.Checked) system = " -nosystem";
 
-                    adb.StartProcessing("adb backup" + apk + shared + all + system + name, formMethods.SelectedDevice());
+                    _adb.StartProcessing("adb backup" + apk + shared + all + system + name,
+                        _formMethods.SelectedDevice());
                 }
             }
             else
@@ -68,14 +60,10 @@ namespace adbGUI.Forms
                 var package = cbx_BackupPackage.SelectedItem.ToString();
 
                 if (txt_BackupPathTo.Text == "")
-                {
-                    MessageBox.Show("Please select a destination!", "Error", MessageBoxButtons.OK,
-                          MessageBoxIcon.Error);
-                }
+                    MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 else
-                {
-                    adb.StartProcessing("adb backup -apk " + package + name, formMethods.SelectedDevice());
-                }
+                    _adb.StartProcessing("adb backup -apk " + package + name, _formMethods.SelectedDevice());
             }
         }
 
@@ -95,21 +83,17 @@ namespace adbGUI.Forms
                 groupBox8.Enabled = false;
                 groupBox14.Enabled = false;
 
-                string output = adb.StartProcessingInThread("adb shell pm list packages -3", formMethods.SelectedDevice());
+                var output =
+                    _adb.StartProcessingInThread("adb shell pm list packages -3", _formMethods.SelectedDevice());
 
-                if (!String.IsNullOrEmpty(output))
+                if (!string.IsNullOrEmpty(output))
                 {
-                    foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
-                    {
+                    foreach (var item in output.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries))
                         cbx_BackupPackage.Items.Add(item.Remove(0, 8));
-                    }
 
                     cbx_BackupPackage.Sorted = true;
 
-                    if (cbx_BackupPackage.Items.Count > 0)
-                    {
-                        cbx_BackupPackage.SelectedIndex = 0;
-                    }
+                    if (cbx_BackupPackage.Items.Count > 0) cbx_BackupPackage.SelectedIndex = 0;
                 }
 
                 groupBox8.Enabled = true;
@@ -124,31 +108,22 @@ namespace adbGUI.Forms
                 cbx_BackupPackage.Items.Clear();
                 label8.Visible = false;
             }
-
         }
 
         private void Btn_RestoreStart_Click(object sender, EventArgs e)
         {
             if (txt_RestorePath.Text == "")
-            {
-                MessageBox.Show("Please select a file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
-            {
-                adb.StartProcessing("adb restore \"" + txt_RestorePath.Text + "\"", formMethods.SelectedDevice());
-            }
+                _adb.StartProcessing("adb restore \"" + txt_RestorePath.Text + "\"", _formMethods.SelectedDevice());
         }
 
         private void Btn_RestoreBrowse_Click(object sender, EventArgs e)
         {
             openFileDialog.FileName = "";
-            openFileDialog.Filter = " .ab|*.ab";
+            openFileDialog.Filter = @" .ab|*.ab";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_RestorePath.Text = openFileDialog.FileName;
-            }
+            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_RestorePath.Text = openFileDialog.FileName;
         }
-
     }
 }

@@ -166,14 +166,16 @@
     <Compile Include="Forms\SpoofMac.Designer.cs">
       <DependentUpon>SpoofMac.cs</DependentUpon>
     </Compile>
+    <Compile Include="Methods\AdbDeviceList.cs" />
+    <Compile Include="Methods\CheckAndDownloadDependencies.cs" />
     <Compile Include="Methods\CmdProcess.cs" />
     <Compile Include="Methods\AdbDeviceWatcher.cs" />
     <Compile Include="Methods\FormMethods.cs" />
-    <Compile Include="Forms\Main.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Methods\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,8 +205,8 @@
     <EmbeddedResource Include="Forms\LogcatOutput.resx">
       <DependentUpon>LogcatOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResolutionChange.resx">
       <DependentUpon>ResolutionChange.cs</DependentUpon>

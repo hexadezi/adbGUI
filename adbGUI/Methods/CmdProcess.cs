@@ -1,40 +1,31 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
-using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using adbGUI.Methods;
 
-namespace adbGUI
+namespace adbGUI.Methods
 {
     public class CmdProcess : IDisposable
     {
-        // Thanks to Vitaliy Fedorchenko
-        internal const int CTRL_C_EVENT = 0;
-        [DllImport("kernel32.dll")]
-        internal static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
-        [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool AttachConsole(uint dwProcessId);
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        internal static extern bool FreeConsole();
-        [DllImport("kernel32.dll")]
-        static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate HandlerRoutine, bool Add);
-        // Delegate type to be used as the Handler Routine for SCCH
-        delegate Boolean ConsoleCtrlDelegate(uint CtrlType);
+        public delegate void ClearConsoleHandler();
 
-        public event CommandExecutionStartedHandler CommandExecutionStarted;
         public delegate void CommandExecutionStartedHandler();
 
-        public event CommandExecutionStoppedHandler CommandExecutionStopped;
         public delegate void CommandExecutionStoppedHandler();
 
-        
-        Process process = new Process
-        {
+        // Thanks to Vitaliy Fedorchenko
+        internal const int CtrlCEvent = 0;
 
+
+        public CmdProcess()
+        {
+            GetProcess.EnableRaisingEvents = true;
+        }
+
+        public Process GetProcess { get; } = new Process
+        {
             StartInfo = new ProcessStartInfo
             {
                 FileName = "cmd",
@@ -45,45 +36,53 @@ namespace adbGUI
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
-                StandardOutputEncoding = System.Text.Encoding.GetEncoding(866),
-                StandardErrorEncoding = System.Text.Encoding.GetEncoding(866)
+                StandardOutputEncoding = Encoding.GetEncoding(866),
+                StandardErrorEncoding = Encoding.GetEncoding(866)
             }
-
         };
 
         public void Dispose()
         {
-            process?.Dispose();
+            GetProcess?.Dispose();
             GC.SuppressFinalize(this);
         }
 
-        public CmdProcess()
-        {
-            process.EnableRaisingEvents = true;
-        }
+        [DllImport("kernel32.dll")]
+        internal static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
 
-        public Process GetProcess
-        {
-            get { return process; }
-        }
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern bool AttachConsole(uint dwProcessId);
+
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        internal static extern bool FreeConsole();
+
+        [DllImport("kernel32.dll")]
+        private static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate handlerRoutine, bool add);
+
+        public event CommandExecutionStartedHandler CommandExecutionStarted;
+
+        public event CommandExecutionStoppedHandler CommandExecutionStopped;
 
 
         public event ClearConsoleHandler ClearConsole;
-        public delegate void ClearConsoleHandler();
-        public void StartProcessing(string @command, string @serialnumber)
+
+        public void StartProcessing(string command, string serialnumber)
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") || command.EndsWith("version") || command.StartsWith("adb connect") || command.StartsWith("adb disconnect"))
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") ||
+                    command.EndsWith("version") || command.StartsWith("adb connect") ||
+                    command.StartsWith("adb disconnect"))
                 {
                     StopProcessing();
                     Thread.Sleep(50);
                     CommandExecutionStarted?.Invoke();
-                    process.StandardInput.WriteLine(CommandParser(command, serialnumber));
+                    GetProcess.StandardInput.WriteLine(CommandParser(command, serialnumber));
                 }
                 else
                 {
-                    MessageBox.Show("No device connected. Please connect a device for adb commands.", "Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(@"No device connected. Please connect a device for adb commands.",
+                        @"Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -97,53 +96,44 @@ namespace adbGUI
                 StopProcessing();
                 Thread.Sleep(50);
                 CommandExecutionStarted?.Invoke();
-                process.StandardInput.WriteLine(CommandParser(command, serialnumber));
+                GetProcess.StandardInput.WriteLine(CommandParser(command, serialnumber));
             }
-
         }
 
         public bool StopProcessing()
         {
-            if (AttachConsole((uint)GetProcess.Id))
+            if (!AttachConsole((uint) GetProcess.Id)) return false;
+            SetConsoleCtrlHandler(null, true);
+            try
             {
-                SetConsoleCtrlHandler(null, true);
-                try
-                {
-                    if (!GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0))
-                    {
-                        return false;
-                    }
-
-                }
-                finally
-                {
-                    FreeConsole();
-                    CommandExecutionStopped?.Invoke();
-                }
-                return true;
+                if (!GenerateConsoleCtrlEvent(CtrlCEvent, 0)) return false;
             }
-            return false;
+            finally
+            {
+                FreeConsole();
+                CommandExecutionStopped?.Invoke();
+            }
+
+            return true;
         }
 
-        public string StartProcessingInThread(string @command, string @serialnumber)
+        public string StartProcessingInThread(string command, string serialnumber)
         {
             if (command.StartsWith("adb"))
-            {
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") || command.EndsWith("version") || command.StartsWith("adb connect") || command.StartsWith("adb disconnect"))
+                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") ||
+                    command.EndsWith("version") || command.StartsWith("adb connect") ||
+                    command.StartsWith("adb disconnect"))
                 {
-                    string output = "";
+                    var output = "";
 
-                    Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
+                    var t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
                     {
                         IsBackground = true
                     };
 
                     t.Start();
 
-                    while (t.IsAlive)
-                    {
-                        Application.DoEvents();
-                    }
+                    while (t.IsAlive) Application.DoEvents();
 
                     return output;
                 }
@@ -151,31 +141,26 @@ namespace adbGUI
                 {
                     return null;
                 }
-            }
-            else
-            {
-                string output = "";
 
-                Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
+            {
+                var output = "";
+
+                var t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
                 {
                     IsBackground = true
                 };
 
                 t.Start();
 
-                while (t.IsAlive)
-                {
-                    Application.DoEvents();
-                }
+                while (t.IsAlive) Application.DoEvents();
 
                 return output;
             }
         }
 
-        private string StartProcessingReadToEnd(string command, string serialnumber)
+        private static string StartProcessingReadToEnd(string command, string serialnumber)
         {
-
-            Process process2 = new Process
+            var process2 = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -185,7 +170,7 @@ namespace adbGUI
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    RedirectStandardInput = true,
+                    RedirectStandardInput = true
                 }
             };
 
@@ -194,7 +179,7 @@ namespace adbGUI
             return process2.StandardOutput.ReadToEnd();
         }
 
-        private string CommandParser(string @command, string @serialnumber)
+        private static string CommandParser(string command, string serialnumber)
         {
             if (command.StartsWith("adb "))
             {
@@ -205,137 +190,32 @@ namespace adbGUI
                     command = command.Remove(0, 5);
                     command = "exec-out" + command;
                 }
-                if (command.StartsWith("logcat"))
-                {
-                    command = "exec-out " + command;
-                }
 
-                string serial = "";
+                if (command.StartsWith("logcat")) command = "exec-out " + command;
+
+                var serial = "";
 
                 if (!string.IsNullOrEmpty(serialnumber))
-                {
                     serial += "-s " + serialnumber + " ";
-                }
                 else
-                {
                     serial = "";
-                }
 
-                string fullcommand = "adb " + serial + command;
+                var fullcommand = "adb " + serial + command;
 
                 return fullcommand;
-
             }
-            else if (command.StartsWith("fastboot "))
+
+            if (!command.StartsWith("fastboot ")) return command;
             {
                 command = command.Remove(0, 9);
 
-                string fullcommand = "fastboot " + command;
+                var fullcommand = "fastboot " + command;
 
                 return fullcommand;
             }
-            else
-            {
-                return command;
-            }
-
         }
 
+        // Delegate type to be used as the Handler Routine for SCCH
+        private delegate bool ConsoleCtrlDelegate(uint ctrlType);
     }
-
-    public static class CheckAndDownloadDependencies
-    {
-        private static string downloadToTempPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
-        private static string[] strFiles = { "adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe", "libwinpthread-1.dll" };
-        
-        public static void Start()
-        {
-
-                if (!CheckIfFilesExist())
-                {
-                    DialogResult dialogResult = MessageBox.Show("Enviroment Variables not set and files missing. \nShould all dependencies be downloaded and extracted?", "Error: Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        try
-                        {
-                            DownloadFiles();
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                    }
-
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        Environment.Exit(0);
-                    }
-                }
-
-        }
-
-        private static bool CheckIfFilesExist()
-        {
-            foreach (var item in strFiles)
-            {
-                if (!File.Exists(item))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private static void DownloadFiles()
-        {
-            ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
-            WebClient wc = new WebClient();
-            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-            wc.DownloadFileTaskAsync(new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"), downloadToTempPath);
-        }
-
-        private static void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            Thread tr = new Thread(new ThreadStart(ExtractFiles));
-            tr.Start();
-        }
-
-        private static event ExtractionCompletedHandler ExtractionCompleted;
-
-        private delegate void ExtractionCompletedHandler();
-
-        private static void ExtractFiles()
-        {
-            if (Directory.Exists(Path.GetTempPath() + "platform-tools"))
-            {
-                Directory.Delete(Path.GetTempPath() + "platform-tools", true);
-            }
-
-            ZipFile.ExtractToDirectory(downloadToTempPath, Path.GetTempPath());
-
-            ExtractionCompleted?.Invoke();
-        }
-
-        private static void DependenciesChecker_ExtractionCompleted()
-        {
-            string extractedFilesPath = Path.GetTempPath() + "platform-tools";
-
-
-            foreach (var item in strFiles)
-            {
-                try
-                {
-                    File.Copy(extractedFilesPath + "\\" + item, item);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-            }
-
-            ExtractionCompleted -= DependenciesChecker_ExtractionCompleted;
-
-            MessageBox.Show("Files downloaded, decompressed and moved successfully", "Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        }
-
-    }
-
 }

@@ -1,31 +1,32 @@
 ﻿using System;
 using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI.Forms
 {
     public partial class Sideload : Form
     {
-        private CmdProcess adb;
-        private FormMethods formMethods;
+        private readonly CmdProcess _adb;
+        private readonly FormMethods _formMethods;
 
         public Sideload(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
 
-            adb = adbFrm;
-            formMethods = formMethodsFrm;
+            _adb = adbFrm;
+            _formMethods = formMethodsFrm;
         }
 
         private void Btn_SideloadStart_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(txt_SideloadPath.Text))
+            if (!string.IsNullOrEmpty(txt_SideloadPath.Text))
             {
                 var s = "adb sideload \"" + txt_SideloadPath.Text + "\"";
-                adb.StartProcessing(s, formMethods.SelectedDevice());
+                _adb.StartProcessing(s, _formMethods.SelectedDevice());
             }
             else
             {
-                MessageBox.Show("Please select a file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -34,10 +35,7 @@ namespace adbGUI.Forms
             openFileDialog.FileName = "";
             openFileDialog.Filter = @" .zip|*.zip";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txt_SideloadPath.Text = openFileDialog.FileName;
-            }
+            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_SideloadPath.Text = openFileDialog.FileName;
         }
     }
 }

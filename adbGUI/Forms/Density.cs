@@ -1,51 +1,46 @@
 ﻿using System;
 using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI.Forms
 {
     public partial class Density : Form
     {
-        private CmdProcess adb;
-        private FormMethods formMethods;
+        private readonly CmdProcess _adb;
+        private readonly FormMethods _formMethods;
 
         public Density(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
-            adb = adbFrm;
-            formMethods = formMethodsFrm;
+            _adb = adbFrm;
+            _formMethods = formMethodsFrm;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Escape)
-            {
-                this.Close();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
+            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
+            Close();
+            return true;
         }
 
         private void Btn_showDpi_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("adb shell wm density", formMethods.SelectedDevice());
+            _adb.StartProcessing("adb shell wm density", _formMethods.SelectedDevice());
         }
 
         private void Btn_setDpi_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("adb shell wm density " + txt_phoneDpi.Text, formMethods.SelectedDevice());
+            _adb.StartProcessing("adb shell wm density " + txt_phoneDpi.Text, _formMethods.SelectedDevice());
         }
 
         private void Btn_resetDpi_Click(object sender, EventArgs e)
         {
-            adb.StartProcessing("adb shell wm density reset", formMethods.SelectedDevice());
+            _adb.StartProcessing("adb shell wm density reset", _formMethods.SelectedDevice());
         }
 
         private void DpiChange_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
+            if (e.KeyCode == Keys.Escape) Close();
         }
     }
 }

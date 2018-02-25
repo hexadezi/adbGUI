@@ -1,4 +1,4 @@
-﻿namespace adbGUI
+﻿namespace adbGUI.Forms
 {
       partial class MainForm
       {
