@@ -42,7 +42,7 @@ namespace adbGUI.Forms
         {
             BeginInvoke((MethodInvoker) delegate
             {
-                if (_formMethods.AlwaysClearConsole()) _lOut.rtb_console.Clear();
+                if (FormMethods.AlwaysClearConsole()) _lOut.rtb_console.Clear();
             });
         }
 
@@ -201,11 +201,11 @@ namespace adbGUI.Forms
         {
             var regEx = "";
 
-            if (!string.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim()))
-                if (txt_LogcatAdvancedRegularExpressions.Text.Contains("|"))
-                    regEx = " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"";
-                else
-                    regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
+            if (string.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim())) return regEx;
+            if (txt_LogcatAdvancedRegularExpressions.Text.Contains("|"))
+                regEx = " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"";
+            else
+                regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
 
             return regEx;
         }
@@ -310,9 +310,7 @@ namespace adbGUI.Forms
             if (opt_LogcatAdvancedOutputFormatProcess.Checked)
                 return " -v process";
 
-            if (opt_LogcatAdvancedOutputFormatBrief.Checked)
-                return " -v brief";
-            return "";
+            return opt_LogcatAdvancedOutputFormatBrief.Checked ? " -v brief" : "";
         }
 
         private void Btn_LogcatAdvancedStatistics_Click(object sender, EventArgs e)

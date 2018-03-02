@@ -11,6 +11,7 @@ namespace adbGUI.Forms
     public partial class MainForm : Form, IDisposable
     {
         private readonly CmdProcess _cmdProcess = new CmdProcess();
+        private readonly FormMethods _formMethods;
         private BackupRestore _backupRestore;
         private Density _densityChange;
         private FileOps _fileOps;
@@ -20,14 +21,13 @@ namespace adbGUI.Forms
         private ScreenRecord _screenRecord;
         private Sideload _sideLoad;
         private SpoofMac _spoofMac;
-        public FormMethods FormMethods;
 
         public MainForm()
         {
             InitializeComponent();
 
             // pass formMethods the created Form this
-            FormMethods = new FormMethods(this);
+            _formMethods = new FormMethods(this);
 
             _cmdProcess.GetProcess.Start();
 
@@ -59,20 +59,16 @@ namespace adbGUI.Forms
         {
             _logcatAdvanced?.Dispose();
             _cmdProcess?.Dispose();
-            FormMethods?.Dispose();
+            _formMethods?.Dispose();
             _cmdProcess?.GetProcess?.Dispose();
             GC.SuppressFinalize(this);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Escape)
-            {
-                _cmdProcess.StopProcessing();
-                return true;
-            }
-
-            return base.ProcessCmdKey(ref msg, keyData);
+            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
+            _cmdProcess.StopProcessing();
+            return true;
         }
 
         private void CommandExecutionStarted()
@@ -86,7 +82,7 @@ namespace adbGUI.Forms
             {
                 BeginInvoke((MethodInvoker) delegate
                 {
-                    FormMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
+                    _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
                     txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
                 });
             }
@@ -109,7 +105,7 @@ namespace adbGUI.Forms
             {
                 cbx_customCommand.Items.Add(command);
 
-                _cmdProcess.StartProcessing(command, FormMethods.SelectedDevice());
+                _cmdProcess.StartProcessing(command, _formMethods.SelectedDevice());
             }
             else
             {
@@ -143,158 +139,160 @@ namespace adbGUI.Forms
 
         private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
         {
-            // todo add network capture tcpdump
+            //todo add network capture tcpdump
             try
             {
                 string tag;
 
-                if (!string.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString()))
-                    if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
-                        _cmdProcess.StartProcessing(tag, FormMethods.SelectedDevice());
+                if (string.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString())) return;
+                if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
+                    _cmdProcess.StartProcessing(tag, _formMethods.SelectedDevice());
 
-                    else if (tag.StartsWith("#"))
-                        switch (tag)
-                        {
-                            case "#prop":
-                                new SetProp(_cmdProcess, FormMethods).Show();
-                                break;
+                else if (tag.StartsWith("#"))
+                    switch (tag)
+                    {
+                        case "#prop":
+                            new SetProp(_cmdProcess, _formMethods).Show();
+                            break;
 
-                            case "#screenshot":
-                                if (!string.IsNullOrEmpty(FormMethods.SelectedDevice()))
-                                {
-                                    saveFileDialog.FileName =
-                                        "screenshot_" + DateTime.Now.ToString(CultureInfo.InvariantCulture)
-                                            .Replace(' ', '_').Replace(':', '.');
-                                    saveFileDialog.Filter = @"PNG Image(.png)|*.png";
-                                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                                        _cmdProcess.StartProcessing(
-                                            "adb shell screencap -p > " + saveFileDialog.FileName,
-                                            FormMethods.SelectedDevice());
-                                }
+                        case "#screenshot":
+                            if (!string.IsNullOrEmpty(_formMethods.SelectedDevice()))
+                            {
+                                saveFileDialog.FileName =
+                                    "screenshot_" + DateTime.Now.ToString(CultureInfo.InvariantCulture)
+                                        .Replace(' ', '_').Replace(':', '.');
+                                saveFileDialog.Filter = @"PNG Image(.png)|*.png";
+                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                    _cmdProcess.StartProcessing(
+                                        "adb shell screencap -p > " + saveFileDialog.FileName,
+                                        _formMethods.SelectedDevice());
+                            }
 
-                                break;
+                            break;
 
-                            case "#screenrecord":
-                                if (_screenRecord == null || _screenRecord.IsDisposed)
-                                {
-                                    _screenRecord = new ScreenRecord(_cmdProcess, FormMethods);
-                                    _screenRecord.Show();
-                                }
-                                else
-                                {
-                                    _screenRecord.Focus();
-                                }
+                        case "#screenrecord":
+                            if (_screenRecord == null || _screenRecord.IsDisposed)
+                            {
+                                _screenRecord = new ScreenRecord(_cmdProcess, _formMethods);
+                                _screenRecord.Show();
+                            }
+                            else
+                            {
+                                _screenRecord.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#spoofmac":
-                                if (_spoofMac == null || _spoofMac.IsDisposed)
-                                {
-                                    _spoofMac = new SpoofMac(_cmdProcess, FormMethods);
-                                    _spoofMac.Show();
-                                }
-                                else
-                                {
-                                    _spoofMac.Focus();
-                                }
+                        case "#spoofmac":
+                            if (_spoofMac == null || _spoofMac.IsDisposed)
+                            {
+                                _spoofMac = new SpoofMac(_cmdProcess, _formMethods);
+                                _spoofMac.Show();
+                            }
+                            else
+                            {
+                                _spoofMac.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#resolution":
-                                if (_resolutionChange == null || _resolutionChange.IsDisposed)
-                                {
-                                    _resolutionChange = new ResolutionChange(_cmdProcess, FormMethods);
-                                    _resolutionChange.Show();
-                                }
-                                else
-                                {
-                                    _resolutionChange.Focus();
-                                }
+                        case "#resolution":
+                            if (_resolutionChange == null || _resolutionChange.IsDisposed)
+                            {
+                                _resolutionChange = new ResolutionChange(_cmdProcess, _formMethods);
+                                _resolutionChange.Show();
+                            }
+                            else
+                            {
+                                _resolutionChange.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#density":
-                                if (_densityChange == null || _densityChange.IsDisposed)
-                                {
-                                    _densityChange = new Density(_cmdProcess, FormMethods);
-                                    _densityChange.Show();
-                                }
-                                else
-                                {
-                                    _densityChange.Focus();
-                                }
+                        case "#density":
+                            if (_densityChange == null || _densityChange.IsDisposed)
+                            {
+                                _densityChange = new Density(_cmdProcess, _formMethods);
+                                _densityChange.Show();
+                            }
+                            else
+                            {
+                                _densityChange.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#files":
-                                if (_fileOps == null || _fileOps.IsDisposed)
-                                {
-                                    _fileOps = new FileOps(_cmdProcess, FormMethods);
-                                    _fileOps.Show();
-                                }
-                                else
-                                {
-                                    _fileOps.Focus();
-                                }
+                        case "#files":
+                            if (_fileOps == null || _fileOps.IsDisposed)
+                            {
+                                _fileOps = new FileOps(_cmdProcess, _formMethods);
+                                _fileOps.Show();
+                            }
+                            else
+                            {
+                                _fileOps.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#installuninstall":
-                                if (_installUninstall == null || _installUninstall.IsDisposed)
-                                {
-                                    _installUninstall = new InstallUninstall(_cmdProcess, FormMethods);
-                                    _installUninstall.Show();
-                                }
-                                else
-                                {
-                                    _installUninstall.Focus();
-                                }
+                        case "#installuninstall":
+                            if (_installUninstall == null || _installUninstall.IsDisposed)
+                            {
+                                _installUninstall = new InstallUninstall(_cmdProcess, _formMethods);
+                                _installUninstall.Show();
+                            }
+                            else
+                            {
+                                _installUninstall.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#sideload":
-                                if (_sideLoad == null || _sideLoad.IsDisposed)
-                                {
-                                    _sideLoad = new Sideload(_cmdProcess, FormMethods);
-                                    _sideLoad.Show();
-                                }
-                                else
-                                {
-                                    _sideLoad.Focus();
-                                }
+                        case "#sideload":
+                            if (_sideLoad == null || _sideLoad.IsDisposed)
+                            {
+                                _sideLoad = new Sideload(_cmdProcess, _formMethods);
+                                _sideLoad.Show();
+                            }
+                            else
+                            {
+                                _sideLoad.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#backuprestore":
-                                if (_backupRestore == null || _backupRestore.IsDisposed)
-                                {
-                                    _backupRestore = new BackupRestore(_cmdProcess, FormMethods);
-                                    _backupRestore.Show();
-                                }
-                                else
-                                {
-                                    _backupRestore.Focus();
-                                }
+                        case "#backuprestore":
+                            if (_backupRestore == null || _backupRestore.IsDisposed)
+                            {
+                                _backupRestore = new BackupRestore(_cmdProcess, _formMethods);
+                                _backupRestore.Show();
+                            }
+                            else
+                            {
+                                _backupRestore.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#logcatadvanced":
-                                if (_logcatAdvanced == null || _logcatAdvanced.IsDisposed)
-                                {
-                                    _logcatAdvanced = new LogcatAdvanced(_cmdProcess, FormMethods);
-                                    _logcatAdvanced.Show();
-                                }
-                                else
-                                {
-                                    _logcatAdvanced.Focus();
-                                }
+                        case "#logcatadvanced":
+                            if (_logcatAdvanced == null || _logcatAdvanced.IsDisposed)
+                            {
+                                _logcatAdvanced = new LogcatAdvanced(_cmdProcess, _formMethods);
+                                _logcatAdvanced.Show();
+                            }
+                            else
+                            {
+                                _logcatAdvanced.Focus();
+                            }
 
-                                break;
+                            break;
 
-                            case "#credits":
-                                new Credits().ShowDialog();
-                                break;
-                        }
+                        case "#credits":
+                            new Credits().ShowDialog();
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
             }
             catch (Exception ex)
             {
@@ -324,11 +322,11 @@ namespace adbGUI.Forms
 
         private void Tsb_OpenShell_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(FormMethods.SelectedDevice()))
+            if (!string.IsNullOrEmpty(_formMethods.SelectedDevice()))
             {
                 var serial = "";
 
-                serial += "-s " + FormMethods.SelectedDevice() + " ";
+                serial += "-s " + _formMethods.SelectedDevice() + " ";
 
                 var process = new Process
                 {
@@ -373,12 +371,12 @@ namespace adbGUI.Forms
 
         private void Tsb_AdbRoot_Click(object sender, EventArgs e)
         {
-            _cmdProcess.StartProcessing("adb root", FormMethods.SelectedDevice());
+            _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
         }
 
         private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
         {
-            _cmdProcess.StartProcessing("adb unroot", FormMethods.SelectedDevice());
+            _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
         }
 
         private void Tsb_Power_Click(object sender, EventArgs e)
@@ -386,37 +384,25 @@ namespace adbGUI.Forms
             switch (sender.ToString())
             {
                 case "Reboot Normal":
-                    _cmdProcess.StartProcessing("adb reboot", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb reboot", _formMethods.SelectedDevice());
                     break;
-
-
                 case "Reboot Recovery":
-                    _cmdProcess.StartProcessing("adb reboot recovery", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb reboot recovery", _formMethods.SelectedDevice());
                     break;
-
-
                 case "Reboot Bootloader":
-                    _cmdProcess.StartProcessing("adb reboot bootloader", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb reboot bootloader", _formMethods.SelectedDevice());
                     break;
-
-
                 case "Reboot Fastboot":
-                    _cmdProcess.StartProcessing("adb reboot fastboot", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb reboot fastboot", _formMethods.SelectedDevice());
                     break;
-
-
                 case "Sideload Mode":
-                    _cmdProcess.StartProcessing("adb reboot sideload", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb reboot sideload", _formMethods.SelectedDevice());
                     break;
-
-
                 case "Shutdown":
-                    _cmdProcess.StartProcessing("adb shell reboot -p", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb shell reboot -p", _formMethods.SelectedDevice());
                     break;
-
-
                 case "Sleep":
-                    _cmdProcess.StartProcessing("adb shell input keyevent POWER", FormMethods.SelectedDevice());
+                    _cmdProcess.StartProcessing("adb shell input keyevent POWER", _formMethods.SelectedDevice());
                     break;
             }
         }

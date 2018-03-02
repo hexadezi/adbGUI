@@ -34,7 +34,7 @@ namespace adbGUI.Forms
             var name = " -f \"" + txt_BackupPathTo.Text + "\"";
             var apk = " -noapk";
             var shared = " -noshared";
-            var all = " -all";
+            const string all = " -all";
             var system = " -system";
 
 
@@ -84,7 +84,7 @@ namespace adbGUI.Forms
                 groupBox14.Enabled = false;
 
                 var output =
-                    _adb.StartProcessingInThread("adb shell pm list packages -3", _formMethods.SelectedDevice());
+                    CmdProcess.StartProcessingInThread("adb shell pm list packages -3", _formMethods.SelectedDevice());
 
                 if (!string.IsNullOrEmpty(output))
                 {

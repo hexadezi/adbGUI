@@ -37,7 +37,7 @@ namespace adbGUI.Methods
             _frm.tsc_ConnectedDevices.SelectedIndex = _frm.tsc_ConnectedDevices.Items.Count - 1;
         }
 
-        public void KillServer()
+        public static void KillServer()
         {
             try
             {
@@ -49,14 +49,7 @@ namespace adbGUI.Methods
             }
         }
 
-        public void ShowMboxAborted()
-        {
-            MessageBox.Show(@"Processing aborted succesfully", @"Abortion succesfully", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-
-        public bool AlwaysClearConsole()
+        public static bool AlwaysClearConsole()
         {
             return true;
         }

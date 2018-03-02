@@ -16,7 +16,7 @@ namespace adbGUI.Methods
         public delegate void CommandExecutionStoppedHandler();
 
         // Thanks to Vitaliy Fedorchenko
-        internal const int CtrlCEvent = 0;
+        private const int CtrlCEvent = 0;
 
 
         public CmdProcess()
@@ -117,7 +117,7 @@ namespace adbGUI.Methods
             return true;
         }
 
-        public string StartProcessingInThread(string command, string serialnumber)
+        public static string StartProcessingInThread(string command, string serialnumber)
         {
             if (command.StartsWith("adb"))
                 if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") ||
