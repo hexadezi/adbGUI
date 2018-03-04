@@ -1,12 +1,15 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Methods
 {
+    using System;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
+    using System.Windows.Forms;
+
     public class CmdProcess : IDisposable
     {
         public delegate void ClearConsoleHandler();

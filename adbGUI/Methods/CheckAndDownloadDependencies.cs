@@ -1,14 +1,17 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Windows.Forms;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Methods
 {
+    using System;
+    using System.ComponentModel;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Linq;
+    using System.Net;
+    using System.Threading;
+    using System.Windows.Forms;
+
     public static class CheckAndDownloadDependencies
     {
         private static readonly string DownloadToTempPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";

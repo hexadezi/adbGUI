@@ -1,13 +1,16 @@
-﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows.Forms;
-using adbGUI.Methods;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Forms
 {
+    using System;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Windows.Forms;
+    using Methods;
+
     public partial class MainForm : Form, IDisposable
     {
         private readonly CmdProcess _cmdProcess = new CmdProcess();

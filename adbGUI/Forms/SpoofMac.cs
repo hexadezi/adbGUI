@@ -1,10 +1,13 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using adbGUI.Methods;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Forms
 {
+    using System;
+    using System.Text.RegularExpressions;
+    using System.Windows.Forms;
+    using Methods;
+
     public partial class SpoofMac : Form
     {
         private readonly CmdProcess _adb;
