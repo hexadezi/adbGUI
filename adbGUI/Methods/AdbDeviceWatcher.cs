@@ -91,7 +91,7 @@ namespace adbGUI.Methods
 
         private static string StartProcessingGetDevices(string command)
         {
-            var process2 = new Process
+            using (var process2 = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -103,11 +103,12 @@ namespace adbGUI.Methods
                     RedirectStandardError = true,
                     RedirectStandardInput = true
                 }
-            };
+            })
+            {
+                process2.Start();
 
-            process2.Start();
-
-            return process2.StandardOutput.ReadToEnd();
+                return process2.StandardOutput.ReadToEnd();
+            }
         }
     }
 }

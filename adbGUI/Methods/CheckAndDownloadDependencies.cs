@@ -62,17 +62,19 @@ namespace adbGUI.Methods
 
         private static bool CheckIfFilesExist()
         {
-            return StrFiles.All(File.Exists);
+            return StrFiles != null && StrFiles.All(File.Exists);
         }
 
         private static void DownloadFiles()
         {
             ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
-            var wc = new WebClient();
-            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-            wc.DownloadFileTaskAsync(
-                new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"),
-                DownloadToTempPath);
+            using (var wc = new WebClient())
+            {
+                wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+                wc.DownloadFileTaskAsync(
+                    new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"),
+                    DownloadToTempPath);
+            }
         }
 
         private static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)

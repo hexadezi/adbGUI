@@ -331,16 +331,17 @@ namespace adbGUI.Forms
 
                 serial += "-s " + _formMethods.SelectedDevice() + " ";
 
-                var process = new Process
+                using (var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = "cmd",
                         Arguments = "/K adb " + serial + " shell"
                     }
-                };
-
-                process.Start();
+                })
+                {
+                    process.Start();
+                }
             }
             else
             {
@@ -407,6 +408,8 @@ namespace adbGUI.Forms
                 case "Sleep":
                     _cmdProcess.StartProcessing("adb shell input keyevent POWER", _formMethods.SelectedDevice());
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
