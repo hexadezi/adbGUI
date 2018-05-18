@@ -1,18 +1,22 @@
-﻿using System;
-using System.Windows.Forms;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Forms
 {
+    using System;
+    using System.Windows.Forms;
+    using Methods;
+
     public partial class FileOps : Form
     {
-        private CmdProcess adb;
-        private FormMethods formMethods;
+        private readonly CmdProcess _adb;
+        private readonly FormMethods _formMethods;
 
         public FileOps(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
-            adb = adbFrm;
-            formMethods = formMethodsFrm;
+            _adb = adbFrm;
+            _formMethods = formMethodsFrm;
         }
 
         private void Btn_FileOpsPushBrowse_Click(object sender, EventArgs e)
@@ -21,69 +25,62 @@ namespace adbGUI.Forms
             openFileDialog.CheckFileExists = false;
             openFileDialog.CheckPathExists = true;
             openFileDialog.ValidateNames = false;
-            openFileDialog.Filter = "All Files (*.*)|*.*";
+            openFileDialog.Filter = @"All Files (*.*)|*.*";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                if (openFileDialog.SafeFileName == " ") //This is not a normal whitespace. ALT + 255
-                {
-                    txt_FileOpsPushTo.Text =
-                          openFileDialog.FileName.Remove(openFileDialog.FileName.Length - 2, 2);
-                }
-                else
-                {
-                    txt_FileOpsPushFrom.Text = openFileDialog.FileName;
-                }
-            }
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            if (openFileDialog.SafeFileName == " ") //This is not a normal whitespace. ALT + 255
+                txt_FileOpsPushTo.Text =
+                    openFileDialog.FileName.Remove(openFileDialog.FileName.Length - 2, 2);
+            else
+                txt_FileOpsPushFrom.Text = openFileDialog.FileName;
         }
 
         private void Btn_FileOpsPushPush_Click(object sender, EventArgs e)
         {
             if (txt_FileOpsPushTo.Text == "" || txt_FileOpsPushFrom.Text == "")
             {
-                MessageBox.Show("Please select a file and chose destination!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Please select a file and chose destination!", @"Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
             else
             {
                 var s = "adb push \"" + txt_FileOpsPushFrom.Text + "\"" + " \"" + txt_FileOpsPushTo.Text + "\"";
-                adb.StartProcessing(s, formMethods.SelectedDevice());
+                _adb.StartProcessing(s, _formMethods.SelectedDevice());
             }
         }
 
         private void Btn_FileOpsPushList_Click(object sender, EventArgs e)
         {
-            string path = txt_FileOpsPushTo.Text;
-            adb.StartProcessing("adb shell ls -la " + path + " -F", formMethods.SelectedDevice());
+            var path = txt_FileOpsPushTo.Text;
+            _adb.StartProcessing("adb shell ls -la " + path + " -F", _formMethods.SelectedDevice());
         }
 
         private void Btn_FileOpsPullBrowse_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog.Description = "Where should the file be saved?";
+            folderBrowserDialog.Description = @"Where should the file be saved?";
 
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
                 txt_FileOpsPullTo.Text = folderBrowserDialog.SelectedPath;
-            }
         }
 
         private void Btn_FileOpsPullPull_Click(object sender, EventArgs e)
         {
             if (txt_FileOpsPullTo.Text == "" || txt_FileOpsPullFrom.Text == "")
             {
-                MessageBox.Show("Please select a file and chose destination!", "Error", MessageBoxButtons.OK,
-                      MessageBoxIcon.Error);
+                MessageBox.Show(@"Please select a file and chose destination!", @"Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
             else
             {
                 var s = "adb pull \"" + txt_FileOpsPullFrom.Text + "\"" + " \"" + txt_FileOpsPullTo.Text + "\"";
-                adb.StartProcessing(s, formMethods.SelectedDevice());
+                _adb.StartProcessing(s, _formMethods.SelectedDevice());
             }
         }
 
         private void Btn_FileOpsPullList_Click(object sender, EventArgs e)
         {
-            string path = txt_FileOpsPullFrom.Text;
-            adb.StartProcessing("adb shell ls -la " + path + " -F", formMethods.SelectedDevice());
+            var path = txt_FileOpsPullFrom.Text;
+            _adb.StartProcessing("adb shell ls -la " + path + " -F", _formMethods.SelectedDevice());
         }
     }
 }

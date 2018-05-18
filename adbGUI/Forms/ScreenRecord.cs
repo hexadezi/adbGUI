@@ -1,29 +1,30 @@
-﻿using System;
-using System.Windows.Forms;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Forms
 {
+    using System;
+    using System.Windows.Forms;
+    using Methods;
+
     public partial class ScreenRecord : Form
     {
-        private CmdProcess adb;
-        private FormMethods formMethods;
-        private int time;
+        private readonly CmdProcess _adb;
+        private readonly FormMethods _formMethods;
+        private int _time;
 
         public ScreenRecord(CmdProcess adbFrm, FormMethods formMethodsFrm)
         {
             InitializeComponent();
-            adb = adbFrm;
-            formMethods = formMethodsFrm;
+            _adb = adbFrm;
+            _formMethods = formMethodsFrm;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Escape)
-            {
-                this.Close();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
+            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
+            Close();
+            return true;
         }
 
         private void Trb_screenRecord_Scroll(object sender, EventArgs e)
@@ -33,80 +34,60 @@ namespace adbGUI.Forms
 
         private void Cbo_ScreenRecordCustomResolution_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbo_ScreenRecordCustomResolution.Checked)
-            {
-                txt_screenRecordResolution.Enabled = true;
-            }
-            else
-            {
-                txt_screenRecordResolution.Enabled = false;
-            }
+            txt_screenRecordResolution.Enabled = cbo_ScreenRecordCustomResolution.Checked;
         }
 
         private void Btn_screenRecordStart_Click(object sender, EventArgs e)
         {
-            string size = "";
-            string rotate = "";
-            string bitrate = "";
-            string timelimit = "--time-limit " + trb_screenRecordTimeLimit.Value.ToString() + " ";
+            var size = "";
+            var rotate = "";
+            var bitrate = "";
+            var timelimit = "--time-limit " + trb_screenRecordTimeLimit.Value + " ";
 
-            time = trb_screenRecordTimeLimit.Value;
+            _time = trb_screenRecordTimeLimit.Value;
 
-            if (cbo_ScreenRecordCustomResolution.Checked)
-            {
-                size = " --size " + txt_screenRecordResolution.Text + " ";
-            }
+            if (cbo_ScreenRecordCustomResolution.Checked) size = " --size " + txt_screenRecordResolution.Text + " ";
 
-            if (cbo_ScreenRecordRotate.Checked)
-            {
-                rotate = " --rotate ";
-            }
+            if (cbo_ScreenRecordRotate.Checked) rotate = " --rotate ";
 
-            if (txt_ScreenRecordBitrate.Text != "")
-            {
-                bitrate = " --bit-rate " + txt_ScreenRecordBitrate.Text + " ";
-            }
+            if (txt_ScreenRecordBitrate.Text != "") bitrate = " --bit-rate " + txt_ScreenRecordBitrate.Text + " ";
 
 
             saveFileDialog.FileName = "record";
-            saveFileDialog.Filter = "Video File (*.mp4)|*.mp4";
+            saveFileDialog.Filter = @"Video File (*.mp4)|*.mp4";
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string phoneDestination = "/sdcard/screenrecord.mp4";
-                string localDestination = saveFileDialog.FileName;
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            const string phoneDestination = "/sdcard/screenrecord.mp4";
+            var localDestination = saveFileDialog.FileName;
 
-                adb.StartProcessing("adb shell screenrecord --verbose" + size + bitrate + timelimit + rotate + phoneDestination, formMethods.SelectedDevice());
-                timer.Enabled = true;
-                adb.StartProcessing("adb pull " + phoneDestination + " " + localDestination + " && adb shell rm " + phoneDestination, formMethods.SelectedDevice());
-            }
-
-
+            _adb.StartProcessing(
+                "adb shell screenrecord --verbose" + size + bitrate + timelimit + rotate + phoneDestination,
+                _formMethods.SelectedDevice());
+            timer.Enabled = true;
+            _adb.StartProcessing(
+                "adb pull " + phoneDestination + " " + localDestination + " && adb shell rm " + phoneDestination,
+                _formMethods.SelectedDevice());
         }
 
         private void Btn_SreenRecordAbort_Click(object sender, EventArgs e)
         {
             timer.Enabled = false;
-            btn_screenRecordStart.Text = "Start";
-            adb.StopProcessing();
+            btn_screenRecordStart.Text = @"Start";
+            _adb.StopProcessing();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (time > 1)
+            if (_time > 1)
             {
-                time--;
-                btn_screenRecordStart.Text = "Start " + time;
+                _time--;
+                btn_screenRecordStart.Text = @"Start " + _time;
             }
             else
             {
                 timer.Enabled = false;
-                btn_screenRecordStart.Text = "Start";
+                btn_screenRecordStart.Text = @"Start";
             }
-        }
-
-        private void ScreenRecord_KeyDown(object sender, KeyEventArgs e)
-        {
         }
     }
 }

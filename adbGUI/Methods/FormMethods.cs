@@ -1,83 +1,60 @@
-﻿using System;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
 using System.Windows.Forms;
+using adbGUI.Forms;
 
-namespace adbGUI
+namespace adbGUI.Methods
 {
-    public class FormMethods
+    public class FormMethods : IDisposable
     {
-        private MainForm frm;
-
-        CmdProcess adb = new CmdProcess();
+        private readonly CmdProcess _adb = new CmdProcess();
+        private readonly MainForm _frm;
 
         public FormMethods(MainForm f)
         {
             //Pass the MainForm instance
-            frm = f;
+            _frm = f;
+        }
+
+        public void Dispose()
+        {
+            _adb?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public string SelectedDevice()
         {
-            if (frm.tsc_ConnectedDevices.Items.Count == 0)
-            {
-                return "";
-            }
-            else
-            {
-                return frm.tsc_ConnectedDevices.SelectedItem.ToString();
-
-            }
+            return _frm.tsc_ConnectedDevices.Items.Count == 0 ? "" : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
         }
 
         public void RefreshAdbSerialsInCombobox(List<string> devices)
         {
-            frm.tsc_ConnectedDevices.Items.Clear();
+            _frm.tsc_ConnectedDevices.Items.Clear();
 
-            foreach (var item in devices)
-            {
-                frm.tsc_ConnectedDevices.Items.Add(item);
-            }
+            foreach (var item in devices) _frm.tsc_ConnectedDevices.Items.Add(item);
 
-            frm.tsc_ConnectedDevices.SelectedIndex = frm.tsc_ConnectedDevices.Items.Count - 1;
-
+            _frm.tsc_ConnectedDevices.SelectedIndex = _frm.tsc_ConnectedDevices.Items.Count - 1;
         }
 
-        public void KillServer()
+        public static void KillServer()
         {
             try
             {
-                foreach (var pr in Process.GetProcessesByName("adb"))
-                {
-                    pr.Kill();
-                }
+                foreach (var pr in Process.GetProcessesByName("adb")) pr.Kill();
             }
             catch (Exception e)
             {
-
-                MessageBox.Show(e.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(e.Message, @"Exception", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
-        public void ShowMboxAborted()
+        public static bool AlwaysClearConsole()
         {
-            MessageBox.Show("Processing aborted succesfully", "Abortion succesfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
         }
-
-
-        public bool AlwaysClearConsole()
-        {
-            if (frm.tsb_AlwaysClearConsole.Checked)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
     }
 }

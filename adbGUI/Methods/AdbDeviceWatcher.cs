@@ -1,67 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
+﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 namespace adbGUI.Methods
 {
-    public class AdbDeviceList : EventArgs
-    {
-        private List<string> devicesList;
-
-        private string devicesRaw;
-
-        public List<string> GetDevicesList
-        {
-            set
-            {
-                devicesList = value;
-            }
-            get
-            {
-                return this.devicesList;
-            }
-        }
-
-        public string GetDevicesRaw
-        {
-            set
-            {
-                devicesRaw = value;
-            }
-            get
-            {
-                return devicesRaw;
-            }
-        }
-
-    }
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Threading;
 
     public static class AdbDeviceWatcher
     {
-        public static event DeviceChangedHandler DeviceChanged;
-
         public delegate void DeviceChangedHandler(AdbDeviceList e);
 
-        private static string devicesRawOld;
+        private static string _devicesRawOld;
 
-        private static string devicesRawNew;
+        private static string _devicesRawNew;
 
-        private static int connectedDevices = 0;
+        private static int _connectedDevices;
 
-        private static Thread tr;
+        private static Thread _tr;
+        public static event DeviceChangedHandler DeviceChanged;
 
         public static void StartDeviceWatcher()
         {
-
-            tr = new Thread(Watcher)
+            _tr = new Thread(Watcher)
             {
                 IsBackground = true
             };
 
-            tr.Start();
-
+            _tr.Start();
         }
 
         private static void Watcher()
@@ -70,64 +37,61 @@ namespace adbGUI.Methods
             {
                 if (DeviceChanged != null)
                 {
-                    devicesRawNew = StartProcessingGetDevices("adb devices -l");
+                    _devicesRawNew = StartProcessingGetDevices("adb devices -l");
 
-                    if (devicesRawNew != devicesRawOld)
+                    if (_devicesRawNew != _devicesRawOld)
                     {
-                        devicesRawOld = devicesRawNew;
+                        _devicesRawOld = _devicesRawNew;
 
-                        AdbDeviceList dl = new AdbDeviceList()
+                        var dl = new AdbDeviceList
                         {
-                            GetDevicesRaw = devicesRawNew,
-                            GetDevicesList = ParseDevicesL(devicesRawNew)
+                            GetDevicesRaw = _devicesRawNew,
+                            GetDevicesList = ParseDevicesL(_devicesRawNew)
                         };
 
-                        connectedDevices = dl.GetDevicesList.Count;
+                        _connectedDevices = dl.GetDevicesList.Count;
 
-                        DeviceChanged(dl);
+                        DeviceChanged?.Invoke(dl);
                     }
                 }
+
                 Thread.Sleep(750);
             }
+
+            // ReSharper disable once FunctionNeverReturns
         }
 
         private static List<string> ParseDevicesL(string input)
         {
-            List<string> listofserials = new List<string>();
+            var listofserials = new List<string>();
 
-            if (input.Length > 29)
+            if (input.Length <= 29) return listofserials;
+            using (var s = new StringReader(input))
             {
-                using (StringReader s = new StringReader(input))
+                while (s.Peek() != -1)
                 {
-                    string line;
+                    var line = s.ReadLine();
 
-                    while (s.Peek() != -1)
-                    {
-                        line = s.ReadLine();
+                    if (line != null && (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "" ||
+                                         line.StartsWith("*")))
+                        continue;
 
-                        if (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "" || line.StartsWith("*"))
-                            continue;
-
-                        if (line.IndexOf(' ') != -1)
-                        {
-                            listofserials.Add(line = line.Substring(0, line.IndexOf(' ')));
-                        }
-                    }
-                    s.Close();
-
+                    if (line != null && line.IndexOf(' ') != -1)
+                        listofserials.Add(line.Substring(0, line.IndexOf(' ')));
                 }
             }
 
             return listofserials;
         }
 
-        public static int GetConnectedAdbDevices() {
-            return connectedDevices;
+        public static int GetConnectedAdbDevices()
+        {
+            return _connectedDevices;
         }
 
         private static string StartProcessingGetDevices(string command)
         {
-            Process process2 = new Process
+            using (var process2 = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -137,15 +101,14 @@ namespace adbGUI.Methods
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    RedirectStandardInput = true,
+                    RedirectStandardInput = true
                 }
-            };
+            })
+            {
+                process2.Start();
 
-            process2.Start();
-
-            return process2.StandardOutput.ReadToEnd();
+                return process2.StandardOutput.ReadToEnd();
+            }
         }
-
     }
-
 }
