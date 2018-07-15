@@ -107,6 +107,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
@@ -131,11 +132,23 @@
     <Compile Include="Forms\Density.Designer.cs">
       <DependentUpon>Density.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Erase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Erase.Designer.cs">
+      <DependentUpon>Erase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FileOps.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FileOps.Designer.cs">
       <DependentUpon>FileOps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flash.Designer.cs">
+      <DependentUpon>Flash.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InstallUninstall.cs">
       <SubType>Form</SubType>
@@ -212,8 +225,14 @@
     <EmbeddedResource Include="Forms\Density.resx">
       <DependentUpon>Density.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Erase.resx">
+      <DependentUpon>Erase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FileOps.resx">
       <DependentUpon>FileOps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flash.resx">
+      <DependentUpon>Flash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InstallUninstall.resx">
       <DependentUpon>InstallUninstall.cs</DependentUpon>

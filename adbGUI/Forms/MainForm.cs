@@ -24,6 +24,8 @@ namespace adbGUI.Forms
         private ScreenRecord _screenRecord;
         private Sideload _sideLoad;
         private SpoofMac _spoofMac;
+        private Erase _erase;
+        private Flash _flash;
 
         public MainForm()
         {
@@ -290,6 +292,32 @@ namespace adbGUI.Forms
 
                             break;
 
+                        case "#erase":
+                            if (_erase == null || _erase.IsDisposed)
+                            {
+                                _erase = new Erase(_cmdProcess, _formMethods);
+                                _erase.Show();
+                            }
+                            else
+                            {
+                                _erase.Focus();
+                            }
+
+                            break;
+
+                        case "#flash":
+                            if (_flash == null || _flash.IsDisposed)
+                            {
+                                _flash = new Flash(_cmdProcess, _formMethods);
+                                _flash.Show();
+                            }
+                            else
+                            {
+                                _flash.Focus();
+                            }
+
+                            break;
+
                         case "#credits":
                             new Credits().ShowDialog();
                             break;
@@ -412,5 +440,6 @@ namespace adbGUI.Forms
                     throw new ArgumentOutOfRangeException();
             }
         }
+    
     }
 }

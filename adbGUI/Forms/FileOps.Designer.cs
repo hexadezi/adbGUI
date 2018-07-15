@@ -59,9 +59,11 @@
             this.groupBox10.Controls.Add(this.btn_FileOpsPullBrowse);
             this.groupBox10.Controls.Add(this.txt_FileOpsPullFrom);
             this.groupBox10.Controls.Add(this.txt_FileOpsPullTo);
-            this.groupBox10.Location = new System.Drawing.Point(12, 115);
+            this.groupBox10.Location = new System.Drawing.Point(16, 133);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(493, 97);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox10.Size = new System.Drawing.Size(657, 112);
             this.groupBox10.TabIndex = 4;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Pull Files";
@@ -69,18 +71,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 55);
+            this.label3.Location = new System.Drawing.Point(8, 63);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.Size = new System.Drawing.Size(39, 15);
             this.label3.TabIndex = 11;
             this.label3.Text = "From";
             // 
             // btn_FileOpsPullList
             // 
             this.btn_FileOpsPullList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_FileOpsPullList.Location = new System.Drawing.Point(415, 68);
+            this.btn_FileOpsPullList.Location = new System.Drawing.Point(553, 78);
+            this.btn_FileOpsPullList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FileOpsPullList.Name = "btn_FileOpsPullList";
-            this.btn_FileOpsPullList.Size = new System.Drawing.Size(72, 23);
+            this.btn_FileOpsPullList.Size = new System.Drawing.Size(96, 27);
             this.btn_FileOpsPullList.TabIndex = 8;
             this.btn_FileOpsPullList.Text = "List";
             this.btn_FileOpsPullList.UseVisualStyleBackColor = true;
@@ -89,18 +93,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 17);
+            this.label2.Location = new System.Drawing.Point(4, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 13);
+            this.label2.Size = new System.Drawing.Size(23, 15);
             this.label2.TabIndex = 6;
             this.label2.Text = "To";
             // 
             // btn_FileOpsPullPull
             // 
             this.btn_FileOpsPullPull.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_FileOpsPullPull.Location = new System.Drawing.Point(334, 68);
+            this.btn_FileOpsPullPull.Location = new System.Drawing.Point(445, 78);
+            this.btn_FileOpsPullPull.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FileOpsPullPull.Name = "btn_FileOpsPullPull";
-            this.btn_FileOpsPullPull.Size = new System.Drawing.Size(75, 23);
+            this.btn_FileOpsPullPull.Size = new System.Drawing.Size(100, 27);
             this.btn_FileOpsPullPull.TabIndex = 10;
             this.btn_FileOpsPullPull.Text = "Pull";
             this.btn_FileOpsPullPull.UseVisualStyleBackColor = true;
@@ -109,9 +115,10 @@
             // btn_FileOpsPullBrowse
             // 
             this.btn_FileOpsPullBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_FileOpsPullBrowse.Location = new System.Drawing.Point(334, 30);
+            this.btn_FileOpsPullBrowse.Location = new System.Drawing.Point(445, 35);
+            this.btn_FileOpsPullBrowse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FileOpsPullBrowse.Name = "btn_FileOpsPullBrowse";
-            this.btn_FileOpsPullBrowse.Size = new System.Drawing.Size(153, 23);
+            this.btn_FileOpsPullBrowse.Size = new System.Drawing.Size(204, 27);
             this.btn_FileOpsPullBrowse.TabIndex = 8;
             this.btn_FileOpsPullBrowse.Text = "Browse...";
             this.btn_FileOpsPullBrowse.UseVisualStyleBackColor = true;
@@ -121,9 +128,10 @@
             // 
             this.txt_FileOpsPullFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_FileOpsPullFrom.Location = new System.Drawing.Point(6, 70);
+            this.txt_FileOpsPullFrom.Location = new System.Drawing.Point(8, 81);
+            this.txt_FileOpsPullFrom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txt_FileOpsPullFrom.Name = "txt_FileOpsPullFrom";
-            this.txt_FileOpsPullFrom.Size = new System.Drawing.Size(322, 20);
+            this.txt_FileOpsPullFrom.Size = new System.Drawing.Size(428, 25);
             this.txt_FileOpsPullFrom.TabIndex = 9;
             this.txt_FileOpsPullFrom.Text = "/sdcard/";
             // 
@@ -131,9 +139,10 @@
             // 
             this.txt_FileOpsPullTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_FileOpsPullTo.Location = new System.Drawing.Point(6, 32);
+            this.txt_FileOpsPullTo.Location = new System.Drawing.Point(8, 37);
+            this.txt_FileOpsPullTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txt_FileOpsPullTo.Name = "txt_FileOpsPullTo";
-            this.txt_FileOpsPullTo.Size = new System.Drawing.Size(322, 20);
+            this.txt_FileOpsPullTo.Size = new System.Drawing.Size(428, 25);
             this.txt_FileOpsPullTo.TabIndex = 7;
             // 
             // groupBox7
@@ -145,9 +154,11 @@
             this.groupBox7.Controls.Add(this.btn_FileOpsPushBrowse);
             this.groupBox7.Controls.Add(this.txt_FileOpsPushTo);
             this.groupBox7.Controls.Add(this.txt_FileOpsPushFrom);
-            this.groupBox7.Location = new System.Drawing.Point(12, 12);
+            this.groupBox7.Location = new System.Drawing.Point(16, 14);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(493, 97);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox7.Size = new System.Drawing.Size(657, 112);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Push Files";
@@ -155,18 +166,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(8, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.Size = new System.Drawing.Size(39, 15);
             this.label1.TabIndex = 8;
             this.label1.Text = "From";
             // 
             // btn_FileOpsPushList
             // 
             this.btn_FileOpsPushList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_FileOpsPushList.Location = new System.Drawing.Point(416, 67);
+            this.btn_FileOpsPushList.Location = new System.Drawing.Point(555, 77);
+            this.btn_FileOpsPushList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FileOpsPushList.Name = "btn_FileOpsPushList";
-            this.btn_FileOpsPushList.Size = new System.Drawing.Size(72, 23);
+            this.btn_FileOpsPushList.Size = new System.Drawing.Size(96, 27);
             this.btn_FileOpsPushList.TabIndex = 7;
             this.btn_FileOpsPushList.Text = "List";
             this.btn_FileOpsPushList.UseVisualStyleBackColor = true;
@@ -175,18 +188,20 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 55);
+            this.label5.Location = new System.Drawing.Point(8, 63);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 13);
+            this.label5.Size = new System.Drawing.Size(23, 15);
             this.label5.TabIndex = 5;
             this.label5.Text = "To";
             // 
             // btn_FileOpsPushPush
             // 
             this.btn_FileOpsPushPush.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_FileOpsPushPush.Location = new System.Drawing.Point(335, 68);
+            this.btn_FileOpsPushPush.Location = new System.Drawing.Point(447, 78);
+            this.btn_FileOpsPushPush.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FileOpsPushPush.Name = "btn_FileOpsPushPush";
-            this.btn_FileOpsPushPush.Size = new System.Drawing.Size(75, 23);
+            this.btn_FileOpsPushPush.Size = new System.Drawing.Size(100, 27);
             this.btn_FileOpsPushPush.TabIndex = 6;
             this.btn_FileOpsPushPush.Text = "Push";
             this.btn_FileOpsPushPush.UseVisualStyleBackColor = true;
@@ -195,9 +210,10 @@
             // btn_FileOpsPushBrowse
             // 
             this.btn_FileOpsPushBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_FileOpsPushBrowse.Location = new System.Drawing.Point(335, 32);
+            this.btn_FileOpsPushBrowse.Location = new System.Drawing.Point(447, 37);
+            this.btn_FileOpsPushBrowse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FileOpsPushBrowse.Name = "btn_FileOpsPushBrowse";
-            this.btn_FileOpsPushBrowse.Size = new System.Drawing.Size(152, 23);
+            this.btn_FileOpsPushBrowse.Size = new System.Drawing.Size(203, 27);
             this.btn_FileOpsPushBrowse.TabIndex = 4;
             this.btn_FileOpsPushBrowse.Text = "Browse...";
             this.btn_FileOpsPushBrowse.UseVisualStyleBackColor = true;
@@ -207,9 +223,10 @@
             // 
             this.txt_FileOpsPushTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_FileOpsPushTo.Location = new System.Drawing.Point(6, 70);
+            this.txt_FileOpsPushTo.Location = new System.Drawing.Point(8, 81);
+            this.txt_FileOpsPushTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txt_FileOpsPushTo.Name = "txt_FileOpsPushTo";
-            this.txt_FileOpsPushTo.Size = new System.Drawing.Size(323, 20);
+            this.txt_FileOpsPushTo.Size = new System.Drawing.Size(429, 25);
             this.txt_FileOpsPushTo.TabIndex = 5;
             this.txt_FileOpsPushTo.Text = "/sdcard/";
             // 
@@ -217,9 +234,10 @@
             // 
             this.txt_FileOpsPushFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_FileOpsPushFrom.Location = new System.Drawing.Point(6, 32);
+            this.txt_FileOpsPushFrom.Location = new System.Drawing.Point(8, 37);
+            this.txt_FileOpsPushFrom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txt_FileOpsPushFrom.Name = "txt_FileOpsPushFrom";
-            this.txt_FileOpsPushFrom.Size = new System.Drawing.Size(323, 20);
+            this.txt_FileOpsPushFrom.Size = new System.Drawing.Size(429, 25);
             this.txt_FileOpsPushFrom.TabIndex = 3;
             // 
             // openFileDialog
@@ -228,12 +246,13 @@
             // 
             // FileOps
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 224);
+            this.ClientSize = new System.Drawing.Size(691, 258);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox10);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "FileOps";
             this.ShowIcon = false;
