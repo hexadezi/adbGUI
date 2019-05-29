@@ -27,16 +27,6 @@ namespace adbGUI.Forms
             return true;
         }
 
-        private void Trb_screenRecord_Scroll(object sender, EventArgs e)
-        {
-            lbl_screenRecordSeconds.Text = trb_screenRecordTimeLimit.Value.ToString();
-        }
-
-        private void Cbo_ScreenRecordCustomResolution_CheckedChanged(object sender, EventArgs e)
-        {
-            txt_screenRecordResolution.Enabled = cbo_ScreenRecordCustomResolution.Checked;
-        }
-
         private void Btn_screenRecordStart_Click(object sender, EventArgs e)
         {
             var size = "";
@@ -75,6 +65,8 @@ namespace adbGUI.Forms
             _adb.StopProcessing();
         }
 
+        private void Cbo_ScreenRecordCustomResolution_CheckedChanged(object sender, EventArgs e) => txt_screenRecordResolution.Enabled = cbo_ScreenRecordCustomResolution.Checked;
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (_time > 1)
@@ -88,5 +80,7 @@ namespace adbGUI.Forms
                 btn_screenRecordStart.Text = @"Start";
             }
         }
+
+        private void Trb_screenRecord_Scroll(object sender, EventArgs e) => lbl_screenRecordSeconds.Text = trb_screenRecordTimeLimit.Value.ToString();
     }
 }

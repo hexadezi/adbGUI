@@ -10,17 +10,19 @@ namespace adbGUI.Methods
 
     public static class AdbDeviceWatcher
     {
-        public delegate void DeviceChangedHandler(AdbDeviceList e);
-
-        private static string _devicesRawOld;
+        private static int _connectedDevices;
 
         private static string _devicesRawNew;
 
-        private static int _connectedDevices;
+        private static string _devicesRawOld;
 
         private static Thread _tr;
 
+        public delegate void DeviceChangedHandler(AdbDeviceList e);
+
         public static event DeviceChangedHandler DeviceChanged;
+
+        public static int ConnectedAdbDevices => _connectedDevices;
 
         public static void StartDeviceWatcher()
         {
@@ -30,6 +32,53 @@ namespace adbGUI.Methods
             };
 
             _tr.Start();
+        }
+
+        private static List<string> ParseDevicesL(string input)
+        {
+            var listofserials = new List<string>();
+
+            if (input.Length <= 29) return listofserials;
+            using (var s = new StringReader(input))
+            {
+                while (s.Peek() != -1)
+                {
+                    var line = s.ReadLine();
+
+                    if (line != null && (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim()?.Length == 0
+                                         || line.StartsWith("*")))
+                    {
+                        continue;
+                    }
+
+                    if (line != null && line.IndexOf(' ') != -1)
+                        listofserials.Add(line.Substring(0, line.IndexOf(' ')));
+                }
+            }
+
+            return listofserials;
+        }
+
+        private static string StartProcessingGetDevices(string command)
+        {
+            using (var process2 = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd",
+                    Arguments = "/C " + command,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    RedirectStandardInput = true
+                }
+            })
+            {
+                process2.Start();
+
+                return process2.StandardOutput.ReadToEnd();
+            }
         }
 
         private static void Watcher()
@@ -60,56 +109,6 @@ namespace adbGUI.Methods
             }
 
             // ReSharper disable once FunctionNeverReturns
-        }
-
-        private static List<string> ParseDevicesL(string input)
-        {
-            var listofserials = new List<string>();
-
-            if (input.Length <= 29) return listofserials;
-            using (var s = new StringReader(input))
-            {
-                while (s.Peek() != -1)
-                {
-                    var line = s.ReadLine();
-
-                    if (line != null && (line.StartsWith("List") || line.StartsWith("\r\n") || line.Trim() == "" ||
-                                         line.StartsWith("*")))
-                        continue;
-
-                    if (line != null && line.IndexOf(' ') != -1)
-                        listofserials.Add(line.Substring(0, line.IndexOf(' ')));
-                }
-            }
-
-            return listofserials;
-        }
-
-        public static int GetConnectedAdbDevices()
-        {
-            return _connectedDevices;
-        }
-
-        private static string StartProcessingGetDevices(string command)
-        {
-            using (var process2 = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "cmd",
-                    Arguments = "/C " + command,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    RedirectStandardInput = true
-                }
-            })
-            {
-                process2.Start();
-
-                return process2.StandardOutput.ReadToEnd();
-            }
         }
     }
 }

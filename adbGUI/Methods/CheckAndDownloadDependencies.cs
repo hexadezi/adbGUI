@@ -19,9 +19,15 @@ namespace adbGUI.Methods
         private static readonly string[] StrFiles =
             {"adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe", "libwinpthread-1.dll"};
 
+        private delegate void ExtractionCompletedHandler();
+
+        private static event ExtractionCompletedHandler ExtractionCompleted;
+
+        private static bool CheckIfFilesExist => StrFiles?.All(File.Exists) == true;
+
         public static void Start()
         {
-            if (CheckIfFilesExist()) return;
+            if (CheckIfFilesExist) return;
             var dialogResult =
                 MessageBox.Show(
                     @"Enviroment Variables not set and files missing. Should all dependencies be downloaded and extracted?",
@@ -68,9 +74,27 @@ namespace adbGUI.Methods
             }
         }
 
-        private static bool CheckIfFilesExist()
+        private static void DependenciesChecker_ExtractionCompleted()
         {
-            return StrFiles != null && StrFiles.All(File.Exists);
+            var extractedFilesPath = Path.GetTempPath() + "platform-tools";
+
+            foreach (var item in StrFiles)
+            {
+                try
+                {
+                    File.Copy(extractedFilesPath + "\\" + item, item);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            ExtractionCompleted -= DependenciesChecker_ExtractionCompleted;
+
+            MessageBox.Show(@"Files downloaded, decompressed and moved successfully", @"Completed",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private static void DownloadFiles()
@@ -79,19 +103,11 @@ namespace adbGUI.Methods
             using (var wc = new WebClient())
             {
                 wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-                wc.DownloadFileTaskAsync(
+                _ = wc.DownloadFileTaskAsync(
                     new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"),
                     DownloadToTempPath);
             }
         }
-
-        private static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            var tr = new Thread(ExtractFiles);
-            tr.Start();
-        }
-
-        private static event ExtractionCompletedHandler ExtractionCompleted;
 
         private static void ExtractFiles()
         {
@@ -103,27 +119,6 @@ namespace adbGUI.Methods
             ExtractionCompleted?.Invoke();
         }
 
-        private static void DependenciesChecker_ExtractionCompleted()
-        {
-            var extractedFilesPath = Path.GetTempPath() + "platform-tools";
-
-            foreach (var item in StrFiles)
-                try
-                {
-                    File.Copy(extractedFilesPath + "\\" + item, item);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-            ExtractionCompleted -= DependenciesChecker_ExtractionCompleted;
-
-            MessageBox.Show(@"Files downloaded, decompressed and moved successfully", @"Completed",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-        private delegate void ExtractionCompletedHandler();
+        private static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e) => new Thread(ExtractFiles).Start();
     }
 }

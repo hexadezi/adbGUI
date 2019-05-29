@@ -12,12 +12,6 @@ namespace adbGUI.Methods
 {
     public class CmdProcess : IDisposable
     {
-        public delegate void ClearConsoleHandler();
-
-        public delegate void CommandExecutionStartedHandler();
-
-        public delegate void CommandExecutionStoppedHandler();
-
         // Thanks to Vitaliy Fedorchenko
         private const int CtrlCEvent = 0;
 
@@ -25,6 +19,21 @@ namespace adbGUI.Methods
         {
             GetProcess.EnableRaisingEvents = true;
         }
+
+        public delegate void ClearConsoleHandler();
+
+        public delegate void CommandExecutionStartedHandler();
+
+        public delegate void CommandExecutionStoppedHandler();
+
+        // Delegate type to be used as the Handler Routine for SCCH
+        private delegate bool ConsoleCtrlDelegate(uint ctrlType);
+
+        public event ClearConsoleHandler ClearConsole;
+
+        public event CommandExecutionStartedHandler CommandExecutionStarted;
+
+        public event CommandExecutionStoppedHandler CommandExecutionStopped;
 
         public Process GetProcess { get; } = new Process
         {
@@ -43,37 +52,68 @@ namespace adbGUI.Methods
             }
         };
 
+        public static string StartProcessingInThread(string command, string serialnumber)
+        {
+            if (command.StartsWith("adb"))
+            {
+                if (AdbDeviceWatcher.ConnectedAdbDevices> 0 || command.EndsWith("help") ||
+                    command.EndsWith("version") || command.StartsWith("adb connect") ||
+                    command.StartsWith("adb disconnect"))
+                {
+                    string output = "";
+
+                    Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
+                    {
+                        IsBackground = true
+                    };
+
+                    t.Start();
+
+                    while (t.IsAlive)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    return output;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            {
+                string output = "";
+
+                Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
+                {
+                    IsBackground = true
+                };
+
+                t.Start();
+
+                while (t.IsAlive)
+                {
+                    Application.DoEvents();
+                }
+
+                return output;
+            }
+        }
+
         public void Dispose()
         {
             GetProcess?.Dispose();
             GC.SuppressFinalize(this);
         }
 
-        [DllImport("kernel32.dll")]
-        internal static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool AttachConsole(uint dwProcessId);
-
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        internal static extern bool FreeConsole();
-
-        [DllImport("kernel32.dll")]
-        private static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate handlerRoutine, bool add);
-
-        public event CommandExecutionStartedHandler CommandExecutionStarted;
-
-        public event CommandExecutionStoppedHandler CommandExecutionStopped;
-
-        public event ClearConsoleHandler ClearConsole;
-
         public void StartProcessing(string command, string serialnumber)
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") ||
-                    command.EndsWith("version") || command.StartsWith("adb connect") ||
-                    command.StartsWith("adb disconnect"))
+                if (AdbDeviceWatcher.ConnectedAdbDevices> 0 || command.EndsWith("help")
+                    || command.EndsWith("version") || command.StartsWith("adb connect")
+                    || command.StartsWith("adb disconnect"))
                 {
                     StopProcessing();
                     Thread.Sleep(50);
@@ -101,11 +141,18 @@ namespace adbGUI.Methods
 
         public bool StopProcessing()
         {
-            if (!AttachConsole((uint)GetProcess.Id)) return false;
+            if (!AttachConsole((uint)GetProcess.Id))
+            {
+                return false;
+            }
+
             SetConsoleCtrlHandler(null, true);
             try
             {
-                if (!GenerateConsoleCtrlEvent(CtrlCEvent, 0)) return false;
+                if (!GenerateConsoleCtrlEvent(CtrlCEvent, 0))
+                {
+                    return false;
+                }
             }
             finally
             {
@@ -116,50 +163,68 @@ namespace adbGUI.Methods
             return true;
         }
 
-        public static string StartProcessingInThread(string command, string serialnumber)
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern bool AttachConsole(uint dwProcessId);
+
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        internal static extern bool FreeConsole();
+
+        [DllImport("kernel32.dll")]
+        internal static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
+
+        private static string CommandParser(string command, string serialnumber)
         {
-            if (command.StartsWith("adb"))
-                if (AdbDeviceWatcher.GetConnectedAdbDevices() > 0 || command.EndsWith("help") ||
-                    command.EndsWith("version") || command.StartsWith("adb connect") ||
-                    command.StartsWith("adb disconnect"))
+            if (command.StartsWith("adb "))
+            {
+                command = command.Remove(0, 4);
+
+                if (command.Contains("shell"))
                 {
-                    var output = "";
+                    command = command.Remove(0, 5);
+                    command = "exec-out" + command;
+                }
 
-                    var t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
-                    {
-                        IsBackground = true
-                    };
+                if (command.StartsWith("logcat"))
+                {
+                    command = "exec-out " + command;
+                }
 
-                    t.Start();
+                string serial = "";
 
-                    while (t.IsAlive) Application.DoEvents();
-
-                    return output;
+                if (!string.IsNullOrEmpty(serialnumber))
+                {
+                    serial += "-s " + serialnumber + " ";
                 }
                 else
                 {
-                    return null;
+                    serial = "";
                 }
 
+                string fullcommand = "adb " + serial + command;
+
+                return fullcommand;
+            }
+
+            if (!command.StartsWith("fastboot "))
             {
-                var output = "";
+                return command;
+            }
 
-                var t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
-                {
-                    IsBackground = true
-                };
+            {
+                command = command.Remove(0, 9);
 
-                t.Start();
+                string fullcommand = "fastboot " + command;
 
-                while (t.IsAlive) Application.DoEvents();
-
-                return output;
+                return fullcommand;
             }
         }
 
+        [DllImport("kernel32.dll")]
+        private static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate handlerRoutine, bool add);
+
         private static string StartProcessingReadToEnd(string command, string serialnumber)
         {
-            var process2 = new Process
+            Process process2 = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -177,44 +242,5 @@ namespace adbGUI.Methods
 
             return process2.StandardOutput.ReadToEnd();
         }
-
-        private static string CommandParser(string command, string serialnumber)
-        {
-            if (command.StartsWith("adb "))
-            {
-                command = command.Remove(0, 4);
-
-                if (command.Contains("shell"))
-                {
-                    command = command.Remove(0, 5);
-                    command = "exec-out" + command;
-                }
-
-                if (command.StartsWith("logcat")) command = "exec-out " + command;
-
-                var serial = "";
-
-                if (!string.IsNullOrEmpty(serialnumber))
-                    serial += "-s " + serialnumber + " ";
-                else
-                    serial = "";
-
-                var fullcommand = "adb " + serial + command;
-
-                return fullcommand;
-            }
-
-            if (!command.StartsWith("fastboot ")) return command;
-            {
-                command = command.Remove(0, 9);
-
-                var fullcommand = "fastboot " + command;
-
-                return fullcommand;
-            }
-        }
-
-        // Delegate type to be used as the Handler Routine for SCCH
-        private delegate bool ConsoleCtrlDelegate(uint ctrlType);
     }
 }

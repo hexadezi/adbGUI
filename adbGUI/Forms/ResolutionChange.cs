@@ -26,20 +26,11 @@ namespace adbGUI.Forms
             return true;
         }
 
-        private void Btn_ResolutionChangeSet_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell wm size " + txt_phoneResolution.Text, _formMethods.SelectedDevice());
-        }
+        private void Btn_ResolutionChangeReset_Click(object sender, EventArgs e) => _adb.StartProcessing("adb shell wm size reset", _formMethods.SelectedDevice());
 
-        private void Btn_ResolutionChangeReset_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell wm size reset", _formMethods.SelectedDevice());
-        }
+        private void Btn_ResolutionChangeSet_Click(object sender, EventArgs e) => _adb.StartProcessing("adb shell wm size " + txt_phoneResolution.Text, _formMethods.SelectedDevice());
 
-        private void Btn_ResolutionChangeShow_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell wm size", _formMethods.SelectedDevice());
-        }
+        private void Btn_ResolutionChangeShow_Click(object sender, EventArgs e) => _adb.StartProcessing("adb shell wm size", _formMethods.SelectedDevice());
 
         private void Txt_phoneResolution_KeyDown(object sender, KeyEventArgs e)
         {

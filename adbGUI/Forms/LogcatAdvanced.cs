@@ -48,6 +48,25 @@ namespace adbGUI.Forms
            });
         }
 
+        private void Btn_LogcatAdvancedClearBuffers_Click(object sender, EventArgs e)
+        {
+            var alternativeBuffers = GetAlternativeBufferString();
+
+            if (!string.IsNullOrEmpty(alternativeBuffers))
+                _adb.StartProcessing("adb logcat" + alternativeBuffers + " -c", _formMethods.SelectedDevice());
+        }
+
+        private void Btn_LogcatAdvancedNewBufferSize_Click(object sender, EventArgs e) => _adb.StartProcessing("adb logcat -g", _formMethods.SelectedDevice());
+
+        private void Btn_LogcatAdvancedSetBufferSize_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txt_LogcatAdvancedBufferSize.Text))
+            {
+                _adb.StartProcessing("adb logcat -G " + txt_LogcatAdvancedBufferSize.Text.Trim(),
+                    _formMethods.SelectedDevice());
+            }
+        }
+
         private void Btn_LogcatAdvancedStart_Click(object sender, EventArgs e)
         {
             var alternativeBuffers = GetAlternativeBufferString();
@@ -77,26 +96,18 @@ namespace adbGUI.Forms
             }
         }
 
-        private void GetProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        private void Btn_LogcatAdvancedStatistics_Click(object sender, EventArgs e)
         {
-            try
+            if (cbo_LogcatAdvancedSeparateWindow.Checked)
             {
-                BeginInvoke((MethodInvoker)delegate { _lOut.rtb_console.AppendText(e.Data + Environment.NewLine); });
+                _lOut.Show();
+
+                _altAdb.StartProcessing("adb logcat -S", _formMethods.SelectedDevice());
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                _adb.StartProcessing("adb logcat -S", _formMethods.SelectedDevice());
             }
-
-            Thread.Sleep(3);
-        }
-
-        private void Btn_LogcatAdvancedClearBuffers_Click(object sender, EventArgs e)
-        {
-            var alternativeBuffers = GetAlternativeBufferString();
-
-            if (!string.IsNullOrEmpty(alternativeBuffers))
-                _adb.StartProcessing("adb logcat" + alternativeBuffers + " -c", _formMethods.SelectedDevice());
         }
 
         private void Btn_LogcatAdvancedStop_Click(object sender, EventArgs e)
@@ -105,28 +116,6 @@ namespace adbGUI.Forms
                 _altAdb.StopProcessing();
             else
                 _adb.StopProcessing();
-        }
-
-        private void Btn_LogcatAdvancedNewBufferSize_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb logcat -g", _formMethods.SelectedDevice());
-        }
-
-        private void Btn_LogcatAdvancedSetBufferSize_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txt_LogcatAdvancedBufferSize.Text))
-                _adb.StartProcessing("adb logcat -G " + txt_LogcatAdvancedBufferSize.Text.Trim(),
-                    _formMethods.SelectedDevice());
-        }
-
-        private void Txt_LogcatAdvancedRecentNumberOfLines_KeyDown(object sender, KeyEventArgs e)
-        {
-            txt_LogcatAdvancedQuitAfterNumberLines.Clear();
-        }
-
-        private void Txt_LogcatAdvancedQuitAfterNumberLines_KeyDown(object sender, KeyEventArgs e)
-        {
-            txt_LogcatAdvancedRecentNumberOfLines.Clear();
         }
 
         private void Cbo_LogcatAdvancedAlternativeBuffersAll_CheckedChanged(object sender, EventArgs e)
@@ -178,11 +167,6 @@ namespace adbGUI.Forms
             }
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(linkLabel1.Text);
-        }
-
         private string GetAlternativeBufferString()
         {
             var alternativeBuffers = "";
@@ -198,24 +182,6 @@ namespace adbGUI.Forms
             return alternativeBuffers;
         }
 
-        private string GetRegularExpressionString()
-        {
-            const string regEx = "";
-
-            if (string.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim())) return regEx;
-            return (txt_LogcatAdvancedRegularExpressions.Text.Contains("|")) ? " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"" : " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
-        }
-
-        private string GetQuitAfterNumberOfLines()
-        {
-            var countNumber = "";
-
-            if (!string.IsNullOrEmpty(txt_LogcatAdvancedQuitAfterNumberLines.Text.Trim()))
-                countNumber = " -m " + txt_LogcatAdvancedQuitAfterNumberLines.Text.Trim();
-
-            return countNumber;
-        }
-
         private string GetBypassRegEx()
         {
             var bypassRegEx = "";
@@ -224,36 +190,6 @@ namespace adbGUI.Forms
                 !string.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim())) bypassRegEx = " --print";
 
             return bypassRegEx;
-        }
-
-        private string GetPidFilter()
-        {
-            var pidFilter = "";
-
-            if (!string.IsNullOrEmpty(txt_LogcatAdvancedPidFilter.Text.Trim()))
-                pidFilter = " --pid=" + txt_LogcatAdvancedPidFilter.Text.Trim();
-
-            return pidFilter;
-        }
-
-        private string GetRecentNumberOfLines()
-        {
-            var recentNumberOfLines = "";
-
-            if (!string.IsNullOrEmpty(txt_LogcatAdvancedRecentNumberOfLines.Text.Trim()))
-                recentNumberOfLines = " -t " + txt_LogcatAdvancedRecentNumberOfLines.Text.Trim();
-
-            return recentNumberOfLines;
-        }
-
-        private string GetSpecifiedTime()
-        {
-            var specifiedTime = "";
-
-            if (!string.IsNullOrEmpty(txt_LogcatAdvancedSpecifiedTime.Text.Trim()))
-                specifiedTime = " -T \"" + txt_LogcatAdvancedSpecifiedTime.Text.Trim() + "\"";
-
-            return specifiedTime;
         }
 
         private string GetOutputFilter()
@@ -303,24 +239,78 @@ namespace adbGUI.Forms
             return opt_LogcatAdvancedOutputFormatBrief.Checked ? " -v brief" : "";
         }
 
-        private void Btn_LogcatAdvancedStatistics_Click(object sender, EventArgs e)
+        private string GetPidFilter()
         {
-            if (cbo_LogcatAdvancedSeparateWindow.Checked)
-            {
-                _lOut.Show();
+            var pidFilter = "";
 
-                _altAdb.StartProcessing("adb logcat -S", _formMethods.SelectedDevice());
-            }
-            else
-            {
-                _adb.StartProcessing("adb logcat -S", _formMethods.SelectedDevice());
-            }
+            if (!string.IsNullOrEmpty(txt_LogcatAdvancedPidFilter.Text.Trim()))
+                pidFilter = " --pid=" + txt_LogcatAdvancedPidFilter.Text.Trim();
+
+            return pidFilter;
         }
+
+        private void GetProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                BeginInvoke((MethodInvoker)delegate { _lOut.rtb_console.AppendText(e.Data + Environment.NewLine); });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            Thread.Sleep(3);
+        }
+
+        private string GetQuitAfterNumberOfLines()
+        {
+            var countNumber = "";
+
+            if (!string.IsNullOrEmpty(txt_LogcatAdvancedQuitAfterNumberLines.Text.Trim()))
+                countNumber = " -m " + txt_LogcatAdvancedQuitAfterNumberLines.Text.Trim();
+
+            return countNumber;
+        }
+
+        private string GetRecentNumberOfLines()
+        {
+            var recentNumberOfLines = "";
+
+            if (!string.IsNullOrEmpty(txt_LogcatAdvancedRecentNumberOfLines.Text.Trim()))
+                recentNumberOfLines = " -t " + txt_LogcatAdvancedRecentNumberOfLines.Text.Trim();
+
+            return recentNumberOfLines;
+        }
+
+        private string GetRegularExpressionString()
+        {
+            const string regEx = "";
+
+            if (string.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim())) return regEx;
+            return (txt_LogcatAdvancedRegularExpressions.Text.Contains("|")) ? " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"" : " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
+        }
+
+        private string GetSpecifiedTime()
+        {
+            var specifiedTime = "";
+
+            if (!string.IsNullOrEmpty(txt_LogcatAdvancedSpecifiedTime.Text.Trim()))
+                specifiedTime = " -T \"" + txt_LogcatAdvancedSpecifiedTime.Text.Trim() + "\"";
+
+            return specifiedTime;
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start(linkLabel1.Text);
 
         private void LogcatAdvanced_FormClosing(object sender, FormClosingEventArgs e)
         {
             _lOut.Close();
             _altAdb.GetProcess.Close();
         }
+
+        private void Txt_LogcatAdvancedQuitAfterNumberLines_KeyDown(object sender, KeyEventArgs e) => txt_LogcatAdvancedRecentNumberOfLines.Clear();
+
+        private void Txt_LogcatAdvancedRecentNumberOfLines_KeyDown(object sender, KeyEventArgs e) => txt_LogcatAdvancedQuitAfterNumberLines.Clear();
     }
 }
