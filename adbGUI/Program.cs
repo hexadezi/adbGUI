@@ -3,10 +3,10 @@
 
 namespace adbGUI
 {
-    using System;
-    using System.Windows.Forms;
     using Forms;
     using Methods;
+    using System;
+    using System.Windows.Forms;
 
     internal static class Program
     {

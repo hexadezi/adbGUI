@@ -3,9 +3,9 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class ResolutionChange : Form
     {

@@ -3,10 +3,10 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class SpoofMac : Form
     {

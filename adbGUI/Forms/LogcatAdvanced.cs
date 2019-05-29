@@ -3,11 +3,11 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Diagnostics;
     using System.Threading;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class LogcatAdvanced : Form, IDisposable
     {
@@ -40,13 +40,12 @@ namespace adbGUI.Forms
             GC.SuppressFinalize(this);
         }
 
-
         private void AltAdb_CommandExecutionStarted()
         {
-            BeginInvoke((MethodInvoker) delegate
-            {
-                if (FormMethods.AlwaysClearConsole()) _lOut.rtb_console.Clear();
-            });
+            BeginInvoke((MethodInvoker)delegate
+           {
+               if (FormMethods.AlwaysClearConsole()) _lOut.rtb_console.Clear();
+           });
         }
 
         private void Btn_LogcatAdvancedStart_Click(object sender, EventArgs e)
@@ -60,7 +59,6 @@ namespace adbGUI.Forms
             var specifiedTime = GetSpecifiedTime();
             var outputFormat = GetOutputFormat();
             var outputFilter = GetOutputFilter();
-
 
             if (cbo_LogcatAdvancedSeparateWindow.Checked)
             {
@@ -83,7 +81,7 @@ namespace adbGUI.Forms
         {
             try
             {
-                BeginInvoke((MethodInvoker) delegate { _lOut.rtb_console.AppendText(e.Data + Environment.NewLine); });
+                BeginInvoke((MethodInvoker)delegate { _lOut.rtb_console.AppendText(e.Data + Environment.NewLine); });
             }
             catch (Exception ex)
             {
@@ -202,15 +200,10 @@ namespace adbGUI.Forms
 
         private string GetRegularExpressionString()
         {
-            var regEx = "";
+            const string regEx = "";
 
             if (string.IsNullOrEmpty(txt_LogcatAdvancedRegularExpressions.Text.Trim())) return regEx;
-            if (txt_LogcatAdvancedRegularExpressions.Text.Contains("|"))
-                regEx = " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"";
-            else
-                regEx = " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
-
-            return regEx;
+            return (txt_LogcatAdvancedRegularExpressions.Text.Contains("|")) ? " -e \"" + txt_LogcatAdvancedRegularExpressions.Text.Trim() + "\"" : " -e " + txt_LogcatAdvancedRegularExpressions.Text.Trim();
         }
 
         private string GetQuitAfterNumberOfLines()
@@ -272,22 +265,16 @@ namespace adbGUI.Forms
 
             if (opt_LogcatAdvancedFilterVerbose.Checked)
                 outputFilter += " *:V";
-
             else if (opt_LogcatAdvancedFilterDebug.Checked)
                 outputFilter += " *:D";
-
             else if (opt_LogcatAdvancedFilterInfo.Checked)
                 outputFilter += " *:I";
-
             else if (opt_LogcatAdvancedFilterWarning.Checked)
                 outputFilter += " *:W";
-
             else if (opt_LogcatAdvancedFilterError.Checked)
                 outputFilter += " *:E";
-
             else if (opt_LogcatAdvancedFilterFatal.Checked)
                 outputFilter += " *:F";
-
             else if (opt_LogcatAdvancedFilterSilent.Checked) outputFilter += " *:S";
 
             return outputFilter;

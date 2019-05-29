@@ -21,7 +21,6 @@ namespace adbGUI.Methods
         // Thanks to Vitaliy Fedorchenko
         private const int CtrlCEvent = 0;
 
-
         public CmdProcess()
         {
             GetProcess.EnableRaisingEvents = true;
@@ -87,12 +86,10 @@ namespace adbGUI.Methods
                         @"Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
             else if (command.StartsWith("cls"))
             {
                 ClearConsole?.Invoke();
             }
-
             else
             {
                 StopProcessing();
@@ -104,7 +101,7 @@ namespace adbGUI.Methods
 
         public bool StopProcessing()
         {
-            if (!AttachConsole((uint) GetProcess.Id)) return false;
+            if (!AttachConsole((uint)GetProcess.Id)) return false;
             SetConsoleCtrlHandler(null, true);
             try
             {

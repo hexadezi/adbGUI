@@ -3,10 +3,10 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Globalization;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class BackupRestore : Form
     {
@@ -39,7 +39,6 @@ namespace adbGUI.Forms
             var shared = " -noshared";
             const string all = " -all";
             var system = " -system";
-
 
             if (cbo_BackupPackage.Checked == false)
             {
@@ -91,7 +90,7 @@ namespace adbGUI.Forms
 
                 if (!string.IsNullOrEmpty(output))
                 {
-                    foreach (var item in output.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var item in output.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
                         cbx_BackupPackage.Items.Add(item.Remove(0, 8));
 
                     cbx_BackupPackage.Sorted = true;

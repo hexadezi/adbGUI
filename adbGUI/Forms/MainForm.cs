@@ -3,13 +3,13 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.Text.RegularExpressions;
     using System.Threading;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class MainForm : Form, IDisposable
     {
@@ -48,7 +48,7 @@ namespace adbGUI.Forms
             rtb_console.Clear();
 
             _cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
-            _cmdProcess.ClearConsole += () => { rtb_console.Clear(); };
+            _cmdProcess.ClearConsole += () => rtb_console.Clear();
 
             // Select custom command control
             cbx_customCommand.Select();
@@ -56,6 +56,7 @@ namespace adbGUI.Forms
             // Start the watcher which fires if adb devices changed
             AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
             AdbDeviceWatcher.StartDeviceWatcher();
+            Text = "ADBGUI build at 29/05/2019";
         }
 
         public new void Dispose()
@@ -76,18 +77,18 @@ namespace adbGUI.Forms
 
         private void CommandExecutionStarted()
         {
-            BeginInvoke((MethodInvoker) delegate { rtb_console.Clear(); });
+            BeginInvoke((MethodInvoker)delegate { rtb_console.Clear(); });
         }
 
         private void DwAdb_DeviceChanged(AdbDeviceList e)
         {
             try
             {
-                BeginInvoke((MethodInvoker) delegate
-                {
-                    _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
-                    txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
-                });
+                BeginInvoke((MethodInvoker)delegate
+               {
+                   _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
+                   txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
+               });
             }
             catch (Exception ex)
             {
@@ -120,7 +121,7 @@ namespace adbGUI.Forms
         {
             try
             {
-                BeginInvoke((MethodInvoker) delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
+                BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
                 Thread.Sleep(2);
             }
             catch (Exception ex)
@@ -150,7 +151,6 @@ namespace adbGUI.Forms
                 if (string.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString())) return;
                 if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
                     _cmdProcess.StartProcessing(tag, _formMethods.SelectedDevice());
-
                 else if (tag.StartsWith("#"))
                     switch (tag)
                     {
@@ -174,7 +174,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#screenrecord":
-                            if (_screenRecord == null || _screenRecord.IsDisposed)
+                            if (_screenRecord?.IsDisposed != false)
                             {
                                 _screenRecord = new ScreenRecord(_cmdProcess, _formMethods);
                                 _screenRecord.Show();
@@ -187,7 +187,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#spoofmac":
-                            if (_spoofMac == null || _spoofMac.IsDisposed)
+                            if (_spoofMac?.IsDisposed != false)
                             {
                                 _spoofMac = new SpoofMac(_cmdProcess, _formMethods);
                                 _spoofMac.Show();
@@ -200,7 +200,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#resolution":
-                            if (_resolutionChange == null || _resolutionChange.IsDisposed)
+                            if (_resolutionChange?.IsDisposed != false)
                             {
                                 _resolutionChange = new ResolutionChange(_cmdProcess, _formMethods);
                                 _resolutionChange.Show();
@@ -213,7 +213,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#density":
-                            if (_densityChange == null || _densityChange.IsDisposed)
+                            if (_densityChange?.IsDisposed != false)
                             {
                                 _densityChange = new Density(_cmdProcess, _formMethods);
                                 _densityChange.Show();
@@ -226,7 +226,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#files":
-                            if (_fileOps == null || _fileOps.IsDisposed)
+                            if (_fileOps?.IsDisposed != false)
                             {
                                 _fileOps = new FileOps(_cmdProcess, _formMethods);
                                 _fileOps.Show();
@@ -239,7 +239,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#installuninstall":
-                            if (_installUninstall == null || _installUninstall.IsDisposed)
+                            if (_installUninstall?.IsDisposed != false)
                             {
                                 _installUninstall = new InstallUninstall(_cmdProcess, _formMethods);
                                 _installUninstall.Show();
@@ -252,7 +252,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#sideload":
-                            if (_sideLoad == null || _sideLoad.IsDisposed)
+                            if (_sideLoad?.IsDisposed != false)
                             {
                                 _sideLoad = new Sideload(_cmdProcess, _formMethods);
                                 _sideLoad.Show();
@@ -265,7 +265,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#backuprestore":
-                            if (_backupRestore == null || _backupRestore.IsDisposed)
+                            if (_backupRestore?.IsDisposed != false)
                             {
                                 _backupRestore = new BackupRestore(_cmdProcess, _formMethods);
                                 _backupRestore.Show();
@@ -278,7 +278,7 @@ namespace adbGUI.Forms
                             break;
 
                         case "#logcatadvanced":
-                            if (_logcatAdvanced == null || _logcatAdvanced.IsDisposed)
+                            if (_logcatAdvanced?.IsDisposed != false)
                             {
                                 _logcatAdvanced = new LogcatAdvanced(_cmdProcess, _formMethods);
                                 _logcatAdvanced.Show();
@@ -293,6 +293,7 @@ namespace adbGUI.Forms
                         case "#credits":
                             new Credits().ShowDialog();
                             break;
+
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
@@ -390,24 +391,31 @@ namespace adbGUI.Forms
                 case "Reboot Normal":
                     _cmdProcess.StartProcessing("adb reboot", _formMethods.SelectedDevice());
                     break;
+
                 case "Reboot Recovery":
                     _cmdProcess.StartProcessing("adb reboot recovery", _formMethods.SelectedDevice());
                     break;
+
                 case "Reboot Bootloader":
                     _cmdProcess.StartProcessing("adb reboot bootloader", _formMethods.SelectedDevice());
                     break;
+
                 case "Reboot Fastboot":
                     _cmdProcess.StartProcessing("adb reboot fastboot", _formMethods.SelectedDevice());
                     break;
+
                 case "Sideload Mode":
                     _cmdProcess.StartProcessing("adb reboot sideload", _formMethods.SelectedDevice());
                     break;
+
                 case "Shutdown":
                     _cmdProcess.StartProcessing("adb shell reboot -p", _formMethods.SelectedDevice());
                     break;
+
                 case "Sleep":
                     _cmdProcess.StartProcessing("adb shell input keyevent POWER", _formMethods.SelectedDevice());
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -3,9 +3,9 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class InstallUninstall : Form
     {
@@ -76,7 +76,7 @@ namespace adbGUI.Forms
 
             if (!string.IsNullOrEmpty(output))
             {
-                foreach (var item in output.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var item in output.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
                     cbx_InstallUninstallPackageUninstall.Items.Add(item.Remove(0, 8));
 
                 cbx_InstallUninstallPackageUninstall.Sorted = true;
@@ -84,7 +84,6 @@ namespace adbGUI.Forms
                 if (cbx_InstallUninstallPackageUninstall.Items.Count > 0)
                     cbx_InstallUninstallPackageUninstall.SelectedIndex = 0;
             }
-
 
             cbx_InstallUninstallPackageUninstall.Enabled = true;
         }

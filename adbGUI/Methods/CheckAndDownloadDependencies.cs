@@ -40,21 +40,29 @@ namespace adbGUI.Methods
                     }
 
                     break;
+
                 case DialogResult.No:
                     Environment.Exit(0);
                     break;
+
                 case DialogResult.None:
                     break;
+
                 case DialogResult.OK:
                     break;
+
                 case DialogResult.Cancel:
                     break;
+
                 case DialogResult.Abort:
                     break;
+
                 case DialogResult.Retry:
                     break;
+
                 case DialogResult.Ignore:
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -98,7 +106,6 @@ namespace adbGUI.Methods
         private static void DependenciesChecker_ExtractionCompleted()
         {
             var extractedFilesPath = Path.GetTempPath() + "platform-tools";
-
 
             foreach (var item in StrFiles)
                 try

@@ -3,9 +3,9 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class ScreenRecord : Form
     {
@@ -51,7 +51,6 @@ namespace adbGUI.Forms
             if (cbo_ScreenRecordRotate.Checked) rotate = " --rotate ";
 
             if (txt_ScreenRecordBitrate.Text != "") bitrate = " --bit-rate " + txt_ScreenRecordBitrate.Text + " ";
-
 
             saveFileDialog.FileName = "record";
             saveFileDialog.Filter = @"Video File (*.mp4)|*.mp4";

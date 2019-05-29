@@ -3,9 +3,9 @@
 
 namespace adbGUI.Forms
 {
+    using Methods;
     using System;
     using System.Windows.Forms;
-    using Methods;
 
     public partial class FileOps : Form
     {
@@ -37,14 +37,14 @@ namespace adbGUI.Forms
 
         private void Btn_FileOpsPushPush_Click(object sender, EventArgs e)
         {
-            if (txt_FileOpsPushTo.Text == "" || txt_FileOpsPushFrom.Text == "")
+            if (txt_FileOpsPushTo.Text?.Length == 0 || txt_FileOpsPushFrom.Text?.Length == 0)
             {
                 MessageBox.Show(@"Please select a file and chose destination!", @"Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             else
             {
-                var s = "adb push \"" + txt_FileOpsPushFrom.Text + "\"" + " \"" + txt_FileOpsPushTo.Text + "\"";
+                var s = "adb push \"" + txt_FileOpsPushFrom.Text + "\" \"" + txt_FileOpsPushTo.Text + "\"";
                 _adb.StartProcessing(s, _formMethods.SelectedDevice());
             }
         }
@@ -65,14 +65,14 @@ namespace adbGUI.Forms
 
         private void Btn_FileOpsPullPull_Click(object sender, EventArgs e)
         {
-            if (txt_FileOpsPullTo.Text == "" || txt_FileOpsPullFrom.Text == "")
+            if (txt_FileOpsPullTo.Text?.Length == 0 || txt_FileOpsPullFrom.Text?.Length == 0)
             {
                 MessageBox.Show(@"Please select a file and chose destination!", @"Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             else
             {
-                var s = "adb pull \"" + txt_FileOpsPullFrom.Text + "\"" + " \"" + txt_FileOpsPullTo.Text + "\"";
+                var s = "adb pull \"" + txt_FileOpsPullFrom.Text + "\" \"" + txt_FileOpsPullTo.Text + "\"";
                 _adb.StartProcessing(s, _formMethods.SelectedDevice());
             }
         }

@@ -19,6 +19,7 @@ namespace adbGUI.Methods
         private static int _connectedDevices;
 
         private static Thread _tr;
+
         public static event DeviceChangedHandler DeviceChanged;
 
         public static void StartDeviceWatcher()
