@@ -311,17 +311,7 @@ namespace adbGUI.Forms
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Kill the process
-            // todo rename Forms
-            try
-            {
-                //adb.StopProcessing();
-                _cmdProcess.GetProcess.Kill();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            FormMethods.KillServer();
         }
 
         private void Tsb_OpenShell_Click(object sender, EventArgs e)
