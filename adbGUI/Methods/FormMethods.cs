@@ -26,10 +26,7 @@ namespace adbGUI.Methods
             GC.SuppressFinalize(this);
         }
 
-        public string SelectedDevice()
-        {
-            return _frm.tsc_ConnectedDevices.Items.Count == 0 ? "" : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
-        }
+        public string SelectedDevice() => _frm.tsc_ConnectedDevices.Items.Count == 0 ? "" : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
 
         public void RefreshAdbSerialsInCombobox(List<string> devices)
         {
