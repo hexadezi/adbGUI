@@ -75,17 +75,18 @@ namespace adbGUI.Forms
             return true;
         }
 
+<<<<<<< HEAD
         private void CommandExecutionStarted() => BeginInvoke((MethodInvoker)delegate { rtb_console.Clear(); });
 
         private void DwAdb_DeviceChanged(AdbDeviceList e)
+=======
+        private void AppendReceivedData(object sender, DataReceivedEventArgs e)
+>>>>>>> 8b7dc4d111a6c85038891aecf961e71a3868c8af
         {
             try
             {
-                BeginInvoke((MethodInvoker)delegate
-               {
-                   _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
-                   txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
-               });
+                BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
+                Thread.Sleep(2);
             }
             catch (Exception ex)
             {
@@ -111,12 +112,37 @@ namespace adbGUI.Forms
             }
         }
 
-        private void AppendReceivedData(object sender, DataReceivedEventArgs e)
+        private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btn_executeCommand.PerformClick();
+        }
+
+        private void CommandExecutionStarted() => BeginInvoke((MethodInvoker)delegate { rtb_console.Clear(); });
+
+        private void DwAdb_DeviceChanged(AdbDeviceList e)
         {
             try
             {
-                BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
-                Thread.Sleep(2);
+                BeginInvoke((MethodInvoker)delegate
+               {
+                   _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
+                   txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
+               });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                foreach (var process in Process.GetProcessesByName("adb"))
+                {
+                    process.Kill();
+                }
             }
             catch (Exception ex)
             {
@@ -160,9 +186,11 @@ namespace adbGUI.Forms
                                         .Replace(' ', '_').Replace(':', '.');
                                 saveFileDialog.Filter = @"PNG Image(.png)|*.png";
                                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                {
                                     _cmdProcess.StartProcessing(
                                         "adb shell screencap -p > " + saveFileDialog.FileName,
                                         _formMethods.SelectedDevice());
+                                }
                             }
 
                             break;
@@ -299,12 +327,15 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Return) btn_executeCommand.PerformClick();
-        }
+        private void Tsb_AdbRoot_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
 
+<<<<<<< HEAD
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e) => FormMethods.KillServer();
+=======
+        private void Tsb_AdbUnroot_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
+
+        private void Tsb_KillServer_Click(object sender, EventArgs e) => FormMethods.KillServer();
+>>>>>>> 8b7dc4d111a6c85038891aecf961e71a3868c8af
 
         private void Tsb_OpenShell_Click(object sender, EventArgs e)
         {
@@ -333,6 +364,7 @@ namespace adbGUI.Forms
             }
         }
 
+<<<<<<< HEAD
         private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
         {
             var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
@@ -358,6 +390,8 @@ namespace adbGUI.Forms
 
         private void Tsb_AdbUnroot_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
 
+=======
+>>>>>>> 8b7dc4d111a6c85038891aecf961e71a3868c8af
         private void Tsb_Power_Click(object sender, EventArgs e)
         {
             switch (sender.ToString())
@@ -394,5 +428,24 @@ namespace adbGUI.Forms
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
+        {
+            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
+
+            var ipadress = tst_IpAdress.Text;
+
+            if (r.Match(ipadress).Success)
+            {
+                _cmdProcess.StartProcessing("adb connect " + ipadress, "");
+            }
+            else
+            {
+                MessageBox.Show(@"Please enter a valid IP adress", @"Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb disconnect", "");
     }
 }

@@ -40,9 +40,9 @@ namespace adbGUI.Forms
             const string all = " -all";
             var system = " -system";
 
-            if (cbo_BackupPackage.Checked == false)
+            if (!cbo_BackupPackage.Checked)
             {
-                if (txt_BackupPathTo.Text == "")
+                if (txt_BackupPathTo.Text?.Length == 0)
                 {
                     MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -61,11 +61,35 @@ namespace adbGUI.Forms
             {
                 var package = cbx_BackupPackage.SelectedItem.ToString();
 
-                if (txt_BackupPathTo.Text == "")
+                if (txt_BackupPathTo.Text?.Length == 0)
+                {
                     MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+                }
                 else
+                {
                     _adb.StartProcessing("adb backup -apk " + package + name, _formMethods.SelectedDevice());
+                }
+            }
+        }
+
+        private void Btn_RestoreBrowse_Click(object sender, EventArgs e)
+        {
+            openFileDialog.FileName = "";
+            openFileDialog.Filter = @" .ab|*.ab";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_RestorePath.Text = openFileDialog.FileName;
+        }
+
+        private void Btn_RestoreStart_Click(object sender, EventArgs e)
+        {
+            if (txt_RestorePath.Text?.Length == 0)
+            {
+                MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                _adb.StartProcessing("adb restore \"" + txt_RestorePath.Text + "\"", _formMethods.SelectedDevice());
             }
         }
 
@@ -110,22 +134,6 @@ namespace adbGUI.Forms
                 cbx_BackupPackage.Items.Clear();
                 label8.Visible = false;
             }
-        }
-
-        private void Btn_RestoreStart_Click(object sender, EventArgs e)
-        {
-            if (txt_RestorePath.Text == "")
-                MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-                _adb.StartProcessing("adb restore \"" + txt_RestorePath.Text + "\"", _formMethods.SelectedDevice());
-        }
-
-        private void Btn_RestoreBrowse_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = @" .ab|*.ab";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_RestorePath.Text = openFileDialog.FileName;
         }
     }
 }

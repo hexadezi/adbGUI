@@ -26,20 +26,11 @@ namespace adbGUI.Forms
             return true;
         }
 
-        private void Btn_showDpi_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell wm density", _formMethods.SelectedDevice());
-        }
+        private void Btn_resetDpi_Click(object sender, EventArgs e) => _adb.StartProcessing("adb shell wm density reset", _formMethods.SelectedDevice());
 
-        private void Btn_setDpi_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell wm density " + txt_phoneDpi.Text, _formMethods.SelectedDevice());
-        }
+        private void Btn_setDpi_Click(object sender, EventArgs e) => _adb.StartProcessing("adb shell wm density " + txt_phoneDpi.Text, _formMethods.SelectedDevice());
 
-        private void Btn_resetDpi_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell wm density reset", _formMethods.SelectedDevice());
-        }
+        private void Btn_showDpi_Click(object sender, EventArgs e) => _adb.StartProcessing("adb shell wm density", _formMethods.SelectedDevice());
 
         private void DpiChange_KeyDown(object sender, KeyEventArgs e)
         {
