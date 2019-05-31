@@ -20,6 +20,17 @@ namespace adbGUI.Forms
             _formMethods = formMethodsFrm;
         }
 
+        private void Btn_InstallUninstallBrowse_Click(object sender, EventArgs e)
+        {
+            openFileDialog.FileName = "";
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.Filter = @" .apk|*.apk";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                txt_InstallUninstallPackageInstall.Text = openFileDialog.FileName;
+        }
+
         private void Btn_InstallUninstallInstall_Click(object sender, EventArgs e)
         {
             var s = "\"" + txt_InstallUninstallPackageInstall.Text + "\"";
@@ -36,15 +47,13 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Btn_InstallUninstallBrowse_Click(object sender, EventArgs e)
+        private void Btn_InstallUninstallRefreshApps_Click(object sender, EventArgs e)
         {
-            openFileDialog.FileName = "";
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.CheckPathExists = true;
-            openFileDialog.Filter = @" .apk|*.apk";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                txt_InstallUninstallPackageInstall.Text = openFileDialog.FileName;
+            groupBox1.Enabled = false;
+            groupBox3.Enabled = false;
+            RefreshInstalledApps();
+            groupBox1.Enabled = true;
+            groupBox3.Enabled = true;
         }
 
         private void Btn_InstallUninstallUninstall_Click(object sender, EventArgs e)
@@ -54,15 +63,6 @@ namespace adbGUI.Forms
             _adb.StartProcessing("adb uninstall " + s, _formMethods.SelectedDevice());
 
             RefreshInstalledApps();
-        }
-
-        private void Btn_InstallUninstallRefreshApps_Click(object sender, EventArgs e)
-        {
-            groupBox1.Enabled = false;
-            groupBox3.Enabled = false;
-            RefreshInstalledApps();
-            groupBox1.Enabled = true;
-            groupBox3.Enabled = true;
         }
 
         private void RefreshInstalledApps()

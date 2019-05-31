@@ -27,6 +27,11 @@ namespace adbGUI.Forms
             return true;
         }
 
+        private void Btn_SpoofMacReset_Click(object sender, EventArgs e)
+        {
+            _adb.StartProcessing("adb shell su root ifconfig wlan0 down", _formMethods.SelectedDevice());
+        }
+
         private void Btn_SpoofMacSet_Click(object sender, EventArgs e)
         {
             var s = txt_SpoofMacAdress.Text;
@@ -37,11 +42,6 @@ namespace adbGUI.Forms
                 _adb.StartProcessing("adb shell su root ifconfig wlan0 hw ether " + s, _formMethods.SelectedDevice());
             else
                 MessageBox.Show(@"Please enter a valid MAC address", @"Error");
-        }
-
-        private void Btn_SpoofMacReset_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell su root ifconfig wlan0 down", _formMethods.SelectedDevice());
         }
 
         private void Btn_SpoofMacShow_Click(object sender, EventArgs e)

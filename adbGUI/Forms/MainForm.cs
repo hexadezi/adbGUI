@@ -56,7 +56,7 @@ namespace adbGUI.Forms
             // Start the watcher which fires if adb devices changed
             AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
             AdbDeviceWatcher.StartDeviceWatcher();
-            Text = "ADBGUI build at 29/05/2019";
+            Text = "ADBGUI build at 31/05/2019";
         }
 
         public new void Dispose()
@@ -70,9 +70,55 @@ namespace adbGUI.Forms
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
+            if (keyData != Keys.Escape)
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+
             _cmdProcess.StopProcessing();
             return true;
+        }
+
+        private void AppendReceivedData(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
+                Thread.Sleep(2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Btn_consoleStop_Click(object sender, EventArgs e)
+        {
+            _cmdProcess.StopProcessing();
+        }
+
+        private void Btn_executeCommand_Click(object sender, EventArgs e)
+        {
+            string command = cbx_customCommand.Text;
+
+            if (!string.IsNullOrEmpty(command))
+            {
+                cbx_customCommand.Items.Add(command);
+
+                _cmdProcess.StartProcessing(command, _formMethods.SelectedDevice());
+            }
+            else
+            {
+                MessageBox.Show(@"Please enter a command!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                btn_executeCommand.PerformClick();
+            }
         }
 
         private void CommandExecutionStarted()
@@ -96,38 +142,9 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Btn_consoleStop_Click(object sender, EventArgs e)
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _cmdProcess.StopProcessing();
-        }
-
-        private void Btn_executeCommand_Click(object sender, EventArgs e)
-        {
-            var command = cbx_customCommand.Text;
-
-            if (!string.IsNullOrEmpty(command))
-            {
-                cbx_customCommand.Items.Add(command);
-
-                _cmdProcess.StartProcessing(command, _formMethods.SelectedDevice());
-            }
-            else
-            {
-                MessageBox.Show(@"Please enter a command!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void AppendReceivedData(object sender, DataReceivedEventArgs e)
-        {
-            try
-            {
-                BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
-                Thread.Sleep(2);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            FormMethods.KillServer();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -148,10 +165,17 @@ namespace adbGUI.Forms
             {
                 string tag;
 
-                if (string.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString())) return;
+                if (string.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString()))
+                {
+                    return;
+                }
+
                 if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
+                {
                     _cmdProcess.StartProcessing(tag, _formMethods.SelectedDevice());
+                }
                 else if (tag.StartsWith("#"))
+                {
                     switch (tag)
                     {
                         case "#prop":
@@ -166,9 +190,11 @@ namespace adbGUI.Forms
                                         .Replace(' ', '_').Replace(':', '.');
                                 saveFileDialog.Filter = @"PNG Image(.png)|*.png";
                                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                {
                                     _cmdProcess.StartProcessing(
                                         "adb shell screencap -p > " + saveFileDialog.FileName,
                                         _formMethods.SelectedDevice());
+                                }
                             }
 
                             break;
@@ -297,6 +323,7 @@ namespace adbGUI.Forms
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -304,12 +331,17 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
+        private void Tsb_AdbRoot_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Return) btn_executeCommand.PerformClick();
+            _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
+        {
+            _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
+        }
+
+        private void Tsb_KillServer_Click(object sender, EventArgs e)
         {
             FormMethods.KillServer();
         }
@@ -318,11 +350,11 @@ namespace adbGUI.Forms
         {
             if (!string.IsNullOrEmpty(_formMethods.SelectedDevice()))
             {
-                var serial = "";
+                string serial = "";
 
                 serial += "-s " + _formMethods.SelectedDevice() + " ";
 
-                using (var process = new Process
+                using (Process process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
@@ -339,39 +371,6 @@ namespace adbGUI.Forms
                 MessageBox.Show(@"No device connected. Please connect a device for adb commands.",
                     @"Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
-        {
-            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
-
-            var ipadress = tst_IpAdress.Text;
-
-            if (r.Match(ipadress).Success)
-                _cmdProcess.StartProcessing("adb connect " + ipadress, "");
-            else
-                MessageBox.Show(@"Please enter a valid IP adress", @"Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-        }
-
-        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb disconnect", "");
-        }
-
-        private void Tsb_KillServer_Click(object sender, EventArgs e)
-        {
-            FormMethods.KillServer();
-        }
-
-        private void Tsb_AdbRoot_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
-        }
-
-        private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
         }
 
         private void Tsb_Power_Click(object sender, EventArgs e)
@@ -409,6 +408,28 @@ namespace adbGUI.Forms
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
+        {
+            Regex r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
+
+            string ipadress = tst_IpAdress.Text;
+
+            if (r.Match(ipadress).Success)
+            {
+                _cmdProcess.StartProcessing("adb connect " + ipadress, "");
+            }
+            else
+            {
+                MessageBox.Show(@"Please enter a valid IP adress", @"Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e)
+        {
+            _cmdProcess.StartProcessing("adb disconnect", "");
         }
     }
 }

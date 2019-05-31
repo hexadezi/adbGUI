@@ -20,21 +20,9 @@ namespace adbGUI.Methods
             _frm = f;
         }
 
-        public void Dispose()
+        public static bool AlwaysClearConsole()
         {
-            _adb?.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        public string SelectedDevice() => _frm.tsc_ConnectedDevices.Items.Count == 0 ? "" : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
-
-        public void RefreshAdbSerialsInCombobox(List<string> devices)
-        {
-            _frm.tsc_ConnectedDevices.Items.Clear();
-
-            foreach (var item in devices) _frm.tsc_ConnectedDevices.Items.Add(item);
-
-            _frm.tsc_ConnectedDevices.SelectedIndex = _frm.tsc_ConnectedDevices.Items.Count - 1;
+            return true;
         }
 
         public static void KillServer()
@@ -49,9 +37,21 @@ namespace adbGUI.Methods
             }
         }
 
-        public static bool AlwaysClearConsole()
+        public void Dispose()
         {
-            return true;
+            _adb?.Dispose();
+            GC.SuppressFinalize(this);
         }
+
+        public void RefreshAdbSerialsInCombobox(List<string> devices)
+        {
+            _frm.tsc_ConnectedDevices.Items.Clear();
+
+            foreach (var item in devices) _frm.tsc_ConnectedDevices.Items.Add(item);
+
+            _frm.tsc_ConnectedDevices.SelectedIndex = _frm.tsc_ConnectedDevices.Items.Count - 1;
+        }
+
+        public string SelectedDevice() => _frm.tsc_ConnectedDevices.Items.Count == 0 ? "" : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
     }
 }

@@ -56,7 +56,7 @@ namespace adbGUI.Methods
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.ConnectedAdbDevices> 0 || command.EndsWith("help") ||
+                if (AdbDeviceWatcher.ConnectedAdbDevices > 0 || command.EndsWith("help") ||
                     command.EndsWith("version") || command.StartsWith("adb connect") ||
                     command.StartsWith("adb disconnect"))
                 {
@@ -111,7 +111,7 @@ namespace adbGUI.Methods
         {
             if (command.StartsWith("adb"))
             {
-                if (AdbDeviceWatcher.ConnectedAdbDevices> 0 || command.EndsWith("help")
+                if (AdbDeviceWatcher.ConnectedAdbDevices > 0 || command.EndsWith("help")
                     || command.EndsWith("version") || command.StartsWith("adb connect")
                     || command.StartsWith("adb disconnect"))
                 {

@@ -20,6 +20,14 @@ namespace adbGUI.Forms
             _formMethods = formMethodsFrm;
         }
 
+        private void Btn_SideloadBrowse_Click(object sender, EventArgs e)
+        {
+            openFileDialog.FileName = "";
+            openFileDialog.Filter = @" .zip|*.zip";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_SideloadPath.Text = openFileDialog.FileName;
+        }
+
         private void Btn_SideloadStart_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txt_SideloadPath.Text))
@@ -31,14 +39,6 @@ namespace adbGUI.Forms
             {
                 MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Btn_SideloadBrowse_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = @" .zip|*.zip";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_SideloadPath.Text = openFileDialog.FileName;
         }
     }
 }
