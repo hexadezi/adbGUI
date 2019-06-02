@@ -238,7 +238,7 @@ namespace adbGUI.Methods
                 }
             };
 
-            process2.Start();
+            _ = process2.Start();
 
             return process2.StandardOutput.ReadToEnd();
         }

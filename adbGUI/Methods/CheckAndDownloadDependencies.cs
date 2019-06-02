@@ -70,23 +70,25 @@ namespace adbGUI.Methods
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Err");
             }
         }
 
         private static void DependenciesChecker_ExtractionCompleted()
         {
-            var extractedFilesPath = Path.GetTempPath() + "platform-tools";
-
-            foreach (var item in StrFiles)
+            string extractedFilesPath = Path.GetTempPath() + "platform-tools";
+            if (extractedFilesPath != null)
             {
-                try
+                foreach (var item in StrFiles)
                 {
-                    File.Copy(extractedFilesPath + "\\" + item, item);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        File.Copy(extractedFilesPath + "\\" + item, item);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
 

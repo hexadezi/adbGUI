@@ -52,6 +52,8 @@ namespace adbGUI.Methods
             _frm.tsc_ConnectedDevices.SelectedIndex = _frm.tsc_ConnectedDevices.Items.Count - 1;
         }
 
-        public string SelectedDevice() => _frm.tsc_ConnectedDevices.Items.Count == 0 ? "" : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
+        public string SelectedDevice() => _frm.tsc_ConnectedDevices.Items.Count == 0
+            ? string.Empty
+            : _frm.tsc_ConnectedDevices.SelectedItem.ToString();
     }
 }

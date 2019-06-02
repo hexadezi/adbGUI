@@ -32,7 +32,7 @@ namespace adbGUI.Forms
             // pass formMethods the created Form this
             _formMethods = new FormMethods(this);
 
-            _cmdProcess.GetProcess.Start();
+            _ = _cmdProcess.GetProcess.Start();
 
             // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
             _cmdProcess.GetProcess.BeginOutputReadLine();
@@ -75,7 +75,7 @@ namespace adbGUI.Forms
                 return base.ProcessCmdKey(ref msg, keyData);
             }
 
-            _cmdProcess.StopProcessing();
+            _ = _cmdProcess.StopProcessing();
             return true;
         }
 
@@ -83,7 +83,7 @@ namespace adbGUI.Forms
         {
             try
             {
-                BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
+                _ = BeginInvoke((MethodInvoker)delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
                 Thread.Sleep(2);
             }
             catch (Exception ex)
@@ -92,10 +92,7 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Btn_consoleStop_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StopProcessing();
-        }
+        private void Btn_consoleStop_Click(object sender, EventArgs e) => _ = _cmdProcess.StopProcessing();
 
         private void Btn_executeCommand_Click(object sender, EventArgs e)
         {
@@ -103,7 +100,7 @@ namespace adbGUI.Forms
 
             if (!string.IsNullOrEmpty(command))
             {
-                cbx_customCommand.Items.Add(command);
+                _ = cbx_customCommand.Items.Add(command);
 
                 _cmdProcess.StartProcessing(command, _formMethods.SelectedDevice());
             }
@@ -121,10 +118,7 @@ namespace adbGUI.Forms
             }
         }
 
-        private void CommandExecutionStarted()
-        {
-            BeginInvoke((MethodInvoker)delegate { rtb_console.Clear(); });
-        }
+        private void CommandExecutionStarted() => _ = BeginInvoke((MethodInvoker)delegate { rtb_console.Clear(); });
 
         private void DwAdb_DeviceChanged(AdbDeviceList e)
         {
@@ -142,10 +136,7 @@ namespace adbGUI.Forms
             }
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            FormMethods.KillServer();
-        }
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e) => FormMethods.KillServer();
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -153,10 +144,7 @@ namespace adbGUI.Forms
             trv_commandTreeView.SelectedNode = trv_commandTreeView.Nodes[0];
         }
 
-        private void Rtb_console_Resize(object sender, EventArgs e)
-        {
-            rtb_console.ScrollToCaret();
-        }
+        private void Rtb_console_Resize(object sender, EventArgs e) => rtb_console.ScrollToCaret();
 
         private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
         {
@@ -331,20 +319,11 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Tsb_AdbRoot_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
-        }
+        private void Tsb_AdbRoot_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
 
-        private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
-        }
+        private void Tsb_AdbUnroot_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
 
-        private void Tsb_KillServer_Click(object sender, EventArgs e)
-        {
-            FormMethods.KillServer();
-        }
+        private void Tsb_KillServer_Click(object sender, EventArgs e) => FormMethods.KillServer();
 
         private void Tsb_OpenShell_Click(object sender, EventArgs e)
         {
@@ -363,7 +342,7 @@ namespace adbGUI.Forms
                     }
                 })
                 {
-                    process.Start();
+                    _ = process.Start();
                 }
             }
             else
@@ -427,9 +406,6 @@ namespace adbGUI.Forms
             }
         }
 
-        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb disconnect", "");
-        }
+        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e) => _cmdProcess.StartProcessing("adb disconnect", "");
     }
 }
