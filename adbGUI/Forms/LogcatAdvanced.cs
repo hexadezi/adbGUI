@@ -42,10 +42,10 @@ namespace adbGUI.Forms
 
         private void AltAdb_CommandExecutionStarted()
         {
-            BeginInvoke((MethodInvoker)delegate
-           {
-               if (FormMethods.AlwaysClearConsole()) _lOut.rtb_console.Clear();
-           });
+            _ = BeginInvoke((MethodInvoker)delegate
+             {
+                 if (FormMethods.AlwaysClearConsole()) _lOut.rtb_console.Clear();
+             });
         }
 
         private void Btn_LogcatAdvancedClearBuffers_Click(object sender, EventArgs e)

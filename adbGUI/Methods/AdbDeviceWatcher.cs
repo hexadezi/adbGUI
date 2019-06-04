@@ -10,8 +10,6 @@ namespace adbGUI.Methods
 
     public static class AdbDeviceWatcher
     {
-        private static int _connectedDevices;
-
         private static string _devicesRawNew;
 
         private static string _devicesRawOld;
@@ -22,14 +20,11 @@ namespace adbGUI.Methods
 
         public static event DeviceChangedHandler DeviceChanged;
 
-        public static int ConnectedAdbDevices => _connectedDevices;
+        public static int ConnectedAdbDevices { get; private set; }
 
         public static void StartDeviceWatcher()
         {
-            _tr = new Thread(Watcher)
-            {
-                IsBackground = true
-            };
+            _tr = new Thread(Watcher) { IsBackground = true };
 
             _tr.Start();
         }
@@ -99,7 +94,7 @@ namespace adbGUI.Methods
                             GetDevicesList = ParseDevicesL(_devicesRawNew)
                         };
 
-                        _connectedDevices = dl.GetDevicesList.Count;
+                        ConnectedAdbDevices = dl.GetDevicesList.Count;
 
                         DeviceChanged?.Invoke(dl);
                     }

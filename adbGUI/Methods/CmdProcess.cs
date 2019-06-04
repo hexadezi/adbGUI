@@ -15,10 +15,7 @@ namespace adbGUI.Methods
         // Thanks to Vitaliy Fedorchenko
         private const int CtrlCEvent = 0;
 
-        public CmdProcess()
-        {
-            GetProcess.EnableRaisingEvents = true;
-        }
+        public CmdProcess() => GetProcess.EnableRaisingEvents = true;
 
         public delegate void ClearConsoleHandler();
 
@@ -62,10 +59,7 @@ namespace adbGUI.Methods
                 {
                     string output = "";
 
-                    Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
-                    {
-                        IsBackground = true
-                    };
+                    Thread t = new Thread(() => output = StartProcessingReadToEnd(command, serialnumber)) { IsBackground = true };
 
                     t.Start();
 
@@ -85,10 +79,7 @@ namespace adbGUI.Methods
             {
                 string output = "";
 
-                Thread t = new Thread(() => { output = StartProcessingReadToEnd(command, serialnumber); })
-                {
-                    IsBackground = true
-                };
+                Thread t = new Thread(() => output = StartProcessingReadToEnd(command, serialnumber)) { IsBackground = true };
 
                 t.Start();
 
@@ -200,9 +191,7 @@ namespace adbGUI.Methods
                     serial = "";
                 }
 
-                string fullcommand = "adb " + serial + command;
-
-                return fullcommand;
+                return "adb " + serial + command;
             }
 
             if (!command.StartsWith("fastboot "))
@@ -213,9 +202,7 @@ namespace adbGUI.Methods
             {
                 command = command.Remove(0, 9);
 
-                string fullcommand = "fastboot " + command;
-
-                return fullcommand;
+                return "fastboot " + command;
             }
         }
 

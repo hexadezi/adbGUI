@@ -56,7 +56,7 @@ namespace adbGUI.Forms
             // Start the watcher which fires if adb devices changed
             AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
             AdbDeviceWatcher.StartDeviceWatcher();
-            Text = "ADBGUI build at 31/05/2019";
+            Text = "ADBGUI build at 03/06/2019";
         }
 
         public new void Dispose()
@@ -124,11 +124,11 @@ namespace adbGUI.Forms
         {
             try
             {
-                BeginInvoke((MethodInvoker)delegate
-               {
-                   _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
-                   txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
-               });
+                _ = BeginInvoke((MethodInvoker)delegate
+                 {
+                     _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
+                     txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
+                 });
             }
             catch (Exception ex)
             {
