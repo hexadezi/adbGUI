@@ -1,44 +1,35 @@
-﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+﻿using System;
+using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI.Forms
 {
-    using System;
-    using System.Windows.Forms;
-    using Methods;
+	public partial class Sideload : ExtForm
+	{
+		public Sideload()
+		{
+			InitializeComponent();
+		}
 
-    public partial class Sideload : Form
-    {
-        private readonly CmdProcess _adb;
-        private readonly FormMethods _formMethods;
+		private void Btn_SideloadStart_Click(object sender, EventArgs e)
+		{
+			if (!string.IsNullOrEmpty(txt_SideloadPath.Text))
+			{
+				var s = "adb sideload \"" + txt_SideloadPath.Text + "\"";
+				HelperClass.Execute(s);
+			}
+			else
+			{
+				MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        public Sideload(CmdProcess adbFrm, FormMethods formMethodsFrm)
-        {
-            InitializeComponent();
+		private void Btn_SideloadBrowse_Click(object sender, EventArgs e)
+		{
+			openFileDialog.FileName = "";
+			openFileDialog.Filter = @" .zip|*.zip";
 
-            _adb = adbFrm;
-            _formMethods = formMethodsFrm;
-        }
-
-        private void Btn_SideloadStart_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txt_SideloadPath.Text))
-            {
-                var s = "adb sideload \"" + txt_SideloadPath.Text + "\"";
-                _adb.StartProcessing(s, _formMethods.SelectedDevice());
-            }
-            else
-            {
-                MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Btn_SideloadBrowse_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = @" .zip|*.zip";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_SideloadPath.Text = openFileDialog.FileName;
-        }
-    }
+			if (openFileDialog.ShowDialog() == DialogResult.OK) txt_SideloadPath.Text = openFileDialog.FileName;
+		}
+	}
 }

@@ -7,16 +7,11 @@ namespace adbGUI.Forms
     using System.Windows.Forms;
     using Methods;
 
-    public partial class Density : Form
+    public partial class Density : ExtForm
     {
-        private readonly CmdProcess _adb;
-        private readonly FormMethods _formMethods;
-
-        public Density(CmdProcess adbFrm, FormMethods formMethodsFrm)
+        public Density()
         {
             InitializeComponent();
-            _adb = adbFrm;
-            _formMethods = formMethodsFrm;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -28,17 +23,17 @@ namespace adbGUI.Forms
 
         private void Btn_showDpi_Click(object sender, EventArgs e)
         {
-            _adb.StartProcessing("adb shell wm density", _formMethods.SelectedDevice());
+            HelperClass.Execute("adb shell wm density");
         }
 
         private void Btn_setDpi_Click(object sender, EventArgs e)
         {
-            _adb.StartProcessing("adb shell wm density " + txt_phoneDpi.Text, _formMethods.SelectedDevice());
+            HelperClass.Execute("adb shell wm density " + txt_phoneDpi.Text);
         }
 
         private void Btn_resetDpi_Click(object sender, EventArgs e)
         {
-            _adb.StartProcessing("adb shell wm density reset", _formMethods.SelectedDevice());
+            HelperClass.Execute("adb shell wm density reset");
         }
 
         private void DpiChange_KeyDown(object sender, KeyEventArgs e)

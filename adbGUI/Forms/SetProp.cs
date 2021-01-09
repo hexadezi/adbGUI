@@ -1,35 +1,26 @@
-﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+﻿using System;
+using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI.Forms
 {
-    using System;
-    using System.Windows.Forms;
-    using Methods;
+	public partial class SetProp : ExtForm
+	{
+		public SetProp()
+		{
+			InitializeComponent();
+		}
 
-    public partial class SetProp : Form
-    {
-        private readonly CmdProcess _adb;
-        private readonly FormMethods _formMethods;
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
+			Close();
+			return true;
+		}
 
-        public SetProp(CmdProcess adbFrm, FormMethods fMethods)
-        {
-            _adb = adbFrm;
-            _formMethods = fMethods;
-            InitializeComponent();
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
-            Close();
-            return true;
-        }
-
-        private void Btn_setProp_Click(object sender, EventArgs e)
-        {
-            _adb.StartProcessing("adb shell su root setprop " + txt_setPropKey.Text + " " + txt_setPropValue.Text,
-                _formMethods.SelectedDevice());
-        }
-    }
+		private void Btn_setProp_Click(object sender, EventArgs e)
+		{
+			HelperClass.Execute("adb shell su root setprop " + txt_setPropKey.Text + " " + txt_setPropValue.Text);
+		}
+	}
 }

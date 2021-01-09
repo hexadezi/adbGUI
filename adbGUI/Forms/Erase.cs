@@ -4,16 +4,11 @@
     using System.Windows.Forms;
     using Methods;
 
-    public partial class Erase : Form
+    public partial class Erase : ExtForm
     {
-        private readonly CmdProcess _adb;
-        private readonly FormMethods _formMethods;
-
-        public Erase(CmdProcess adbFrm, FormMethods formMethodsFrm)
+        public Erase()
         {
             InitializeComponent();
-            _adb = adbFrm;
-            _formMethods = formMethodsFrm;
         }
 
         private void Btn_Erase_Click(object sender, EventArgs e)
@@ -26,8 +21,13 @@
             else
             {
                 var s = "fastboot erase " + txt_Erase.Text;
-                _adb.StartProcessing(s, _formMethods.SelectedDevice());
+                HelperClass.Execute(s);
             }
         }
-    }
+
+		private void RadioButton_CheckedChanged(object sender, EventArgs e)
+		{
+            txt_Erase.Text = ((RadioButton)sender).Text.ToLower();
+		}
+	}
 }

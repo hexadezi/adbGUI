@@ -25,8 +25,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>adbGUI</ProductName>
     <PublisherName>Labo</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.1.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -66,7 +66,7 @@
     <ManifestKeyFile>adbGUI_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -110,6 +110,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -162,12 +163,6 @@
     <Compile Include="Forms\LogcatAdvanced.Designer.cs">
       <DependentUpon>LogcatAdvanced.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LogcatOutput.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LogcatOutput.Designer.cs">
-      <DependentUpon>LogcatOutput.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ResolutionChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,11 +193,13 @@
     <Compile Include="Forms\SpoofMac.Designer.cs">
       <DependentUpon>SpoofMac.cs</DependentUpon>
     </Compile>
-    <Compile Include="Methods\AdbDeviceList.cs" />
-    <Compile Include="Methods\CheckAndDownloadDependencies.cs" />
-    <Compile Include="Methods\CmdProcess.cs" />
-    <Compile Include="Methods\AdbDeviceWatcher.cs" />
-    <Compile Include="Methods\FormMethods.cs" />
+    <Compile Include="Methods\Dependencies.cs" />
+    <Compile Include="Methods\CLI.cs" />
+    <Compile Include="Forms\ExtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Methods\DevicesWatcher.cs" />
+    <Compile Include="Methods\HelperClass.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,9 +237,6 @@
     <EmbeddedResource Include="Forms\LogcatAdvanced.resx">
       <DependentUpon>LogcatAdvanced.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LogcatOutput.resx">
-      <DependentUpon>LogcatOutput.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -266,6 +260,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="app.config" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>

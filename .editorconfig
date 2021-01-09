@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0414: Dem Feld "MainForm.RICHTEXTBOX_REFRSH_INTERVAL" wurde ein Wert zugewiesen, der aber nie verwendet wird.
+dotnet_diagnostic.CS0414.severity = warning

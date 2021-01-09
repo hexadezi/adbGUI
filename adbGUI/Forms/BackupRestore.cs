@@ -3,130 +3,124 @@
 
 namespace adbGUI.Forms
 {
-    using System;
-    using System.Globalization;
-    using System.Windows.Forms;
-    using Methods;
+	using System;
+	using System.Globalization;
+	using System.Windows.Forms;
+	using Methods;
 
-    public partial class BackupRestore : Form
-    {
-        // todo backup restore testen
+	public partial class BackupRestore : ExtForm
+	{
+		// todo backup restore testen
 
-        private readonly CmdProcess _adb;
-        private readonly FormMethods _formMethods;
+		public BackupRestore()
+		{
+			InitializeComponent();
+		}
 
-        public BackupRestore(CmdProcess adbFrm, FormMethods formMethodsFrm)
-        {
-            InitializeComponent();
+		private void Btn_BackupBrowse_Click(object sender, EventArgs e)
+		{
+			saveFileDialog.FileName = "backup_" + DateTime.Now.ToString(@"ddMMyyyy_HHmmss");
+			saveFileDialog.Filter = @" .ab|*.ab";
 
-            _adb = adbFrm;
-            _formMethods = formMethodsFrm;
-        }
+			if (saveFileDialog.ShowDialog() == DialogResult.OK) txt_BackupPathTo.Text = saveFileDialog.FileName;
+		}
 
-        private void Btn_BackupBrowse_Click(object sender, EventArgs e)
-        {
-            saveFileDialog.FileName = "backup_" + DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(' ', '_')
-                                          .Replace(':', '.');
-            saveFileDialog.Filter = @" .ab|*.ab";
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK) txt_BackupPathTo.Text = saveFileDialog.FileName;
-        }
-
-        private void Btn_BackupStart_Click(object sender, EventArgs e)
-        {
-            var name = " -f \"" + txt_BackupPathTo.Text + "\"";
-            var apk = " -noapk";
-            var shared = " -noshared";
-            const string all = " -all";
-            var system = " -system";
+		private void Btn_BackupStart_Click(object sender, EventArgs e)
+		{
+			var name = " -f \"" + txt_BackupPathTo.Text + "\"";
+			var apk = " -noapk";
+			var shared = " -noshared";
+			const string all = " -all";
+			var system = " -system";
 
 
-            if (cbo_BackupPackage.Checked == false)
-            {
-                if (txt_BackupPathTo.Text == "")
-                {
-                    MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                else
-                {
-                    if (cbo_BackupWithApk.Checked) apk = " -apk";
-                    if (cbo_BackupShared.Checked) shared = " -shared";
-                    if (cbo_BackupNoSystem.Checked) system = " -nosystem";
+			if (cbo_BackupPackage.Checked)
+			{
+				if (cbx_BackupPackage.SelectedItem != null)
+				{
+					string package = cbx_BackupPackage.SelectedItem.ToString();
 
-                    _adb.StartProcessing("adb backup" + apk + shared + all + system + name,
-                        _formMethods.SelectedDevice());
-                }
-            }
-            else
-            {
-                var package = cbx_BackupPackage.SelectedItem.ToString();
+					if (txt_BackupPathTo.Text == "")
+						MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					else
+						HelperClass.Execute("adb backup -apk " + package + name);
+				}
+			}
+			else
+			{
 
-                if (txt_BackupPathTo.Text == "")
-                    MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                else
-                    _adb.StartProcessing("adb backup -apk " + package + name, _formMethods.SelectedDevice());
-            }
-        }
+				if (txt_BackupPathTo.Text == "")
+				{
+					MessageBox.Show(@"Please select a destination!", @"Error", MessageBoxButtons.OK,
+						MessageBoxIcon.Error);
+				}
+				else
+				{
+					if (cbo_BackupWithApk.Checked) apk = " -apk";
+					if (cbo_BackupShared.Checked) shared = " -shared";
+					if (cbo_BackupNoSystem.Checked) system = " -nosystem";
 
-        private void Cbo_BackupPackage_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbo_BackupPackage.Checked)
-            {
-                cbo_BackupNoSystem.Enabled = false;
-                cbo_BackupNoSystem.Checked = false;
-                cbo_BackupShared.Enabled = false;
-                cbo_BackupShared.Checked = false;
-                cbo_BackupWithApk.Enabled = false;
-                cbo_BackupWithApk.Checked = false;
-                cbx_BackupPackage.Visible = true;
-                label8.Visible = true;
+					HelperClass.Execute("adb backup" + apk + shared + all + system + name);
+				}
+			}
+		}
 
-                groupBox8.Enabled = false;
-                groupBox14.Enabled = false;
+		private void Cbo_BackupPackage_CheckedChanged(object sender, EventArgs e)
+		{
+			if (cbo_BackupPackage.Checked)
+			{
+				cbo_BackupNoSystem.Enabled = false;
+				cbo_BackupNoSystem.Checked = false;
+				cbo_BackupShared.Enabled = false;
+				cbo_BackupShared.Checked = false;
+				cbo_BackupWithApk.Enabled = false;
+				cbo_BackupWithApk.Checked = false;
+				cbx_BackupPackage.Visible = true;
+				label8.Visible = true;
 
-                var output =
-                    CmdProcess.StartProcessingInThread("adb shell pm list packages -3", _formMethods.SelectedDevice());
+				groupBox8.Enabled = false;
+				groupBox14.Enabled = false;
 
-                if (!string.IsNullOrEmpty(output))
-                {
-                    foreach (var item in output.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries))
-                        cbx_BackupPackage.Items.Add(item.Remove(0, 8));
+				var output = HelperClass.ExecuteWithOutput("adb shell pm list packages -3");
 
-                    cbx_BackupPackage.Sorted = true;
+				if (!string.IsNullOrEmpty(output))
+				{
+					foreach (var item in output.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+						cbx_BackupPackage.Items.Add(item.Remove(0, 8));
 
-                    if (cbx_BackupPackage.Items.Count > 0) cbx_BackupPackage.SelectedIndex = 0;
-                }
+					cbx_BackupPackage.Sorted = true;
 
-                groupBox8.Enabled = true;
-                groupBox14.Enabled = true;
-            }
-            else
-            {
-                cbo_BackupNoSystem.Enabled = true;
-                cbo_BackupShared.Enabled = true;
-                cbo_BackupWithApk.Enabled = true;
-                cbx_BackupPackage.Visible = false;
-                cbx_BackupPackage.Items.Clear();
-                label8.Visible = false;
-            }
-        }
+					if (cbx_BackupPackage.Items.Count > 0) cbx_BackupPackage.SelectedIndex = 0;
+				}
 
-        private void Btn_RestoreStart_Click(object sender, EventArgs e)
-        {
-            if (txt_RestorePath.Text == "")
-                MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-                _adb.StartProcessing("adb restore \"" + txt_RestorePath.Text + "\"", _formMethods.SelectedDevice());
-        }
+				groupBox8.Enabled = true;
+				groupBox14.Enabled = true;
+			}
+			else
+			{
+				cbo_BackupNoSystem.Enabled = true;
+				cbo_BackupShared.Enabled = true;
+				cbo_BackupWithApk.Enabled = true;
+				cbx_BackupPackage.Visible = false;
+				cbx_BackupPackage.Items.Clear();
+				label8.Visible = false;
+			}
+		}
 
-        private void Btn_RestoreBrowse_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = @" .ab|*.ab";
+		private void Btn_RestoreStart_Click(object sender, EventArgs e)
+		{
+			if (txt_RestorePath.Text == "")
+				MessageBox.Show(@"Please select a file!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			else
+				HelperClass.Execute("adb restore \"" + txt_RestorePath.Text + "\"");
+		}
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK) txt_RestorePath.Text = openFileDialog.FileName;
-        }
-    }
+		private void Btn_RestoreBrowse_Click(object sender, EventArgs e)
+		{
+			openFileDialog.FileName = "";
+			openFileDialog.Filter = @" .ab|*.ab";
+
+			if (openFileDialog.ShowDialog() == DialogResult.OK) txt_RestorePath.Text = openFileDialog.FileName;
+		}
+	}
 }

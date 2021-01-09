@@ -1,445 +1,323 @@
-﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
+using adbGUI.Methods;
 
 namespace adbGUI.Forms
 {
-    using System;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Windows.Forms;
-    using Methods;
+	public partial class MainForm : Form
+	{
+		readonly StringBuilder stringBuilder = new StringBuilder();
 
-    public partial class MainForm : Form, IDisposable
-    {
-        private readonly CmdProcess _cmdProcess = new CmdProcess();
-        private readonly FormMethods _formMethods;
-        private BackupRestore _backupRestore;
-        private Density _densityChange;
-        private FileOps _fileOps;
-        private InstallUninstall _installUninstall;
-        private LogcatAdvanced _logcatAdvanced;
-        private ResolutionChange _resolutionChange;
-        private ScreenRecord _screenRecord;
-        private Sideload _sideLoad;
-        private SpoofMac _spoofMac;
-        private Erase _erase;
-        private Flash _flash;
+		const int RICHTEXTBOX_REFRSH_INTERVAL = 5;
 
-        public MainForm()
-        {
-            InitializeComponent();
+		public MainForm()
+		{
+			InitializeComponent();
+		}
 
-            // pass formMethods the created Form this
-            _formMethods = new FormMethods(this);
+		public void AppendToRichTextBox()
+		{
+			while (true)
+			{
+				lock (stringBuilder)
+				{
+					if (stringBuilder.Length > 0)
+					{
+						rtb_console.Invoke((MethodInvoker)(() => rtb_console.AppendText(stringBuilder.ToString())));
+						stringBuilder.Clear();
+					}
+				}
 
-            _cmdProcess.GetProcess.Start();
+				Thread.Sleep(RICHTEXTBOX_REFRSH_INTERVAL);
+			}
+		}
 
-            // Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
-            _cmdProcess.GetProcess.BeginOutputReadLine();
-            _cmdProcess.GetProcess.CancelOutputRead();
+		public Form GetForm(string arg)
+		{
+			Type type = Type.GetType($"adbGUI.Forms.{arg}");
+			Form frm = (Form)Activator.CreateInstance(type);
+			return frm;
+		}
 
-            _cmdProcess.GetProcess.OutputDataReceived += AppendReceivedData;
-            _cmdProcess.GetProcess.ErrorDataReceived += AppendReceivedData;
+		private void AppendReceivedData(object sender, DataReceivedEventArgs e)
+		{
+			lock (stringBuilder)
+			{
+				stringBuilder.AppendLine(e.Data);
+			}
+		}
 
-            Thread.Sleep(20);
+		private void Btn_ConsoleClear_Click(object sender, EventArgs e)
+		{
+			rtb_console.Clear();
+		}
 
-            _cmdProcess.GetProcess.BeginOutputReadLine();
-            _cmdProcess.GetProcess.BeginErrorReadLine();
-            rtb_console.Clear();
+		private void Btn_consoleStop_Click(object sender, EventArgs e)
+		{
+			CLI.AbortChildProcessesAsync();
+		}
 
-            _cmdProcess.CommandExecutionStarted += CommandExecutionStarted;
-            _cmdProcess.ClearConsole += () => { rtb_console.Clear(); };
+		private void Btn_executeCommand_Click(object sender, EventArgs e)
+		{
+			var command = cbx_customCommand.Text;
 
-            // Select custom command control
-            cbx_customCommand.Select();
+			if (!string.IsNullOrEmpty(command))
+			{
+				cbx_customCommand.Items.Insert(0, command);
+				HelperClass.Execute(command);
+			}
+		}
 
-            // Start the watcher which fires if adb devices changed
-            AdbDeviceWatcher.DeviceChanged += DwAdb_DeviceChanged;
-            AdbDeviceWatcher.StartDeviceWatcher();
-        }
+		private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Return) btn_executeCommand.PerformClick();
+		}
 
-        public new void Dispose()
-        {
-            _logcatAdvanced?.Dispose();
-            _cmdProcess?.Dispose();
-            _formMethods?.Dispose();
-            _cmdProcess?.GetProcess?.Dispose();
-            GC.SuppressFinalize(this);
-        }
+		private void CloseApplication()
+		{
+			Debug.WriteLine("Shutting down...");
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData != Keys.Escape) return base.ProcessCmdKey(ref msg, keyData);
-            _cmdProcess.StopProcessing();
-            return true;
-        }
+			Debug.WriteLine("  > Killing child processes...");
+			CLI.StopWithShell();
 
-        private void CommandExecutionStarted()
-        {
-            BeginInvoke((MethodInvoker) delegate { rtb_console.Clear(); });
-        }
+			Debug.WriteLine("  > Closing application...");
+			Environment.Exit(0);
+		}
 
-        private void DwAdb_DeviceChanged(AdbDeviceList e)
-        {
-            try
-            {
-                BeginInvoke((MethodInvoker) delegate
-                {
-                    _formMethods.RefreshAdbSerialsInCombobox(e.GetDevicesList);
-                    txt_DevicesAdb.Text = e.GetDevicesRaw.ToUpper().TrimEnd();
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+		private void DevicesWatcher_DevicesChanged(object sender, List<string> e)
+		{
+			HelperClass.SelectedDevice = "";
+			tsc_ConnectedDevices.ComboBox.Invoke((MethodInvoker)(() => tsc_ConnectedDevices.ComboBox.DataSource = e));
+		}
 
-        private void Btn_consoleStop_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StopProcessing();
-        }
+		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			CloseApplication();
+		}
 
-        private void Btn_executeCommand_Click(object sender, EventArgs e)
-        {
-            var command = cbx_customCommand.Text;
+		private void MainForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
+			{
 
-            if (!string.IsNullOrEmpty(command))
-            {
-                cbx_customCommand.Items.Add(command);
+				if ((!cbx_customCommand.Focused || String.IsNullOrWhiteSpace(cbx_customCommand.SelectedText)) && String.IsNullOrWhiteSpace(rtb_console.SelectedText))
+				{
+					Debug.WriteLine("Keypress detected: CTRL + C");
+					CLI.AbortChildProcessesAsync();
+					e.Handled = e.SuppressKeyPress = true;
+				}
 
-                _cmdProcess.StartProcessing(command, _formMethods.SelectedDevice());
-            }
-            else
-            {
-                MessageBox.Show(@"Please enter a command!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+			}
+			else if (e.KeyCode == Keys.Escape)
+			{
+				Debug.WriteLine("Keypress detected: ESC");
+				CloseApplication();
+			}
+		}
 
-        private void AppendReceivedData(object sender, DataReceivedEventArgs e)
-        {
-            try
-            {
-                BeginInvoke((MethodInvoker) delegate { rtb_console.AppendText(e.Data + Environment.NewLine); });
-                Thread.Sleep(2);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			// Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
+			CLI.Commandline.BeginOutputReadLine();
+			CLI.Commandline.CancelOutputRead();
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            trv_commandTreeView.ExpandAll();
-            trv_commandTreeView.SelectedNode = trv_commandTreeView.Nodes[0];
-        }
+			Thread.Sleep(50);
 
-        private void Rtb_console_Resize(object sender, EventArgs e)
-        {
-            rtb_console.ScrollToCaret();
-        }
+			CLI.Commandline.BeginOutputReadLine();
+			CLI.Commandline.BeginErrorReadLine();
 
-        private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
-        {
-            //todo add network capture tcpdump
-            try
-            {
-                string tag;
+			CLI.Commandline.ErrorDataReceived += AppendReceivedData;
+			CLI.Commandline.OutputDataReceived += AppendReceivedData;
 
-                if (string.IsNullOrEmpty(tag = trv_commandTreeView.SelectedNode.Tag.ToString())) return;
-                if (tag.StartsWith("adb ") || tag.StartsWith("fastboot "))
-                    _cmdProcess.StartProcessing(tag, _formMethods.SelectedDevice());
+			HelperClass.BeforeExecute += (s, ee) =>
+			{
+				if (HelperClass.AlwaysClearConsole) { rtb_console.Invoke((MethodInvoker)(() => rtb_console.Clear())); }
+			};
 
-                else if (tag.StartsWith("#"))
-                    switch (tag)
-                    {
-                        case "#prop":
-                            new SetProp(_cmdProcess, _formMethods).Show();
-                            break;
 
-                        case "#screenshot":
-                            if (!string.IsNullOrEmpty(_formMethods.SelectedDevice()))
-                            {
-                                saveFileDialog.FileName =
-                                    "screenshot_" + DateTime.Now.ToString(CultureInfo.InvariantCulture)
-                                        .Replace(' ', '_').Replace(':', '.');
-                                saveFileDialog.Filter = @"PNG Image(.png)|*.png";
-                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                                    _cmdProcess.StartProcessing(
-                                        "adb shell screencap -p > " + saveFileDialog.FileName,
-                                        _formMethods.SelectedDevice());
-                            }
+			// We start a thread which continuously (see RICHTEXTBOX_REFRSH_INTERVAL) 
+			// reads stringBuilder and fills the RichTextBox and then empties stringBuilder.
+			new Thread(AppendToRichTextBox).Start();
 
-                            break;
+			DevicesWatcher.DevicesChanged += DevicesWatcher_DevicesChanged;
+			DevicesWatcher.Start();
 
-                        case "#screenrecord":
-                            if (_screenRecord == null || _screenRecord.IsDisposed)
-                            {
-                                _screenRecord = new ScreenRecord(_cmdProcess, _formMethods);
-                                _screenRecord.Show();
-                            }
-                            else
-                            {
-                                _screenRecord.Focus();
-                            }
+			trv_commandTreeView.ExpandAll();
+			trv_commandTreeView.SelectedNode = trv_commandTreeView.Nodes[0];
 
-                            break;
+			//Select custom command control
+			cbx_customCommand.Select();
+		}
+		private void Rtb_console_Resize(object sender, EventArgs e)
+		{
+			rtb_console.ScrollToCaret();
+		}
 
-                        case "#spoofmac":
-                            if (_spoofMac == null || _spoofMac.IsDisposed)
-                            {
-                                _spoofMac = new SpoofMac(_cmdProcess, _formMethods);
-                                _spoofMac.Show();
-                            }
-                            else
-                            {
-                                _spoofMac.Focus();
-                            }
+		private void Trv_commandTreeView_DoubleClick(object sender, EventArgs e)
+		{
+			// Check if cursor is above a node
+			Point localPosition = trv_commandTreeView.PointToClient(Cursor.Position);
+			TreeViewHitTestInfo hitTestInfo = trv_commandTreeView.HitTest(localPosition);
+			if (hitTestInfo.Location != TreeViewHitTestLocations.Label) { return; }
 
-                            break;
+			//   To see what should be executed, the property "tag" is read. 
+			//   
+			//   If it starts with #, it means that a new window must be created. The name of the window follows the symbol.
+			//   
+			//   If it starts with %, it means that something custom must be executed.
+			//   
+			//   Otherwise the string is executed with CLI.
 
-                        case "#resolution":
-                            if (_resolutionChange == null || _resolutionChange.IsDisposed)
-                            {
-                                _resolutionChange = new ResolutionChange(_cmdProcess, _formMethods);
-                                _resolutionChange.Show();
-                            }
-                            else
-                            {
-                                _resolutionChange.Focus();
-                            }
+			string tag = trv_commandTreeView.SelectedNode.Tag.ToString();
 
-                            break;
+			if (string.IsNullOrEmpty(tag)) return;
 
-                        case "#density":
-                            if (_densityChange == null || _densityChange.IsDisposed)
-                            {
-                                _densityChange = new Density(_cmdProcess, _formMethods);
-                                _densityChange.Show();
-                            }
-                            else
-                            {
-                                _densityChange.Focus();
-                            }
+			else if (tag.StartsWith("%"))
+			{
+				switch (tag)
+				{
+					case "%screenshot":
+						if (!string.IsNullOrEmpty(HelperClass.SelectedDevice))
+						{
+							saveFileDialog.FileName =
+								"screenshot_" + DateTime.Now.ToString(@"ddMMyyyy_HHmmss")
+									.Replace(' ', '_').Replace(':', '.');
+							saveFileDialog.Filter = @"PNG Image(.png)|*.png";
+							if (saveFileDialog.ShowDialog() == DialogResult.OK)
+							{
+								HelperClass.Execute("adb exec-out screencap -p > " + saveFileDialog.FileName);
+							}
+						}
 
-                            break;
+						break;
 
-                        case "#files":
-                            if (_fileOps == null || _fileOps.IsDisposed)
-                            {
-                                _fileOps = new FileOps(_cmdProcess, _formMethods);
-                                _fileOps.Show();
-                            }
-                            else
-                            {
-                                _fileOps.Focus();
-                            }
+					default:
+						throw new NotImplementedException();
+				}
+			}
 
-                            break;
+			else if (tag.StartsWith("#"))
+			{
 
-                        case "#installuninstall":
-                            if (_installUninstall == null || _installUninstall.IsDisposed)
-                            {
-                                _installUninstall = new InstallUninstall(_cmdProcess, _formMethods);
-                                _installUninstall.Show();
-                            }
-                            else
-                            {
-                                _installUninstall.Focus();
-                            }
+				Form frm = GetForm(tag.Substring(1));
 
-                            break;
+				Form t = Application.OpenForms[frm.Text];
 
-                        case "#sideload":
-                            if (_sideLoad == null || _sideLoad.IsDisposed)
-                            {
-                                _sideLoad = new Sideload(_cmdProcess, _formMethods);
-                                _sideLoad.Show();
-                            }
-                            else
-                            {
-                                _sideLoad.Focus();
-                            }
+				if (t == null)
+				{
+					frm.Show();
+				}
+				else
+				{
+					t.Focus();
+				}
+			}
 
-                            break;
+			else
+			{
+				HelperClass.Execute(tag);
+			}
+		}
 
-                        case "#backuprestore":
-                            if (_backupRestore == null || _backupRestore.IsDisposed)
-                            {
-                                _backupRestore = new BackupRestore(_cmdProcess, _formMethods);
-                                _backupRestore.Show();
-                            }
-                            else
-                            {
-                                _backupRestore.Focus();
-                            }
+		private void Tsb_AdbRoot_Click(object sender, EventArgs e)
+		{
+			HelperClass.Execute("adb root");
+		}
 
-                            break;
+		private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
+		{
+			HelperClass.Execute("adb unroot");
+		}
 
-                        case "#logcatadvanced":
-                            if (_logcatAdvanced == null || _logcatAdvanced.IsDisposed)
-                            {
-                                _logcatAdvanced = new LogcatAdvanced(_cmdProcess, _formMethods);
-                                _logcatAdvanced.Show();
-                            }
-                            else
-                            {
-                                _logcatAdvanced.Focus();
-                            }
+		private void Tsb_KillServer_Click(object sender, EventArgs e)
+		{
+			HelperClass.Execute("adb kill-server");
+		}
 
-                            break;
+		private void Tsb_OpenShell_Click(object sender, EventArgs e)
+		{
+			if (!string.IsNullOrEmpty(HelperClass.SelectedDevice))
+			{
+				var serial = "";
 
-                        case "#erase":
-                            if (_erase == null || _erase.IsDisposed)
-                            {
-                                _erase = new Erase(_cmdProcess, _formMethods);
-                                _erase.Show();
-                            }
-                            else
-                            {
-                                _erase.Focus();
-                            }
+				serial += "-s " + HelperClass.SelectedDevice + " ";
 
-                            break;
+				using (var process = new Process
+				{
+					StartInfo = new ProcessStartInfo
+					{
+						FileName = "cmd",
+						Arguments = "/K adb " + serial + " shell"
+					}
+				})
+				{
+					process.Start();
+				}
+			}
+		}
 
-                        case "#flash":
-                            if (_flash == null || _flash.IsDisposed)
-                            {
-                                _flash = new Flash(_cmdProcess, _formMethods);
-                                _flash.Show();
-                            }
-                            else
-                            {
-                                _flash.Focus();
-                            }
+		private void Tsb_Power_Click(object sender, EventArgs e)
+		{
+			switch (sender.ToString())
+			{
+				case "Reboot Normal":
+					HelperClass.Execute("adb reboot");
+					break;
+				case "Reboot Recovery":
+					HelperClass.Execute("adb reboot recovery");
+					break;
+				case "Reboot Bootloader":
+					HelperClass.Execute("adb reboot bootloader");
+					break;
+				case "Reboot Fastboot":
+					HelperClass.Execute("adb reboot fastboot");
+					break;
+				case "Sideload Mode":
+					HelperClass.Execute("adb reboot sideload");
+					break;
+				case "Shutdown":
+					HelperClass.Execute("adb shell reboot -p");
+					break;
+				case "Sleep":
+					HelperClass.Execute("adb shell input keyevent POWER");
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
 
-                            break;
+		private void Tsc_ConnectedDevices_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			HelperClass.SelectedDevice = tsc_ConnectedDevices.SelectedItem.ToString();
+		}
 
-                        case "#credits":
-                            new Credits().ShowDialog();
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+		private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
+		{
+			var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
 
-        private void Cbx_customCommand_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Return) btn_executeCommand.PerformClick();
-        }
+			var ipadress = tst_IpAdress.Text;
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Kill the process
-            // todo rename Forms
-            try
-            {
-                //adb.StopProcessing();
-                _cmdProcess.GetProcess.Kill();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+			if (r.Match(ipadress).Success)
+				HelperClass.Execute("adb connect " + ipadress, false);
+			else
+				MessageBox.Show(@"Please enter a valid IP adress", @"Error", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+		}
 
-        private void Tsb_OpenShell_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(_formMethods.SelectedDevice()))
-            {
-                var serial = "";
+		private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e)
+		{
+			HelperClass.Execute("adb disconnect", false);
+		}
 
-                serial += "-s " + _formMethods.SelectedDevice() + " ";
-
-                using (var process = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "cmd",
-                        Arguments = "/K adb " + serial + " shell"
-                    }
-                })
-                {
-                    process.Start();
-                }
-            }
-            else
-            {
-                MessageBox.Show(@"No device connected. Please connect a device for adb commands.",
-                    @"Error - No Device Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Tsm_WirelessConnect_Click(object sender, EventArgs e)
-        {
-            var r = new Regex(@"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$");
-
-            var ipadress = tst_IpAdress.Text;
-
-            if (r.Match(ipadress).Success)
-                _cmdProcess.StartProcessing("adb connect " + ipadress, "");
-            else
-                MessageBox.Show(@"Please enter a valid IP adress", @"Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-        }
-
-        private void Tsm_WirelessDisconnect_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb disconnect", "");
-        }
-
-        private void Tsb_KillServer_Click(object sender, EventArgs e)
-        {
-            FormMethods.KillServer();
-        }
-
-        private void Tsb_AdbRoot_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb root", _formMethods.SelectedDevice());
-        }
-
-        private void Tsb_AdbUnroot_Click(object sender, EventArgs e)
-        {
-            _cmdProcess.StartProcessing("adb unroot", _formMethods.SelectedDevice());
-        }
-
-        private void Tsb_Power_Click(object sender, EventArgs e)
-        {
-            switch (sender.ToString())
-            {
-                case "Reboot Normal":
-                    _cmdProcess.StartProcessing("adb reboot", _formMethods.SelectedDevice());
-                    break;
-                case "Reboot Recovery":
-                    _cmdProcess.StartProcessing("adb reboot recovery", _formMethods.SelectedDevice());
-                    break;
-                case "Reboot Bootloader":
-                    _cmdProcess.StartProcessing("adb reboot bootloader", _formMethods.SelectedDevice());
-                    break;
-                case "Reboot Fastboot":
-                    _cmdProcess.StartProcessing("adb reboot fastboot", _formMethods.SelectedDevice());
-                    break;
-                case "Sideload Mode":
-                    _cmdProcess.StartProcessing("adb reboot sideload", _formMethods.SelectedDevice());
-                    break;
-                case "Shutdown":
-                    _cmdProcess.StartProcessing("adb shell reboot -p", _formMethods.SelectedDevice());
-                    break;
-                case "Sleep":
-                    _cmdProcess.StartProcessing("adb shell input keyevent POWER", _formMethods.SelectedDevice());
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-    
-    }
+		private void Tsb_AlwayClearConsole_CheckedChanged(object sender, EventArgs e)
+		{
+			HelperClass.AlwaysClearConsole = ((ToolStripButton)sender).Checked;
+		}
+	}
 }
