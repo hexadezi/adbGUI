@@ -2,4 +2,4 @@
 
 #### Screenshots
 This is the main window.
-![new gui](screenshot/main.PNG)  
+![new gui](screenshot/screenshot_2_1.png)  
