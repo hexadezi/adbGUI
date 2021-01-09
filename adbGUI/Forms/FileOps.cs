@@ -44,7 +44,7 @@ namespace adbGUI.Forms
 		private void Btn_FileOpsPushList_Click(object sender, EventArgs e)
 		{
 			var path = txt_FileOpsPushTo.Text;
-			HelperClass.Execute("adb shell ls -la " + path + " -F");
+			HelperClass.Execute("adb shell ls -la \"" + path + "\" -F");
 		}
 
 		private void Btn_FileOpsPullBrowse_Click(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace adbGUI.Forms
 		private void Btn_FileOpsPullList_Click(object sender, EventArgs e)
 		{
 			var path = txt_FileOpsPullFrom.Text;
-			HelperClass.Execute("adb shell ls -la " + path + " -F");
+			HelperClass.Execute("adb shell ls -la \"" + path + "\" -F");
 		}
 	}
 }
