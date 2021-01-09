@@ -36,7 +36,7 @@ namespace adbGUI.Forms
 			}
 			else
 			{
-				var s = "adb push \"" + txt_FileOpsPushFrom.Text + "\"" + " \"" + txt_FileOpsPushTo.Text + "\"";
+				var s = "adb push \"" + txt_FileOpsPushFrom.Text + "\"" + " \"" + txt_FileOpsPushTo.Text + "\" && echo finished";
 				HelperClass.Execute(s);
 			}
 		}
@@ -64,7 +64,7 @@ namespace adbGUI.Forms
 			}
 			else
 			{
-				var s = "adb pull \"" + txt_FileOpsPullFrom.Text + "\"" + " \"" + txt_FileOpsPullTo.Text + "\"";
+				var s = "adb pull \"" + txt_FileOpsPullFrom.Text + "\"" + " \"" + txt_FileOpsPullTo.Text + "\" && echo finished";
 				HelperClass.Execute(s);
 			}
 		}
