@@ -5,94 +5,89 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace adbGUI.Methods
 {
 	public static class Dependencies
 	{
-		private static readonly string DownloadToTempPath = Path.GetTempPath() + "platform-tools-latest-windows.zip";
+		private static readonly string downloadedZipFile = Path.GetTempPath() + "platform-tools-latest-windows.zip";
+
+		private static readonly string tmpPlatformPath = Path.Combine(Path.GetTempPath(), "platform-tools");
+
+		private static readonly Uri downloadUri = new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip");
 
 		private static readonly string[] StrFiles =
 			{"adb.exe", "AdbWinApi.dll", "AdbWinUsbApi.dll", "fastboot.exe", "libwinpthread-1.dll"};
 
-		public static void Start()
+		public static void Check()
 		{
-			if (CheckIfFilesExist()) return;
+			SetEnvVariable();
+
+			if (FilesExist()) return;
+
 			var dialogResult =
 				MessageBox.Show(
-					@"Enviroment Variables not set and files missing. Should all dependencies be downloaded and extracted?",
-					@"Error: Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+					@"Required files are missing. Download missing files?",
+					@"Error: Missing Files",
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Error);
 
 			switch (dialogResult)
 			{
 				case DialogResult.Yes:
-					try
-					{
-						DownloadFiles();
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show(ex.Message);
-					}
-
-					break;
-				case DialogResult.No:
-					Environment.Exit(0);
-					break;
-				case DialogResult.None:
-					break;
-				case DialogResult.OK:
-					break;
-				case DialogResult.Cancel:
-					break;
-				case DialogResult.Abort:
-					break;
-				case DialogResult.Retry:
-					break;
-				case DialogResult.Ignore:
+					DownloadFiles();
 					break;
 				default:
-					throw new ArgumentOutOfRangeException();
+					Environment.Exit(0);
+					break;
 			}
 		}
 
-		private static bool CheckIfFilesExist()
+		private static bool FilesExist()
 		{
-			return StrFiles != null && StrFiles.All(File.Exists);
+			foreach (var file in StrFiles)
+			{
+				if (!File.Exists(Path.Combine(tmpPlatformPath, file)))
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		private static void DownloadFiles()
 		{
-			ExtractionCompleted += DependenciesChecker_ExtractionCompleted;
 			using (var wc = new WebClient())
 			{
-				wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-				wc.DownloadFileTaskAsync(
-					new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip"),
-					DownloadToTempPath);
+				wc.DownloadFile(downloadUri, downloadedZipFile);
 			}
-		}
 
-		private static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-		{
-			var tr = new Thread(ExtractFiles);
-			tr.Start();
+			ExtractFiles();
 		}
-
-		private static event ExtractionCompletedHandler ExtractionCompleted;
 
 		private static void ExtractFiles()
 		{
-			if (Directory.Exists(Path.GetTempPath() + "platform-tools"))
-				Directory.Delete(Path.GetTempPath() + "platform-tools", true);
+			if (Directory.Exists(tmpPlatformPath))
+			{
+				Directory.Delete(tmpPlatformPath, true);
+			}
 
-			ZipFile.ExtractToDirectory(DownloadToTempPath, Path.GetTempPath());
+			ZipFile.ExtractToDirectory(downloadedZipFile, Path.GetTempPath());
 
-			ExtractionCompleted?.Invoke();
+			MessageBox.Show(@"Files downloaded", @"Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
-		private static void DependenciesChecker_ExtractionCompleted()
+		private static void SetEnvVariable()
+		{
+			string oldValue = Environment.GetEnvironmentVariable("PATH");
+
+			Environment.SetEnvironmentVariable("PATH", oldValue + ";" + tmpPlatformPath);
+		}
+
+		private static void ExtractionCompleted()
 		{
 			var extractedFilesPath = Path.GetTempPath() + "platform-tools";
 
@@ -105,14 +100,6 @@ namespace adbGUI.Methods
 				{
 					MessageBox.Show(ex.Message);
 				}
-
-			ExtractionCompleted -= DependenciesChecker_ExtractionCompleted;
-
-			MessageBox.Show(@"Files downloaded, decompressed and moved successfully", @"Completed",
-				MessageBoxButtons.OK,
-				MessageBoxIcon.Information);
 		}
-
-		private delegate void ExtractionCompletedHandler();
 	}
 }

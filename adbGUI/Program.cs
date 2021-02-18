@@ -15,7 +15,7 @@ namespace adbGUI
         {
             try
             {
-                Dependencies.Start();
+                Dependencies.Check();
             }
             catch (Exception ex)
             {
