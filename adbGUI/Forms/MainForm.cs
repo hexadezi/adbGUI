@@ -60,7 +60,7 @@ namespace adbGUI.Forms
 
 		private void Btn_consoleStop_Click(object sender, EventArgs e)
 		{
-			CLI.AbortChildProcessesAsync();
+			CLI.KillChildProcessesAsync();
 		}
 
 		private void Btn_executeCommand_Click(object sender, EventArgs e)
@@ -83,7 +83,7 @@ namespace adbGUI.Forms
 		{
 			Debug.WriteLine("Shutting down...");
 
-			Debug.WriteLine("  > Killing child processes...");
+			Debug.WriteLine("  > Killing all child processes...");
 			CLI.StopWithShell();
 
 			Debug.WriteLine("  > Closing application...");
@@ -109,7 +109,7 @@ namespace adbGUI.Forms
 				if ((!cbx_customCommand.Focused || String.IsNullOrWhiteSpace(cbx_customCommand.SelectedText)) && String.IsNullOrWhiteSpace(rtb_console.SelectedText))
 				{
 					Debug.WriteLine("Keypress detected: CTRL + C");
-					CLI.AbortChildProcessesAsync();
+					CLI.KillChildProcessesAsync();
 					e.Handled = e.SuppressKeyPress = true;
 				}
 

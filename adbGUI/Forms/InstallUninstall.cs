@@ -60,7 +60,7 @@ namespace adbGUI.Forms
 
 			cbx_InstallUninstallPackageUninstall.Enabled = false;
 
-			var output = HelperClass.ExecuteWithOutput("adb shell pm list packages -3");
+			var output = HelperClass.ExecuteWithOutput("adb", "shell pm list packages -3");
 
 			if (!string.IsNullOrEmpty(output))
 			{

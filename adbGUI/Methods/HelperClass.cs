@@ -34,16 +34,16 @@ namespace adbGUI.Methods
 			}
 		}
 
-		public static string ExecuteWithOutput(string command, bool withSerial = true)
+		public static string ExecuteWithOutput(string fileName, string arguments, bool withSerial = true)
 		{
 			if (String.IsNullOrWhiteSpace(SelectedDevice) || withSerial == false)
 			{
-				return CLI.GetOutput(command);
+				return CLI.GetOutput(fileName, arguments);
 			}
 			else
 			{
-				string cmd = command.Replace("adb ", "adb -s " + SelectedDevice + " ");
-				return CLI.GetOutput(cmd);
+				arguments = "-s " + SelectedDevice + " " + arguments;
+				return CLI.GetOutput(fileName, arguments);
 			}
 		}
 

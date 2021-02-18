@@ -27,7 +27,7 @@ namespace adbGUI.Methods
 		{
 			while (true)
 			{
-				string output = CLI.GetOutput("adb devices");
+				string output = CLI.GetOutput("adb", "devices");
 
 				if (output != oldOutput)
 				{

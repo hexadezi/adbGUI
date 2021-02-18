@@ -43,7 +43,7 @@ namespace adbGUI.Forms
 
 		private void Btn_LogcatAdvancedStop_Click(object sender, EventArgs e)
 		{
-			CLI.AbortChildProcessesAsync();
+			CLI.KillChildProcessesAsync();
 		}
 
 		private void Btn_LogcatAdvancedNewBufferSize_Click(object sender, EventArgs e)

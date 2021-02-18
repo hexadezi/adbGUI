@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Management;
@@ -38,38 +39,43 @@ namespace adbGUI.Methods
 
 		public static Process Commandline { get; set; } = new Process();
 
-		public static void AbortChildProcesses()
+		public static List<int> GetChildProcesses()
 		{
+			List<int> lst = new List<int>();
+
 			using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Process WHERE ParentProcessID=" + Commandline.Id + " AND Caption != 'conhost.exe'"))
 			{
 				ManagementObjectCollection managementObjectCollection = searcher.Get();
 				foreach (ManagementObject managementObject in managementObjectCollection)
 				{
-					int pid = Convert.ToInt32(managementObject["ProcessID"]);
-					Debug.WriteLine($"Killing {managementObject["Caption"]}({managementObject["ProcessID"]})");
-					Process.GetProcessById(pid).Kill();
+					lst.Add(Convert.ToInt32(managementObject["ProcessID"]));
 				}
+			}
+
+			return lst;
+		}
+
+		public static void KillChildProcesses()
+		{
+			foreach (int pid in GetChildProcesses())
+			{
+				Debug.WriteLine($"Killing {pid})");
+				Process.GetProcessById(pid).Kill();
 			}
 		}
 
-		public static void AbortChildProcessesAsync()
+		public static void KillChildProcessesAsync()
 		{
-			Task.Run(() => { AbortChildProcesses(); });
+			Task.Run(() => { KillChildProcesses(); });
 		}
 
-		public static void AbortChildProcessesWithShell()
+		public static void KillChildProcessesWithShell()
 		{
 			string input = "taskkill /F ";
 
-			using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Process WHERE ParentProcessID=" + Commandline.Id + " AND Caption != 'conhost.exe'"))
+			foreach (int pid in GetChildProcesses())
 			{
-				ManagementObjectCollection managementObjectCollection = searcher.Get();
-
-				foreach (ManagementObject managementObject in managementObjectCollection)
-				{
-					int pid = Convert.ToInt32(managementObject["ProcessID"]);
-					input += $"/PID {pid} ";
-				}
+				input += $"/PID {pid} ";
 			}
 
 			if (input == "taskkill /F ") return;
@@ -86,9 +92,38 @@ namespace adbGUI.Methods
 
 			cmd.StartInfo = startInfo;
 
-			Debug.WriteLine("Executing: cmd /c" + input);
+			Debug.WriteLine("Executing: cmd /c " + input);
 
 			cmd.Start();
+		}
+
+		public static void KillAllAdbProcessesWithShell()
+		{
+			string input = "taskkill /F ";
+
+			foreach (Process process in Process.GetProcessesByName("adb"))
+			{
+				input += $"/PID {process.Id} ";
+			}
+
+			if (input == "taskkill /F ") return;
+
+			Process cmd = new Process();
+
+			ProcessStartInfo startInfo = new ProcessStartInfo()
+			{
+				FileName = "cmd",
+				Arguments = "/c " + input,
+				UseShellExecute = false,
+				CreateNoWindow = true,
+			};
+
+			cmd.StartInfo = startInfo;
+
+			Debug.WriteLine("Executing: cmd /c " + input);
+
+			cmd.Start();
+
 		}
 
 		public static void Execute(string command)
@@ -96,14 +131,14 @@ namespace adbGUI.Methods
 			Commandline.StandardInput.WriteLine(command);
 		}
 
-		public static string GetOutput(string command)
+		public static string GetOutput(string fileName, string arguments)
 		{
 			Process cmd = new Process();
 
 			ProcessStartInfo startInfo = new ProcessStartInfo()
 			{
-				FileName = "cmd",
-				Arguments = "/c " + command,
+				FileName = fileName,
+				Arguments = arguments,
 				UseShellExecute = false,
 				CreateNoWindow = true,
 				RedirectStandardOutput = true,
@@ -122,15 +157,9 @@ namespace adbGUI.Methods
 			return cmd.StandardOutput.ReadToEnd();
 		}
 
-		internal static void Stop()
+		public static void StopWithShell()
 		{
-			AbortChildProcesses();
-			Commandline.Kill();
-		}
-
-		internal static void StopWithShell()
-		{
-			AbortChildProcessesWithShell();
+			KillChildProcessesWithShell();
 			Commandline.Kill();
 		}
 	}

@@ -81,7 +81,7 @@ namespace adbGUI.Forms
 				groupBox8.Enabled = false;
 				groupBox14.Enabled = false;
 
-				var output = HelperClass.ExecuteWithOutput("adb shell pm list packages -3");
+				var output = HelperClass.ExecuteWithOutput("adb", "shell pm list packages -3");
 
 				if (!string.IsNullOrEmpty(output))
 				{

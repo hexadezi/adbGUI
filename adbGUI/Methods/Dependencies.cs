@@ -38,7 +38,10 @@ namespace adbGUI.Methods
 			{
 				case DialogResult.Yes:
 					DownloadFiles();
+					ExtractFiles();
+					MessageBox.Show(@"Files downloaded", @"Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					break;
+
 				default:
 					Environment.Exit(0);
 					break;
@@ -64,20 +67,11 @@ namespace adbGUI.Methods
 			{
 				wc.DownloadFile(downloadUri, downloadedZipFile);
 			}
-
-			ExtractFiles();
 		}
 
 		private static void ExtractFiles()
 		{
-			if (Directory.Exists(tmpPlatformPath))
-			{
-				Directory.Delete(tmpPlatformPath, true);
-			}
-
 			ZipFile.ExtractToDirectory(downloadedZipFile, Path.GetTempPath());
-
-			MessageBox.Show(@"Files downloaded", @"Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private static void SetEnvVariable()

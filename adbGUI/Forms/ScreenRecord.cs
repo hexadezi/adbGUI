@@ -68,7 +68,7 @@ namespace adbGUI.Forms
 		{
 			timer.Enabled = false;
 			btn_screenRecordStart.Text = @"Start";
-			CLI.AbortChildProcesses();
+			CLI.KillChildProcesses();
 		}
 
 		private void Timer_Tick(object sender, EventArgs e)
