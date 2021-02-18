@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -82,7 +83,14 @@ namespace adbGUI.Methods
 				{
 					if (StrFiles.Any(entry.Name.Contains))
 					{
-						entry.ExtractToFile(Path.Combine(Path.GetTempPath(), entry.FullName), true);
+						try
+						{
+							entry.ExtractToFile(Path.Combine(Path.GetTempPath(), entry.FullName), true);
+						}
+						catch (IOException)
+						{
+							Debug.WriteLine($"File {entry.Name} can not be extracted");
+						}
 					}
 				}
 			}
