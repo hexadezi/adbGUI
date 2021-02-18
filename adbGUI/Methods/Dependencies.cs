@@ -94,20 +94,5 @@ namespace adbGUI.Methods
 
 			Environment.SetEnvironmentVariable("PATH", oldValue + ";" + tmpPlatformPath);
 		}
-
-		private static void ExtractionCompleted()
-		{
-			var extractedFilesPath = Path.GetTempPath() + "platform-tools";
-
-			foreach (var item in StrFiles)
-				try
-				{
-					File.Copy(extractedFilesPath + "\\" + item, item);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
-		}
 	}
 }
