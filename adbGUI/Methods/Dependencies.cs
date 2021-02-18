@@ -71,7 +71,21 @@ namespace adbGUI.Methods
 
 		private static void ExtractFiles()
 		{
-			ZipFile.ExtractToDirectory(downloadedZipFile, Path.GetTempPath());
+			if (!Directory.Exists(tmpPlatformPath))
+			{
+				Directory.CreateDirectory(tmpPlatformPath);
+			}
+
+			using (ZipArchive archive = ZipFile.OpenRead(downloadedZipFile))
+			{
+				foreach (ZipArchiveEntry entry in archive.Entries)
+				{
+					if (StrFiles.Any(entry.Name.Contains))
+					{
+						entry.ExtractToFile(Path.Combine(Path.GetTempPath(), entry.FullName), true);
+					}
+				}
+			}
 		}
 
 		private static void SetEnvVariable()
