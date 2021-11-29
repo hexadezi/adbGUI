@@ -30,6 +30,8 @@ namespace adbGUI.Forms
 			var name = " -f \"" + txt_BackupPathTo.Text + "\"";
 			var apk = " -noapk";
 			var shared = " -noshared";
+                        var obb = " -noobb";
+                        var keyvalue = " -nokeyvalue";
 			const string all = " -all";
 			var system = " -system";
 
