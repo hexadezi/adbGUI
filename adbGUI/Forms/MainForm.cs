@@ -278,6 +278,9 @@ namespace adbGUI.Forms
 				case "Reboot Fastboot":
 					HelperClass.Execute("adb reboot fastboot");
 					break;
+                                case "Reboot Emergency Download (Qualcomm Only)":
+					HelperClass.Execute("adb reboot edl");
+					break;
 				case "Sideload Mode":
 					HelperClass.Execute("adb reboot sideload");
 					break;
