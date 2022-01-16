@@ -281,8 +281,20 @@ namespace adbGUI.Forms
                                 case "Reboot Emergency Download (Qualcomm Only)":
 					HelperClass.Execute("adb reboot edl");
 					break;
+				case "Samsung Odin/Download mode (Samsung only)":
+					HelperClass.Execute("adb reboot download");
+					break;
 				case "Sideload Mode":
 					HelperClass.Execute("adb reboot sideload");
+					break;
+				case "Power menu":
+					HelperClass.Execute("adb shell input keyevent --longpress 26");
+					break;
+				case "Lock":
+					HelperClass.Execute("adb shell input keyevent 223");
+					break;
+				case "Wake":
+					HelperClass.Execute("adb shell input keyevent 224");
 					break;
 				case "Shutdown":
 					HelperClass.Execute("adb shell reboot -p");
