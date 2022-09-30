@@ -87,11 +87,11 @@ namespace adbGUI.Forms
 			Debug.WriteLine("  > Killing all child processes...");
 			CLI.StopWithShell();
 
-            // Save last ip config
-            File.WriteAllText("data.dat", tst_IpAdress.Text);
+			// Save last ip config
+			File.WriteAllText("data.dat", tst_IpAdress.Text);
 
-            Debug.WriteLine("  > Closing application...");           
-            Environment.Exit(0);
+			Debug.WriteLine("  > Closing application...");
+			Environment.Exit(0);
 		}
 
 		private void DevicesWatcher_DevicesChanged(object sender, List<string> e)
@@ -163,7 +163,7 @@ namespace adbGUI.Forms
 			//Select custom command control
 			cbx_customCommand.Select();
 		}
-		
+
 		private void Rtb_console_Resize(object sender, EventArgs e)
 		{
 			rtb_console.ScrollToCaret();
@@ -288,7 +288,7 @@ namespace adbGUI.Forms
 				case "Reboot Fastboot":
 					HelperClass.Execute("adb reboot fastboot");
 					break;
-                                case "Reboot Emergency Download (Qualcomm Only)":
+				case "Reboot Emergency Download (Qualcomm Only)":
 					HelperClass.Execute("adb reboot edl");
 					break;
 				case "Samsung Odin/Download mode (Samsung only)":
