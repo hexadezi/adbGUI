@@ -71,6 +71,7 @@ namespace adbGUI.Methods
 
 		public static void KillChildProcessesWithShell()
 		{
+			HelperClass.Execute("adb kill-server");
 			string input = "taskkill /F ";
 
 			foreach (int pid in GetChildProcesses())

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -86,6 +87,9 @@ namespace adbGUI.Forms
 			Debug.WriteLine("  > Killing all child processes...");
 			CLI.StopWithShell();
 
+			// Save last ip config
+			File.WriteAllText("data.dat", tst_IpAdress.Text);
+
 			Debug.WriteLine("  > Closing application...");
 			Environment.Exit(0);
 		}
@@ -123,6 +127,12 @@ namespace adbGUI.Forms
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
+			// Load last ip config
+			if (File.Exists("data.dat"))
+			{
+				tst_IpAdress.Text = File.ReadAllText("data.dat").Trim();
+			}
+
 			// Begin and cancel so the RichTextBox will stay clean. Otherwise it will start in line 2.
 			CLI.Commandline.BeginOutputReadLine();
 			CLI.Commandline.CancelOutputRead();
@@ -140,7 +150,6 @@ namespace adbGUI.Forms
 				if (HelperClass.AlwaysClearConsole) { rtb_console.Invoke((MethodInvoker)(() => rtb_console.Clear())); }
 			};
 
-
 			// We start a thread which continuously (see RICHTEXTBOX_REFRSH_INTERVAL) 
 			// reads stringBuilder and fills the RichTextBox and then empties stringBuilder.
 			new Thread(AppendToRichTextBox).Start();
@@ -154,6 +163,7 @@ namespace adbGUI.Forms
 			//Select custom command control
 			cbx_customCommand.Select();
 		}
+
 		private void Rtb_console_Resize(object sender, EventArgs e)
 		{
 			rtb_console.ScrollToCaret();
@@ -278,7 +288,7 @@ namespace adbGUI.Forms
 				case "Reboot Fastboot":
 					HelperClass.Execute("adb reboot fastboot");
 					break;
-                                case "Reboot Emergency Download (Qualcomm Only)":
+				case "Reboot Emergency Download (Qualcomm Only)":
 					HelperClass.Execute("adb reboot edl");
 					break;
 				case "Samsung Odin/Download mode (Samsung only)":
